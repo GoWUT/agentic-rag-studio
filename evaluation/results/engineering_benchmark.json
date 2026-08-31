@@ -1,0 +1,26 @@
+{
+  "generated_at_utc": "2026-08-30T06:03:43.486987+00:00",
+  "context": {
+    "source_messages": 146,
+    "prepared_messages": 9,
+    "estimated_tokens_before": 69037,
+    "estimated_tokens_after": 4535,
+    "token_reduction_percent": 93.43,
+    "within_60k_budget": true,
+    "latest_question_preserved": true,
+    "tool_protocol_valid": true,
+    "compacted_messages": 138,
+    "truncated_messages": 0,
+    "latency_ms_p50": 0.29,
+    "latency_ms_p95": 0.32
+  },
+  "concurrency": {
+    "requests": 4,
+    "synthetic_agent_delay_ms": 100.0,
+    "same_session_seconds": 0.403,
+    "cross_session_seconds": 0.102,
+    "parallel_speedup": 3.97,
+    "same_session_serialized": true,
+    "cross_sessions_parallel": true
+  }
+}
