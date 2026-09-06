@@ -284,7 +284,7 @@ with st.sidebar:
                             "application/pdf",
                         )
                     },
-                    timeout=300,
+                    timeout=660,
                 )
                 if response.status_code != 200:
                     raise BackendError(_response_error(response))

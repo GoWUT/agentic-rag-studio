@@ -26,3 +26,8 @@ htmlcov/
 # OS-generated files
 .DS_Store
 Thumbs.db
+
+# Local test suite (kept locally, excluded from GitHub)
+test_*.py
+*_test.py
+tests/

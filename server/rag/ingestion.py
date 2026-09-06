@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from contextlib import contextmanager
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -17,6 +17,8 @@ from typing import Any, BinaryIO, Iterator, Protocol
 import uuid
 
 from pypdf import PdfReader
+
+from server.rag.ocr import OCRSettings
 
 
 LOGGER = logging.getLogger(__name__)
@@ -51,13 +53,17 @@ class ChromaIndexAdapter:
         *,
         chunk_size: int = 800,
         chunk_overlap: int = 150,
+        ocr_settings: OCRSettings | None = None,
     ):
         self.embedding_model = embedding_model
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
+        self.ocr_settings = ocr_settings or OCRSettings()
         fingerprint_payload = json.dumps(
             {
-                "format_version": 1,
+                "format_version": 2,
+                "ocr": asdict(self.ocr_settings),
+                "ocr_version": "PP-OCRv5",
                 "embedding_model": embedding_model,
                 "chunk_size": chunk_size,
                 "chunk_overlap": chunk_overlap,
@@ -90,11 +96,16 @@ class ChromaIndexAdapter:
                 str(self.chunk_size),
                 "--chunk-overlap",
                 str(self.chunk_overlap),
+                "--ocr-settings",
+                json.dumps(asdict(self.ocr_settings)),
             ],
             cwd=project_root,
             capture_output=True,
             text=True,
             check=False,
+            timeout=600,
+            encoding="utf-8",
+            errors="replace",
         )
         if completed.returncode != 0:
             LOGGER.error(

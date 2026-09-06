@@ -26,6 +26,7 @@ from server.agent.execution_harness import (
 from server.agent.graph import build_agent
 from server.agent.tools import build_tools
 from server.rag.embeddings import get_embedder
+from server.rag.ocr import OCRSettings
 from server.rag.ingestion import (
     ChromaIndexAdapter,
     DocumentIngestionPipeline,
@@ -240,7 +241,8 @@ class AgentSessionManager:
                     25 * 1024 * 1024,
                 ),
                 index_adapter=ChromaIndexAdapter(
-                    config["EMBEDDING_MODEL"]
+                    config["EMBEDDING_MODEL"],
+                    ocr_settings=OCRSettings.from_config(config),
                 ),
             )
         )
@@ -401,7 +403,9 @@ class AgentSessionManager:
         *,
         messages: list[BaseMessage],
     ) -> dict[str, Any]:
-        retriever = vectordb.as_retriever(search_kwargs={"k": 5})
+        from server.rag.retrieval import build_retriever
+
+        retriever = build_retriever(vectordb, self.config)
         tools = build_tools(retriever, self.config["SERPER_API_KEY"])
         context_harness = ContextHarness(
             context_window_tokens=self.config[

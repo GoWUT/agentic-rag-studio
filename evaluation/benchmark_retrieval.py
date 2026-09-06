@@ -29,6 +29,7 @@ from server.rag.ingestion import (
     DocumentIngestionPipeline,
 )
 from server.rag.loaders import load_pdf
+from server.rag.ocr import OCRSettings
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -73,7 +74,7 @@ def find_gold_pages(documents, cases: list[RetrievalCase]) -> dict[str, list[int
     for case in cases:
         needle = normalize_text(case.anchor)
         pages = [
-            index
+            int(documents[index].metadata.get("page", index))
             for index, page_content in enumerate(normalized_pages)
             if needle in page_content
         ]
@@ -142,7 +143,7 @@ def run_benchmark(args: argparse.Namespace) -> dict:
         corpus_path = str(pdf_path)
 
     cases = load_cases(dataset_path)
-    documents = load_pdf(str(pdf_path))
+    documents = load_pdf(str(pdf_path), ocr_settings=OCRSettings(mode="off"))
     gold_pages = find_gold_pages(documents, cases)
     splits = RecursiveCharacterTextSplitter(
         chunk_size=args.chunk_size,
@@ -173,7 +174,9 @@ def run_benchmark(args: argparse.Namespace) -> dict:
                 25 * 1024 * 1024,
                 pdf_path.stat().st_size + 1,
             ),
-            index_adapter=ChromaIndexAdapter(args.embedding_model),
+            index_adapter=ChromaIndexAdapter(
+                args.embedding_model, ocr_settings=OCRSettings(mode="off"),
+            ),
         )
 
         cold_started = time.perf_counter()

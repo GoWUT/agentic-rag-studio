@@ -36,6 +36,13 @@ def _non_negative_float(name: str, default: float) -> float:
     return value
 
 
+def _boolean(name: str, default: bool) -> bool:
+    value = os.getenv(name, str(default)).strip().lower()
+    if value not in {"true", "false", "1", "0"}:
+        raise ValueError(f"{name} must be true or false")
+    return value in {"true", "1"}
+
+
 def load_config():
     load_dotenv()
 
@@ -94,6 +101,20 @@ def load_config():
             "EMBEDDING_MODEL",
             "BAAI/bge-small-zh-v1.5",
         ),
+        "HYBRID_RETRIEVAL_ENABLED": _boolean("HYBRID_RETRIEVAL_ENABLED", True),
+        "RETRIEVAL_TOP_K": _positive_int("RETRIEVAL_TOP_K", 5),
+        "RETRIEVAL_CANDIDATE_K": _positive_int("RETRIEVAL_CANDIDATE_K", 20),
+        "RERANKER_ENABLED": _boolean("RERANKER_ENABLED", True),
+        "RERANKER_MODEL": os.getenv("RERANKER_MODEL", "BAAI/bge-reranker-base"),
+        "RERANKER_DEVICE": os.getenv("RERANKER_DEVICE", "cpu"),
+        "RERANKER_BATCH_SIZE": _positive_int("RERANKER_BATCH_SIZE", 8),
+        "RERANKER_FALLBACK": _boolean("RERANKER_FALLBACK", True),
+        "PDF_OCR_MODE": os.getenv("PDF_OCR_MODE", "auto").strip().lower(),
+        "PDF_OCR_LANG": os.getenv("PDF_OCR_LANG", "ch"),
+        "PDF_OCR_DEVICE": os.getenv("PDF_OCR_DEVICE", "cpu"),
+        "PDF_OCR_DPI": _positive_int("PDF_OCR_DPI", 200),
+        "PDF_OCR_MIN_TEXT_CHARS": _positive_int("PDF_OCR_MIN_TEXT_CHARS", 40),
+        "PDF_OCR_MIN_CONFIDENCE": _non_negative_float("PDF_OCR_MIN_CONFIDENCE", 0.5),
         "MAX_PDF_UPLOAD_BYTES": _positive_int(
             "MAX_PDF_UPLOAD_BYTES",
             25 * 1024 * 1024,
@@ -114,6 +135,12 @@ def load_config():
             "AGENT_EXECUTION_TIMEOUT_SECONDS"
         )
 
+    if config["RETRIEVAL_CANDIDATE_K"] < config["RETRIEVAL_TOP_K"]:
+        raise ValueError("RETRIEVAL_CANDIDATE_K must be >= RETRIEVAL_TOP_K")
+
+    from server.rag.ocr import OCRSettings
+
+    OCRSettings.from_config(config)
     return config
 
 
