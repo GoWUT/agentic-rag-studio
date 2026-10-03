@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="990" viewBox="0 0 1280 990" role="img" aria-labelledby="title description">
+<title id="title">Agentic RAG Studio system architecture</title>
+<desc id="description">Streamlit connects to FastAPI with live authentication and RBAC. PostgreSQL holds business state, durable queue jobs and checkpoints. An independent worker restores the original actor and executes bounded LangGraph workflows. Retrieval, analysis and governed MCP tools use shared workspace files. API and Worker export optional redacted telemetry. SQLite inline mode is a local alternative; container runtime acceptance is pending.</desc>
+<rect width="1280" height="990" fill="#f8fafc"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<rect x="44" y="32" width="182" height="27" rx="8" fill="#e8efff" stroke="#e8efff"/>
+<text x="56" y="51" font-size="13" font-weight="700" fill="#2563eb">SYSTEM ARCHITECTURE</text>
+<text x="44" y="103" font-size="36" font-weight="700" fill="#14253d">Agentic RAG Studio</text>
+<text x="44" y="133" font-size="18" font-weight="400" fill="#52647b">Evidence-grounded research · durable execution · live workspace authority</text>
+<rect x="44" y="177" width="248" height="179" rx="16" fill="#ffffff" stroke="#d9e2ef"/>
+<text x="64" y="209" font-size="12" font-weight="700" fill="#2563eb">01  EXPERIENCE</text>
+<text x="64" y="246" font-size="21" font-weight="700" fill="#14253d">Streamlit workspace</text>
+<text x="64" y="278" font-size="16" font-weight="400" fill="#52647b">Chat · sources · datasets</text>
+<text x="64" y="306" font-size="16" font-weight="400" fill="#52647b">Tasks · agents · approvals</text>
+<text x="64" y="335" font-size="15" font-weight="400" fill="#52647b">Session-local auth tokens</text>
+<rect x="336" y="177" width="556" height="179" rx="16" fill="#ffffff" stroke="#d9e2ef"/>
+<text x="358" y="209" font-size="12" font-weight="700" fill="#2563eb">02  API &amp; AUTHORITY</text>
+<text x="358" y="246" font-size="23" font-weight="700" fill="#14253d">FastAPI + scoped services</text>
+<text x="358" y="278" font-size="17" font-weight="400" fill="#52647b">JWT identity · live status · OWNER / EDITOR / VIEWER</text>
+<text x="358" y="306" font-size="17" font-weight="400" fill="#52647b">Private sessions · asset access · durable task control</text>
+<text x="358" y="335" font-size="16" font-weight="400" fill="#52647b">Argon2id · rotating refresh · membership &amp; audit</text>
+<rect x="936" y="177" width="300" height="179" rx="16" fill="#eef5ff" stroke="#bfcef0"/>
+<text x="958" y="209" font-size="12" font-weight="700" fill="#2563eb">03  DURABLE STATE</text>
+<text x="958" y="246" font-size="23" font-weight="700" fill="#14253d">PostgreSQL</text>
+<text x="958" y="278" font-size="17" font-weight="400" fill="#52647b">Business · accounts · audit</text>
+<text x="958" y="306" font-size="17" font-weight="400" fill="#52647b">Procrastinate queue</text>
+<text x="958" y="335" font-size="17" font-weight="400" fill="#52647b">LangGraph checkpoints</text>
+<polyline points="292,266 336,266" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="336,266 327,261 327,271" fill="#2563eb"/>
+<polyline points="892,266 936,266" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="936,266 927,261 927,271" fill="#2563eb"/>
+<polyline points="1086,356 1086,427" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="1086,427 1081,418 1091,418" fill="#2563eb"/>
+<text x="1099" y="397" font-size="14" font-weight="400" fill="#2563eb">claim job</text>
+<polyline points="614,356 614,427" fill="none" stroke="#6d28d9" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="614,427 609,418 619,418" fill="#6d28d9"/>
+<text x="629" y="397" font-size="14" font-weight="400" fill="#6d28d9">inline alternative</text>
+<rect x="44" y="427" width="848" height="247" rx="16" fill="#f5f1ff" stroke="#d7c9f3"/>
+<text x="66" y="461" font-size="12" font-weight="700" fill="#6d28d9">04  BOUNDED AGENT RUNTIME</text>
+<text x="66" y="498" font-size="24" font-weight="700" fill="#14253d">ExecutionHarness + LangGraph</text>
+<text x="66" y="530" font-size="17" font-weight="400" fill="#52647b">Cost-aware supervisor: research workflow / single agent / delegation</text>
+<rect x="66" y="550" width="804" height="47" rx="9" fill="#ffffff" stroke="#ded4f1"/>
+<text x="88" y="580" font-size="17" font-weight="700" fill="#6d28d9">Research Agent</text>
+<text x="307" y="580" font-size="17" font-weight="700" fill="#6d28d9">Data Agent</text>
+<text x="484" y="580" font-size="17" font-weight="700" fill="#6d28d9">Coding Agent</text>
+<text x="676" y="580" font-size="17" font-weight="700" fill="#6d28d9">Reviewer Agent</text>
+<text x="66" y="628" font-size="17" font-weight="400" fill="#52647b">Private context · scoped memory · parallel delegation · selective review</text>
+<text x="66" y="655" font-size="17" font-weight="400" fill="#52647b">Call / token / time budgets · task events · persistent graph checkpoints</text>
+<rect x="936" y="427" width="300" height="247" rx="16" fill="#ffffff" stroke="#d9e2ef"/>
+<text x="958" y="461" font-size="12" font-weight="700" fill="#2563eb">05  INDEPENDENT WORKER</text>
+<text x="958" y="498" font-size="20" font-weight="700" fill="#14253d">Execute as task creator</text>
+<text x="958" y="535" font-size="17" font-weight="400" fill="#52647b">Live account + membership</text>
+<text x="958" y="568" font-size="17" font-weight="400" fill="#52647b">Expected-version guard</text>
+<text x="958" y="601" font-size="17" font-weight="400" fill="#52647b">Bounded retry · heartbeat</text>
+<text x="958" y="638" font-size="17" font-weight="400" fill="#52647b">Resume from durable state</text>
+<polyline points="936,517 892,517" fill="none" stroke="#6d28d9" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="892,517 901,512 901,522" fill="#6d28d9"/>
+<polyline points="236,674 236,744" fill="none" stroke="#087f8c" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="236,744 231,735 241,735" fill="#087f8c"/>
+<polyline points="676,674 676,744" fill="none" stroke="#087f8c" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="676,744 671,735 681,735" fill="#087f8c"/>
+<text x="249" y="715" font-size="14" font-weight="400" fill="#087f8c">retrieve evidence</text>
+<text x="689" y="715" font-size="14" font-weight="400" fill="#087f8c">execute tools</text>
+<rect x="44" y="744" width="408" height="165" rx="16" fill="#ffffff" stroke="#d9e2ef"/>
+<text x="66" y="776" font-size="12" font-weight="700" fill="#087f8c">06  RESEARCH &amp; SHARED FILES</text>
+<text x="66" y="813" font-size="21" font-weight="700" fill="#14253d">Workspace-scoped retrieval</text>
+<text x="66" y="845" font-size="16" font-weight="400" fill="#52647b">Dense + BM25 · RRF · optional reranker</text>
+<text x="66" y="873" font-size="16" font-weight="400" fill="#52647b">PDF / OCR · Chroma · page citations</text>
+<text x="66" y="895" font-size="14" font-weight="400" fill="#52647b">Shared files: datasets · artifacts · model cache</text>
+<rect x="484" y="744" width="408" height="165" rx="16" fill="#ffffff" stroke="#d9e2ef"/>
+<text x="506" y="776" font-size="12" font-weight="700" fill="#087f8c">07  GOVERNED ACTIONS</text>
+<text x="506" y="813" font-size="21" font-weight="700" fill="#14253d">Analysis + MCP tools</text>
+<text x="506" y="845" font-size="16" font-weight="400" fill="#52647b">MCP writes: RBAC → policy → approval</text>
+<text x="506" y="873" font-size="16" font-weight="400" fill="#52647b">Recheck authority → claim → receipt</text>
+<text x="506" y="895" font-size="14" font-weight="400" fill="#52647b">Constrained subprocess; not an OS sandbox</text>
+<rect x="936" y="744" width="300" height="165" rx="16" fill="#eff8f7" stroke="#c6e3de"/>
+<text x="958" y="776" font-size="12" font-weight="700" fill="#087f8c">08  OPTIONAL TELEMETRY</text>
+<text x="958" y="813" font-size="20" font-weight="700" fill="#14253d">API + Worker export</text>
+<text x="958" y="845" font-size="15" font-weight="400" fill="#52647b">Redacted logs · OTel · LangSmith</text>
+<text x="958" y="873" font-size="15" font-weight="400" fill="#52647b">Collector · Tempo · Prometheus</text>
+<text x="958" y="895" font-size="14" font-weight="400" fill="#52647b">Grafana configuration included</text>
+<text x="44" y="950" font-size="15" font-weight="400" fill="#52647b">Shown: PostgreSQL worker mode. Local alternative: SQLite + inline execution.</text>
+<text x="44" y="975" font-size="15" font-weight="400" fill="#52647b">Validated: native processes. Pending: Docker / Compose runtime acceptance.</text>
+</g></svg>
