@@ -1,0 +1,41 @@
+{
+  "case_count": 2,
+  "metrics": {
+    "tool_selection_accuracy": 1.0,
+    "retrieval_success": 1.0,
+    "planner_success": 1.0,
+    "citation_validity": 1.0,
+    "grounded_answer": 1.0,
+    "tool_calls": 1.0,
+    "retrieval_attempts": 1.0,
+    "latency_ms": 13.240699889138341
+  },
+  "cases": [
+    {
+      "id": "compare",
+      "missing_response": false,
+      "tool_selection_accuracy": true,
+      "retrieval_success": true,
+      "planner_success": true,
+      "citation_validity": true,
+      "grounded_answer": true,
+      "tool_calls": 1,
+      "retrieval_attempts": 1,
+      "latency_ms": 14.802699908614159
+    },
+    {
+      "id": "title",
+      "missing_response": false,
+      "tool_selection_accuracy": true,
+      "retrieval_success": true,
+      "planner_success": true,
+      "citation_validity": true,
+      "grounded_answer": true,
+      "tool_calls": 1,
+      "retrieval_attempts": 1,
+      "latency_ms": 11.678699869662523
+    }
+  ],
+  "groundedness_measurement": "Verifier pass rate; requires independent human/benchmark validation for factual accuracy.",
+  "mode": "synthetic_offline_demo_not_a_quality_benchmark"
+}

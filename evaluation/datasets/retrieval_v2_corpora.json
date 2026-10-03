@@ -1,0 +1,26 @@
+{
+  "phase": "2.1",
+  "corpora": [
+    {
+      "id": "gcnet",
+      "title": "Golden Cudgel Network for Real-Time Semantic Segmentation",
+      "pdf": ".rag_workspace/0dad13b35659a0d6.pdf",
+      "pdf_sha256": "0dad13b35659a0d61eb3fa3db415145b55ce89004ffc9b9b97cfb0ea8a369bb9",
+      "dataset": "evaluation/datasets/retrieval_v2_gcnet.jsonl"
+    },
+    {
+      "id": "tda_yolo",
+      "title": "TDA-YOLO: A Novel Adaptive YOLO-Based Framework for UAV Remote Sensing Image Object Detection with Enhanced Sampling and Detect Head Mechanisms",
+      "pdf": ".rag_workspace/1327dde30bcd5c41.pdf",
+      "pdf_sha256": "1327dde30bcd5c41d52778ee7b7396a6f433f1040ccb87f75604aa3c0c8952f2",
+      "dataset": "evaluation/datasets/retrieval_v2_tda_yolo.jsonl"
+    },
+    {
+      "id": "pvigs",
+      "title": "PViGS: Sparse-view 3D Gaussian splatting with pixelwise visibility-aware regularization",
+      "pdf": ".rag_workspace/b4acc699ab746317.pdf",
+      "pdf_sha256": "b4acc699ab746317be68ea9f58eebafc450d7e537aba0b06f8ec2218da7287ae",
+      "dataset": "evaluation/datasets/retrieval_v2_pvigs.jsonl"
+    }
+  ]
+}

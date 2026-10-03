@@ -1,0 +1,2667 @@
+{
+  "run_id": "retrieval-v2-20260907T113141Z",
+  "environment": {
+    "timestamp_utc": "2026-09-07T11:31:41.297643+00:00",
+    "git_commit": "24f01d5f2901191fbdcde8a2117250b0b728c93c",
+    "git_worktree_dirty": true,
+    "python_version": "3.11.16",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "cpu": "Intel64 Family 6 Model 198 Stepping 2, GenuineIntel",
+    "cuda_available": false,
+    "gpu": "none",
+    "torch_version": "2.9.1",
+    "sentence_transformers_version": "5.2.0",
+    "chromadb_version": "1.3.7",
+    "device": "cpu"
+  },
+  "corpus": {
+    "pdf_path": ".rag_workspace\\1327dde30bcd5c41.pdf",
+    "pdf_size_bytes": 24475296,
+    "pdf_sha256": "1327dde30bcd5c41d52778ee7b7396a6f433f1040ccb87f75604aa3c0c8952f2",
+    "pages": 17,
+    "chunks": 93,
+    "index_path": ".runtime\\retrieval-v2-phase2_1\\chroma_1327dde30bcd5c41d52778ee7b7396a6f433f1040ccb87f75604aa3c0c8952f2_f78ec797f5a5",
+    "index_reused": false
+  },
+  "dataset": {
+    "path": "evaluation\\datasets\\retrieval_v2_tda_yolo.jsonl",
+    "sha256": "78c8610f4264c429e53e65afa1e764347a185bf9bb9958ee0896ac5d69ff4e9c",
+    "query_count": 20,
+    "gold_label_method": "human-selected answer anchor located in native PDF text",
+    "category_distribution": {
+      "lexical": 5,
+      "mixed": 5,
+      "numeric": 5,
+      "semantic": 5
+    },
+    "gold_page_distribution": {
+      "3": 3,
+      "4": 1,
+      "7": 1,
+      "9": 4,
+      "10": 4,
+      "11": 3,
+      "13": 1,
+      "14": 3
+    },
+    "duplicate_queries": [],
+    "duplicate_anchors": [],
+    "anchor_location_failures": []
+  },
+  "config": {
+    "embedding_model": "BAAI/bge-small-zh-v1.5",
+    "reranker_model": "BAAI/bge-reranker-base",
+    "reranker_device": "cpu",
+    "reranker_batch_size": 8,
+    "reranker_fallback": false,
+    "ocr": {
+      "mode": "auto",
+      "lang": "ch",
+      "device": "cpu",
+      "dpi": 200,
+      "min_text_chars": 40,
+      "min_confidence": 0.5
+    },
+    "chunk_size": 800,
+    "chunk_overlap": 150,
+    "top_k": 5,
+    "candidate_k": 20,
+    "rrf_constant": 60,
+    "repeats": 5,
+    "warmup_queries_per_method": 3,
+    "bootstrap_samples": 2000,
+    "bootstrap_seed": 42
+  },
+  "initialization": {
+    "index_load_or_build_ms": 10114.0267,
+    "index_reused": false,
+    "bm25_index_build_ms": 4.7377,
+    "reranker_cold_start_ms": 1028.4103,
+    "reranker_warmup_queries": 3
+  },
+  "methods": {
+    "dense": {
+      "hit_at_1": 0.4,
+      "hit_at_3": 0.75,
+      "hit_at_5": 0.75,
+      "recall_at_5": 0.75,
+      "mrr_at_5": 0.55,
+      "ndcg_at_5": 0.601186,
+      "latency_ms_p50": 6.4311,
+      "latency_ms_p95": 8.58188,
+      "latency_ms_mean": 6.543911,
+      "latency_ms_min": 4.7573,
+      "latency_ms_max": 10.1111,
+      "ranking_stable": true,
+      "stage_latency_ms": {
+        "dense_ms_p50": 6.4311,
+        "total_ms_p50": 6.4311
+      },
+      "confidence_intervals_95": {
+        "hit_at_5": {
+          "mean": 0.75,
+          "lower": 0.55,
+          "upper": 0.9,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "mrr_at_5": {
+          "mean": 0.55,
+          "lower": 0.375,
+          "upper": 0.725208,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "ndcg_at_5": {
+          "mean": 0.601186,
+          "lower": 0.432732,
+          "upper": 0.770959,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        }
+      }
+    },
+    "bm25": {
+      "hit_at_1": 0.55,
+      "hit_at_3": 0.7,
+      "hit_at_5": 0.95,
+      "recall_at_5": 0.95,
+      "mrr_at_5": 0.676667,
+      "ndcg_at_5": 0.743571,
+      "latency_ms_p50": 0.0553,
+      "latency_ms_p95": 0.089905,
+      "latency_ms_mean": 0.055395,
+      "latency_ms_min": 0.0148,
+      "latency_ms_max": 0.1958,
+      "ranking_stable": true,
+      "stage_latency_ms": {
+        "bm25_ms_p50": 0.0553,
+        "total_ms_p50": 0.0553
+      },
+      "confidence_intervals_95": {
+        "hit_at_5": {
+          "mean": 0.95,
+          "lower": 0.85,
+          "upper": 1.0,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "mrr_at_5": {
+          "mean": 0.676667,
+          "lower": 0.526667,
+          "upper": 0.8375,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "ndcg_at_5": {
+          "mean": 0.743571,
+          "lower": 0.609425,
+          "upper": 0.874614,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        }
+      }
+    },
+    "hybrid_rrf": {
+      "hit_at_1": 0.5,
+      "hit_at_3": 0.7,
+      "hit_at_5": 0.75,
+      "recall_at_5": 0.75,
+      "mrr_at_5": 0.5875,
+      "ndcg_at_5": 0.62808,
+      "latency_ms_p50": 7.82745,
+      "latency_ms_p95": 9.64964,
+      "latency_ms_mean": 7.858872,
+      "latency_ms_min": 5.3422,
+      "latency_ms_max": 12.2997,
+      "ranking_stable": true,
+      "stage_latency_ms": {
+        "dense_ms_p50": 7.47315,
+        "bm25_ms_p50": 0.1146,
+        "rrf_ms_p50": 0.1633,
+        "total_ms_p50": 7.82745
+      },
+      "confidence_intervals_95": {
+        "hit_at_5": {
+          "mean": 0.75,
+          "lower": 0.55,
+          "upper": 0.95,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "mrr_at_5": {
+          "mean": 0.5875,
+          "lower": 0.408229,
+          "upper": 0.779167,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "ndcg_at_5": {
+          "mean": 0.62808,
+          "lower": 0.45,
+          "upper": 0.806546,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        }
+      }
+    },
+    "hybrid_reranker": {
+      "hit_at_1": 0.45,
+      "hit_at_3": 0.85,
+      "hit_at_5": 0.95,
+      "recall_at_5": 0.95,
+      "mrr_at_5": 0.658333,
+      "ndcg_at_5": 0.732347,
+      "latency_ms_p50": 1414.73635,
+      "latency_ms_p95": 1691.7651,
+      "latency_ms_mean": 1443.114676,
+      "latency_ms_min": 1200.7083,
+      "latency_ms_max": 1976.4731,
+      "ranking_stable": true,
+      "stage_latency_ms": {
+        "dense_ms_p50": 9.2243,
+        "bm25_ms_p50": 0.1448,
+        "rrf_ms_p50": 0.1987,
+        "reranker_ms_p50": 1405.1606,
+        "total_ms_p50": 1414.73635
+      },
+      "confidence_intervals_95": {
+        "hit_at_5": {
+          "mean": 0.95,
+          "lower": 0.85,
+          "upper": 1.0,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "mrr_at_5": {
+          "mean": 0.658333,
+          "lower": 0.508333,
+          "upper": 0.795937,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "ndcg_at_5": {
+          "mean": 0.732347,
+          "lower": 0.603841,
+          "upper": 0.845873,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        }
+      }
+    }
+  },
+  "candidate_recall": {
+    "candidate_k": 20,
+    "dense_candidate_hit_at_20": 0.9,
+    "hybrid_candidate_hit_at_20": 0.95
+  },
+  "comparison": {
+    "hybrid_vs_dense": {
+      "hit_at_5_delta": 0.0,
+      "mrr_at_5_delta": 0.0375,
+      "ndcg_at_5_delta": 0.026894,
+      "p95_latency_delta_ms": 1.06776
+    },
+    "hybrid_reranker_vs_hybrid": {
+      "hit_at_5_delta": 0.2,
+      "mrr_at_5_delta": 0.070833,
+      "ndcg_at_5_delta": 0.104267,
+      "p95_latency_delta_ms": 1682.11546
+    },
+    "hybrid_reranker_vs_dense": {
+      "hit_at_5_delta": 0.2,
+      "mrr_at_5_delta": 0.108333,
+      "ndcg_at_5_delta": 0.131161,
+      "p95_latency_delta_ms": 1683.18322
+    }
+  },
+  "per_category": {
+    "lexical": {
+      "dense": {
+        "query_count": 5,
+        "hit_at_5": 0.8,
+        "mrr_at_5": 0.566667,
+        "ndcg_at_5": 0.626186
+      },
+      "bm25": {
+        "query_count": 5,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 0.616667,
+        "ndcg_at_5": 0.712321
+      },
+      "hybrid_rrf": {
+        "query_count": 5,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 0.766667,
+        "ndcg_at_5": 0.826186
+      },
+      "hybrid_reranker": {
+        "query_count": 5,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 0.766667,
+        "ndcg_at_5": 0.826186
+      }
+    },
+    "mixed": {
+      "dense": {
+        "query_count": 5,
+        "hit_at_5": 0.6,
+        "mrr_at_5": 0.366667,
+        "ndcg_at_5": 0.426186
+      },
+      "bm25": {
+        "query_count": 5,
+        "hit_at_5": 0.8,
+        "mrr_at_5": 0.55,
+        "ndcg_at_5": 0.612321
+      },
+      "hybrid_rrf": {
+        "query_count": 5,
+        "hit_at_5": 0.4,
+        "mrr_at_5": 0.266667,
+        "ndcg_at_5": 0.3
+      },
+      "hybrid_reranker": {
+        "query_count": 5,
+        "hit_at_5": 0.8,
+        "mrr_at_5": 0.416667,
+        "ndcg_at_5": 0.512321
+      }
+    },
+    "numeric": {
+      "dense": {
+        "query_count": 5,
+        "hit_at_5": 0.6,
+        "mrr_at_5": 0.5,
+        "ndcg_at_5": 0.526186
+      },
+      "bm25": {
+        "query_count": 5,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 0.84,
+        "ndcg_at_5": 0.877371
+      },
+      "hybrid_rrf": {
+        "query_count": 5,
+        "hit_at_5": 0.8,
+        "mrr_at_5": 0.65,
+        "ndcg_at_5": 0.686135
+      },
+      "hybrid_reranker": {
+        "query_count": 5,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 0.9,
+        "ndcg_at_5": 0.926186
+      }
+    },
+    "semantic": {
+      "dense": {
+        "query_count": 5,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 0.766667,
+        "ndcg_at_5": 0.826186
+      },
+      "bm25": {
+        "query_count": 5,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 0.7,
+        "ndcg_at_5": 0.772271
+      },
+      "hybrid_rrf": {
+        "query_count": 5,
+        "hit_at_5": 0.8,
+        "mrr_at_5": 0.666667,
+        "ndcg_at_5": 0.7
+      },
+      "hybrid_reranker": {
+        "query_count": 5,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 0.55,
+        "ndcg_at_5": 0.664693
+      }
+    }
+  },
+  "failed_cases": {
+    "dense_miss_hybrid_success": [
+      {
+        "id": "tda_q01",
+        "query": "What weakness of conventional convolution choices motivates TDA-YOLO for complex aerial scenes?",
+        "analysis": "requires manual analysis"
+      },
+      {
+        "id": "tda_q06",
+        "query": "How large is the VisDrone2019 image collection used in the experiments?",
+        "analysis": "requires manual analysis"
+      }
+    ],
+    "hybrid_miss_reranker_success": [
+      {
+        "id": "tda_q02",
+        "query": "How does LAWDS preserve useful information during downsampling?",
+        "analysis": "requires manual analysis"
+      },
+      {
+        "id": "tda_q08",
+        "query": "Why is VisDrone2019 appropriate for testing performance in practical UAV scenes?",
+        "analysis": "requires manual analysis"
+      },
+      {
+        "id": "tda_q11",
+        "query": "With all three proposed modules enabled, what precision and mAP scores are reported on VisDrone and DOTAv2?",
+        "analysis": "requires manual analysis"
+      },
+      {
+        "id": "tda_q20",
+        "query": "What accuracy, parameter count, and compute does TDA-YOLO report against UAV-domain methods on VisDrone2019-val?",
+        "analysis": "requires manual analysis"
+      }
+    ],
+    "dense_success_hybrid_fail": [
+      {
+        "id": "tda_q02",
+        "query": "How does LAWDS preserve useful information during downsampling?",
+        "analysis": "requires manual analysis"
+      },
+      {
+        "id": "tda_q20",
+        "query": "What accuracy, parameter count, and compute does TDA-YOLO report against UAV-domain methods on VisDrone2019-val?",
+        "analysis": "requires manual analysis"
+      }
+    ],
+    "hybrid_success_reranker_fail": []
+  },
+  "cases": [
+    {
+      "id": "tda_q01",
+      "query": "What weakness of conventional convolution choices motivates TDA-YOLO for complex aerial scenes?",
+      "anchor": "traditional methods that rely on large kernels or dilated convolutions often fail to effectively capture fine-grained features",
+      "category": "lexical",
+      "gold_pages_1_based": [
+        3
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            1,
+            9,
+            2,
+            14,
+            6
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            10.1111,
+            6.6697,
+            6.2714,
+            8.4503,
+            8.9593
+          ],
+          "latency_ms_median": 8.4503,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            10,
+            8,
+            10,
+            3,
+            4
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.25,
+          "ndcg_at_5": 0.430677,
+          "first_relevant_rank": 4,
+          "latency_ms": [
+            0.1958,
+            0.071,
+            0.0616,
+            0.0565,
+            0.0553
+          ],
+          "latency_ms_median": 0.0616,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            9,
+            4,
+            3,
+            3,
+            7
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            11.343,
+            5.6223,
+            6.1563,
+            7.1501,
+            6.482
+          ],
+          "latency_ms_median": 6.482,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            3,
+            4,
+            2,
+            8,
+            3
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1648.7748,
+            1624.1181,
+            1547.9436,
+            1579.4643,
+            1501.2726
+          ],
+          "latency_ms_median": 1579.4643,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "tda_q02",
+      "query": "How does LAWDS preserve useful information during downsampling?",
+      "anchor": "adaptively pri- oritizes feature importance and selectively retains critical spatial information for enhanced detection accuracy.",
+      "category": "semantic",
+      "gold_pages_1_based": [
+        3
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            3,
+            6,
+            6,
+            6,
+            4
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            7.34,
+            7.2578,
+            6.7588,
+            5.2799,
+            6.7274
+          ],
+          "latency_ms_median": 6.7588,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            6,
+            2,
+            13,
+            3,
+            7
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.25,
+          "ndcg_at_5": 0.430677,
+          "first_relevant_rank": 4,
+          "latency_ms": [
+            0.0313,
+            0.0171,
+            0.0153,
+            0.0148,
+            0.0151
+          ],
+          "latency_ms_median": 0.0153,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            6,
+            6,
+            4,
+            13,
+            6
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            6.6522,
+            6.0352,
+            7.3523,
+            7.3096,
+            7.4921
+          ],
+          "latency_ms_median": 7.3096,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            6,
+            3,
+            2,
+            7,
+            5
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            1332.6438,
+            1303.4949,
+            1320.652,
+            1394.5871,
+            1369.5997
+          ],
+          "latency_ms_median": 1332.6438,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "tda_q03",
+      "query": "What two mechanisms does Dynamic UpSampling combine, and what efficiency benefit is claimed?",
+      "anchor": "combines dynamic offset generation with adaptive modulation, optimizing traditional upsampling methods and reducing computational overhead.",
+      "category": "semantic",
+      "gold_pages_1_based": [
+        3
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            7,
+            4,
+            3,
+            3,
+            9
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            5.6125,
+            5.3443,
+            8.8213,
+            7.2361,
+            7.9921
+          ],
+          "latency_ms_median": 7.2361,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            2,
+            8,
+            8,
+            3,
+            4
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.25,
+          "ndcg_at_5": 0.430677,
+          "first_relevant_rank": 4,
+          "latency_ms": [
+            0.1061,
+            0.0488,
+            0.0452,
+            0.0447,
+            0.045
+          ],
+          "latency_ms_median": 0.0452,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            7,
+            4,
+            3,
+            9,
+            7
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            7.8281,
+            8.4038,
+            7.1157,
+            8.4458,
+            7.5857
+          ],
+          "latency_ms_median": 7.8281,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            3,
+            7,
+            2,
+            8,
+            8
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1322.6957,
+            1417.9762,
+            1442.196,
+            1429.5546,
+            1345.6287
+          ],
+          "latency_ms_median": 1417.9762,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "tda_q04",
+      "query": "Which three building blocks make up the TD Detect head?",
+      "anchor": "three primary components: deformable convolutions, scale attention, and task-specific dynamic activation.",
+      "category": "mixed",
+      "gold_pages_1_based": [
+        9
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            9,
+            12,
+            2,
+            15,
+            13
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            4.9037,
+            5.8111,
+            6.3981,
+            6.3817,
+            6.8543
+          ],
+          "latency_ms_median": 6.3817,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            13,
+            9,
+            9,
+            5,
+            2
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            0.0712,
+            0.0409,
+            0.0391,
+            0.0392,
+            0.0379
+          ],
+          "latency_ms_median": 0.0392,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            13,
+            2,
+            9,
+            9,
+            9
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            6.5496,
+            5.5465,
+            7.1453,
+            8.0482,
+            7.7978
+          ],
+          "latency_ms_median": 7.1453,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            2,
+            9,
+            2,
+            9,
+            9
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            1430.042,
+            1365.5513,
+            1364.0009,
+            1343.3122,
+            1356.1441
+          ],
+          "latency_ms_median": 1364.0009,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "tda_q05",
+      "query": "What does the Dynamic Scope Factor generate before it modulates the sampling offsets?",
+      "anchor": "The Dynamic Scope Factor generates adaptive weights in real-time, thereby enabling precise calibration of the sampling offsets.",
+      "category": "lexical",
+      "gold_pages_1_based": [
+        7
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            9,
+            7,
+            8,
+            10,
+            8
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            7.58,
+            7.1976,
+            6.6315,
+            6.7282,
+            5.7758
+          ],
+          "latency_ms_median": 6.7282,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            8,
+            7,
+            8,
+            9,
+            12
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            0.0552,
+            0.0408,
+            0.0389,
+            0.0382,
+            0.0371
+          ],
+          "latency_ms_median": 0.0389,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            7,
+            8,
+            8,
+            9,
+            9
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            7.8268,
+            7.2993,
+            7.6166,
+            6.3459,
+            8.0958
+          ],
+          "latency_ms_median": 7.6166,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            8,
+            7,
+            8,
+            7,
+            3
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            1251.3424,
+            1275.1678,
+            1321.7247,
+            1274.2051,
+            1261.4982
+          ],
+          "latency_ms_median": 1274.2051,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "tda_q06",
+      "query": "How large is the VisDrone2019 image collection used in the experiments?",
+      "anchor": "The VisDrone2019 dataset contains 6,471 images",
+      "category": "numeric",
+      "gold_pages_1_based": [
+        10
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            16,
+            5,
+            8,
+            9,
+            2
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            5.9608,
+            6.6728,
+            5.8482,
+            5.898,
+            4.9672
+          ],
+          "latency_ms_median": 5.898,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            10,
+            3,
+            8,
+            9,
+            13
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.0756,
+            0.049,
+            0.0585,
+            0.0482,
+            0.0472
+          ],
+          "latency_ms_median": 0.049,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            8,
+            9,
+            3,
+            10,
+            10
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.25,
+          "ndcg_at_5": 0.430677,
+          "first_relevant_rank": 4,
+          "latency_ms": [
+            5.8863,
+            8.7609,
+            8.0774,
+            8.9339,
+            8.6339
+          ],
+          "latency_ms_median": 8.6339,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            10,
+            10,
+            10,
+            3,
+            14
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1284.4014,
+            1514.9647,
+            1503.4454,
+            1547.7415,
+            1222.8466
+          ],
+          "latency_ms_median": 1503.4454,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "tda_q07",
+      "query": "How many images, annotated instances, and categories does DOTAv2 contain?",
+      "anchor": "with 11,268 images and over 1.8 million object instances across 18 categories",
+      "category": "numeric",
+      "gold_pages_1_based": [
+        10
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            10,
+            10,
+            12,
+            15,
+            14
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            6.1019,
+            7.1865,
+            5.0078,
+            6.5663,
+            5.7621
+          ],
+          "latency_ms_median": 6.1019,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            10,
+            12,
+            10,
+            10,
+            10
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.0552,
+            0.0378,
+            0.0357,
+            0.0356,
+            0.0348
+          ],
+          "latency_ms_median": 0.0357,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            10,
+            10,
+            10,
+            12,
+            12
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            7.6018,
+            6.3065,
+            7.0534,
+            7.2262,
+            10.1583
+          ],
+          "latency_ms_median": 7.2262,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            10,
+            10,
+            10,
+            13,
+            15
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1445.5408,
+            1428.6593,
+            1441.8988,
+            1976.4731,
+            1744.1686
+          ],
+          "latency_ms_median": 1445.5408,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "tda_q08",
+      "query": "Why is VisDrone2019 appropriate for testing performance in practical UAV scenes?",
+      "anchor": "featuring various urban and suburban scenes, such as pedestrians and vehicles, making it suitable for evaluating model performance in real-world settings.",
+      "category": "mixed",
+      "gold_pages_1_based": [
+        10
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            4,
+            12,
+            3,
+            6,
+            9
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            6.0068,
+            6.84,
+            5.8851,
+            8.3814,
+            4.9718
+          ],
+          "latency_ms_median": 6.0068,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            10,
+            13,
+            10,
+            4,
+            10
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.069,
+            0.0483,
+            0.0767,
+            0.0957,
+            0.092
+          ],
+          "latency_ms_median": 0.0767,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            4,
+            13,
+            4,
+            14,
+            4
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            6.5668,
+            9.2852,
+            6.6924,
+            8.6075,
+            5.6478
+          ],
+          "latency_ms_median": 6.6924,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            3,
+            13,
+            13,
+            10,
+            4
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.25,
+          "ndcg_at_5": 0.430677,
+          "first_relevant_rank": 4,
+          "latency_ms": [
+            1410.8781,
+            1381.8318,
+            1316.8728,
+            1299.0063,
+            1200.7083
+          ],
+          "latency_ms_median": 1316.8728,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "tda_q09",
+      "query": "What annotation property makes DOTAv2 useful for arbitrarily oriented targets?",
+      "anchor": "These images featurerotatedboundingboxestoaccuratelydescribeobjectorientations",
+      "category": "mixed",
+      "gold_pages_1_based": [
+        10
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            12,
+            10,
+            10,
+            12,
+            14
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            5.139,
+            5.8286,
+            5.774,
+            5.502,
+            7.6365
+          ],
+          "latency_ms_median": 5.774,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            10,
+            10,
+            13,
+            16,
+            4
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.0705,
+            0.0588,
+            0.0554,
+            0.0563,
+            0.0553
+          ],
+          "latency_ms_median": 0.0563,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            10,
+            10,
+            13,
+            12,
+            4
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            6.7293,
+            7.5371,
+            7.6484,
+            8.7419,
+            8.2954
+          ],
+          "latency_ms_median": 7.6484,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            10,
+            10,
+            11,
+            12,
+            13
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1476.8865,
+            1495.4463,
+            1349.5309,
+            1383.2565,
+            1421.9915
+          ],
+          "latency_ms_median": 1421.9915,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "tda_q10",
+      "query": "What epoch count, batch size, input size, optimizer, and NMS IoU were used for training?",
+      "anchor": "Epochs 100 Batch Size 16 Input Size 640 Optimizer SGD NMS IoU 0.7",
+      "category": "numeric",
+      "gold_pages_1_based": [
+        11
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            10,
+            11,
+            4,
+            11,
+            9
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            5.332,
+            7.1333,
+            5.1785,
+            5.1826,
+            5.8543
+          ],
+          "latency_ms_median": 5.332,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            11,
+            11,
+            10,
+            10,
+            8
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.0742,
+            0.048,
+            0.0466,
+            0.0574,
+            0.0446
+          ],
+          "latency_ms_median": 0.048,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            11,
+            10,
+            7,
+            11,
+            9
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            8.4356,
+            8.5162,
+            7.2153,
+            8.5754,
+            7.0587
+          ],
+          "latency_ms_median": 8.4356,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            11,
+            5,
+            10,
+            9,
+            8
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1447.7044,
+            1434.4076,
+            1446.8622,
+            1423.2042,
+            1430.9877
+          ],
+          "latency_ms_median": 1434.4076,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "tda_q11",
+      "query": "With all three proposed modules enabled, what precision and mAP scores are reported on VisDrone and DOTAv2?",
+      "anchor": "(7) ✓ ✓ ✓ 50.2 41.9 25.2 60.8 34.2 20.9",
+      "category": "numeric",
+      "gold_pages_1_based": [
+        11
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            2,
+            10,
+            12,
+            10,
+            10
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            7.6223,
+            6.8529,
+            7.1908,
+            5.9852,
+            6.5387
+          ],
+          "latency_ms_median": 6.8529,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            10,
+            5,
+            2,
+            13,
+            11
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.2,
+          "ndcg_at_5": 0.386853,
+          "first_relevant_rank": 5,
+          "latency_ms": [
+            0.09,
+            0.0589,
+            0.0571,
+            0.0571,
+            0.0574
+          ],
+          "latency_ms_median": 0.0574,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            10,
+            2,
+            5,
+            13,
+            14
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            9.088,
+            7.7637,
+            9.8058,
+            7.1317,
+            8.1221
+          ],
+          "latency_ms_median": 8.1221,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            2,
+            11,
+            10,
+            14,
+            13
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            1640.9137,
+            1790.3066,
+            1631.2832,
+            1690.7682,
+            1593.2244
+          ],
+          "latency_ms_median": 1640.9137,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "tda_q12",
+      "query": "How does TDA-YOLO compare with LE-YOLO in parameters, accuracy gains, and computation?",
+      "anchor": "Despite having 0.1 million fewer parameters than LE-YOLO, TDA-YOLO achieved an increase of 9.1% and 11.6% in mAP@.5 and mAP@.95, respectively.Furthermore,TDA-YOLO’sGFLOPsareonly60.3%ofLE-YOLO",
+      "category": "numeric",
+      "gold_pages_1_based": [
+        11
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            11,
+            6,
+            4,
+            7,
+            17
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            5.9108,
+            8.5817,
+            6.3409,
+            6.6689,
+            7.7587
+          ],
+          "latency_ms_median": 6.6689,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            11,
+            11,
+            12,
+            13,
+            4
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.0807,
+            0.0657,
+            0.0641,
+            0.0638,
+            0.073
+          ],
+          "latency_ms_median": 0.0657,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            11,
+            17,
+            7,
+            11,
+            13
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            8.0203,
+            9.4419,
+            7.8487,
+            8.3884,
+            9.0632
+          ],
+          "latency_ms_median": 8.3884,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            11,
+            11,
+            13,
+            12,
+            11
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1590.6294,
+            1588.4241,
+            1516.3108,
+            1640.0641,
+            1649.6464
+          ],
+          "latency_ms_median": 1590.6294,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "tda_q13",
+      "query": "What learnable quantities let DCNv4 adapt its sampling positions?",
+      "anchor": "DCNv4 introduces learnable offsetsΔ𝑝 and masks𝑚, allowing the convolutional kernel to adapt its sampling locationsdynamically.",
+      "category": "lexical",
+      "gold_pages_1_based": [
+        9
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            9,
+            2,
+            9,
+            12,
+            9
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            7.515,
+            5.7952,
+            8.1829,
+            5.5551,
+            6.4641
+          ],
+          "latency_ms_median": 6.4641,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            9,
+            7,
+            4,
+            7,
+            7
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.0326,
+            0.0206,
+            0.0193,
+            0.0194,
+            0.019
+          ],
+          "latency_ms_median": 0.0194,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            9,
+            9,
+            7,
+            7,
+            9
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            8.0208,
+            7.6586,
+            5.7228,
+            5.3422,
+            7.265
+          ],
+          "latency_ms_median": 7.265,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            9,
+            4,
+            7,
+            9,
+            7
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1382.9436,
+            1415.2487,
+            1496.2531,
+            1414.224,
+            1404.0342
+          ],
+          "latency_ms_median": 1414.224,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "tda_q14",
+      "query": "What is the purpose of scale attention in the TD Detect Block?",
+      "anchor": "This mechanism ensures that the TD Detect Block prioritizes the most informative scales during feature aggregation.",
+      "category": "semantic",
+      "gold_pages_1_based": [
+        9
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            9,
+            2,
+            4,
+            9,
+            9
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            7.0396,
+            4.7573,
+            6.9507,
+            5.4899,
+            7.0761
+          ],
+          "latency_ms_median": 6.9507,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            9,
+            2,
+            9,
+            9,
+            4
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.0819,
+            0.0625,
+            0.0687,
+            0.0655,
+            0.0616
+          ],
+          "latency_ms_median": 0.0655,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            9,
+            2,
+            9,
+            4,
+            9
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            6.1935,
+            7.3434,
+            5.577,
+            7.9996,
+            8.335
+          ],
+          "latency_ms_median": 7.3434,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            2,
+            9,
+            9,
+            9,
+            2
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            1378.8521,
+            1450.2507,
+            1409.651,
+            1374.7208,
+            1419.7532
+          ],
+          "latency_ms_median": 1409.651,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "tda_q15",
+      "query": "How is the task-specific dynamic activation aligned with different detection objectives?",
+      "anchor": "where 𝑊𝑎 and 𝑏are dynamically adjusted based on task-specific requirements, ensuring optimal alignment with detection objectives.",
+      "category": "semantic",
+      "gold_pages_1_based": [
+        9
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            9,
+            9,
+            11,
+            4,
+            12
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            7.3686,
+            5.8707,
+            7.8477,
+            5.8969,
+            6.2473
+          ],
+          "latency_ms_median": 6.2473,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            9,
+            9,
+            4,
+            11,
+            7
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.0735,
+            0.0547,
+            0.0543,
+            0.0535,
+            0.0533
+          ],
+          "latency_ms_median": 0.0543,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            9,
+            9,
+            11,
+            4,
+            8
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            7.7559,
+            6.8717,
+            8.2087,
+            12.2997,
+            7.5265
+          ],
+          "latency_ms_median": 7.7559,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            3,
+            9,
+            9,
+            4,
+            4
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            1382.8949,
+            1528.9646,
+            1408.8192,
+            1320.8281,
+            1345.3662
+          ],
+          "latency_ms_median": 1382.8949,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "tda_q16",
+      "query": "How small are the low-visibility targets highlighted as a major UAV detection challenge?",
+      "anchor": "small, low-visibility targets, often smaller than 32 × 32 pixels",
+      "category": "lexical",
+      "gold_pages_1_based": [
+        4
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            4,
+            4,
+            12,
+            2,
+            4
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            5.9227,
+            5.8412,
+            6.5257,
+            5.8046,
+            6.1467
+          ],
+          "latency_ms_median": 5.9227,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            4,
+            4,
+            13,
+            13,
+            3
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.0899,
+            0.0747,
+            0.0623,
+            0.0619,
+            0.062
+          ],
+          "latency_ms_median": 0.0623,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            4,
+            4,
+            13,
+            3,
+            3
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            9.2083,
+            9.1693,
+            8.78,
+            7.6211,
+            8.0613
+          ],
+          "latency_ms_median": 8.78,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            4,
+            3,
+            4,
+            16,
+            13
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1376.1483,
+            1379.6293,
+            1446.5857,
+            1457.8391,
+            1387.9331
+          ],
+          "latency_ms_median": 1387.9331,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "tda_q17",
+      "query": "What overall mAP improvements and parameter reduction are summarized in the conclusion?",
+      "anchor": "15.8% and 17.9% in mAP@0.5 on the VisDrone2019 and DOTAv2 datasets, respectively, while reducing the modelparametersby10.4%.",
+      "category": "mixed",
+      "gold_pages_1_based": [
+        14
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            7,
+            7,
+            11,
+            12,
+            6
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            5.5737,
+            5.5382,
+            6.5656,
+            5.7826,
+            5.7221
+          ],
+          "latency_ms_median": 5.7221,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            11,
+            5,
+            6,
+            4,
+            13
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            0.0644,
+            0.0567,
+            0.0542,
+            0.058,
+            0.0539
+          ],
+          "latency_ms_median": 0.0567,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            11,
+            8,
+            7,
+            12,
+            7
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            7.9276,
+            9.4569,
+            6.6742,
+            8.6979,
+            8.007
+          ],
+          "latency_ms_median": 8.007,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            11,
+            3,
+            5,
+            12,
+            5
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            1378.4482,
+            1361.9353,
+            1295.7574,
+            1474.3107,
+            1442.851
+          ],
+          "latency_ms_median": 1378.4482,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "tda_q18",
+      "query": "Under what visual condition does the detector's accuracy still decline?",
+      "anchor": "detection accuracy decreases significantly in scenarios with substantial color redundancy between the target and the background.",
+      "category": "lexical",
+      "gold_pages_1_based": [
+        14
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            12,
+            11,
+            14,
+            4,
+            12
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            6.9554,
+            5.4359,
+            6.4819,
+            6.6878,
+            5.3318
+          ],
+          "latency_ms_median": 6.4819,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            12,
+            9,
+            14,
+            4,
+            3
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            0.0481,
+            0.0361,
+            0.0345,
+            0.035,
+            0.035
+          ],
+          "latency_ms_median": 0.035,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            12,
+            14,
+            11,
+            9,
+            4
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            9.1248,
+            6.2569,
+            8.8417,
+            8.9829,
+            8.8513
+          ],
+          "latency_ms_median": 8.8513,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            3,
+            4,
+            14,
+            6,
+            3
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            1408.6554,
+            1307.3,
+            1450.8273,
+            1353.7675,
+            1381.7965
+          ],
+          "latency_ms_median": 1381.7965,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "tda_q19",
+      "query": "What future data expansion do the authors propose to address the remaining accuracy limitation?",
+      "anchor": "Future research will focus on integrating a wider range of remote sensing datasets to overcome this limitation",
+      "category": "semantic",
+      "gold_pages_1_based": [
+        14
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            3,
+            14,
+            4,
+            3,
+            13
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            6.0524,
+            8.2204,
+            6.8312,
+            5.8332,
+            6.2678
+          ],
+          "latency_ms_median": 6.2678,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            14,
+            4,
+            3,
+            9,
+            15
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.0599,
+            0.0467,
+            0.0455,
+            0.0574,
+            0.045
+          ],
+          "latency_ms_median": 0.0467,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            14,
+            3,
+            4,
+            4,
+            4
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            8.729,
+            7.54,
+            8.8298,
+            8.5377,
+            7.637
+          ],
+          "latency_ms_median": 8.5377,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            3,
+            6,
+            4,
+            14,
+            15
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.25,
+          "ndcg_at_5": 0.430677,
+          "first_relevant_rank": 4,
+          "latency_ms": [
+            1332.4643,
+            1343.3816,
+            1357.0128,
+            1342.0088,
+            1296.1917
+          ],
+          "latency_ms_median": 1342.0088,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "tda_q20",
+      "query": "What accuracy, parameter count, and compute does TDA-YOLO report against UAV-domain methods on VisDrone2019-val?",
+      "anchor": "TDA-YOLO 48.4 34.3 2.6 7.9 Table 5",
+      "category": "mixed",
+      "gold_pages_1_based": [
+        13
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            14,
+            4,
+            13,
+            12,
+            17
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            8.5853,
+            8.1581,
+            6.5934,
+            7.7236,
+            8.5903
+          ],
+          "latency_ms_median": 8.1581,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            12,
+            14,
+            11,
+            13,
+            12
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.25,
+          "ndcg_at_5": 0.430677,
+          "first_relevant_rank": 4,
+          "latency_ms": [
+            0.0845,
+            0.0719,
+            0.0692,
+            0.0689,
+            0.0671
+          ],
+          "latency_ms_median": 0.0692,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            14,
+            12,
+            12,
+            4,
+            4
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            9.8005,
+            9.6417,
+            7.5131,
+            9.2313,
+            8.5341
+          ],
+          "latency_ms_median": 9.2313,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            14,
+            12,
+            13,
+            11,
+            4
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            1710.7062,
+            1657.5435,
+            1649.9036,
+            1685.378,
+            1715.4109
+          ],
+          "latency_ms_median": 1685.378,
+          "ranking_stable": true
+        }
+      }
+    }
+  ]
+}

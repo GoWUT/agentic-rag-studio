@@ -1,0 +1,235 @@
+{
+  "run_id": "f60ebc6873f64c94a02d91c4ad60073e",
+  "folder": "D:\\ProjectCode\\AgentLLM\\Agentic-RAG-with-FastAPI-and-Streamlit\\.runtime\\phase5b1_smoke\\f60ebc6873f64c94a02d91c4ad60073e",
+  "provider": "deterministic LLM and synthetic retrieval fixture",
+  "runtime": "real PostgreSQL, Alembic, queue, independent API/worker, LangGraph, MCP SDK and analysis subprocess",
+  "checks": {
+    "PostgreSQL starts": {
+      "status": "PASS",
+      "details": "17.11"
+    },
+    "Alembic upgrade head": {
+      "status": "PASS",
+      "details": "5b1_0001; empty-fixture downgrade/upgrade passed"
+    },
+    "Queue schema initialized": {
+      "status": "PASS",
+      "details": "official SchemaManager"
+    },
+    "PostgresSaver initialized": {
+      "status": "PASS",
+      "details": "official AsyncPostgresSaver.setup"
+    },
+    "FastAPI postgres/worker starts": {
+      "status": "PASS",
+      "details": null
+    },
+    "Independent worker starts": {
+      "status": "PASS",
+      "details": null
+    },
+    "Streamlit starts": {
+      "status": "PASS",
+      "details": null
+    },
+    "Task creation": {
+      "status": "PASS",
+      "details": "17e67a42-4d5b-4dbd-a7dd-fe137b00ab77"
+    },
+    "Run returns 202": {
+      "status": "PASS",
+      "details": 47.0
+    },
+    "Task QUEUED": {
+      "status": "PASS",
+      "details": null
+    },
+    "Worker RUNNING": {
+      "status": "PASS",
+      "details": null
+    },
+    "Task completes": {
+      "status": "PASS",
+      "details": null
+    },
+    "API restart independent": {
+      "status": "PASS",
+      "details": "API was killed while second step ran"
+    },
+    "Streamlit stop independent": {
+      "status": "PASS",
+      "details": "Streamlit process stopped while task ran"
+    },
+    "Worker graceful restart": {
+      "status": "PASS",
+      "details": null
+    },
+    "Worker hard crash read recovery": {
+      "status": "PASS",
+      "details": null
+    },
+    "Completed step not repeated": {
+      "status": "PASS",
+      "details": {
+        "completed_first_step_calls": 1
+      }
+    },
+    "Pause": {
+      "status": "PASS",
+      "details": null
+    },
+    "Queue resume": {
+      "status": "PASS",
+      "details": null
+    },
+    "Cancel queued task": {
+      "status": "PASS",
+      "details": null
+    },
+    "HITL WAITING_USER": {
+      "status": "PASS",
+      "details": null
+    },
+    "Approval queue resume": {
+      "status": "PASS",
+      "details": null
+    },
+    "Approved write exactly once": {
+      "status": "PASS",
+      "details": {
+        "write_execution_count": 1
+      }
+    },
+    "Research + Data background": {
+      "status": "PASS",
+      "details": {
+        "agents": [
+          "research",
+          "data"
+        ],
+        "status": "COMPLETED"
+      }
+    },
+    "Persistence after restart": {
+      "status": "PASS",
+      "details": null
+    },
+    "SQLite migration dry-run": {
+      "status": "PASS",
+      "details": null
+    },
+    "SQLite fixture migration": {
+      "status": "PASS",
+      "details": null
+    },
+    "Row/checksum verification": {
+      "status": "PASS",
+      "details": {
+        "source_rows": 12,
+        "tables": 16
+      }
+    },
+    "Duplicate run requests": {
+      "status": "PASS",
+      "details": null
+    },
+    "DB/queue health": {
+      "status": "PASS",
+      "details": {
+        "database": "ok",
+        "queue": "ok",
+        "worker": "active",
+        "last_heartbeat": "2026-10-03T05:54:42.957726+00:00",
+        "queue_depth": 0,
+        "running_jobs": 1
+      }
+    }
+  },
+  "performance": {
+    "enqueue_ms": [
+      47.0,
+      31.0,
+      31.0,
+      47.0,
+      16.0,
+      31.0,
+      32.0,
+      0.0,
+      32.0,
+      31.0
+    ],
+    "queue_wait_ms": [
+      6341.207,
+      38619.496,
+      6.574,
+      6377.351,
+      9.542
+    ],
+    "worker_startup_to_run_ms": 6332.021,
+    "sqlite_task_create_ms": [
+      2.05,
+      2.084,
+      2.247,
+      2.062,
+      2.143,
+      2.36,
+      2.478,
+      2.118,
+      2.087,
+      2.025
+    ],
+    "postgres_task_create_ms": [
+      2.804,
+      1.113,
+      1.579,
+      1.346,
+      1.093,
+      1.235,
+      1.218,
+      1.328,
+      0.82,
+      0.87
+    ]
+  },
+  "task_ids": [
+    "17e67a42-4d5b-4dbd-a7dd-fe137b00ab77",
+    "66832750-44f9-464e-ac3b-70229c93eb83",
+    "7136c0f9-5fab-43eb-bdfd-ec5f362036d2",
+    "581b10cc-eba5-41eb-aebb-4312a5460abe",
+    "54762624-b029-4f4e-a287-45ce914c729e",
+    "29616eb4-39c9-424d-a2e9-5492d04743fc",
+    "281dc8fa-fc6c-4cde-b4f6-0d26b510bb28",
+    "23ce95fe-9a43-4565-aa03-08f73d57142a",
+    "484cb142-4b3c-415d-a540-daf64271d0e5",
+    "ce44b647-2d3f-479c-8756-370189570744"
+  ],
+  "postgres_version": "17.11",
+  "retry_checks": {
+    "transient_read": {
+      "status": "PASS",
+      "attempts": 2
+    },
+    "invalid_input": {
+      "status": "PASS",
+      "attempts": 1
+    },
+    "ambiguous_write": {
+      "status": "PASS",
+      "task_status": "REQUIRES_RECONCILIATION",
+      "writes_before_recovery": 2,
+      "writes_after_recovery": 2
+    }
+  },
+  "existing_local_migration": {
+    "outcome": "DRY RUN VALIDATED",
+    "warnings": [
+      "existing-sessions.sqlite3: ignored non-application table checkpoints",
+      "existing-sessions.sqlite3: ignored non-application table writes"
+    ],
+    "import_outcome": "VERIFIED",
+    "source_rows": 222,
+    "destination_rows": 222,
+    "all_tables_verified": true
+  },
+  "original_sqlite_unchanged": true
+}

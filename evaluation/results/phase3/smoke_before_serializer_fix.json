@@ -1,0 +1,599 @@
+{
+  "workspace": {
+    "id": "3c508d70-8e2e-4ded-8732-e619f41d8d0f",
+    "name": "phase3_synthetic_smoke",
+    "description": "Synthetic non-sensitive fixtures for real provider smoke",
+    "created_at": "2026-10-01T16:10:48.677098+00:00",
+    "updated_at": "2026-10-01T16:10:48.677098+00:00"
+  },
+  "session": {
+    "session_id": "4684ee64-64a4-4cb5-a652-17f93ffe7f7b",
+    "file_id": "",
+    "file_name": "phase3_synthetic_smoke",
+    "created_at": "2026-10-01T16:10:56.040021+00:00",
+    "updated_at": "2026-10-01T16:10:56.040021+00:00",
+    "turn_count": 0,
+    "workspace_id": "3c508d70-8e2e-4ded-8732-e619f41d8d0f"
+  },
+  "csv": {
+    "id": "1f43343c-bb3a-4020-b942-5503e7dadf57",
+    "workspace_id": "3c508d70-8e2e-4ded-8732-e619f41d8d0f",
+    "filename": "experiment.csv",
+    "display_name": "experiment.csv",
+    "file_type": "csv",
+    "mime_type": "application/vnd.ms-excel",
+    "fingerprint": "3367698e9469fc401e03253777c645f6db4c1e73a197804ff4a4d0ca8f348fa4",
+    "size_bytes": 54,
+    "status": "ready",
+    "row_count": 3,
+    "column_count": 3,
+    "schema_metadata": {
+      "sheet_names": [
+        "data"
+      ],
+      "sheets": {
+        "data": {
+          "rows": 3,
+          "columns": 3,
+          "column_names": [
+            "model",
+            "params_m",
+            "miou"
+          ],
+          "dtypes": {
+            "model": "object",
+            "params_m": "float64",
+            "miou": "float64"
+          },
+          "missing": {
+            "model": 0,
+            "params_m": 0,
+            "miou": 0
+          },
+          "statistics": {
+            "model": {
+              "count": 3,
+              "unique": 3,
+              "top": "A",
+              "freq": 1,
+              "mean": null,
+              "std": null,
+              "min": null,
+              "25%": null,
+              "50%": null,
+              "75%": null,
+              "max": null
+            },
+            "params_m": {
+              "count": 3.0,
+              "unique": null,
+              "top": null,
+              "freq": null,
+              "mean": 2.5666666667,
+              "std": 0.6027713773,
+              "min": 2.0,
+              "25%": 2.25,
+              "50%": 2.5,
+              "75%": 2.85,
+              "max": 3.2
+            },
+            "miou": {
+              "count": 3.0,
+              "unique": null,
+              "top": null,
+              "freq": null,
+              "mean": 73.09,
+              "std": 3.0040472699,
+              "min": 70.0,
+              "25%": 71.635,
+              "50%": 73.27,
+              "75%": 74.635,
+              "max": 76.0
+            }
+          },
+          "sample": [
+            {
+              "model": "A",
+              "params_m": 2.5,
+              "miou": 73.27
+            },
+            {
+              "model": "B",
+              "params_m": 3.2,
+              "miou": 76.0
+            },
+            {
+              "model": "C",
+              "params_m": 2.0,
+              "miou": 70.0
+            }
+          ]
+        }
+      }
+    },
+    "created_at": "2026-10-01T16:10:55.424639+00:00",
+    "updated_at": "2026-10-01T16:10:55.424639+00:00"
+  },
+  "xlsx": {
+    "id": "8d642df8-4e57-443b-af5b-91c06e19f133",
+    "workspace_id": "3c508d70-8e2e-4ded-8732-e619f41d8d0f",
+    "filename": "experiment.xlsx",
+    "display_name": "experiment.xlsx",
+    "file_type": "xlsx",
+    "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "fingerprint": "999eec6df37a27c59c01a5adb14143d13f0ece54361412e2198e7e1c6a1b231b",
+    "size_bytes": 5503,
+    "status": "ready",
+    "row_count": 3,
+    "column_count": 3,
+    "schema_metadata": {
+      "sheet_names": [
+        "Experiments",
+        "Notes"
+      ],
+      "sheets": {
+        "Experiments": {
+          "rows": 3,
+          "columns": 3,
+          "column_names": [
+            "model",
+            "params_m",
+            "miou"
+          ],
+          "dtypes": {
+            "model": "object",
+            "params_m": "float64",
+            "miou": "float64"
+          },
+          "missing": {
+            "model": 0,
+            "params_m": 0,
+            "miou": 0
+          },
+          "statistics": {
+            "model": {
+              "count": 3,
+              "unique": 3,
+              "top": "A",
+              "freq": 1,
+              "mean": null,
+              "std": null,
+              "min": null,
+              "25%": null,
+              "50%": null,
+              "75%": null,
+              "max": null
+            },
+            "params_m": {
+              "count": 3.0,
+              "unique": null,
+              "top": null,
+              "freq": null,
+              "mean": 2.5666666667,
+              "std": 0.6027713773,
+              "min": 2.0,
+              "25%": 2.25,
+              "50%": 2.5,
+              "75%": 2.85,
+              "max": 3.2
+            },
+            "miou": {
+              "count": 3.0,
+              "unique": null,
+              "top": null,
+              "freq": null,
+              "mean": 73.09,
+              "std": 3.0040472699,
+              "min": 70.0,
+              "25%": 71.635,
+              "50%": 73.27,
+              "75%": 74.635,
+              "max": 76.0
+            }
+          },
+          "sample": [
+            {
+              "model": "A",
+              "params_m": 2.5,
+              "miou": 73.27
+            },
+            {
+              "model": "B",
+              "params_m": 3.2,
+              "miou": 76.0
+            },
+            {
+              "model": "C",
+              "params_m": 2.0,
+              "miou": 70.0
+            }
+          ]
+        },
+        "Notes": {
+          "rows": 1,
+          "columns": 1,
+          "column_names": [
+            "note"
+          ],
+          "dtypes": {
+            "note": "object"
+          },
+          "missing": {
+            "note": 0
+          },
+          "statistics": {
+            "note": {
+              "count": 1,
+              "unique": 1,
+              "top": "synthetic fixture",
+              "freq": 1
+            }
+          },
+          "sample": [
+            {
+              "note": "synthetic fixture"
+            }
+          ]
+        }
+      }
+    },
+    "created_at": "2026-10-01T16:10:56.000425+00:00",
+    "updated_at": "2026-10-01T16:10:56.000425+00:00"
+  },
+  "memory": {
+    "id": "37e58561-6137-4fd9-8ac6-8c6d1956cbe1",
+    "owner_id": "local_default",
+    "scope_type": "workspace",
+    "scope_id": "3c508d70-8e2e-4ded-8732-e619f41d8d0f",
+    "memory_type": "preference",
+    "content": "Preferred report format is markdown.",
+    "summary": "",
+    "importance": 0.8,
+    "confidence": 1.0,
+    "source_session_id": null,
+    "source_task_id": null,
+    "source_message_id": null,
+    "content_hash": "2d91fcd09bbd512f3c79e8b0feb749f2407ca26a5d0abf7e9e26d7e8e326ca73",
+    "created_at": "2026-10-01T16:10:56.007009+00:00",
+    "updated_at": "2026-10-01T16:10:56.007009+00:00",
+    "last_accessed_at": null,
+    "access_count": 0,
+    "status": "active",
+    "superseded_by": null,
+    "metadata": {
+      "conflict_key": "report_format",
+      "preference_value": "markdown"
+    }
+  },
+  "analysis": {
+    "execution_id": "d6ffd1bc-2115-4f87-a71c-970921043125",
+    "workspace_id": "3c508d70-8e2e-4ded-8732-e619f41d8d0f",
+    "task_id": null,
+    "status": "completed",
+    "objective": "Choose best mIoU under 3M parameters and chart",
+    "stdout": "A 73.27\r\n",
+    "stderr": "",
+    "duration_ms": 1078.0,
+    "dataset_ids": [
+      "8d642df8-4e57-443b-af5b-91c06e19f133"
+    ],
+    "artifacts": [
+      {
+        "id": "79c2d706-0d34-4470-a852-c1239b64979f",
+        "task_id": null,
+        "step_id": null,
+        "execution_id": "d6ffd1bc-2115-4f87-a71c-970921043125",
+        "workspace_id": "3c508d70-8e2e-4ded-8732-e619f41d8d0f",
+        "filename": "comparison.png",
+        "artifact_type": "png",
+        "mime_type": "image/png",
+        "size_bytes": 7852,
+        "created_at": "2026-10-01T16:10:57.132569+00:00",
+        "metadata": {}
+      }
+    ],
+    "code_hash": "6e859193665a4309cde95277e63c984ddbce1641434c7bed1f2bd4902c8b12c8",
+    "error_type": null
+  },
+  "checks": [
+    {
+      "check": "FastAPI health",
+      "status": "PASS"
+    },
+    {
+      "check": "PDF upload",
+      "status": "PASS"
+    },
+    {
+      "check": "CSV upload",
+      "status": "PASS"
+    },
+    {
+      "check": "XLSX multi-sheet upload",
+      "status": "PASS"
+    },
+    {
+      "check": "Cross-session memory retrieval",
+      "status": "PASS"
+    },
+    {
+      "check": "Real subprocess data analysis",
+      "status": "PASS"
+    },
+    {
+      "check": "Real PNG artifact download",
+      "status": "PASS"
+    },
+    {
+      "check": "Unsafe rejection os",
+      "status": "PASS"
+    },
+    {
+      "check": "Unsafe rejection socket",
+      "status": "PASS"
+    },
+    {
+      "check": "Unsafe rejection host_path",
+      "status": "PASS"
+    },
+    {
+      "check": "Unsafe rejection dunder",
+      "status": "PASS"
+    },
+    {
+      "check": "Real LLM memory continuity",
+      "status": "PASS"
+    },
+    {
+      "check": "Explicit remember across sessions",
+      "status": "PASS"
+    },
+    {
+      "check": "Real LLM code generation, analysis evidence and chart",
+      "status": "FAIL"
+    },
+    {
+      "check": "Task real planner + one step + pause",
+      "status": "PASS"
+    }
+  ],
+  "unsafe": {
+    "os": "UnsafeCode",
+    "socket": "UnsafeCode",
+    "host_path": "UnsafeCode",
+    "dunder": "UnsafeCode"
+  },
+  "kind": "real_http_and_real_subprocess_synthetic_fixture",
+  "task_id": "4a9c41b6-1fa5-4cd8-ac18-cdcbe1d0bce3",
+  "before_restart": {
+    "id": "4a9c41b6-1fa5-4cd8-ac18-cdcbe1d0bce3",
+    "owner_id": "local_default",
+    "workspace_id": "3c508d70-8e2e-4ded-8732-e619f41d8d0f",
+    "session_id": "d11e2a9e-a8c2-40b4-bbf7-2d1bf3220be2",
+    "goal": "Compare the synthetic research PDF with experiment.xlsx. Inspect datasets, analyze model results under 3M parameters, generate a chart, then synthesize a concise report.",
+    "description": "",
+    "status": "PAUSED",
+    "source_scope": "workspace_only",
+    "plan_json": {
+      "goal": "Compare the synthetic research PDF with experiment.xlsx. Inspect datasets, analyze model results under 3M parameters, generate a chart, then synthesize a concise report.",
+      "reasoning_summary": "Research and data analysis using accessible assets.",
+      "steps": [
+        {
+          "id": "step_1",
+          "description": "Search the workspace for the synthetic research PDF file.",
+          "query": "synthetic research PDF",
+          "sources": [
+            "workspace"
+          ],
+          "status": "pending",
+          "preferred_tool": "search_workspace"
+        },
+        {
+          "id": "step_2",
+          "description": "Inspect the experiment.xlsx dataset, including the Experiments and Notes sheets, to understand columns, rows, and sample values.",
+          "query": "inspect experiment.xlsx Experiments and Notes sheets",
+          "sources": [],
+          "status": "pending",
+          "preferred_tool": "inspect_dataset"
+        },
+        {
+          "id": "step_3",
+          "description": "Retrieve the research PDF content from the workspace to extract reported model results for models under 3M parameters.",
+          "query": "research PDF model results under 3M parameters miou",
+          "sources": [
+            "workspace"
+          ],
+          "status": "pending",
+          "preferred_tool": "search_workspace"
+        },
+        {
+          "id": "step_4",
+          "description": "Filter experiment.xlsx models with params_m < 3, compare their miou with the PDF findings, and generate a bar chart.",
+          "query": "filter models params_m < 3, compare miou with PDF, generate bar chart",
+          "sources": [],
+          "status": "pending",
+          "preferred_tool": "analyze_data"
+        },
+        {
+          "id": "synthesize",
+          "description": "Synthesize and verify the report",
+          "query": "Compare the synthetic research PDF with experiment.xlsx, inspecting their datasets and analyzing model results for models under 3M parameters, then generate a chart and synthesize a concise report.",
+          "sources": [],
+          "status": "pending",
+          "preferred_tool": "synthesize"
+        }
+      ]
+    },
+    "current_step_id": "9ce36d28-3da1-45a7-9707-0a1da683d403",
+    "created_at": "2026-10-01T16:12:57.321136+00:00",
+    "updated_at": "2026-10-01T16:13:04.851524+00:00",
+    "started_at": "2026-10-01T16:12:57.326508+00:00",
+    "completed_at": null,
+    "last_error": null,
+    "metadata": {},
+    "steps": [
+      {
+        "id": "9ce36d28-3da1-45a7-9707-0a1da683d403",
+        "task_id": "4a9c41b6-1fa5-4cd8-ac18-cdcbe1d0bce3",
+        "step_index": 0,
+        "description": "Search the workspace for the synthetic research PDF file.",
+        "preferred_tool": "search_workspace",
+        "status": "COMPLETED",
+        "input_json": {
+          "id": "step_1",
+          "description": "Search the workspace for the synthetic research PDF file.",
+          "query": "synthetic research PDF",
+          "sources": [
+            "workspace"
+          ],
+          "status": "pending",
+          "preferred_tool": "search_workspace"
+        },
+        "output_json": {
+          "evidence": [
+            {
+              "evidence_id": "ev_d8b916dac9698f906c8fd035",
+              "source_type": "workspace",
+              "execution_id": null,
+              "dataset_ids": [],
+              "artifact_ids": [],
+              "document_id": "4ed44745-48db-4b85-9bc5-e11b6f303f77",
+              "document_name": "synthetic_research.pdf",
+              "page": 1,
+              "page_count": 1,
+              "chunk_id": "cdfa9b4f0e7cd4000b70b802",
+              "title": null,
+              "url": null,
+              "content": "Synthetic Phase 3 Research Fixture\nModel A: 2.5 million parameters; mIoU 73.27 percent.\nModel B: 3.2 million parameters; mIoU 76.0 percent.\nModel C: 2.0 million parameters; mIoU 70.0 percent.\nThese are synthetic test values, not published research claims.",
+              "retrieval_score": 0.03278688524590164,
+              "rerank_score": 0.10796487331390381,
+              "extraction_method": "native",
+              "table_labels": []
+            }
+          ],
+          "evidence_pool": [
+            {
+              "source": "workspace",
+              "query": "synthetic research PDF",
+              "content": "[\n  {\n    \"evidence_id\": \"ev_d8b916dac9698f906c8fd035\",\n    \"source_type\": \"workspace\",\n    \"execution_id\": null,\n    \"dataset_ids\": [],\n    \"artifact_ids\": [],\n    \"document_id\": \"4ed44745-48db-4b85-9bc5-e11b6f303f77\",\n    \"document_name\": \"synthetic_research.pdf\",\n    \"page\": 1,\n    \"page_count\": 1,\n    \"chunk_id\": \"cdfa9b4f0e7cd4000b70b802\",\n    \"title\": null,\n    \"url\": null,\n    \"content\": \"Synthetic Phase 3 Research Fixture\\nModel A: 2.5 million parameters; mIoU 73.27 percent.\\nModel B: 3.2 million parameters; mIoU 76.0 percent.\\nModel C: 2.0 million parameters; mIoU 70.0 percent.\\nThese are synthetic test values, not published research claims.\",\n    \"retrieval_score\": 0.03278688524590164,\n    \"rerank_score\": 0.10796487331390381,\n    \"extraction_method\": \"native\",\n    \"table_labels\": []\n  }\n]",
+              "round": 0,
+              "status": "success"
+            }
+          ],
+          "artifacts": [],
+          "step_results": [
+            {
+              "step": 0,
+              "status": "completed"
+            }
+          ],
+          "tools_used": [
+            "search_workspace"
+          ],
+          "tool_calls": 1,
+          "retrieval_attempts": 1,
+          "rewrite_count": 0,
+          "replan_count": 0,
+          "revision_count": 0,
+          "final_answer": "",
+          "verification_result": null,
+          "analysis_result": null,
+          "selected_sources": [
+            "workspace"
+          ],
+          "citations": []
+        },
+        "attempt_count": 1,
+        "started_at": "2026-10-01T16:13:04.749338+00:00",
+        "completed_at": "2026-10-01T16:13:04.845524+00:00",
+        "error": null
+      },
+      {
+        "id": "0bb15027-068b-4e61-accf-db3a920b93bd",
+        "task_id": "4a9c41b6-1fa5-4cd8-ac18-cdcbe1d0bce3",
+        "step_index": 1,
+        "description": "Inspect the experiment.xlsx dataset, including the Experiments and Notes sheets, to understand columns, rows, and sample values.",
+        "preferred_tool": "inspect_dataset",
+        "status": "PENDING",
+        "input_json": {
+          "id": "step_2",
+          "description": "Inspect the experiment.xlsx dataset, including the Experiments and Notes sheets, to understand columns, rows, and sample values.",
+          "query": "inspect experiment.xlsx Experiments and Notes sheets",
+          "sources": [],
+          "status": "pending",
+          "preferred_tool": "inspect_dataset"
+        },
+        "output_json": {},
+        "attempt_count": 0,
+        "started_at": null,
+        "completed_at": null,
+        "error": null
+      },
+      {
+        "id": "99bff0ec-4619-466d-906e-6b4c0237025d",
+        "task_id": "4a9c41b6-1fa5-4cd8-ac18-cdcbe1d0bce3",
+        "step_index": 2,
+        "description": "Retrieve the research PDF content from the workspace to extract reported model results for models under 3M parameters.",
+        "preferred_tool": "search_workspace",
+        "status": "PENDING",
+        "input_json": {
+          "id": "step_3",
+          "description": "Retrieve the research PDF content from the workspace to extract reported model results for models under 3M parameters.",
+          "query": "research PDF model results under 3M parameters miou",
+          "sources": [
+            "workspace"
+          ],
+          "status": "pending",
+          "preferred_tool": "search_workspace"
+        },
+        "output_json": {},
+        "attempt_count": 0,
+        "started_at": null,
+        "completed_at": null,
+        "error": null
+      },
+      {
+        "id": "d5c6f92b-ad30-4004-bf8e-7b320f4c475b",
+        "task_id": "4a9c41b6-1fa5-4cd8-ac18-cdcbe1d0bce3",
+        "step_index": 3,
+        "description": "Filter experiment.xlsx models with params_m < 3, compare their miou with the PDF findings, and generate a bar chart.",
+        "preferred_tool": "analyze_data",
+        "status": "PENDING",
+        "input_json": {
+          "id": "step_4",
+          "description": "Filter experiment.xlsx models with params_m < 3, compare their miou with the PDF findings, and generate a bar chart.",
+          "query": "filter models params_m < 3, compare miou with PDF, generate bar chart",
+          "sources": [],
+          "status": "pending",
+          "preferred_tool": "analyze_data"
+        },
+        "output_json": {},
+        "attempt_count": 0,
+        "started_at": null,
+        "completed_at": null,
+        "error": null
+      },
+      {
+        "id": "4dc78515-e413-4213-ad18-8c67dda716ef",
+        "task_id": "4a9c41b6-1fa5-4cd8-ac18-cdcbe1d0bce3",
+        "step_index": 4,
+        "description": "Synthesize and verify the report",
+        "preferred_tool": "synthesize",
+        "status": "PENDING",
+        "input_json": {
+          "id": "synthesize",
+          "description": "Synthesize and verify the report",
+          "query": "Compare the synthetic research PDF with experiment.xlsx, inspecting their datasets and analyzing model results for models under 3M parameters, then generate a chart and synthesize a concise report.",
+          "sources": [],
+          "status": "pending",
+          "preferred_tool": "synthesize"
+        },
+        "output_json": {},
+        "attempt_count": 0,
+        "started_at": null,
+        "completed_at": null,
+        "error": null
+      }
+    ]
+  }
+}

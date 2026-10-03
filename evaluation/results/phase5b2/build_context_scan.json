@@ -1,0 +1,7 @@
+{
+  "scope": "static Docker COPY allowlist sources only; no built image inspection",
+  "files_scanned": 94,
+  "credential_literal_matches": 0,
+  "matching_files": [],
+  "env_original_unchanged": true
+}

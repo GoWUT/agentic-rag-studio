@@ -1,0 +1,12 @@
+{
+  "kind": "real_local_models_existing_indexes_no_llm_no_network",
+  "hit_count": 5,
+  "covered_documents": [
+    "gcnet.pdf",
+    "pvigs.pdf",
+    "tda_yolo.pdf"
+  ],
+  "registered_documents": 3,
+  "all_have_rerank_scores": true,
+  "latency_ms": 2530.4576999042183
+}

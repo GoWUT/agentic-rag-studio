@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "method": "Streamlit AppTest renders production component using real HTTP task metrics",
+  "metrics": {
+    "LLM calls": "6",
+    "Tool calls": "3",
+    "Tokens": "45219"
+  },
+  "expanders": [
+    "Orchestration efficiency",
+    "✓ Supervisor · COMPLETED · e3bdff35",
+    "✓ Research Agent · COMPLETED · 6397146a",
+    "✓ Data Agent · COMPLETED · 0b8bbcbf",
+    "✓ Reviewer Agent · COMPLETED · 8edba7c7"
+  ],
+  "captions": [
+    "Mode: multi_agent · Agents: 2 · Cache hits: 0 · Reviewer: executed",
+    "Why this mode? Distinct required source/tool boundaries can run independently.",
+    "Duration: 130594.96 ms · Tools: 0 · LLM: 4 · Iterations: 4",
+    "Evidence: 0 · Artifacts: 0 · Tokens: 36221",
+    "Duration: 7134.19 ms · Tools: 1 · LLM: 1 · Iterations: 1",
+    "Evidence: 3 · Artifacts: 0 · Tokens: 3173",
+    "Duration: 1512.17 ms · Tools: 2 · LLM: 0 · Iterations: 2",
+    "Evidence: 2 · Artifacts: 2 · Tokens: unavailable",
+    "Duration: 18030.69 ms · Tools: 0 · LLM: 1 · Iterations: 1",
+    "Evidence: 5 · Artifacts: 2 · Tokens: 5825"
+  ]
+}

@@ -1,0 +1,2641 @@
+{
+  "run_id": "retrieval-v2-20260907T112900Z",
+  "environment": {
+    "timestamp_utc": "2026-09-07T11:29:00.263090+00:00",
+    "git_commit": "24f01d5f2901191fbdcde8a2117250b0b728c93c",
+    "git_worktree_dirty": true,
+    "python_version": "3.11.16",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "cpu": "Intel64 Family 6 Model 198 Stepping 2, GenuineIntel",
+    "cuda_available": false,
+    "gpu": "none",
+    "torch_version": "2.9.1",
+    "sentence_transformers_version": "5.2.0",
+    "chromadb_version": "1.3.7",
+    "device": "cpu"
+  },
+  "corpus": {
+    "pdf_path": ".rag_workspace\\0dad13b35659a0d6.pdf",
+    "pdf_size_bytes": 1309368,
+    "pdf_sha256": "0dad13b35659a0d61eb3fa3db415145b55ce89004ffc9b9b97cfb0ea8a369bb9",
+    "pages": 13,
+    "chunks": 101,
+    "index_path": ".runtime\\retrieval-v2-phase2_1\\chroma_0dad13b35659a0d61eb3fa3db415145b55ce89004ffc9b9b97cfb0ea8a369bb9_f78ec797f5a5",
+    "index_reused": false
+  },
+  "dataset": {
+    "path": "evaluation\\datasets\\retrieval_v2_gcnet.jsonl",
+    "sha256": "1dfb88748561aa03dbab50f3a0f200249edefb9f0e3befe1c5c77172e263176a",
+    "query_count": 20,
+    "gold_label_method": "human-selected answer anchor located in native PDF text",
+    "category_distribution": {
+      "lexical": 5,
+      "mixed": 5,
+      "numeric": 5,
+      "semantic": 5
+    },
+    "gold_page_distribution": {
+      "1": 3,
+      "2": 1,
+      "3": 1,
+      "4": 3,
+      "6": 3,
+      "7": 1,
+      "8": 3,
+      "11": 3,
+      "13": 2
+    },
+    "duplicate_queries": [],
+    "duplicate_anchors": [],
+    "anchor_location_failures": []
+  },
+  "config": {
+    "embedding_model": "BAAI/bge-small-zh-v1.5",
+    "reranker_model": "BAAI/bge-reranker-base",
+    "reranker_device": "cpu",
+    "reranker_batch_size": 8,
+    "reranker_fallback": false,
+    "ocr": {
+      "mode": "auto",
+      "lang": "ch",
+      "device": "cpu",
+      "dpi": 200,
+      "min_text_chars": 40,
+      "min_confidence": 0.5
+    },
+    "chunk_size": 800,
+    "chunk_overlap": 150,
+    "top_k": 5,
+    "candidate_k": 20,
+    "rrf_constant": 60,
+    "repeats": 5,
+    "warmup_queries_per_method": 3,
+    "bootstrap_samples": 2000,
+    "bootstrap_seed": 42
+  },
+  "initialization": {
+    "index_load_or_build_ms": 17175.9704,
+    "index_reused": false,
+    "bm25_index_build_ms": 5.2031,
+    "reranker_cold_start_ms": 5727.3518,
+    "reranker_warmup_queries": 3
+  },
+  "methods": {
+    "dense": {
+      "hit_at_1": 0.4,
+      "hit_at_3": 0.7,
+      "hit_at_5": 0.75,
+      "recall_at_5": 0.75,
+      "mrr_at_5": 0.5375,
+      "ndcg_at_5": 0.591173,
+      "latency_ms_p50": 4.73455,
+      "latency_ms_p95": 5.838625,
+      "latency_ms_mean": 4.864289,
+      "latency_ms_min": 4.077,
+      "latency_ms_max": 7.8809,
+      "ranking_stable": true,
+      "stage_latency_ms": {
+        "dense_ms_p50": 4.73455,
+        "total_ms_p50": 4.73455
+      },
+      "confidence_intervals_95": {
+        "hit_at_5": {
+          "mean": 0.75,
+          "lower": 0.55,
+          "upper": 0.9,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "mrr_at_5": {
+          "mean": 0.5375,
+          "lower": 0.358333,
+          "upper": 0.716667,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "ndcg_at_5": {
+          "mean": 0.591173,
+          "lower": 0.419639,
+          "upper": 0.763093,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        }
+      }
+    },
+    "bm25": {
+      "hit_at_1": 0.55,
+      "hit_at_3": 0.8,
+      "hit_at_5": 0.95,
+      "recall_at_5": 0.95,
+      "mrr_at_5": 0.693333,
+      "ndcg_at_5": 0.75705,
+      "latency_ms_p50": 0.0495,
+      "latency_ms_p95": 0.073845,
+      "latency_ms_mean": 0.051356,
+      "latency_ms_min": 0.0324,
+      "latency_ms_max": 0.1265,
+      "ranking_stable": true,
+      "stage_latency_ms": {
+        "bm25_ms_p50": 0.0495,
+        "total_ms_p50": 0.0495
+      },
+      "confidence_intervals_95": {
+        "hit_at_5": {
+          "mean": 0.95,
+          "lower": 0.85,
+          "upper": 1.0,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "mrr_at_5": {
+          "mean": 0.693333,
+          "lower": 0.529979,
+          "upper": 0.845875,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "ndcg_at_5": {
+          "mean": 0.75705,
+          "lower": 0.62409,
+          "upper": 0.881569,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        }
+      }
+    },
+    "hybrid_rrf": {
+      "hit_at_1": 0.5,
+      "hit_at_3": 0.85,
+      "hit_at_5": 0.9,
+      "recall_at_5": 0.9,
+      "mrr_at_5": 0.668333,
+      "ndcg_at_5": 0.727075,
+      "latency_ms_p50": 5.4503,
+      "latency_ms_p95": 6.799015,
+      "latency_ms_mean": 5.628762,
+      "latency_ms_min": 4.7293,
+      "latency_ms_max": 8.1529,
+      "ranking_stable": true,
+      "stage_latency_ms": {
+        "dense_ms_p50": 5.16765,
+        "bm25_ms_p50": 0.1102,
+        "rrf_ms_p50": 0.14715,
+        "total_ms_p50": 5.4503
+      },
+      "confidence_intervals_95": {
+        "hit_at_5": {
+          "mean": 0.9,
+          "lower": 0.75,
+          "upper": 1.0,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "mrr_at_5": {
+          "mean": 0.668333,
+          "lower": 0.508333,
+          "upper": 0.818333,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "ndcg_at_5": {
+          "mean": 0.727075,
+          "lower": 0.577068,
+          "upper": 0.857732,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        }
+      }
+    },
+    "hybrid_reranker": {
+      "hit_at_1": 0.6,
+      "hit_at_3": 0.85,
+      "hit_at_5": 0.9,
+      "recall_at_5": 0.9,
+      "mrr_at_5": 0.7375,
+      "ndcg_at_5": 0.779266,
+      "latency_ms_p50": 1599.0062,
+      "latency_ms_p95": 2002.164145,
+      "latency_ms_mean": 1546.787694,
+      "latency_ms_min": 894.8763,
+      "latency_ms_max": 2162.665,
+      "ranking_stable": true,
+      "stage_latency_ms": {
+        "dense_ms_p50": 8.3225,
+        "bm25_ms_p50": 0.1372,
+        "rrf_ms_p50": 0.1839,
+        "reranker_ms_p50": 1587.75235,
+        "total_ms_p50": 1599.0062
+      },
+      "confidence_intervals_95": {
+        "hit_at_5": {
+          "mean": 0.9,
+          "lower": 0.75,
+          "upper": 1.0,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "mrr_at_5": {
+          "mean": 0.7375,
+          "lower": 0.5875,
+          "upper": 0.9,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "ndcg_at_5": {
+          "mean": 0.779266,
+          "lower": 0.64075,
+          "upper": 0.916173,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        }
+      }
+    }
+  },
+  "candidate_recall": {
+    "candidate_k": 20,
+    "dense_candidate_hit_at_20": 0.95,
+    "hybrid_candidate_hit_at_20": 1.0
+  },
+  "comparison": {
+    "hybrid_vs_dense": {
+      "hit_at_5_delta": 0.15,
+      "mrr_at_5_delta": 0.130833,
+      "ndcg_at_5_delta": 0.135902,
+      "p95_latency_delta_ms": 0.96039
+    },
+    "hybrid_reranker_vs_hybrid": {
+      "hit_at_5_delta": 0.0,
+      "mrr_at_5_delta": 0.069167,
+      "ndcg_at_5_delta": 0.052191,
+      "p95_latency_delta_ms": 1995.36513
+    },
+    "hybrid_reranker_vs_dense": {
+      "hit_at_5_delta": 0.15,
+      "mrr_at_5_delta": 0.2,
+      "ndcg_at_5_delta": 0.188093,
+      "p95_latency_delta_ms": 1996.32552
+    }
+  },
+  "per_category": {
+    "lexical": {
+      "dense": {
+        "query_count": 5,
+        "hit_at_5": 0.6,
+        "mrr_at_5": 0.316667,
+        "ndcg_at_5": 0.386135
+      },
+      "bm25": {
+        "query_count": 5,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 0.616667,
+        "ndcg_at_5": 0.712321
+      },
+      "hybrid_rrf": {
+        "query_count": 5,
+        "hit_at_5": 0.8,
+        "mrr_at_5": 0.6,
+        "ndcg_at_5": 0.652372
+      },
+      "hybrid_reranker": {
+        "query_count": 5,
+        "hit_at_5": 0.8,
+        "mrr_at_5": 0.7,
+        "ndcg_at_5": 0.726186
+      }
+    },
+    "mixed": {
+      "dense": {
+        "query_count": 5,
+        "hit_at_5": 0.8,
+        "mrr_at_5": 0.7,
+        "ndcg_at_5": 0.726186
+      },
+      "bm25": {
+        "query_count": 5,
+        "hit_at_5": 0.8,
+        "mrr_at_5": 0.8,
+        "ndcg_at_5": 0.8
+      },
+      "hybrid_rrf": {
+        "query_count": 5,
+        "hit_at_5": 0.8,
+        "mrr_at_5": 0.8,
+        "ndcg_at_5": 0.8
+      },
+      "hybrid_reranker": {
+        "query_count": 5,
+        "hit_at_5": 0.8,
+        "mrr_at_5": 0.7,
+        "ndcg_at_5": 0.726186
+      }
+    },
+    "numeric": {
+      "dense": {
+        "query_count": 5,
+        "hit_at_5": 0.8,
+        "mrr_at_5": 0.566667,
+        "ndcg_at_5": 0.626186
+      },
+      "bm25": {
+        "query_count": 5,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 0.75,
+        "ndcg_at_5": 0.812321
+      },
+      "hybrid_rrf": {
+        "query_count": 5,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 0.64,
+        "ndcg_at_5": 0.729742
+      },
+      "hybrid_reranker": {
+        "query_count": 5,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 0.9,
+        "ndcg_at_5": 0.926186
+      }
+    },
+    "semantic": {
+      "dense": {
+        "query_count": 5,
+        "hit_at_5": 0.8,
+        "mrr_at_5": 0.566667,
+        "ndcg_at_5": 0.626186
+      },
+      "bm25": {
+        "query_count": 5,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 0.606667,
+        "ndcg_at_5": 0.703557
+      },
+      "hybrid_rrf": {
+        "query_count": 5,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 0.633333,
+        "ndcg_at_5": 0.726186
+      },
+      "hybrid_reranker": {
+        "query_count": 5,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 0.65,
+        "ndcg_at_5": 0.738507
+      }
+    }
+  },
+  "failed_cases": {
+    "dense_miss_hybrid_success": [
+      {
+        "id": "gcnet_q01",
+        "query": "What limitations of existing real-time segmentation designs motivated the authors to create GCNet?",
+        "analysis": "requires manual analysis"
+      },
+      {
+        "id": "gcnet_q06",
+        "query": "How many 1 x 1 convolutions were selected for the dedicated path after the ablation study?",
+        "analysis": "requires manual analysis"
+      },
+      {
+        "id": "gcnet_q20",
+        "query": "At what input sizes were CamVid and VOC inference speeds measured?",
+        "analysis": "requires manual analysis"
+      }
+    ],
+    "hybrid_miss_reranker_success": [],
+    "dense_success_hybrid_fail": [],
+    "hybrid_success_reranker_fail": []
+  },
+  "cases": [
+    {
+      "id": "gcnet_q01",
+      "query": "What limitations of existing real-time segmentation designs motivated the authors to create GCNet?",
+      "anchor": "their speed is limited by multi-path blocks, and some depend on high-performance teacher models for training.",
+      "category": "semantic",
+      "gold_pages_1_based": [
+        1
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            5,
+            2,
+            4,
+            8,
+            2
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            6.3814,
+            4.8424,
+            4.6019,
+            4.8875,
+            4.3129
+          ],
+          "latency_ms_median": 4.8424,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            2,
+            2,
+            1,
+            1,
+            2
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            0.1265,
+            0.0656,
+            0.0597,
+            0.0568,
+            0.0546
+          ],
+          "latency_ms_median": 0.0597,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            2,
+            2,
+            1,
+            5,
+            8
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            8.1529,
+            6.7615,
+            5.7589,
+            5.7537,
+            5.8801
+          ],
+          "latency_ms_median": 5.8801,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            8,
+            2,
+            2,
+            1,
+            1
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.25,
+          "ndcg_at_5": 0.430677,
+          "first_relevant_rank": 4,
+          "latency_ms": [
+            1141.9494,
+            1107.3189,
+            1107.0635,
+            1111.1631,
+            1186.9637
+          ],
+          "latency_ms_median": 1111.1631,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "gcnet_q02",
+      "query": "How is the network simplified when moving from training to inference?",
+      "anchor": "which are reparameterized into a single convolution for inference, optimizing both performance and speed.",
+      "category": "semantic",
+      "gold_pages_1_based": [
+        1
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            3,
+            1,
+            3,
+            10,
+            2
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            6.4696,
+            4.8406,
+            4.3997,
+            5.8383,
+            4.5274
+          ],
+          "latency_ms_median": 4.8406,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            2,
+            3,
+            6,
+            5,
+            1
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.2,
+          "ndcg_at_5": 0.386853,
+          "first_relevant_rank": 5,
+          "latency_ms": [
+            0.069,
+            0.0482,
+            0.048,
+            0.0467,
+            0.0476
+          ],
+          "latency_ms_median": 0.048,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            3,
+            3,
+            1,
+            6,
+            2
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            5.4883,
+            5.1209,
+            4.7767,
+            4.7815,
+            5.1896
+          ],
+          "latency_ms_median": 5.1209,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            1,
+            2,
+            1,
+            3,
+            2
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            954.6172,
+            894.8763,
+            1003.7498,
+            980.9156,
+            1000.8989
+          ],
+          "latency_ms_median": 980.9156,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "gcnet_q03",
+      "query": "In which two architectural directions can the proposed GCBlock scale?",
+      "anchor": "GCBlock, a block that is scalable in both vertical and horizontal directions.",
+      "category": "lexical",
+      "gold_pages_1_based": [
+        2
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            4,
+            4,
+            3,
+            2,
+            3
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.25,
+          "ndcg_at_5": 0.430677,
+          "first_relevant_rank": 4,
+          "latency_ms": [
+            4.7071,
+            4.6814,
+            4.5006,
+            4.3738,
+            4.5871
+          ],
+          "latency_ms_median": 4.5871,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            2,
+            2,
+            2,
+            3,
+            3
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.0579,
+            0.0416,
+            0.0438,
+            0.0394,
+            0.0398
+          ],
+          "latency_ms_median": 0.0416,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            2,
+            2,
+            3,
+            2,
+            4
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            5.0793,
+            4.8856,
+            4.9758,
+            5.8181,
+            4.839
+          ],
+          "latency_ms_median": 4.9758,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            2,
+            2,
+            4,
+            3,
+            2
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1146.8459,
+            1145.9775,
+            1131.6408,
+            1296.969,
+            1243.4932
+          ],
+          "latency_ms_median": 1146.8459,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "gcnet_q04",
+      "query": "What different information is learned by GCNet's semantic and detail branches?",
+      "anchor": "The semantic branch is designed to learn deep semantic information, while the detail branch fo- cuses on learning spatial detail information.",
+      "category": "mixed",
+      "gold_pages_1_based": [
+        4
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            1,
+            4,
+            5,
+            3,
+            2
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            4.6972,
+            5.0486,
+            5.0439,
+            5.1291,
+            4.7426
+          ],
+          "latency_ms_median": 5.0439,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            4,
+            4,
+            3,
+            1,
+            3
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.0656,
+            0.0498,
+            0.0492,
+            0.0477,
+            0.0479
+          ],
+          "latency_ms_median": 0.0492,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            4,
+            1,
+            4,
+            3,
+            3
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            5.0123,
+            5.9858,
+            5.011,
+            4.9349,
+            5.4509
+          ],
+          "latency_ms_median": 5.0123,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            3,
+            4,
+            4,
+            3,
+            4
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            1077.4393,
+            1044.6531,
+            1030.1862,
+            1020.0212,
+            1038.7617
+          ],
+          "latency_ms_median": 1038.7617,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "gcnet_q05",
+      "query": "What coefficient is assigned to the auxiliary segmentation loss in the total objective?",
+      "anchor": "α is the weight coefficient, which is set to 0.4 in GCNet.",
+      "category": "numeric",
+      "gold_pages_1_based": [
+        6
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            5,
+            4,
+            6,
+            4,
+            6
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            4.7558,
+            4.46,
+            5.0532,
+            4.5907,
+            4.5037
+          ],
+          "latency_ms_median": 4.5907,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            6,
+            5,
+            5,
+            6,
+            4
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.0586,
+            0.0517,
+            0.0494,
+            0.0494,
+            0.0483
+          ],
+          "latency_ms_median": 0.0494,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            5,
+            6,
+            4,
+            2,
+            4
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            5.1136,
+            5.1193,
+            6.9734,
+            5.3165,
+            5.8831
+          ],
+          "latency_ms_median": 5.3165,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            6,
+            5,
+            1,
+            6,
+            1
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1063.4442,
+            1062.6051,
+            1384.345,
+            1477.7155,
+            1493.0953
+          ],
+          "latency_ms_median": 1384.345,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "gcnet_q06",
+      "query": "How many 1 x 1 convolutions were selected for the dedicated path after the ablation study?",
+      "anchor": "Consequently, we set the number of 1 × 1 convolutions in this path to 2.",
+      "category": "numeric",
+      "gold_pages_1_based": [
+        6
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            5,
+            5,
+            5,
+            4,
+            5
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            5.3121,
+            5.2105,
+            4.4341,
+            4.8344,
+            4.5614
+          ],
+          "latency_ms_median": 4.8344,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            6,
+            6,
+            6,
+            6,
+            5
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.0848,
+            0.0938,
+            0.0599,
+            0.0545,
+            0.0532
+          ],
+          "latency_ms_median": 0.0599,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            5,
+            6,
+            6,
+            4,
+            5
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            6.141,
+            5.1598,
+            6.1658,
+            6.3812,
+            5.9107
+          ],
+          "latency_ms_median": 6.141,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            6,
+            6,
+            6,
+            5,
+            5
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1943.1026,
+            1970.676,
+            1948.4019,
+            1960.1455,
+            1883.4104
+          ],
+          "latency_ms_median": 1948.4019,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "gcnet_q07",
+      "query": "Which GCNet variant obtains the strongest Cityscapes accuracy, and what score does it reach?",
+      "anchor": "GCNet-L achieves the highest performance with 79.6% mIoU.",
+      "category": "mixed",
+      "gold_pages_1_based": [
+        7
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            2,
+            6,
+            4,
+            2,
+            11
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            5.1508,
+            4.6109,
+            4.7428,
+            4.7375,
+            4.544
+          ],
+          "latency_ms_median": 4.7375,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            3,
+            1,
+            2,
+            6,
+            2
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            0.0823,
+            0.0546,
+            0.0529,
+            0.0506,
+            0.0507
+          ],
+          "latency_ms_median": 0.0529,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            6,
+            2,
+            2,
+            1,
+            2
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            5.2083,
+            5.3239,
+            5.176,
+            6.3205,
+            6.3285
+          ],
+          "latency_ms_median": 5.3239,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            2,
+            2,
+            6,
+            2,
+            8
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            1774.3422,
+            1738.7973,
+            1663.1362,
+            1728.9709,
+            1768.4214
+          ],
+          "latency_ms_median": 1738.7973,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "gcnet_q08",
+      "query": "What speed and segmentation scores does the largest GCNet report on CamVid and VOC?",
+      "anchor": "GCNet-L 170.4 79.1 145.1 58.8",
+      "category": "numeric",
+      "gold_pages_1_based": [
+        8
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            2,
+            8,
+            12,
+            11,
+            13
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            5.0932,
+            4.4648,
+            5.2877,
+            4.9614,
+            4.754
+          ],
+          "latency_ms_median": 4.9614,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            2,
+            1,
+            6,
+            8,
+            8
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.25,
+          "ndcg_at_5": 0.430677,
+          "first_relevant_rank": 4,
+          "latency_ms": [
+            0.0706,
+            0.0562,
+            0.0543,
+            0.0537,
+            0.0531
+          ],
+          "latency_ms_median": 0.0543,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            2,
+            11,
+            1,
+            6,
+            8
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.2,
+          "ndcg_at_5": 0.386853,
+          "first_relevant_rank": 5,
+          "latency_ms": [
+            6.3668,
+            5.1978,
+            5.1982,
+            6.2015,
+            5.3317
+          ],
+          "latency_ms_median": 5.3317,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            8,
+            8,
+            6,
+            2,
+            11
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1716.4718,
+            1634.0198,
+            1663.2902,
+            1654.3221,
+            1591.4862
+          ],
+          "latency_ms_median": 1654.3221,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "gcnet_q09",
+      "query": "What deployment limitation do the authors acknowledge for storage-constrained hardware?",
+      "anchor": "its parameter count and computational complexity are higher than those of other models, which limits its applicability on devices with constrained storage capacity.",
+      "category": "lexical",
+      "gold_pages_1_based": [
+        8
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            8,
+            2,
+            2,
+            2,
+            3
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            4.5909,
+            5.0582,
+            4.6516,
+            4.3966,
+            5.4702
+          ],
+          "latency_ms_median": 4.6516,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            8,
+            8,
+            1,
+            4,
+            11
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.0424,
+            0.0355,
+            0.0332,
+            0.036,
+            0.0326
+          ],
+          "latency_ms_median": 0.0355,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            8,
+            11,
+            8,
+            2,
+            1
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            5.2507,
+            5.8562,
+            4.9673,
+            5.4529,
+            6.0976
+          ],
+          "latency_ms_median": 5.4529,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            1,
+            8,
+            8,
+            11,
+            2
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            1521.1456,
+            1574.5967,
+            1515.7712,
+            1472.2245,
+            1514.9175
+          ],
+          "latency_ms_median": 1515.7712,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "gcnet_q10",
+      "query": "How is the Cityscapes image collection split across training, validation, and testing?",
+      "anchor": "It consists of 19 classes and a total of 5000 images, with 2975 designated for training, 500 for validation, and 1525 for testing.",
+      "category": "numeric",
+      "gold_pages_1_based": [
+        11
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            11,
+            7,
+            12,
+            11,
+            11
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            4.5021,
+            4.572,
+            6.1999,
+            4.5155,
+            4.7754
+          ],
+          "latency_ms_median": 4.572,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            11,
+            11,
+            1,
+            6,
+            11
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.0606,
+            0.0493,
+            0.0472,
+            0.0578,
+            0.0473
+          ],
+          "latency_ms_median": 0.0493,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            11,
+            11,
+            1,
+            11,
+            7
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            6.4022,
+            7.4771,
+            6.4363,
+            6.0451,
+            5.0778
+          ],
+          "latency_ms_median": 6.4022,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            11,
+            11,
+            11,
+            1,
+            11
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1633.9857,
+            1717.9411,
+            1678.0882,
+            1674.3352,
+            1793.8428
+          ],
+          "latency_ms_median": 1678.0882,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "gcnet_q11",
+      "query": "How does the training cost of GCNet-B compare with SCTNet-B-Seg100 at roughly 79% mIoU?",
+      "anchor": "SCTNet-B-Seg100 takes 17.1 hours to reach 79.0% mIoU, while GCNet-B achieves this in only 8.8 hours.",
+      "category": "mixed",
+      "gold_pages_1_based": [
+        13
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            13,
+            12,
+            6,
+            7,
+            3
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            4.8295,
+            5.2915,
+            5.0115,
+            4.6748,
+            7.8809
+          ],
+          "latency_ms_median": 5.0115,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            13,
+            7,
+            7,
+            8,
+            12
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.0737,
+            0.0575,
+            0.0586,
+            0.0553,
+            0.0569
+          ],
+          "latency_ms_median": 0.0575,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            13,
+            7,
+            6,
+            8,
+            12
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            5.4493,
+            6.7926,
+            6.2693,
+            5.9495,
+            5.6254
+          ],
+          "latency_ms_median": 5.9495,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            13,
+            7,
+            2,
+            7,
+            12
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            2162.665,
+            2140.3634,
+            2137.5944,
+            2041.647,
+            2067.3392
+          ],
+          "latency_ms_median": 2137.5944,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "gcnet_q12",
+      "query": "Why can GCNet run especially faster when the input resolution is reduced?",
+      "anchor": "This may be attributed to the benefits of reduced memory access enabled by the single-path block, as memory access represents a significant computational cost in computer systems.",
+      "category": "semantic",
+      "gold_pages_1_based": [
+        13
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            13,
+            13,
+            8,
+            4,
+            8
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            5.0107,
+            4.6188,
+            4.7316,
+            4.308,
+            4.3207
+          ],
+          "latency_ms_median": 4.6188,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            2,
+            13,
+            8,
+            13,
+            5
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            0.0484,
+            0.0403,
+            0.0405,
+            0.0388,
+            0.0439
+          ],
+          "latency_ms_median": 0.0405,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            13,
+            8,
+            2,
+            4,
+            13
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            5.0567,
+            6.3485,
+            5.0998,
+            5.808,
+            6.2474
+          ],
+          "latency_ms_median": 5.808,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            2,
+            13,
+            8,
+            13,
+            1
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            1824.6709,
+            1764.3898,
+            1861.3661,
+            2000.0861,
+            1824.3336
+          ],
+          "latency_ms_median": 1824.6709,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "gcnet_q13",
+      "query": "How does GCNet avoid depending on a separate high-performance model during training?",
+      "anchor": "effectively be- coming a “teacher model” without needing external ones.",
+      "category": "lexical",
+      "gold_pages_1_based": [
+        1
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            2,
+            3,
+            1,
+            13,
+            8
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            5.0238,
+            5.1853,
+            4.9251,
+            5.5307,
+            4.9768
+          ],
+          "latency_ms_median": 5.0238,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            2,
+            3,
+            1,
+            8,
+            3
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            0.062,
+            0.0484,
+            0.0518,
+            0.0471,
+            0.0451
+          ],
+          "latency_ms_median": 0.0484,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            3,
+            1,
+            8,
+            3,
+            8
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            5.0743,
+            5.4059,
+            7.7425,
+            5.753,
+            6.2715
+          ],
+          "latency_ms_median": 5.753,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            1,
+            1,
+            3,
+            2,
+            8
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1442.1882,
+            1407.529,
+            1434.4614,
+            1425.9275,
+            1398.0004
+          ],
+          "latency_ms_median": 1425.9275,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "gcnet_q14",
+      "query": "From the authors' macro-level interpretation, which forms of GCNet act as teacher and student?",
+      "anchor": "the self-enlarged GCNet functions as the “teacher model”, while the self-contracted GCNet serves as the “student model”.",
+      "category": "semantic",
+      "gold_pages_1_based": [
+        3
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            2,
+            5,
+            3,
+            4,
+            2
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            5.4709,
+            4.9431,
+            4.5552,
+            4.7413,
+            4.9703
+          ],
+          "latency_ms_median": 4.9431,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            3,
+            2,
+            2,
+            2,
+            2
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.0766,
+            0.0582,
+            0.0597,
+            0.0546,
+            0.0556
+          ],
+          "latency_ms_median": 0.0582,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            2,
+            3,
+            2,
+            5,
+            2
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            5.5768,
+            6.0917,
+            4.9612,
+            5.3615,
+            5.7148
+          ],
+          "latency_ms_median": 5.5768,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            3,
+            2,
+            6,
+            4,
+            1
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1686.1921,
+            1676.9757,
+            1596.8332,
+            1601.1792,
+            1751.7933
+          ],
+          "latency_ms_median": 1676.9757,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "gcnet_q15",
+      "query": "What channel width C is used by the small model versus the medium and large variants?",
+      "anchor": "For GCNet-S, C is set to 32, while for GCNet-M and GCNet-L, C is set to 64.",
+      "category": "numeric",
+      "gold_pages_1_based": [
+        4
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            4,
+            2,
+            7,
+            4,
+            4
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            5.1591,
+            4.1917,
+            5.7031,
+            4.4074,
+            4.338
+          ],
+          "latency_ms_median": 4.4074,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            2,
+            4,
+            4,
+            4,
+            8
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            0.0594,
+            0.0524,
+            0.0499,
+            0.0517,
+            0.0506
+          ],
+          "latency_ms_median": 0.0517,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            4,
+            4,
+            4,
+            5,
+            4
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            6.5226,
+            5.8353,
+            6.6107,
+            5.3337,
+            5.3438
+          ],
+          "latency_ms_median": 5.8353,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            2,
+            4,
+            4,
+            1,
+            10
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            1641.8537,
+            1567.3656,
+            1754.8328,
+            1698.1969,
+            1656.5652
+          ],
+          "latency_ms_median": 1656.5652,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "gcnet_q16",
+      "query": "Why are attention modules omitted from feature fusion in this architecture?",
+      "anchor": "We do not utilize various attention modules [16, 18, 29, 32] for feature fu- sion, as this would complicate the model and decrease in- ference speed.",
+      "category": "semantic",
+      "gold_pages_1_based": [
+        4
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            4,
+            2,
+            5,
+            3,
+            5
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            5.4971,
+            4.3389,
+            4.3222,
+            4.077,
+            5.7572
+          ],
+          "latency_ms_median": 4.3389,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            4,
+            4,
+            3,
+            5,
+            3
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.0423,
+            0.0345,
+            0.0324,
+            0.0331,
+            0.0339
+          ],
+          "latency_ms_median": 0.0339,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            4,
+            5,
+            3,
+            3,
+            2
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            5.711,
+            5.3789,
+            5.5799,
+            5.3424,
+            5.8832
+          ],
+          "latency_ms_median": 5.5799,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            1,
+            4,
+            2,
+            2,
+            4
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            1532.9185,
+            1520.4162,
+            1610.1765,
+            1512.1085,
+            1556.9339
+          ],
+          "latency_ms_median": 1532.9185,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "gcnet_q17",
+      "query": "Which three public benchmarks are used to evaluate the proposed segmentation network?",
+      "anchor": "we conducted experiments on three public datasets: Cityscapes [9], CamVid [1], and Pascal VOC 2012 [14].",
+      "category": "lexical",
+      "gold_pages_1_based": [
+        6
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            2,
+            3,
+            1,
+            4,
+            2
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            4.4878,
+            4.3055,
+            5.8448,
+            4.4468,
+            4.4198
+          ],
+          "latency_ms_median": 4.4468,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            2,
+            2,
+            8,
+            6,
+            2
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.25,
+          "ndcg_at_5": 0.430677,
+          "first_relevant_rank": 4,
+          "latency_ms": [
+            0.0531,
+            0.0471,
+            0.0479,
+            0.0444,
+            0.0571
+          ],
+          "latency_ms_median": 0.0479,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            2,
+            2,
+            1,
+            4,
+            3
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            5.5522,
+            5.1076,
+            4.9811,
+            5.4497,
+            5.2319
+          ],
+          "latency_ms_median": 5.2319,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            1,
+            10,
+            2,
+            2,
+            2
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            1557.1121,
+            1536.2208,
+            1495.0658,
+            1522.1178,
+            1609.9115
+          ],
+          "latency_ms_median": 1536.2208,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "gcnet_q18",
+      "query": "How many CamVid images belong to its train, validation, and test partitions?",
+      "anchor": "It comprises 701 images, with 367 des- ignated for training, 101 for validation, and 233 for test- ing.",
+      "category": "mixed",
+      "gold_pages_1_based": [
+        11
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            11,
+            11,
+            1,
+            1,
+            12
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            4.6423,
+            4.6077,
+            4.5683,
+            4.5206,
+            5.7534
+          ],
+          "latency_ms_median": 4.6077,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            11,
+            11,
+            8,
+            13,
+            11
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.0442,
+            0.0387,
+            0.0378,
+            0.0371,
+            0.0356
+          ],
+          "latency_ms_median": 0.0378,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            11,
+            11,
+            8,
+            11,
+            11
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            4.926,
+            5.6382,
+            6.9209,
+            5.1355,
+            5.0728
+          ],
+          "latency_ms_median": 5.1355,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            11,
+            11,
+            11,
+            8,
+            11
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1677.1749,
+            1639.5587,
+            1650.5421,
+            1771.2625,
+            1710.0287
+          ],
+          "latency_ms_median": 1677.1749,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "gcnet_q19",
+      "query": "What classes and image split are used for Pascal VOC 2012 semantic segmentation?",
+      "anchor": "It includes 20 classes along with 1 background class. For the semantic segmentation task, the dataset consists of 2913 images, with 1464 allocated to the training set and 1449 to the validation set.",
+      "category": "mixed",
+      "gold_pages_1_based": [
+        11
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            11,
+            11,
+            9,
+            1,
+            1
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            4.6082,
+            4.896,
+            4.8336,
+            5.0146,
+            4.6923
+          ],
+          "latency_ms_median": 4.8336,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            11,
+            1,
+            11,
+            11,
+            11
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.0569,
+            0.051,
+            0.0496,
+            0.0486,
+            0.0482
+          ],
+          "latency_ms_median": 0.0496,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            11,
+            1,
+            11,
+            11,
+            9
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            4.8449,
+            5.2282,
+            5.8205,
+            4.8803,
+            5.083
+          ],
+          "latency_ms_median": 5.083,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            11,
+            9,
+            1,
+            11,
+            11
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1508.2998,
+            1673.9496,
+            1535.757,
+            1532.5438,
+            1514.0987
+          ],
+          "latency_ms_median": 1532.5438,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "gcnet_q20",
+      "query": "At what input sizes were CamVid and VOC inference speeds measured?",
+      "anchor": "The inference resolution for CamVid was set at 720 × 960, while for VOC it was set at 512 × 2048.",
+      "category": "lexical",
+      "gold_pages_1_based": [
+        8
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            7,
+            1,
+            12,
+            13,
+            11
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            5.2029,
+            4.2659,
+            4.3585,
+            4.5139,
+            4.2453
+          ],
+          "latency_ms_median": 4.3585,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            11,
+            8,
+            11,
+            11,
+            8
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            0.0435,
+            0.0375,
+            0.0405,
+            0.037,
+            0.0367
+          ],
+          "latency_ms_median": 0.0375,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            11,
+            8,
+            11,
+            1,
+            13
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            5.1302,
+            4.7293,
+            4.8826,
+            5.7978,
+            4.7847
+          ],
+          "latency_ms_median": 4.8826,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            8,
+            11,
+            11,
+            8,
+            8
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1746.3167,
+            1724.9186,
+            1663.5123,
+            1620.8826,
+            1810.0397
+          ],
+          "latency_ms_median": 1724.9186,
+          "ranking_stable": true
+        }
+      }
+    }
+  ]
+}

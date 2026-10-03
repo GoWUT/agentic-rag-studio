@@ -1,0 +1,31 @@
+{
+  "original_hashes_unchanged": {
+    ".env": true,
+    ".rag_workspace\\sessions.sqlite3": true,
+    ".rag_workspace\\indexes.sqlite3": true
+  },
+  "legacy_resource_counts": {
+    "workspaces": 3,
+    "sessions": 23,
+    "tasks": 6,
+    "long_term_memories": 8,
+    "workspace_documents": 5,
+    "data_assets": 2,
+    "artifacts": 12
+  },
+  "assigned_user": null,
+  "new_memberships_in_original_data": 0,
+  "dependencies": {
+    "langgraph": "1.0.5",
+    "procrastinate": "3.10.0",
+    "sqlalchemy": "2.0.45",
+    "psycopg": "3.3.6",
+    "alembic": "1.20.0",
+    "pwdlib": "0.3.1",
+    "argon2-cffi": "25.1.0",
+    "PyJWT": "2.15.1",
+    "opentelemetry-sdk": "1.45.0",
+    "opentelemetry-instrumentation-sqlalchemy": "0.66b0",
+    "prometheus-client": "0.26.0"
+  }
+}

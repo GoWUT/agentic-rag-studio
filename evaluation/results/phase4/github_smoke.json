@@ -1,0 +1,25 @@
+{
+  "source": "REAL GitHub official MCP, no fixture substitution",
+  "checks": {
+    "17_github_connect": {
+      "status": "SKIPPED",
+      "reason": "GITHUB_PERSONAL_ACCESS_TOKEN absent"
+    },
+    "18_github_discovery": {
+      "status": "SKIPPED",
+      "reason": "GITHUB_PERSONAL_ACCESS_TOKEN absent"
+    },
+    "19_repository_read": {
+      "status": "SKIPPED",
+      "reason": "GITHUB_PERSONAL_ACCESS_TOKEN absent"
+    },
+    "20_issue_pr_read": {
+      "status": "SKIPPED",
+      "reason": "GITHUB_PERSONAL_ACCESS_TOKEN absent"
+    }
+  },
+  "write": {
+    "status": "SKIPPED",
+    "reason": "This runner only reads; write smoke requires explicit test repo/flag and durable human approval"
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "workspace": {
+    "id": "86873dfc-42c8-460c-96a8-8d3be52e693f",
+    "name": "phase2_validation",
+    "description": "Phase 2.5 real runtime smoke test",
+    "created_at": "2026-10-01T15:06:38.303736+00:00",
+    "updated_at": "2026-10-01T15:06:38.303736+00:00"
+  },
+  "reuse_workspace": {
+    "id": "3769fda0-c19a-464e-9740-4fa8a11a3296",
+    "name": "phase2_validation_reuse",
+    "description": "",
+    "created_at": "2026-10-01T15:06:38.307739+00:00",
+    "updated_at": "2026-10-01T15:06:38.307739+00:00"
+  },
+  "records": [
+    {
+      "corpus": "gcnet",
+      "source_pdf": ".rag_workspace/0dad13b35659a0d6.pdf",
+      "first_upload_ms": 7884.58,
+      "document": {
+        "id": "e5a35109-25ae-46ee-821e-0fad152cbb23",
+        "workspace_id": "86873dfc-42c8-460c-96a8-8d3be52e693f",
+        "filename": "gcnet.pdf",
+        "display_name": "gcnet.pdf",
+        "fingerprint": "0dad13b35659a0d6",
+        "index_id": "D:\\ProjectCode\\AgentLLM\\Agentic-RAG-with-FastAPI-and-Streamlit\\.rag_workspace\\chroma_0dad13b35659a0d6_f78ec797f5a5",
+        "status": "ready",
+        "page_count": 13,
+        "created_at": "2026-10-01T15:06:46.193859+00:00",
+        "metadata": {
+          "pdf_path": "D:\\ProjectCode\\AgentLLM\\Agentic-RAG-with-FastAPI-and-Streamlit\\.rag_workspace\\0dad13b35659a0d6.pdf",
+          "embedding_model": "BAAI/bge-small-zh-v1.5"
+        },
+        "index_reused": false,
+        "size_bytes": 1309368
+      },
+      "second_upload_ms": 109.58,
+      "reuse_document": {
+        "id": "b8339b27-7975-4398-a0cc-183c5a0095ef",
+        "workspace_id": "3769fda0-c19a-464e-9740-4fa8a11a3296",
+        "filename": "gcnet.pdf",
+        "display_name": "gcnet.pdf",
+        "fingerprint": "0dad13b35659a0d6",
+        "index_id": "D:\\ProjectCode\\AgentLLM\\Agentic-RAG-with-FastAPI-and-Streamlit\\.rag_workspace\\chroma_0dad13b35659a0d6_f78ec797f5a5",
+        "status": "ready",
+        "page_count": 13,
+        "created_at": "2026-10-01T15:07:01.763914+00:00",
+        "metadata": {
+          "pdf_path": "D:\\ProjectCode\\AgentLLM\\Agentic-RAG-with-FastAPI-and-Streamlit\\.rag_workspace\\0dad13b35659a0d6.pdf",
+          "embedding_model": "BAAI/bge-small-zh-v1.5"
+        },
+        "index_reused": true,
+        "size_bytes": 1309368
+      }
+    },
+    {
+      "corpus": "tda_yolo",
+      "source_pdf": ".rag_workspace/1327dde30bcd5c41.pdf",
+      "first_upload_ms": 6927.85,
+      "document": {
+        "id": "73d844c8-7920-422e-8bc4-c8918eb7b150",
+        "workspace_id": "86873dfc-42c8-460c-96a8-8d3be52e693f",
+        "filename": "tda_yolo.pdf",
+        "display_name": "tda_yolo.pdf",
+        "fingerprint": "1327dde30bcd5c41",
+        "index_id": "D:\\ProjectCode\\AgentLLM\\Agentic-RAG-with-FastAPI-and-Streamlit\\.rag_workspace\\chroma_1327dde30bcd5c41_f78ec797f5a5",
+        "status": "ready",
+        "page_count": 17,
+        "created_at": "2026-10-01T15:06:53.121397+00:00",
+        "metadata": {
+          "pdf_path": "D:\\ProjectCode\\AgentLLM\\Agentic-RAG-with-FastAPI-and-Streamlit\\.rag_workspace\\1327dde30bcd5c41.pdf",
+          "embedding_model": "BAAI/bge-small-zh-v1.5"
+        },
+        "index_reused": false,
+        "size_bytes": 24475296
+      }
+    },
+    {
+      "corpus": "pvigs",
+      "source_pdf": ".rag_workspace/b4acc699ab746317.pdf",
+      "first_upload_ms": 8528.97,
+      "document": {
+        "id": "e680901e-ee4b-41c4-864d-d46237e8639e",
+        "workspace_id": "86873dfc-42c8-460c-96a8-8d3be52e693f",
+        "filename": "pvigs.pdf",
+        "display_name": "pvigs.pdf",
+        "fingerprint": "b4acc699ab746317",
+        "index_id": "D:\\ProjectCode\\AgentLLM\\Agentic-RAG-with-FastAPI-and-Streamlit\\.rag_workspace\\chroma_b4acc699ab746317_f78ec797f5a5",
+        "status": "ready",
+        "page_count": 16,
+        "created_at": "2026-10-01T15:07:01.652786+00:00",
+        "metadata": {
+          "pdf_path": "D:\\ProjectCode\\AgentLLM\\Agentic-RAG-with-FastAPI-and-Streamlit\\.rag_workspace\\b4acc699ab746317.pdf",
+          "embedding_model": "BAAI/bge-small-zh-v1.5"
+        },
+        "index_reused": false,
+        "size_bytes": 8360482
+      }
+    }
+  ],
+  "session": {
+    "session_id": "dea74132-10c8-414e-a3b9-e43c99fef83a",
+    "file_id": "",
+    "file_name": "phase2_validation",
+    "created_at": "2026-10-01T15:07:01.769908+00:00",
+    "updated_at": "2026-10-01T15:07:01.769908+00:00",
+    "turn_count": 0,
+    "workspace_id": "86873dfc-42c8-460c-96a8-8d3be52e693f"
+  }
+}

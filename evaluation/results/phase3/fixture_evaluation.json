@@ -1,0 +1,40 @@
+{
+  "kind": "synthetic_offline_fixture_results",
+  "provider_calls": 0,
+  "fixture_counts": {
+    "memory": 4,
+    "unsafe_code": 10,
+    "analysis": 1,
+    "task": 1
+  },
+  "memory": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "duplicate_rate": 0,
+    "irrelevant_memory_rate": 0.0
+  },
+  "data": {
+    "tool_selection_accuracy": 1.0,
+    "tool_selection_cases": [
+      {
+        "result_file": "chat_data.json",
+        "correct": true
+      },
+      {
+        "result_file": "chat_legacy.json",
+        "correct": true
+      }
+    ],
+    "tool_selection_note": "Required/forbidden tools assessed against recorded real synthetic smoke traces; null if traces unavailable. This is a tiny rubric, not a production benchmark.",
+    "execution_success_rate": 1.0,
+    "unsafe_code_rejection_rate": 1.0,
+    "analysis_answer_correctness": 1.0,
+    "artifact_success_rate": 1.0
+  },
+  "tasks": {
+    "task_completion_rate": 1.0,
+    "step_success_rate": 1.0,
+    "resume_success_rate": 1.0,
+    "duplicate_completed_step_execution_rate": 0.0
+  }
+}

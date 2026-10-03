@@ -1,0 +1,185 @@
+{
+  "quality_rule_version": 3,
+  "checks": {
+    "fastapi_start": {
+      "status": "PASS",
+      "details": null
+    },
+    "streamlit_start": {
+      "status": "PASS",
+      "details": null
+    },
+    "five_agents_only": {
+      "status": "PASS",
+      "details": null
+    },
+    "optimized_run_1": {
+      "status": "PASS",
+      "details": {
+        "task_id": "6467592a-a623-4f54-9311-ee25eb830c65",
+        "status": "COMPLETED",
+        "latency_seconds": 130.937,
+        "llm_calls": 6,
+        "tool_calls": 3,
+        "tokens": 45219,
+        "valid_citations": 5,
+        "evidence_count": 5,
+        "grounded": true,
+        "core_answer_correct": true,
+        "evidence_coverage": {
+          "three_papers": true,
+          "computed_dataset": true,
+          "chart_generated": true
+        },
+        "citation_validity": true,
+        "review_rounds": 1,
+        "redelegations": 0,
+        "cache_hits": 0,
+        "supplementary_completed": 0
+      },
+      "original_classifier_status": "FAIL",
+      "recheck": "Rule version 3: explicit best is/was A predicate with Markdown normalization. Original answers/measurements remain unchanged."
+    },
+    "optimized_run_2": {
+      "status": "PASS",
+      "details": {
+        "task_id": "fac381d9-f8e4-4570-b20a-cd95f6fd8453",
+        "status": "COMPLETED",
+        "latency_seconds": 191.484,
+        "llm_calls": 6,
+        "tool_calls": 3,
+        "tokens": 60032,
+        "valid_citations": 5,
+        "evidence_count": 5,
+        "grounded": true,
+        "core_answer_correct": true,
+        "evidence_coverage": {
+          "three_papers": true,
+          "computed_dataset": true,
+          "chart_generated": true
+        },
+        "citation_validity": true,
+        "review_rounds": 1,
+        "redelegations": 0,
+        "cache_hits": 0,
+        "supplementary_completed": 0
+      },
+      "original_classifier_status": "FAIL",
+      "recheck": "Rule version 3: explicit best is/was A predicate with Markdown normalization. Original answers/measurements remain unchanged."
+    },
+    "targeted_repair": {
+      "status": "PASS",
+      "details": {
+        "requested": 1,
+        "completed": 1,
+        "failed": 0,
+        "failure_reasons": []
+      }
+    },
+    "review_not_disabled": {
+      "status": "PASS",
+      "details": null
+    },
+    "completed_data_not_repeated": {
+      "status": "PASS",
+      "details": null
+    },
+    "target_document_only": {
+      "status": "PASS",
+      "details": [
+        [
+          {
+            "capability": "workspace.search",
+            "arguments": {
+              "query": "Retrieve only the missing source facts: Required source coverage: paper_3.pdf is missing. Retrieve its reported method, parameters and mIoU only.. Required source coverage: paper_3.pdf is missing. Retrieve its reported method, parameters and mIoU only.. Treat facts not reported by target sources as explicit limitations, not failed retrieval. No cross-specialty analysis.",
+              "document_ids": [
+                "c672a8f9-8dd3-4efb-80c1-1557453af72a"
+              ]
+            }
+          }
+        ]
+      ]
+    },
+    "clean_data_review_skipped": {
+      "status": "PASS",
+      "details": null
+    },
+    "deterministic_data": {
+      "status": "PASS",
+      "details": null
+    },
+    "hard_budget_no_500": {
+      "status": "PASS",
+      "details": null,
+      "source": "budget_runtime.json; final budget-only probe"
+    },
+    "budget_retains_completed_data": {
+      "status": "PASS",
+      "details": null,
+      "source": "budget_runtime.json; final budget-only probe"
+    },
+    "existing_single_current": {
+      "status": "PASS",
+      "details": {
+        "core_answer_correct": true,
+        "criteria": {
+          "select_A_2_5M_73_27": true,
+          "exclude_B_3_2M": true,
+          "no_causal_claim": true
+        },
+        "required_evidence_coverage": {
+          "three_papers": true,
+          "computed_dataset": true,
+          "chart_generated": true
+        },
+        "citation_validity": true,
+        "grounded": true
+      }
+    },
+    "budget_partial_calculation_visible": {
+      "status": "PASS",
+      "details": null,
+      "source": "budget_runtime.json; final budget-only probe"
+    },
+    "efficiency_panel": {
+      "status": "PASS",
+      "method": "Streamlit AppTest renders production component using real HTTP task metrics",
+      "metrics": {
+        "LLM calls": "6",
+        "Tool calls": "3",
+        "Tokens": "45219"
+      },
+      "expanders": [
+        "Orchestration efficiency",
+        "✓ Supervisor · COMPLETED · e3bdff35",
+        "✓ Research Agent · COMPLETED · 6397146a",
+        "✓ Data Agent · COMPLETED · 0b8bbcbf",
+        "✓ Reviewer Agent · COMPLETED · 8edba7c7"
+      ],
+      "captions": [
+        "Mode: multi_agent · Agents: 2 · Cache hits: 0 · Reviewer: executed",
+        "Why this mode? Distinct required source/tool boundaries can run independently.",
+        "Duration: 130594.96 ms · Tools: 0 · LLM: 4 · Iterations: 4",
+        "Evidence: 0 · Artifacts: 0 · Tokens: 36221",
+        "Duration: 7134.19 ms · Tools: 1 · LLM: 1 · Iterations: 1",
+        "Evidence: 3 · Artifacts: 0 · Tokens: 3173",
+        "Duration: 1512.17 ms · Tools: 2 · LLM: 0 · Iterations: 2",
+        "Evidence: 2 · Artifacts: 2 · Tokens: unavailable",
+        "Duration: 18030.69 ms · Tools: 0 · LLM: 1 · Iterations: 1",
+        "Evidence: 5 · Artifacts: 2 · Tokens: 5825"
+      ]
+    },
+    "root_memory_once": {
+      "status": "PASS",
+      "details": "Actual usage-only callbacks; one root extraction per optimized task."
+    },
+    "private_context_isolation": {
+      "status": "PASS",
+      "details": "Research-only private sentinel measured in actual model inputs; absent from root/Reviewer/other workers."
+    }
+  },
+  "passed": 18,
+  "failed": 0,
+  "raw_runtime_report": "runtime_smoke.json",
+  "classifier_corrections": "Raw false negatives are retained. They missed valid explicit Best: Method A / best is/was A; no provider answer, coverage threshold or grounding decision was altered."
+}

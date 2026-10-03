@@ -1,0 +1,45 @@
+{
+  "metrics": {
+    "Tool Selection Accuracy": {
+      "value": 1.0,
+      "denominator": 1,
+      "source": "real LLM + local official-SDK MCP synthetic smoke",
+      "check": "6_read_without_approval"
+    },
+    "Capability Resolution Accuracy": {
+      "value": 1.0,
+      "denominator": 1,
+      "source": "real LLM + local official-SDK MCP synthetic smoke",
+      "check": "5_dynamic_discovery"
+    },
+    "Approval Trigger Accuracy": {
+      "value": 1.0,
+      "denominator": 1,
+      "source": "real LLM + local official-SDK MCP synthetic smoke",
+      "check": "7_write_creates_approval"
+    },
+    "Tool Execution Success Rate": {
+      "value": 1.0,
+      "denominator": 1,
+      "source": "real LLM + local official-SDK MCP synthetic smoke",
+      "check": "10_approve_resumes"
+    },
+    "Failure Recovery Success Rate": {
+      "value": 1.0,
+      "denominator": 1,
+      "source": "real LLM + local official-SDK MCP synthetic smoke",
+      "check": "13_resume_after_restart"
+    },
+    "Unauthorized Write Rate": {
+      "value": 0,
+      "denominator": 1,
+      "check": "rejected synthetic write"
+    },
+    "Duplicate Action Rate": {
+      "value": 0,
+      "denominator": 2,
+      "check": "duplicate approve and resume both returned 409"
+    }
+  },
+  "limitations": "Small synthetic fixtures; these are observed acceptance outcomes, not production benchmarks. No real GitHub action measured."
+}

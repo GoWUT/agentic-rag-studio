@@ -1,0 +1,93 @@
+{
+  "run_id": "f2c38e56-298a-4064-b3b6-2dc74a1a9f83",
+  "synthetic_only": true,
+  "llm": "configured real provider",
+  "mcp": "official SDK local mock; no GitHub connection",
+  "checks": {
+    "1_fastapi_starts": {
+      "status": "PASS",
+      "details": null
+    },
+    "2_streamlit_starts": {
+      "status": "PASS",
+      "details": null
+    },
+    "4_mock_mcp_connects": {
+      "status": "PASS",
+      "details": null
+    },
+    "5_dynamic_discovery": {
+      "status": "PASS",
+      "details": null
+    },
+    "3_native_registry": {
+      "status": "PASS",
+      "details": null
+    },
+    "6_read_without_approval": {
+      "status": "PASS",
+      "details": null
+    },
+    "15_injection_does_not_bypass_policy": {
+      "status": "PASS",
+      "details": null
+    },
+    "7_write_creates_approval": {
+      "status": "PASS",
+      "details": null
+    },
+    "8_task_waiting_user": {
+      "status": "PASS",
+      "details": null
+    },
+    "9_reject_prevents_execution": {
+      "status": "PASS",
+      "details": null
+    },
+    "12_restart_pending_approval": {
+      "status": "PASS",
+      "details": null
+    },
+    "10_approve_resumes": {
+      "status": "PASS",
+      "details": null
+    },
+    "13_resume_after_restart": {
+      "status": "PASS",
+      "details": null
+    },
+    "14_action_exactly_once": {
+      "status": "PASS",
+      "details": {
+        "execution_count": 1,
+        "duplicate_approval": 409,
+        "duplicate_resume": 409
+      }
+    },
+    "11_edit_and_revalidate": {
+      "status": "PASS",
+      "details": null
+    },
+    "16_secrets_absent_logs": {
+      "status": "PASS",
+      "details": null
+    },
+    "streamable_http_transport": {
+      "status": "PASS",
+      "details": null
+    }
+  },
+  "task_ids": [
+    "3f6b71b3-cdfa-43cd-acbc-5c60277112cf",
+    "df637840-b94a-4814-98a0-42627781def9",
+    "f871a624-4782-4415-9eeb-18d2cef22f69",
+    "3a8ef92b-07bb-41f3-94a6-3509c1ff2350"
+  ],
+  "real_github": {
+    "connect": "SKIPPED: token absent",
+    "discovery": "SKIPPED: token absent",
+    "repository_read": "SKIPPED: token absent",
+    "issue_pr_read": "SKIPPED: token absent",
+    "write": "SKIPPED: write smoke disabled and test repository absent"
+  }
+}

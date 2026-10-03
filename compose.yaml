@@ -1,0 +1,144 @@
+x-app: &app
+  image: ${APP_IMAGE:-agentic-rag-studio:local}
+  build:
+    context: .
+    args: {INSTALL_OCR: "${INSTALL_OCR:-false}"}
+  user: "10001:10001"
+  restart: unless-stopped
+  read_only: true
+  tmpfs: [/tmp]
+  security_opt: [no-new-privileges:true]
+  cap_drop: [ALL]
+  volumes: [app_data:/data]
+  environment: &environment
+    APP_ENV: production
+    DATABASE_BACKEND: postgresql
+    DATABASE_URL: ${DATABASE_URL:?Provide a URL-encoded PostgreSQL URL using host postgres}
+    TASK_EXECUTION_MODE: worker
+    TASK_QUEUE_ENABLED: "true"
+    WORKSPACE_DIR: /data/workspace
+    AUTH_ENABLED: "true"
+    AUTH_JWT_SECRET: ${AUTH_JWT_SECRET:?Generate a random JWT secret of at least 32 bytes}
+    AUTH_JWT_ISSUER: ${AUTH_JWT_ISSUER:-agentic-rag-studio}
+    AUTH_JWT_AUDIENCE: ${AUTH_JWT_AUDIENCE:-agentic-rag-api}
+    AUTH_ALLOW_REGISTRATION: ${AUTH_ALLOW_REGISTRATION:-false}
+    API_DOCS_ENABLED: "false"
+    TRUSTED_HOSTS: ${TRUSTED_HOSTS:-localhost,127.0.0.1,api}
+    CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:8501}
+    LOG_FORMAT: json
+    METRICS_ENABLED: "true"
+    OTEL_ENABLED: ${OTEL_ENABLED:-false}
+    OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-http://otel-collector:4318}
+    OTEL_SERVICE_NAME: agentic-rag-api
+    API_HOST: 0.0.0.0
+    API_PORT: "8001"
+    DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+    MODEL_NAME: ${MODEL_NAME:-deepseek-v4-flash}
+    SERPER_API_KEY: ${SERPER_API_KEY:-}
+    LANGSMITH_API_KEY: ${LANGSMITH_API_KEY:-}
+    LANGSMITH_TRACING: ${LANGSMITH_TRACING:-false}
+    LANGSMITH_HIDE_INPUTS: "true"
+    LANGSMITH_HIDE_OUTPUTS: "true"
+    GITHUB_MCP_ENABLED: ${GITHUB_MCP_ENABLED:-false}
+    GITHUB_PERSONAL_ACCESS_TOKEN: ${GITHUB_PERSONAL_ACCESS_TOKEN:-}
+    GITHUB_ALLOWED_REPOSITORIES: ${GITHUB_ALLOWED_REPOSITORIES:-}
+    WORKER_CONCURRENCY: ${WORKER_CONCURRENCY:-2}
+    WORKER_GRACEFUL_SHUTDOWN_SECONDS: "120"
+services:
+  postgres:
+    image: postgres:17-bookworm
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:?Provide PostgreSQL user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Provide PostgreSQL password}
+      POSTGRES_DB: ${POSTGRES_DB:-agentic_rag}
+    volumes: [postgres_data:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  migrate:
+    <<: *app
+    restart: "no"
+    command: [python, -m, server.migrate]
+    healthcheck: {disable: true}
+    depends_on:
+      postgres: {condition: service_healthy}
+  api:
+    <<: *app
+    command: [python, -m, server.api]
+    ports: ["127.0.0.1:8001:8001"]
+    depends_on:
+      postgres: {condition: service_healthy}
+      migrate: {condition: service_completed_successfully}
+    healthcheck:
+      test: [CMD, python, -m, server.healthcheck, api]
+      start_period: 90s
+      interval: 15s
+      timeout: 5s
+      retries: 5
+  worker:
+    <<: *app
+    environment:
+      <<: *environment
+      OTEL_SERVICE_NAME: agentic-rag-worker
+      WORKER_HEALTH_FILE: /tmp/agent-worker-health.json
+    command: [python, -m, server.worker]
+    stop_grace_period: 130s
+    depends_on:
+      postgres: {condition: service_healthy}
+      migrate: {condition: service_completed_successfully}
+    healthcheck:
+      test: [CMD, python, -m, server.healthcheck, worker]
+      start_period: 90s
+      interval: 15s
+      timeout: 10s
+      retries: 5
+  streamlit:
+    <<: *app
+    environment:
+      API_BASE: http://api:8001
+      AUTH_ENABLED: "true"
+      HOME: /data/home
+    command: [python, -m, streamlit, run, client/app.py, --server.address=0.0.0.0, --server.port=8501, --server.headless=true]
+    ports: ["127.0.0.1:8501:8501"]
+    depends_on:
+      api: {condition: service_healthy}
+    healthcheck:
+      test: [CMD, python, -m, server.healthcheck, streamlit]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+  otel-collector:
+    profiles: [observability]
+    image: otel/opentelemetry-collector-contrib:0.143.0
+    command: [--config=/etc/otel/config.yaml]
+    volumes: [./observability/otel-collector.yaml:/etc/otel/config.yaml:ro]
+    depends_on: [tempo]
+  tempo:
+    profiles: [observability]
+    image: grafana/tempo:2.9.0
+    command: [-config.file=/etc/tempo.yaml]
+    volumes: [./observability/tempo.yaml:/etc/tempo.yaml:ro,tempo_data:/var/tempo]
+  prometheus:
+    profiles: [observability]
+    image: prom/prometheus:v3.9.1
+    volumes: [./observability/prometheus.yaml:/etc/prometheus/prometheus.yml:ro,prometheus_data:/prometheus]
+    ports: ["127.0.0.1:9090:9090"]
+  grafana:
+    profiles: [observability]
+    image: grafana/grafana:12.3.2
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-operator}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    entrypoint: [/bin/sh, -c, 'test -n "$$GF_SECURITY_ADMIN_PASSWORD" && exec /run.sh']
+    volumes: [./observability/grafana:/etc/grafana/provisioning:ro,grafana_data:/var/lib/grafana]
+    ports: ["127.0.0.1:3000:3000"]
+volumes:
+  postgres_data:
+  app_data:
+  tempo_data:
+  prometheus_data:
+  grafana_data:

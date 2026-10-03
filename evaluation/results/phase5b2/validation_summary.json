@@ -1,0 +1,16 @@
+{
+  "previous": 479,
+  "new": 52,
+  "total_distinct": 531,
+  "passed": 531,
+  "failed": 0,
+  "skipped_tests": 0,
+  "full_discovery": 529,
+  "final_security_suite": 52,
+  "runtime": {
+    "PASS": 43,
+    "FAIL": 0,
+    "SKIPPED": 2
+  },
+  "run_id": "f53ace2961be4868b651018bcc303ed6"
+}

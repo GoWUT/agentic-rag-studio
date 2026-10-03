@@ -3,8 +3,12 @@ from __future__ import annotations
 from dataclasses import asdict
 
 from fastapi import FastAPI, File, HTTPException, UploadFile
-from fastapi.responses import RedirectResponse
-from pydantic import BaseModel
+from fastapi.responses import RedirectResponse, JSONResponse
+from pydantic import BaseModel, Field
+from typing import Any, Literal
+from server.workspaces import Workspace, DocumentRecord, WorkspaceNotFoundError
+from server.agent.evidence import Evidence, Citation
+from server.agent.schemas import TaskPlan
 
 from server.agent.execution_harness import (
     ExecutionConfigurationError,
@@ -24,13 +28,29 @@ from server.sessions import (
 
 init_langsmith()
 
-app = FastAPI(title="Agentic RAG API")
+app = FastAPI(title="Agentic RAG API",docs_url='/docs' if CONFIG.get('API_DOCS_ENABLED',True) else None,
+              redoc_url='/redoc' if CONFIG.get('API_DOCS_ENABLED',True) else None,
+              openapi_url='/openapi.json' if CONFIG.get('API_DOCS_ENABLED',True) else None)
 SESSION_MANAGER = AgentSessionManager(CONFIG)
+from server.runtime_services import register_runtime
+register_runtime(app, SESSION_MANAGER)
+from server.phase3_api import register_phase3_api
+register_phase3_api(app, SESSION_MANAGER)
+from server.phase4_api import register_phase4_api
+register_phase4_api(app, SESSION_MANAGER)
+from server.phase5_api import register_phase5_api
+register_phase5_api(app, SESSION_MANAGER)
+from server.auth.middleware import register_security
+from server.observability.runtime import register_observability
+register_security(app, SESSION_MANAGER)
+register_observability(app, SESSION_MANAGER)
 
 
 class ChatRequest(BaseModel):
     session_id: str
     message: str
+    workspace_id: str | None = None
+    source_scope: Literal["workspace_only", "workspace_and_external", "external"] = "workspace_and_external"
 
 
 class ContextStats(BaseModel):
@@ -56,6 +76,11 @@ class ChatResponse(BaseModel):
     answer: str
     context: ContextStats
     execution: ExecutionStats
+    citations: list[Citation] = Field(default_factory=list)
+    evidence: list[Evidence] = Field(default_factory=list)
+    plan: TaskPlan | None = None
+    trace_summary: dict[str, Any] = Field(default_factory=dict)
+    artifacts: list[dict[str, Any]] = Field(default_factory=list)
 
 
 class SessionSummary(BaseModel):
@@ -65,6 +90,7 @@ class SessionSummary(BaseModel):
     created_at: str
     updated_at: str
     turn_count: int
+    workspace_id: str | None = None
 
 
 class UploadResponse(SessionSummary):
@@ -80,6 +106,7 @@ class SessionListResponse(BaseModel):
 class HistoryMessage(BaseModel):
     role: str
     content: str
+    research: dict[str, Any] | None = None
 
 
 class SessionHistoryResponse(BaseModel):
@@ -103,11 +130,14 @@ def root():
 
 
 @app.get("/health")
-def health():
+async def health():
+    database = await SESSION_MANAGER.database.health() if SESSION_MANAGER.database else 'sqlite'
     return {
         "status": "ok",
         "service": "agentic-rag-deepseek",
         "port": 8001,
+        "database": database,
+        **await SESSION_MANAGER.task_queue.health(),
     }
 
 
@@ -130,6 +160,7 @@ def index_status(file_id: str):
 @app.get(
     "/sessions/{session_id}/messages",
     response_model=SessionHistoryResponse,
+    response_model_exclude_none=True,
 )
 def session_history(session_id: str):
     try:
@@ -161,7 +192,10 @@ def upload_pdf(file: UploadFile = File(...)):
 @app.post("/chat", response_model=ChatResponse)
 def chat(req: ChatRequest):
     try:
-        reply = SESSION_MANAGER.ask(req.session_id, req.message)
+        if req.workspace_id is None and req.source_scope == "workspace_and_external":
+            reply = SESSION_MANAGER.ask(req.session_id, req.message)
+        else:
+            reply = SESSION_MANAGER.ask(req.session_id, req.message, workspace_id=req.workspace_id, source_scope=req.source_scope)
     except SessionNotFoundError as error:
         raise HTTPException(status_code=404, detail="Session not found") from error
     except SessionUnavailableError as error:
@@ -196,4 +230,70 @@ def chat(req: ChatRequest):
         "answer": reply.answer,
         "context": reply.context.as_dict(),
         "execution": reply.execution.as_dict(),
+        "citations": reply.citations,
+        "evidence": reply.evidence,
+        "plan": reply.plan,
+        "trace_summary": reply.trace_summary,
+        "artifacts": getattr(reply, "artifacts", []),
     }
+
+
+class WorkspaceCreate(BaseModel):
+    name: str = Field(min_length=1, max_length=200)
+    description: str = ""
+
+
+@app.exception_handler(WorkspaceNotFoundError)
+async def workspace_not_found(request, error):
+    return JSONResponse(status_code=404, content={"detail": "Workspace or document not found"})
+
+
+@app.post("/workspaces", response_model=Workspace)
+def create_workspace(req: WorkspaceCreate):
+    try:
+        return SESSION_MANAGER.workspaces.create(req.name, req.description)
+    except ValueError as error:
+        raise HTTPException(400, detail="Workspace name cannot be blank") from error
+
+
+@app.get("/workspaces", response_model=list[Workspace])
+def list_workspaces():
+    return SESSION_MANAGER.workspaces.list()
+
+
+@app.get("/workspaces/{workspace_id}", response_model=Workspace)
+def get_workspace(workspace_id: str):
+    return SESSION_MANAGER.workspaces.get(workspace_id)
+
+
+@app.delete("/workspaces/{workspace_id}", status_code=204)
+def delete_workspace(workspace_id: str):
+    SESSION_MANAGER.workspaces.delete(workspace_id)
+
+
+@app.post("/workspaces/{workspace_id}/sessions", response_model=SessionSummary)
+def create_workspace_session(workspace_id: str):
+    return SESSION_MANAGER.create_workspace_session(workspace_id)
+
+
+@app.get("/workspaces/{workspace_id}/documents", response_model=list[DocumentRecord])
+def list_workspace_documents(workspace_id: str):
+    return SESSION_MANAGER.workspaces.documents(workspace_id)
+
+
+@app.post("/workspaces/{workspace_id}/documents")
+def upload_workspace_documents(workspace_id: str, files: list[UploadFile] = File(...)):
+    """Each upload is independent; one OCR/index failure does not discard the batch."""
+    SESSION_MANAGER.workspaces.get(workspace_id)
+    results = []
+    for file in files:
+        try:
+            results.append(SESSION_MANAGER.add_workspace_document(workspace_id, file.filename or "uploaded.pdf", file.file))
+        except (ValueError, IndexBuildError) as error:
+            results.append({"filename": file.filename, "status": "failed", "error": str(error) if isinstance(error, ValueError) else "PDF indexing failed; check backend logs"})
+    return {"documents": results}
+
+
+@app.delete("/workspaces/{workspace_id}/documents/{document_id}", status_code=204)
+def delete_workspace_document(workspace_id: str, document_id: str):
+    SESSION_MANAGER.workspaces.delete_document(workspace_id, document_id)

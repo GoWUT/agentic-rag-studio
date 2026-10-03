@@ -1,0 +1,2686 @@
+{
+  "run_id": "retrieval-v2-20260907T113428Z",
+  "environment": {
+    "timestamp_utc": "2026-09-07T11:34:28.366678+00:00",
+    "git_commit": "24f01d5f2901191fbdcde8a2117250b0b728c93c",
+    "git_worktree_dirty": true,
+    "python_version": "3.11.16",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "cpu": "Intel64 Family 6 Model 198 Stepping 2, GenuineIntel",
+    "cuda_available": false,
+    "gpu": "none",
+    "torch_version": "2.9.1",
+    "sentence_transformers_version": "5.2.0",
+    "chromadb_version": "1.3.7",
+    "device": "cpu"
+  },
+  "corpus": {
+    "pdf_path": ".rag_workspace\\b4acc699ab746317.pdf",
+    "pdf_size_bytes": 8360482,
+    "pdf_sha256": "b4acc699ab746317be68ea9f58eebafc450d7e537aba0b06f8ec2218da7287ae",
+    "pages": 16,
+    "chunks": 150,
+    "index_path": ".runtime\\retrieval-v2-phase2_1\\chroma_b4acc699ab746317be68ea9f58eebafc450d7e537aba0b06f8ec2218da7287ae_f78ec797f5a5",
+    "index_reused": false
+  },
+  "dataset": {
+    "path": "evaluation\\datasets\\retrieval_v2_pvigs.jsonl",
+    "sha256": "eb4a7fe751bf6bb5ce99ea44854cbfe973efdc98bca97f299916aa8f60b7c3c2",
+    "query_count": 20,
+    "gold_label_method": "human-selected answer anchor located in native PDF text",
+    "category_distribution": {
+      "lexical": 5,
+      "mixed": 5,
+      "numeric": 5,
+      "semantic": 5
+    },
+    "gold_page_distribution": {
+      "1": 2,
+      "2": 1,
+      "3": 2,
+      "6": 3,
+      "7": 1,
+      "8": 4,
+      "9": 1,
+      "10": 2,
+      "11": 1,
+      "12": 2,
+      "13": 1
+    },
+    "duplicate_queries": [],
+    "duplicate_anchors": [],
+    "anchor_location_failures": []
+  },
+  "config": {
+    "embedding_model": "BAAI/bge-small-zh-v1.5",
+    "reranker_model": "BAAI/bge-reranker-base",
+    "reranker_device": "cpu",
+    "reranker_batch_size": 8,
+    "reranker_fallback": false,
+    "ocr": {
+      "mode": "auto",
+      "lang": "ch",
+      "device": "cpu",
+      "dpi": 200,
+      "min_text_chars": 40,
+      "min_confidence": 0.5
+    },
+    "chunk_size": 800,
+    "chunk_overlap": 150,
+    "top_k": 5,
+    "candidate_k": 20,
+    "rrf_constant": 60,
+    "repeats": 5,
+    "warmup_queries_per_method": 3,
+    "bootstrap_samples": 2000,
+    "bootstrap_seed": 42
+  },
+  "initialization": {
+    "index_load_or_build_ms": 12357.2001,
+    "index_reused": false,
+    "bm25_index_build_ms": 6.6155,
+    "reranker_cold_start_ms": 1130.9106,
+    "reranker_warmup_queries": 3
+  },
+  "methods": {
+    "dense": {
+      "hit_at_1": 0.1,
+      "hit_at_3": 0.4,
+      "hit_at_5": 0.55,
+      "recall_at_5": 0.55,
+      "mrr_at_5": 0.2575,
+      "ndcg_at_5": 0.329859,
+      "latency_ms_p50": 6.1537,
+      "latency_ms_p95": 8.395955,
+      "latency_ms_mean": 6.526905,
+      "latency_ms_min": 4.7225,
+      "latency_ms_max": 9.8677,
+      "ranking_stable": true,
+      "stage_latency_ms": {
+        "dense_ms_p50": 6.1537,
+        "total_ms_p50": 6.1537
+      },
+      "confidence_intervals_95": {
+        "hit_at_5": {
+          "mean": 0.55,
+          "lower": 0.35,
+          "upper": 0.75,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "mrr_at_5": {
+          "mean": 0.2575,
+          "lower": 0.137479,
+          "upper": 0.401667,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "ndcg_at_5": {
+          "mean": 0.329859,
+          "lower": 0.185204,
+          "upper": 0.479859,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        }
+      }
+    },
+    "bm25": {
+      "hit_at_1": 0.55,
+      "hit_at_3": 0.8,
+      "hit_at_5": 0.9,
+      "recall_at_5": 0.9,
+      "mrr_at_5": 0.680833,
+      "ndcg_at_5": 0.735516,
+      "latency_ms_p50": 0.11275,
+      "latency_ms_p95": 0.253295,
+      "latency_ms_mean": 0.135906,
+      "latency_ms_min": 0.0517,
+      "latency_ms_max": 0.302,
+      "ranking_stable": true,
+      "stage_latency_ms": {
+        "bm25_ms_p50": 0.11275,
+        "total_ms_p50": 0.11275
+      },
+      "confidence_intervals_95": {
+        "hit_at_5": {
+          "mean": 0.9,
+          "lower": 0.75,
+          "upper": 1.0,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "mrr_at_5": {
+          "mean": 0.680833,
+          "lower": 0.515833,
+          "upper": 0.843333,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "ndcg_at_5": {
+          "mean": 0.735516,
+          "lower": 0.592929,
+          "upper": 0.875897,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        }
+      }
+    },
+    "hybrid_rrf": {
+      "hit_at_1": 0.25,
+      "hit_at_3": 0.8,
+      "hit_at_5": 0.85,
+      "recall_at_5": 0.85,
+      "mrr_at_5": 0.518333,
+      "ndcg_at_5": 0.603261,
+      "latency_ms_p50": 7.3551,
+      "latency_ms_p95": 9.66527,
+      "latency_ms_mean": 7.454521,
+      "latency_ms_min": 5.5001,
+      "latency_ms_max": 11.4926,
+      "ranking_stable": true,
+      "stage_latency_ms": {
+        "dense_ms_p50": 6.87345,
+        "bm25_ms_p50": 0.18595,
+        "rrf_ms_p50": 0.1808,
+        "total_ms_p50": 7.3551
+      },
+      "confidence_intervals_95": {
+        "hit_at_5": {
+          "mean": 0.85,
+          "lower": 0.7,
+          "upper": 1.0,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "mrr_at_5": {
+          "mean": 0.518333,
+          "lower": 0.378333,
+          "upper": 0.666667,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "ndcg_at_5": {
+          "mean": 0.603261,
+          "lower": 0.465753,
+          "upper": 0.735786,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        }
+      }
+    },
+    "hybrid_reranker": {
+      "hit_at_1": 0.5,
+      "hit_at_3": 0.75,
+      "hit_at_5": 0.8,
+      "recall_at_5": 0.8,
+      "mrr_at_5": 0.629167,
+      "ndcg_at_5": 0.67272,
+      "latency_ms_p50": 1431.81785,
+      "latency_ms_p95": 1773.734425,
+      "latency_ms_mean": 1466.315493,
+      "latency_ms_min": 1222.9455,
+      "latency_ms_max": 2016.5321,
+      "ranking_stable": true,
+      "stage_latency_ms": {
+        "dense_ms_p50": 8.98865,
+        "bm25_ms_p50": 0.2136,
+        "rrf_ms_p50": 0.197,
+        "reranker_ms_p50": 1423.68415,
+        "total_ms_p50": 1431.81785
+      },
+      "confidence_intervals_95": {
+        "hit_at_5": {
+          "mean": 0.8,
+          "lower": 0.6,
+          "upper": 0.95,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "mrr_at_5": {
+          "mean": 0.629167,
+          "lower": 0.45,
+          "upper": 0.791771,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        },
+        "ndcg_at_5": {
+          "mean": 0.67272,
+          "lower": 0.494639,
+          "upper": 0.831576,
+          "confidence": 0.95,
+          "samples": 2000,
+          "seed": 42
+        }
+      }
+    }
+  },
+  "candidate_recall": {
+    "candidate_k": 20,
+    "dense_candidate_hit_at_20": 0.9,
+    "hybrid_candidate_hit_at_20": 1.0
+  },
+  "comparison": {
+    "hybrid_vs_dense": {
+      "hit_at_5_delta": 0.3,
+      "mrr_at_5_delta": 0.260833,
+      "ndcg_at_5_delta": 0.273402,
+      "p95_latency_delta_ms": 1.269315
+    },
+    "hybrid_reranker_vs_hybrid": {
+      "hit_at_5_delta": -0.05,
+      "mrr_at_5_delta": 0.110834,
+      "ndcg_at_5_delta": 0.069459,
+      "p95_latency_delta_ms": 1764.069155
+    },
+    "hybrid_reranker_vs_dense": {
+      "hit_at_5_delta": 0.25,
+      "mrr_at_5_delta": 0.371667,
+      "ndcg_at_5_delta": 0.342861,
+      "p95_latency_delta_ms": 1765.33847
+    }
+  },
+  "per_category": {
+    "lexical": {
+      "dense": {
+        "query_count": 5,
+        "hit_at_5": 0.2,
+        "mrr_at_5": 0.1,
+        "ndcg_at_5": 0.126186
+      },
+      "bm25": {
+        "query_count": 5,
+        "hit_at_5": 0.6,
+        "mrr_at_5": 0.44,
+        "ndcg_at_5": 0.477371
+      },
+      "hybrid_rrf": {
+        "query_count": 5,
+        "hit_at_5": 0.8,
+        "mrr_at_5": 0.466667,
+        "ndcg_at_5": 0.552372
+      },
+      "hybrid_reranker": {
+        "query_count": 5,
+        "hit_at_5": 0.6,
+        "mrr_at_5": 0.6,
+        "ndcg_at_5": 0.6
+      }
+    },
+    "mixed": {
+      "dense": {
+        "query_count": 5,
+        "hit_at_5": 0.8,
+        "mrr_at_5": 0.223333,
+        "ndcg_at_5": 0.363506
+      },
+      "bm25": {
+        "query_count": 5,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 0.633333,
+        "ndcg_at_5": 0.726186
+      },
+      "hybrid_rrf": {
+        "query_count": 5,
+        "hit_at_5": 0.8,
+        "mrr_at_5": 0.5,
+        "ndcg_at_5": 0.578558
+      },
+      "hybrid_reranker": {
+        "query_count": 5,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 0.7,
+        "ndcg_at_5": 0.778558
+      }
+    },
+    "numeric": {
+      "dense": {
+        "query_count": 5,
+        "hit_at_5": 0.6,
+        "mrr_at_5": 0.266667,
+        "ndcg_at_5": 0.352372
+      },
+      "bm25": {
+        "query_count": 5,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "hybrid_rrf": {
+        "query_count": 5,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 0.54,
+        "ndcg_at_5": 0.655928
+      },
+      "hybrid_reranker": {
+        "query_count": 5,
+        "hit_at_5": 0.8,
+        "mrr_at_5": 0.8,
+        "ndcg_at_5": 0.8
+      }
+    },
+    "semantic": {
+      "dense": {
+        "query_count": 5,
+        "hit_at_5": 0.6,
+        "mrr_at_5": 0.44,
+        "ndcg_at_5": 0.477371
+      },
+      "bm25": {
+        "query_count": 5,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 0.65,
+        "ndcg_at_5": 0.738507
+      },
+      "hybrid_rrf": {
+        "query_count": 5,
+        "hit_at_5": 0.8,
+        "mrr_at_5": 0.566667,
+        "ndcg_at_5": 0.626186
+      },
+      "hybrid_reranker": {
+        "query_count": 5,
+        "hit_at_5": 0.8,
+        "mrr_at_5": 0.416667,
+        "ndcg_at_5": 0.512321
+      }
+    }
+  },
+  "failed_cases": {
+    "dense_miss_hybrid_success": [
+      {
+        "id": "pvigs_q01",
+        "query": "What failure mode does standard 3D Gaussian Splatting exhibit with too few input views?",
+        "analysis": "requires manual analysis"
+      },
+      {
+        "id": "pvigs_q06",
+        "query": "What IQA threshold and filtering-rate range are used for the four NVS datasets?",
+        "analysis": "requires manual analysis"
+      },
+      {
+        "id": "pvigs_q08",
+        "query": "Which two rendered attributes are constrained against the visibility prior for stable sparse-view training?",
+        "analysis": "requires manual analysis"
+      },
+      {
+        "id": "pvigs_q10",
+        "query": "On which four benchmark datasets is PViGS evaluated?",
+        "analysis": "requires manual analysis"
+      },
+      {
+        "id": "pvigs_q13",
+        "query": "What throughput, training time, memory, and image-quality scores are listed for PViGS on LLFF?",
+        "analysis": "requires manual analysis"
+      },
+      {
+        "id": "pvigs_q17",
+        "query": "What three reconstruction metrics are reported for PViGS on DTU with three views?",
+        "analysis": "requires manual analysis"
+      },
+      {
+        "id": "pvigs_q20",
+        "query": "What future distillation approach is proposed to reduce dependence on pixel-level depth priors?",
+        "analysis": "requires manual analysis"
+      }
+    ],
+    "hybrid_miss_reranker_success": [
+      {
+        "id": "pvigs_q04",
+        "query": "How does the added Gaussian visibility weight combine the two view directions?",
+        "analysis": "requires manual analysis"
+      }
+    ],
+    "dense_success_hybrid_fail": [
+      {
+        "id": "pvigs_q04",
+        "query": "How does the added Gaussian visibility weight combine the two view directions?",
+        "analysis": "requires manual analysis"
+      }
+    ],
+    "hybrid_success_reranker_fail": [
+      {
+        "id": "pvigs_q10",
+        "query": "On which four benchmark datasets is PViGS evaluated?",
+        "analysis": "requires manual analysis"
+      },
+      {
+        "id": "pvigs_q13",
+        "query": "What throughput, training time, memory, and image-quality scores are listed for PViGS on LLFF?",
+        "analysis": "requires manual analysis"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "pvigs_q01",
+      "query": "What failure mode does standard 3D Gaussian Splatting exhibit with too few input views?",
+      "anchor": "resulting in structural inaccuracies and visual artifacts.",
+      "category": "lexical",
+      "gold_pages_1_based": [
+        1
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            2,
+            5,
+            3,
+            6,
+            5
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            7.9078,
+            7.0675,
+            7.7824,
+            8.587,
+            5.6043
+          ],
+          "latency_ms_median": 7.7824,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            16,
+            15,
+            15,
+            3,
+            4
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            0.2341,
+            0.0931,
+            0.083,
+            0.0807,
+            0.0886
+          ],
+          "latency_ms_median": 0.0886,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            2,
+            15,
+            1,
+            5,
+            3
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            9.6509,
+            6.0509,
+            7.3822,
+            5.8066,
+            7.1532
+          ],
+          "latency_ms_median": 7.1532,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            1,
+            2,
+            1,
+            15,
+            15
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1768.7053,
+            1706.0425,
+            1701.7196,
+            1629.2317,
+            1656.6658
+          ],
+          "latency_ms_median": 1701.7196,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "pvigs_q02",
+      "query": "Which two unresolved problems with earlier prior-based sparse-view methods motivate PViGS?",
+      "anchor": "The traditional monocular depth prior suffers from the inherent ambiguity",
+      "category": "semantic",
+      "gold_pages_1_based": [
+        2
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            9,
+            3,
+            10,
+            13,
+            3
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            7.8054,
+            5.8968,
+            6.7071,
+            7.2388,
+            5.7361
+          ],
+          "latency_ms_median": 6.7071,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            3,
+            4,
+            7,
+            2,
+            3
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.25,
+          "ndcg_at_5": 0.430677,
+          "first_relevant_rank": 4,
+          "latency_ms": [
+            0.1786,
+            0.097,
+            0.0948,
+            0.0989,
+            0.0912
+          ],
+          "latency_ms_median": 0.097,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            3,
+            9,
+            4,
+            13,
+            3
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            6.8387,
+            7.902,
+            7.8292,
+            6.2103,
+            8.4779
+          ],
+          "latency_ms_median": 7.8292,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            10,
+            3,
+            4,
+            3,
+            13
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            1396.2103,
+            1391.0023,
+            1401.101,
+            1363.4278,
+            1353.5441
+          ],
+          "latency_ms_median": 1391.0023,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "pvigs_q03",
+      "query": "How are Plane Sweep Volumes constructed from a reference and source image?",
+      "anchor": "comparing them to calculate reprojection error maps as weights.",
+      "category": "mixed",
+      "gold_pages_1_based": [
+        3
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            7,
+            5,
+            12,
+            3,
+            12
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.25,
+          "ndcg_at_5": 0.430677,
+          "first_relevant_rank": 4,
+          "latency_ms": [
+            7.8622,
+            5.8328,
+            8.1187,
+            5.1518,
+            6.0435
+          ],
+          "latency_ms_median": 6.0435,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            6,
+            3,
+            5,
+            5,
+            8
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            0.1769,
+            0.0929,
+            0.1024,
+            0.0903,
+            0.0894
+          ],
+          "latency_ms_median": 0.0929,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            5,
+            3,
+            5,
+            12,
+            3
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            6.4295,
+            8.7998,
+            8.015,
+            6.5344,
+            9.039
+          ],
+          "latency_ms_median": 8.015,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            3,
+            6,
+            5,
+            5,
+            7
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1436.1768,
+            1403.6713,
+            1400.6733,
+            1447.0398,
+            1458.1528
+          ],
+          "latency_ms_median": 1436.1768,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "pvigs_q04",
+      "query": "How does the added Gaussian visibility weight combine the two view directions?",
+      "anchor": "an external learnable visibility weight parameter, which is leveraged to fuse two directions of both reference and source views.",
+      "category": "mixed",
+      "gold_pages_1_based": [
+        3
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            6,
+            6,
+            3,
+            5,
+            13
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            6.0266,
+            5.5936,
+            7.5559,
+            7.612,
+            7.5898
+          ],
+          "latency_ms_median": 7.5559,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            3,
+            6,
+            7,
+            1,
+            10
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.1341,
+            0.0878,
+            0.0899,
+            0.0859,
+            0.0839
+          ],
+          "latency_ms_median": 0.0878,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            6,
+            7,
+            1,
+            6,
+            9
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            6.261,
+            5.6425,
+            8.0838,
+            6.5435,
+            8.4058
+          ],
+          "latency_ms_median": 6.5435,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            6,
+            3,
+            9,
+            5,
+            6
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            1442.6696,
+            1417.4042,
+            1413.5415,
+            1451.3511,
+            1402.7838
+          ],
+          "latency_ms_median": 1417.4042,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "pvigs_q05",
+      "query": "How many candidate warped images are generated per training view during augmentation?",
+      "anchor": "generate N candidate warped images (N=360).",
+      "category": "numeric",
+      "gold_pages_1_based": [
+        6
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            5,
+            6,
+            5,
+            7,
+            8
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            5.4752,
+            5.7483,
+            7.0423,
+            5.0628,
+            7.0641
+          ],
+          "latency_ms_median": 5.7483,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            6,
+            5,
+            7,
+            12,
+            3
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.2945,
+            0.1662,
+            0.1396,
+            0.1319,
+            0.1287
+          ],
+          "latency_ms_median": 0.1396,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            5,
+            6,
+            7,
+            5,
+            8
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            5.9074,
+            6.4019,
+            6.5708,
+            6.075,
+            7.6324
+          ],
+          "latency_ms_median": 6.4019,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            6,
+            8,
+            6,
+            6,
+            8
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1260.4594,
+            1330.0563,
+            1422.1192,
+            1316.6473,
+            1350.2462
+          ],
+          "latency_ms_median": 1330.0563,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "pvigs_q06",
+      "query": "What IQA threshold and filtering-rate range are used for the four NVS datasets?",
+      "anchor": "we set 𝜅= 0 .6 and the corresponding filtering ratios range between 40% and 50%.",
+      "category": "numeric",
+      "gold_pages_1_based": [
+        6
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            12,
+            7,
+            8,
+            13,
+            13
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            6.7563,
+            6.0048,
+            6.5504,
+            5.6373,
+            8.2567
+          ],
+          "latency_ms_median": 6.5504,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            6,
+            3,
+            3,
+            12,
+            6
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.253,
+            0.217,
+            0.2093,
+            0.2064,
+            0.2055
+          ],
+          "latency_ms_median": 0.2093,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            8,
+            12,
+            13,
+            12,
+            6
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.2,
+          "ndcg_at_5": 0.386853,
+          "first_relevant_rank": 5,
+          "latency_ms": [
+            6.0169,
+            6.6856,
+            6.8706,
+            8.2296,
+            6.8809
+          ],
+          "latency_ms_median": 6.8706,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            6,
+            13,
+            12,
+            14,
+            2
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1575.0629,
+            1539.6573,
+            1534.3115,
+            1543.3933,
+            1514.8065
+          ],
+          "latency_ms_median": 1539.6573,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "pvigs_q07",
+      "query": "Why does the method recursively aggregate visibility along a ray?",
+      "anchor": "helps suppress depth ambiguity caused by sparse views.",
+      "category": "semantic",
+      "gold_pages_1_based": [
+        6
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            6,
+            3,
+            3,
+            8,
+            10
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            5.2155,
+            6.7967,
+            6.1727,
+            5.2058,
+            8.0407
+          ],
+          "latency_ms_median": 6.1727,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            10,
+            6,
+            3,
+            9,
+            11
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            0.2085,
+            0.1584,
+            0.1524,
+            0.1499,
+            0.1548
+          ],
+          "latency_ms_median": 0.1548,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            10,
+            9,
+            6,
+            3,
+            10
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            5.5001,
+            7.8785,
+            5.7582,
+            9.3906,
+            6.1028
+          ],
+          "latency_ms_median": 6.1028,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            2,
+            3,
+            6,
+            6,
+            3
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            1448.1619,
+            1394.3528,
+            1504.7069,
+            1380.6989,
+            1345.6315
+          ],
+          "latency_ms_median": 1394.3528,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "pvigs_q08",
+      "query": "Which two rendered attributes are constrained against the visibility prior for stable sparse-view training?",
+      "anchor": "output both visibility 𝑉 ′(𝑝) and accumulated transmittance 𝑡𝑖.",
+      "category": "semantic",
+      "gold_pages_1_based": [
+        7
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            3,
+            4,
+            3,
+            1,
+            4
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            5.9198,
+            7.9397,
+            5.8431,
+            7.9092,
+            6.0188
+          ],
+          "latency_ms_median": 6.0188,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            7,
+            7,
+            4,
+            4,
+            9
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.302,
+            0.2624,
+            0.2498,
+            0.2434,
+            0.2706
+          ],
+          "latency_ms_median": 0.2624,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            4,
+            7,
+            7,
+            4,
+            4
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            9.0893,
+            6.5087,
+            8.4361,
+            6.1999,
+            7.9122
+          ],
+          "latency_ms_median": 7.9122,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            7,
+            12,
+            3,
+            7,
+            3
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1376.6299,
+            1294.7114,
+            1299.4079,
+            1334.5593,
+            1333.7967
+          ],
+          "latency_ms_median": 1333.7967,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "pvigs_q09",
+      "query": "Which pretrained model supplies features for PSV-wise semantic regularization?",
+      "anchor": "a pre-trained DINO-ViT model is used to impose spatial semantic consistency",
+      "category": "lexical",
+      "gold_pages_1_based": [
+        1
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            4,
+            1,
+            1,
+            6,
+            3
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            7.1767,
+            6.8202,
+            5.5915,
+            5.6888,
+            6.181
+          ],
+          "latency_ms_median": 6.181,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            2,
+            3,
+            4,
+            7,
+            1
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.2,
+          "ndcg_at_5": 0.386853,
+          "first_relevant_rank": 5,
+          "latency_ms": [
+            0.182,
+            0.153,
+            0.1486,
+            0.1456,
+            0.1659
+          ],
+          "latency_ms_median": 0.153,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            3,
+            1,
+            7,
+            7,
+            12
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            5.9275,
+            6.7704,
+            8.9633,
+            8.4927,
+            7.725
+          ],
+          "latency_ms_median": 7.725,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            1,
+            12,
+            7,
+            3,
+            5
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1222.9455,
+            1252.7038,
+            1260.1829,
+            1266.4211,
+            1232.4196
+          ],
+          "latency_ms_median": 1252.7038,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "pvigs_q10",
+      "query": "On which four benchmark datasets is PViGS evaluated?",
+      "anchor": "the LLFF [38], the DTU [39], T&T(Tanks and Temples) [41], and the Mip- NeRF360 [40].",
+      "category": "lexical",
+      "gold_pages_1_based": [
+        8
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            9,
+            3,
+            10,
+            10,
+            10
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            9.8677,
+            7.7206,
+            8.0345,
+            4.7225,
+            5.7651
+          ],
+          "latency_ms_median": 7.7206,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            8,
+            3,
+            5,
+            3,
+            1
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.1718,
+            0.1337,
+            0.1301,
+            0.1271,
+            0.1255
+          ],
+          "latency_ms_median": 0.1301,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            3,
+            8,
+            8,
+            8,
+            1
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            7.7543,
+            6.4065,
+            7.4821,
+            6.7895,
+            6.7263
+          ],
+          "latency_ms_median": 6.7895,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            1,
+            10,
+            9,
+            1,
+            1
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            1356.535,
+            1414.6213,
+            1357.3067,
+            1367.0001,
+            1402.769
+          ],
+          "latency_ms_median": 1367.0001,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "pvigs_q11",
+      "query": "How many PSV depth planes are used for LLFF, T&T, Mip-NeRF360, and DTU?",
+      "anchor": "𝑘= 64 for LLFF, T&T, and Mip-NeRF360, and 𝑘= 128 for DTU.",
+      "category": "numeric",
+      "gold_pages_1_based": [
+        8
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            5,
+            8,
+            6,
+            10,
+            6
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            5.6292,
+            6.3866,
+            6.4427,
+            5.3042,
+            5.403
+          ],
+          "latency_ms_median": 5.6292,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            8,
+            1,
+            6,
+            14,
+            1
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.2589,
+            0.1991,
+            0.1971,
+            0.1942,
+            0.1942
+          ],
+          "latency_ms_median": 0.1971,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            6,
+            8,
+            8,
+            3,
+            5
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            8.8643,
+            7.328,
+            9.9383,
+            7.708,
+            8.0796
+          ],
+          "latency_ms_median": 8.0796,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            8,
+            8,
+            8,
+            8,
+            6
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1456.7684,
+            1475.5394,
+            1509.1446,
+            1492.7249,
+            1497.641
+          ],
+          "latency_ms_median": 1492.7249,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "pvigs_q12",
+      "query": "How is the LLFF test split selected and how are its remaining training views chosen?",
+      "anchor": "Every eighth image in the sequence is systematically chosen for the test set. Subsequently, the training views are constructed by evenly sampling from the remaining images.",
+      "category": "mixed",
+      "gold_pages_1_based": [
+        8
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            12,
+            10,
+            8,
+            3,
+            10
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            8.0352,
+            5.2947,
+            7.4698,
+            4.9548,
+            5.0713
+          ],
+          "latency_ms_median": 5.2947,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            8,
+            8,
+            8,
+            6,
+            6
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.2416,
+            0.2101,
+            0.2047,
+            0.1965,
+            0.2194
+          ],
+          "latency_ms_median": 0.2101,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            8,
+            12,
+            9,
+            3,
+            10
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            8.0762,
+            7.4632,
+            8.752,
+            7.1908,
+            8.1575
+          ],
+          "latency_ms_median": 8.0762,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            8,
+            6,
+            12,
+            12,
+            8
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1277.1597,
+            1248.7395,
+            1310.5565,
+            1271.0615,
+            1290.9859
+          ],
+          "latency_ms_median": 1277.1597,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "pvigs_q13",
+      "query": "What throughput, training time, memory, and image-quality scores are listed for PViGS on LLFF?",
+      "anchor": "PViGS(ours) 275 30 min 8 GB 21.27 0.766 0.168",
+      "category": "numeric",
+      "gold_pages_1_based": [
+        8
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            10,
+            10,
+            13,
+            9,
+            1
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            8.3859,
+            5.5869,
+            5.7,
+            5.9427,
+            5.064
+          ],
+          "latency_ms_median": 5.7,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            8,
+            8,
+            8,
+            8,
+            13
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.2065,
+            0.1185,
+            0.1106,
+            0.1081,
+            0.1052
+          ],
+          "latency_ms_median": 0.1106,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            8,
+            10,
+            13,
+            10,
+            8
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            7.4167,
+            10.256,
+            11.4926,
+            10.0459,
+            8.6379
+          ],
+          "latency_ms_median": 10.0459,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            9,
+            1,
+            10,
+            10,
+            10
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            1497.9356,
+            1528.6399,
+            1491.2977,
+            1611.4386,
+            1463.3719
+          ],
+          "latency_ms_median": 1497.9356,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "pvigs_q14",
+      "query": "How do the authors justify the method's extra training computation?",
+      "anchor": "the additional computational cost reflects a necessary quality-first trade-off",
+      "category": "semantic",
+      "gold_pages_1_based": [
+        9
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            12,
+            3,
+            11,
+            10,
+            9
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.2,
+          "ndcg_at_5": 0.386853,
+          "first_relevant_rank": 5,
+          "latency_ms": [
+            8.2603,
+            7.0436,
+            5.3051,
+            6.3222,
+            6.9365
+          ],
+          "latency_ms_median": 6.9365,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            9,
+            5,
+            10,
+            14,
+            1
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.0892,
+            0.0677,
+            0.0647,
+            0.0619,
+            0.0625
+          ],
+          "latency_ms_median": 0.0647,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            9,
+            1,
+            10,
+            10,
+            6
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            5.8764,
+            6.9453,
+            6.4853,
+            7.3896,
+            7.6895
+          ],
+          "latency_ms_median": 6.9453,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            2,
+            4,
+            5,
+            9,
+            14
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.25,
+          "ndcg_at_5": 0.430677,
+          "first_relevant_rank": 4,
+          "latency_ms": [
+            1394.7402,
+            1371.1759,
+            1395.749,
+            1376.3657,
+            1445.9686
+          ],
+          "latency_ms_median": 1394.7402,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "pvigs_q15",
+      "query": "What PSNR values does PViGS achieve under the two three-view LLFF resolution settings?",
+      "anchor": "achieving the highest PSNR scores of 21.27 dB and 20.66 dB under 3-view input settings.",
+      "category": "mixed",
+      "gold_pages_1_based": [
+        10
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            9,
+            5,
+            3,
+            6,
+            10
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.2,
+          "ndcg_at_5": 0.386853,
+          "first_relevant_rank": 5,
+          "latency_ms": [
+            9.2253,
+            9.4694,
+            7.7642,
+            6.309,
+            5.9314
+          ],
+          "latency_ms_median": 7.7642,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            9,
+            9,
+            10,
+            10,
+            13
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            0.127,
+            0.0917,
+            0.0919,
+            0.0834,
+            0.0843
+          ],
+          "latency_ms_median": 0.0917,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            9,
+            10,
+            10,
+            10,
+            2
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            6.4347,
+            10.6625,
+            8.8074,
+            7.0384,
+            6.8134
+          ],
+          "latency_ms_median": 7.0384,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            9,
+            10,
+            2,
+            14,
+            13
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            1630.3861,
+            1554.6214,
+            1548.2768,
+            1553.2588,
+            1638.2593
+          ],
+          "latency_ms_median": 1554.6214,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "pvigs_q16",
+      "query": "What PSNR, SSIM, and LPIPS does PViGS obtain on Tanks and Temples with three views?",
+      "anchor": "PViGS(ours) 28.41 0.890 0.102",
+      "category": "numeric",
+      "gold_pages_1_based": [
+        10
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            9,
+            3,
+            10,
+            10,
+            10
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            7.4901,
+            5.183,
+            5.7026,
+            7.1631,
+            5.1741
+          ],
+          "latency_ms_median": 5.7026,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            10,
+            10,
+            9,
+            10,
+            14
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.1174,
+            0.1002,
+            0.0935,
+            0.0922,
+            0.0919
+          ],
+          "latency_ms_median": 0.0935,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            9,
+            10,
+            10,
+            10,
+            3
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            6.0792,
+            7.5057,
+            7.4058,
+            7.4069,
+            8.7388
+          ],
+          "latency_ms_median": 7.4069,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            10,
+            14,
+            10,
+            10,
+            9
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1928.8677,
+            1869.2878,
+            1884.1292,
+            2004.1917,
+            2016.5321
+          ],
+          "latency_ms_median": 1928.8677,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "pvigs_q17",
+      "query": "What three reconstruction metrics are reported for PViGS on DTU with three views?",
+      "anchor": "PViGS(ours) 21.30 0.899 0.095",
+      "category": "mixed",
+      "gold_pages_1_based": [
+        11
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            9,
+            3,
+            10,
+            10,
+            10
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            6.1347,
+            7.7805,
+            5.2924,
+            6.9359,
+            6.1256
+          ],
+          "latency_ms_median": 6.1347,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            3,
+            8,
+            11,
+            8,
+            12
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.333333,
+          "ndcg_at_5": 0.5,
+          "first_relevant_rank": 3,
+          "latency_ms": [
+            0.1079,
+            0.0953,
+            0.0924,
+            0.0922,
+            0.0904
+          ],
+          "latency_ms_median": 0.0924,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            3,
+            11,
+            10,
+            1,
+            4
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            8.6911,
+            7.2713,
+            6.8954,
+            6.366,
+            5.6917
+          ],
+          "latency_ms_median": 6.8954,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            9,
+            11,
+            13,
+            1,
+            10
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            1691.6947,
+            1649.174,
+            1651.9003,
+            1668.4608,
+            1756.3259
+          ],
+          "latency_ms_median": 1668.4608,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "pvigs_q18",
+      "query": "What property of the camera inputs limits the reliability of PViGS visibility priors?",
+      "anchor": "The effectiveness of visibility priors depends on the overlapping area between input views.",
+      "category": "lexical",
+      "gold_pages_1_based": [
+        12
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            5,
+            6,
+            3,
+            9,
+            7
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            6.41,
+            8.7413,
+            7.4168,
+            5.5146,
+            5.071
+          ],
+          "latency_ms_median": 6.41,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            10,
+            6,
+            5,
+            6,
+            2
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            0.1149,
+            0.0895,
+            0.0887,
+            0.0867,
+            0.0984
+          ],
+          "latency_ms_median": 0.0895,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            6,
+            5,
+            3,
+            5,
+            9
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            8.868,
+            6.5956,
+            7.8636,
+            6.0487,
+            9.1467
+          ],
+          "latency_ms_median": 7.8636,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            13,
+            7,
+            10,
+            3,
+            3
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            1508.7094,
+            1491.0952,
+            1485.9909,
+            1522.3164,
+            1521.9955
+          ],
+          "latency_ms_median": 1508.7094,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "pvigs_q19",
+      "query": "When does visibility-guided regularization provide its largest relative benefit?",
+      "anchor": "the efficacy of the visibility-based regularization becomes more evident for sparse views.",
+      "category": "semantic",
+      "gold_pages_1_based": [
+        12
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            12,
+            3,
+            12,
+            3,
+            2
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            7.7975,
+            5.5054,
+            5.1213,
+            6.8919,
+            5.5253
+          ],
+          "latency_ms_median": 5.5253,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            10,
+            12,
+            12,
+            2,
+            3
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            0.0709,
+            0.0559,
+            0.0529,
+            0.0566,
+            0.0517
+          ],
+          "latency_ms_median": 0.0559,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            12,
+            12,
+            2,
+            12,
+            3
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            6.5046,
+            6.9505,
+            6.6978,
+            7.5631,
+            7.6753
+          ],
+          "latency_ms_median": 6.9505,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            3,
+            12,
+            12,
+            1,
+            2
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 0.5,
+          "ndcg_at_5": 0.63093,
+          "first_relevant_rank": 2,
+          "latency_ms": [
+            1331.58,
+            1279.0115,
+            1322.9294,
+            1308.9011,
+            1341.4032
+          ],
+          "latency_ms_median": 1322.9294,
+          "ranking_stable": true
+        }
+      }
+    },
+    {
+      "id": "pvigs_q20",
+      "query": "What future distillation approach is proposed to reduce dependence on pixel-level depth priors?",
+      "anchor": "incorporating Large Vision-Language Models (LVLMs) into the Gaussian radiance fields.",
+      "category": "lexical",
+      "gold_pages_1_based": [
+        13
+      ],
+      "methods": {
+        "dense": {
+          "retrieved_pages_1_based": [
+            11,
+            5,
+            6,
+            1,
+            4
+          ],
+          "hit_at_1": 0.0,
+          "hit_at_3": 0.0,
+          "hit_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "first_relevant_rank": null,
+          "latency_ms": [
+            5.7825,
+            5.6351,
+            5.2495,
+            6.0338,
+            5.8256
+          ],
+          "latency_ms_median": 5.7825,
+          "ranking_stable": true
+        },
+        "bm25": {
+          "retrieved_pages_1_based": [
+            13,
+            3,
+            4,
+            4,
+            2
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            0.1245,
+            0.0962,
+            0.0951,
+            0.0933,
+            0.0918
+          ],
+          "latency_ms_median": 0.0951,
+          "ranking_stable": true
+        },
+        "hybrid_rrf": {
+          "retrieved_pages_1_based": [
+            13,
+            4,
+            5,
+            1,
+            4
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            9.1465,
+            6.4928,
+            7.2764,
+            6.4052,
+            6.4746
+          ],
+          "latency_ms_median": 6.4928,
+          "ranking_stable": true
+        },
+        "hybrid_reranker": {
+          "retrieved_pages_1_based": [
+            13,
+            3,
+            4,
+            4,
+            2
+          ],
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "hit_at_5": 1.0,
+          "recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "ndcg_at_5": 1.0,
+          "first_relevant_rank": 1,
+          "latency_ms": [
+            1415.2069,
+            1442.9001,
+            1424.2573,
+            1427.4589,
+            1481.9857
+          ],
+          "latency_ms_median": 1427.4589,
+          "ranking_stable": true
+        }
+      }
+    }
+  ]
+}

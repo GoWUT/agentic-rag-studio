@@ -1,0 +1,52 @@
+{
+  "answer": "Got it — I've noted that your preferred report format is **markdown**. I'll use markdown formatting for reports going forward.\n\nThis is stored as a preference (I can see it's already recorded from before), so it will apply to future reporting requests without you needing to repeat it. Just let me know if you'd like to change it at any point.",
+  "context": {
+    "model_context_window_tokens": 1000000,
+    "input_budget_tokens": 60000,
+    "max_output_tokens": 4096,
+    "safety_tokens": 4096,
+    "estimated_tokens_before": 894,
+    "estimated_tokens_after": 894,
+    "compacted_messages": 0,
+    "truncated_messages": 0,
+    "strategy": "full"
+  },
+  "execution": {
+    "run_id": "fdcdcf80-e8ec-4a05-bfeb-105a6aae9d8b",
+    "attempts": 1,
+    "duration_ms": 2408.9,
+    "max_graph_steps": 35
+  },
+  "citations": [],
+  "evidence": [],
+  "plan": null,
+  "trace_summary": {
+    "workspace_id": "3c508d70-8e2e-4ded-8732-e619f41d8d0f",
+    "document_count": 1,
+    "task_complexity": "simple",
+    "planner_steps": 0,
+    "tool_calls": 0,
+    "tools_used": [],
+    "retrieval_attempts": 0,
+    "rewrite_count": 0,
+    "evidence_count": 0,
+    "citation_count": 0,
+    "verification_passed": false,
+    "memory_retrieval_count": 2,
+    "memory_candidates": 1,
+    "memory_written": 1,
+    "task_id": null,
+    "task_step_id": null,
+    "task_status": null,
+    "dataset_ids": [
+      "1f43343c-bb3a-4020-b942-5503e7dadf57",
+      "8d642df8-4e57-443b-af5b-91c06e19f133"
+    ],
+    "analysis_execution_id": null,
+    "analysis_duration": null,
+    "artifact_count": 0,
+    "code_validation_result": null,
+    "latency": 2408.9
+  },
+  "artifacts": []
+}

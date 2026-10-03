@@ -1,0 +1,1134 @@
+{
+  "verdict": "READY WITH LIMITATIONS",
+  "runtime_run_id": "92e51059-6332-44de-ae4b-b1ef6d44d907",
+  "checks": [
+    {
+      "number": 1,
+      "name": "FastAPI start",
+      "status": "PASS",
+      "measurement_keys": [
+        "1_fastapi_start"
+      ]
+    },
+    {
+      "number": 2,
+      "name": "Streamlit start",
+      "status": "PASS",
+      "measurement_keys": [
+        "2_streamlit_start"
+      ]
+    },
+    {
+      "number": 3,
+      "name": "Agent Registry",
+      "status": "PASS",
+      "measurement_keys": [
+        "3_agent_registry"
+      ]
+    },
+    {
+      "number": 4,
+      "name": "Simple query bypass",
+      "status": "PASS",
+      "measurement_keys": [
+        "4_simple_bypasses_orchestration"
+      ]
+    },
+    {
+      "number": 5,
+      "name": "Data only",
+      "status": "PASS",
+      "measurement_keys": [
+        "5_data_only"
+      ]
+    },
+    {
+      "number": 6,
+      "name": "Research only",
+      "status": "PASS",
+      "measurement_keys": [
+        "6_research_only"
+      ]
+    },
+    {
+      "number": 7,
+      "name": "Research + Data",
+      "status": "PASS",
+      "measurement_keys": [
+        "7_multi_agent"
+      ]
+    },
+    {
+      "number": 8,
+      "name": "Parallel overlap",
+      "status": "PASS",
+      "measurement_keys": [
+        "8_parallel_overlap"
+      ]
+    },
+    {
+      "number": 9,
+      "name": "Private context isolation",
+      "status": "PASS",
+      "measurement_keys": [
+        "9_private_context_isolation"
+      ]
+    },
+    {
+      "number": 10,
+      "name": "Evidence merge",
+      "status": "PASS",
+      "measurement_keys": [
+        "10_evidence_merge"
+      ]
+    },
+    {
+      "number": 11,
+      "name": "Reviewer structured input",
+      "status": "PASS",
+      "measurement_keys": [
+        "11_reviewer_structured_input"
+      ]
+    },
+    {
+      "number": 12,
+      "name": "Reviewer PASS",
+      "status": "PASS",
+      "measurement_keys": [
+        "12_reviewer_pass"
+      ]
+    },
+    {
+      "number": 13,
+      "name": "Reviewer revision",
+      "status": "PASS",
+      "measurement_keys": [
+        "13_reviewer_revision"
+      ]
+    },
+    {
+      "number": 14,
+      "name": "Bounded re-delegation",
+      "status": "PASS",
+      "measurement_keys": [
+        "14_bounded_redelegation"
+      ]
+    },
+    {
+      "number": 15,
+      "name": "Completed work not repeated",
+      "status": "PASS",
+      "measurement_keys": [
+        "15_completed_work_not_repeated"
+      ]
+    },
+    {
+      "number": 16,
+      "name": "Agent timeout",
+      "status": "PASS",
+      "measurement_keys": [
+        "16_agent_timeout"
+      ]
+    },
+    {
+      "number": 17,
+      "name": "Parallel branch failure",
+      "status": "PASS",
+      "measurement_keys": [
+        "17_parallel_branch_failure"
+      ]
+    },
+    {
+      "number": 18,
+      "name": "HITL",
+      "status": "PASS",
+      "measurement_keys": [
+        "18_hitl_waiting",
+        "18_hitl_resume"
+      ]
+    },
+    {
+      "number": 19,
+      "name": "Restart + resume",
+      "status": "PASS",
+      "measurement_keys": [
+        "19_restart_paused",
+        "19_restart_resume"
+      ]
+    },
+    {
+      "number": 20,
+      "name": "Grounding",
+      "status": "PASS",
+      "measurement_keys": [
+        "20_grounding"
+      ]
+    },
+    {
+      "number": 21,
+      "name": "Citations",
+      "status": "PASS",
+      "measurement_keys": [
+        "21_citations"
+      ]
+    },
+    {
+      "number": 22,
+      "name": "Memory once",
+      "status": "PASS",
+      "measurement_keys": [
+        "22_memory_once"
+      ]
+    },
+    {
+      "number": 23,
+      "name": "Single/multi runner",
+      "status": "PASS",
+      "measurement_keys": [
+        "23_single_multi_runner"
+      ]
+    }
+  ],
+  "tests": {
+    "previous": 295,
+    "new_phase5a": 78,
+    "total": 373,
+    "passed": 373,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "agent_selection_accuracy": {
+    "value": 1.0,
+    "correct": 5,
+    "denominator": 5
+  },
+  "routing_accuracy": {
+    "value": 1.0,
+    "denominator": 6
+  },
+  "reviewer_gap_detection": {
+    "value": 1,
+    "denominator": 1,
+    "fixture": "explicit F research evidence-gap injection"
+  },
+  "redelegation_success": {
+    "completed": 0,
+    "denominator": 2
+  },
+  "duplicate_completed_work": {
+    "repeated": 0,
+    "denominator": 28,
+    "rate": 0.0
+  },
+  "delegation_success": {
+    "completed": 14,
+    "denominator": 34,
+    "rate": 0.4117647058823529
+  },
+  "delegation_completion": {
+    "terminal": 34,
+    "denominator": 34,
+    "rate": 1.0
+  },
+  "per_scenario_metrics": {
+    "A_research_only": {
+      "status": "COMPLETED",
+      "latency_seconds": 90.953,
+      "llm_calls": 11,
+      "tool_calls": 1,
+      "tokens": 39747,
+      "token_usage_status": "available",
+      "delegation_success_rate": 1.0,
+      "delegation_completion_rate": 1.0,
+      "parallelism_utilization": 1.0,
+      "grounding": true,
+      "evidence_count": 3
+    },
+    "B_data_only": {
+      "status": "COMPLETED",
+      "latency_seconds": 95.141,
+      "llm_calls": 12,
+      "tool_calls": 2,
+      "tokens": 43976,
+      "token_usage_status": "available",
+      "delegation_success_rate": 1.0,
+      "delegation_completion_rate": 1.0,
+      "parallelism_utilization": 1.0,
+      "grounding": true,
+      "evidence_count": 2
+    },
+    "C_research_data": {
+      "status": "COMPLETED",
+      "latency_seconds": 214.75,
+      "llm_calls": 21,
+      "tool_calls": 7,
+      "tokens": 110824,
+      "token_usage_status": "available",
+      "delegation_success_rate": 0.4,
+      "delegation_completion_rate": 1.0,
+      "parallelism_utilization": 0.997,
+      "grounding": true,
+      "evidence_count": 5
+    },
+    "D_code_review_MOCK": {
+      "status": "COMPLETED",
+      "latency_seconds": 83.109,
+      "llm_calls": 10,
+      "tool_calls": 1,
+      "tokens": 32615,
+      "token_usage_status": "available",
+      "delegation_success_rate": 0.0,
+      "delegation_completion_rate": 1.0,
+      "parallelism_utilization": 1.0,
+      "grounding": true,
+      "evidence_count": 1
+    },
+    "E_research_code_MOCK": {
+      "status": "COMPLETED",
+      "latency_seconds": 167.312,
+      "llm_calls": 18,
+      "tool_calls": 6,
+      "tokens": 87233,
+      "token_usage_status": "available",
+      "delegation_success_rate": 0.2,
+      "delegation_completion_rate": 1.0,
+      "parallelism_utilization": 0.979,
+      "grounding": true,
+      "evidence_count": 7
+    },
+    "F_injected_research_gap": {
+      "status": "COMPLETED",
+      "latency_seconds": 203.375,
+      "llm_calls": 22,
+      "tool_calls": 6,
+      "tokens": 109287,
+      "token_usage_status": "available",
+      "delegation_success_rate": 0.2,
+      "delegation_completion_rate": 1.0,
+      "parallelism_utilization": 1.005,
+      "grounding": true,
+      "evidence_count": 6
+    },
+    "timeout_injected": {
+      "status": "COMPLETED",
+      "latency_seconds": 158.235,
+      "llm_calls": 15,
+      "tool_calls": 3,
+      "tokens": 61084,
+      "token_usage_status": "available",
+      "delegation_success_rate": 0.2,
+      "delegation_completion_rate": 1.0,
+      "parallelism_utilization": 0.488,
+      "grounding": false,
+      "evidence_count": 3
+    },
+    "branch_failure_injected": {
+      "status": "COMPLETED",
+      "latency_seconds": 162.469,
+      "llm_calls": 17,
+      "tool_calls": 5,
+      "tokens": 72921,
+      "token_usage_status": "available",
+      "delegation_success_rate": 0.5,
+      "delegation_completion_rate": 1.0,
+      "parallelism_utilization": 0.596,
+      "grounding": true,
+      "evidence_count": 3
+    },
+    "G_restart": {
+      "status": "COMPLETED",
+      "latency_seconds": 110.578,
+      "llm_calls": 15,
+      "tool_calls": 4,
+      "tokens": 67179,
+      "token_usage_status": "available",
+      "delegation_success_rate": 1.0,
+      "delegation_completion_rate": 1.0,
+      "parallelism_utilization": 1.254,
+      "grounding": true,
+      "evidence_count": 5
+    },
+    "fresh_multi_comparison": {
+      "status": "COMPLETED",
+      "latency_seconds": 212.906,
+      "llm_calls": 19,
+      "tool_calls": 5,
+      "tokens": 108497,
+      "token_usage_status": "available",
+      "delegation_success_rate": 0.5,
+      "delegation_completion_rate": 1.0,
+      "parallelism_utilization": 0.884,
+      "grounding": true,
+      "evidence_count": 7
+    }
+  },
+  "per_agent_metrics": {
+    "A_research_only": [
+      {
+        "agent_id": "supervisor",
+        "delegation_id": null,
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T08:56:44.654483+00:00",
+        "completed_at": "2026-10-02T08:58:13.141386+00:00",
+        "iterations": 9,
+        "tool_calls": 0,
+        "llm_calls": 9,
+        "tokens": 36164,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "research",
+        "delegation_id": "f2907f71-3157-43bc-9d81-187bfaea9397",
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T08:56:49.594473+00:00",
+        "completed_at": "2026-10-02T08:56:58.048198+00:00",
+        "iterations": 1,
+        "tool_calls": 1,
+        "llm_calls": 2,
+        "tokens": 3583,
+        "token_usage_status": "available"
+      }
+    ],
+    "B_data_only": [
+      {
+        "agent_id": "supervisor",
+        "delegation_id": null,
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T09:03:36.909572+00:00",
+        "completed_at": "2026-10-02T09:05:10.519528+00:00",
+        "iterations": 9,
+        "tool_calls": 0,
+        "llm_calls": 9,
+        "tokens": 31540,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "data",
+        "delegation_id": "29065288-b570-4076-b548-1dd92cf7a3e4",
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T09:03:44.386999+00:00",
+        "completed_at": "2026-10-02T09:04:09.199538+00:00",
+        "iterations": 2,
+        "tool_calls": 2,
+        "llm_calls": 3,
+        "tokens": 12436,
+        "token_usage_status": "available"
+      }
+    ],
+    "C_research_data": [
+      {
+        "agent_id": "supervisor",
+        "delegation_id": null,
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T09:26:33.754813+00:00",
+        "completed_at": "2026-10-02T09:30:06.207759+00:00",
+        "iterations": 10,
+        "tool_calls": 0,
+        "llm_calls": 10,
+        "tokens": 47022,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "research",
+        "delegation_id": "ea7d7dc8-7e5a-40df-96db-59cf134d4a1a",
+        "status": "PARTIAL",
+        "started_at": "2026-10-02T09:26:40.139355+00:00",
+        "completed_at": "2026-10-02T09:26:49.625184+00:00",
+        "iterations": 1,
+        "tool_calls": 1,
+        "llm_calls": 2,
+        "tokens": 5154,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "data",
+        "delegation_id": "535b49e8-b348-4921-906a-d2b63281fe32",
+        "status": "PARTIAL",
+        "started_at": "2026-10-02T09:26:40.154444+00:00",
+        "completed_at": "2026-10-02T09:27:41.225835+00:00",
+        "iterations": 2,
+        "tool_calls": 2,
+        "llm_calls": 3,
+        "tokens": 24434,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "reviewer",
+        "delegation_id": "912992c1-45fd-4a37-9e38-4afe4a41b763",
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T09:27:53.185630+00:00",
+        "completed_at": "2026-10-02T09:28:04.652395+00:00",
+        "iterations": 1,
+        "tool_calls": 0,
+        "llm_calls": 1,
+        "tokens": 6413,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "research",
+        "delegation_id": "33d3ac75-f3e4-4886-bb9e-9f4b3263eb71",
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T09:28:04.710900+00:00",
+        "completed_at": "2026-10-02T09:28:18.425067+00:00",
+        "iterations": 2,
+        "tool_calls": 2,
+        "llm_calls": 2,
+        "tokens": 9036,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "data",
+        "delegation_id": "a7959337-38e0-49a2-b9be-f8757441e32d",
+        "status": "PARTIAL",
+        "started_at": "2026-10-02T09:28:04.747129+00:00",
+        "completed_at": "2026-10-02T09:28:40.115181+00:00",
+        "iterations": 2,
+        "tool_calls": 2,
+        "llm_calls": 3,
+        "tokens": 18765,
+        "token_usage_status": "available"
+      }
+    ],
+    "D_code_review_MOCK": [
+      {
+        "agent_id": "supervisor",
+        "delegation_id": null,
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T09:30:15.404848+00:00",
+        "completed_at": "2026-10-02T09:31:33.123641+00:00",
+        "iterations": 8,
+        "tool_calls": 0,
+        "llm_calls": 8,
+        "tokens": 26212,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "coding",
+        "delegation_id": "388da67f-89a8-4ee6-89aa-3b752c6382d0",
+        "status": "PARTIAL",
+        "started_at": "2026-10-02T09:30:25.683681+00:00",
+        "completed_at": "2026-10-02T09:30:42.862368+00:00",
+        "iterations": 1,
+        "tool_calls": 1,
+        "llm_calls": 2,
+        "tokens": 6403,
+        "token_usage_status": "available"
+      }
+    ],
+    "E_research_code_MOCK": [
+      {
+        "agent_id": "supervisor",
+        "delegation_id": null,
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T09:31:40.508078+00:00",
+        "completed_at": "2026-10-02T09:34:20.449496+00:00",
+        "iterations": 9,
+        "tool_calls": 0,
+        "llm_calls": 9,
+        "tokens": 45764,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "research",
+        "delegation_id": "ac2857f4-8bb3-4fca-a196-c742da524264",
+        "status": "FAILED",
+        "started_at": "2026-10-02T09:31:53.207311+00:00",
+        "completed_at": "2026-10-02T09:32:01.058321+00:00",
+        "iterations": 1,
+        "tool_calls": 1,
+        "llm_calls": 2,
+        "tokens": 4798,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "coding",
+        "delegation_id": "d7799a08-00e3-4c1d-95d1-0cb43536adb0",
+        "status": "PARTIAL",
+        "started_at": "2026-10-02T09:31:53.205311+00:00",
+        "completed_at": "2026-10-02T09:32:07.785361+00:00",
+        "iterations": 2,
+        "tool_calls": 2,
+        "llm_calls": 2,
+        "tokens": 5871,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "reviewer",
+        "delegation_id": "9ead978d-e1c1-4470-8d35-5422736d1378",
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T09:32:15.141220+00:00",
+        "completed_at": "2026-10-02T09:32:36.813019+00:00",
+        "iterations": 1,
+        "tool_calls": 0,
+        "llm_calls": 1,
+        "tokens": 8361,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "research",
+        "delegation_id": "a3346b4c-89c4-489f-a45c-48ac18cb5f1e",
+        "status": "PARTIAL",
+        "started_at": "2026-10-02T09:32:36.909382+00:00",
+        "completed_at": "2026-10-02T09:33:05.761739+00:00",
+        "iterations": 1,
+        "tool_calls": 1,
+        "llm_calls": 2,
+        "tokens": 12070,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "coding",
+        "delegation_id": "1a022e2f-6e67-408c-9197-b0ff587dbbf6",
+        "status": "PARTIAL",
+        "started_at": "2026-10-02T09:32:36.873355+00:00",
+        "completed_at": "2026-10-02T09:32:56.633130+00:00",
+        "iterations": 2,
+        "tool_calls": 2,
+        "llm_calls": 2,
+        "tokens": 10369,
+        "token_usage_status": "available"
+      }
+    ],
+    "F_injected_research_gap": [
+      {
+        "agent_id": "supervisor",
+        "delegation_id": null,
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T09:34:22.052287+00:00",
+        "completed_at": "2026-10-02T09:37:43.856972+00:00",
+        "iterations": 10,
+        "tool_calls": 0,
+        "llm_calls": 10,
+        "tokens": 53303,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "research",
+        "delegation_id": "9a760ba2-0eab-40f0-9b2c-b69c0d306f40",
+        "status": "FAILED",
+        "started_at": "2026-10-02T09:34:29.780839+00:00",
+        "completed_at": "2026-10-02T09:34:37.511338+00:00",
+        "iterations": 1,
+        "tool_calls": 1,
+        "llm_calls": 2,
+        "tokens": 3533,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "data",
+        "delegation_id": "320096dc-ba02-4557-89c7-4f3762c59bfa",
+        "status": "PARTIAL",
+        "started_at": "2026-10-02T09:34:29.757455+00:00",
+        "completed_at": "2026-10-02T09:34:57.127465+00:00",
+        "iterations": 2,
+        "tool_calls": 2,
+        "llm_calls": 3,
+        "tokens": 14296,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "reviewer",
+        "delegation_id": "70db7f90-4da8-4723-8b0b-b1b92d502ea7",
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T09:35:05.337267+00:00",
+        "completed_at": "2026-10-02T09:35:26.640024+00:00",
+        "iterations": 1,
+        "tool_calls": 0,
+        "llm_calls": 1,
+        "tokens": 7095,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "research",
+        "delegation_id": "657747e3-6b7d-418b-995c-b3742ac4694f",
+        "status": "PARTIAL",
+        "started_at": "2026-10-02T09:35:26.708190+00:00",
+        "completed_at": "2026-10-02T09:35:49.046970+00:00",
+        "iterations": 1,
+        "tool_calls": 1,
+        "llm_calls": 2,
+        "tokens": 10834,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "data",
+        "delegation_id": "339f949a-4e66-44e6-8fc8-f3dfacba101c",
+        "status": "PARTIAL",
+        "started_at": "2026-10-02T09:35:26.701696+00:00",
+        "completed_at": "2026-10-02T09:36:03.720773+00:00",
+        "iterations": 2,
+        "tool_calls": 2,
+        "llm_calls": 4,
+        "tokens": 20226,
+        "token_usage_status": "available"
+      }
+    ],
+    "timeout_injected": [
+      {
+        "agent_id": "supervisor",
+        "delegation_id": null,
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T09:43:26.461693+00:00",
+        "completed_at": "2026-10-02T09:46:02.912588+00:00",
+        "iterations": 10,
+        "tool_calls": 0,
+        "llm_calls": 10,
+        "tokens": 39458,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "research",
+        "delegation_id": "f7c14e46-99a6-4258-8e15-7cae35af08d4",
+        "status": "PARTIAL",
+        "started_at": "2026-10-02T09:43:46.085173+00:00",
+        "completed_at": "2026-10-02T09:44:02.105537+00:00",
+        "iterations": 1,
+        "tool_calls": 1,
+        "llm_calls": 2,
+        "tokens": 6365,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "data",
+        "delegation_id": "278acc65-0e1b-4551-b09d-8760917dc738",
+        "status": "FAILED",
+        "started_at": "2026-10-02T09:43:46.079174+00:00",
+        "completed_at": "2026-10-02T09:43:46.131922+00:00",
+        "iterations": 0,
+        "tool_calls": 0,
+        "llm_calls": 0,
+        "tokens": null,
+        "token_usage_status": "unavailable"
+      },
+      {
+        "agent_id": "reviewer",
+        "delegation_id": "1865d35a-959d-448a-9590-46f1a4cf2b0b",
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T09:44:10.335065+00:00",
+        "completed_at": "2026-10-02T09:44:33.570407+00:00",
+        "iterations": 1,
+        "tool_calls": 0,
+        "llm_calls": 1,
+        "tokens": 7629,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "research",
+        "delegation_id": "b02357fe-8995-4831-83a8-dd8d7d5a4197",
+        "status": "PARTIAL",
+        "started_at": "2026-10-02T09:44:33.647954+00:00",
+        "completed_at": "2026-10-02T09:44:47.435420+00:00",
+        "iterations": 2,
+        "tool_calls": 2,
+        "llm_calls": 2,
+        "tokens": 7632,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "data",
+        "delegation_id": "ba20128e-ce25-449f-97e8-651452461f60",
+        "status": "FAILED",
+        "started_at": "2026-10-02T09:44:33.646826+00:00",
+        "completed_at": "2026-10-02T09:44:33.701633+00:00",
+        "iterations": 0,
+        "tool_calls": 0,
+        "llm_calls": 0,
+        "tokens": null,
+        "token_usage_status": "unavailable"
+      }
+    ],
+    "branch_failure_injected": [
+      {
+        "agent_id": "supervisor",
+        "delegation_id": null,
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T09:46:04.463149+00:00",
+        "completed_at": "2026-10-02T09:48:45.415394+00:00",
+        "iterations": 10,
+        "tool_calls": 0,
+        "llm_calls": 10,
+        "tokens": 44041,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "research",
+        "delegation_id": "a930fc9c-f181-48e9-8d19-1a1d16eb916e",
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T09:46:15.695926+00:00",
+        "completed_at": "2026-10-02T09:46:26.228291+00:00",
+        "iterations": 1,
+        "tool_calls": 1,
+        "llm_calls": 2,
+        "tokens": 5494,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "data",
+        "delegation_id": "95f7ee8f-40b2-4b0b-a3e0-786e95183a42",
+        "status": "FAILED",
+        "started_at": "2026-10-02T09:46:15.736932+00:00",
+        "completed_at": "2026-10-02T09:46:30.210149+00:00",
+        "iterations": 2,
+        "tool_calls": 2,
+        "llm_calls": 2,
+        "tokens": 6707,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "reviewer",
+        "delegation_id": "586aef29-85e7-4ef6-94f3-91ef7a9162ab",
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T09:46:40.954520+00:00",
+        "completed_at": "2026-10-02T09:47:05.330638+00:00",
+        "iterations": 1,
+        "tool_calls": 0,
+        "llm_calls": 1,
+        "tokens": 8432,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "data",
+        "delegation_id": "92370fe8-7fbd-41dc-8121-a0cfd5cae647",
+        "status": "PARTIAL",
+        "started_at": "2026-10-02T09:47:05.381694+00:00",
+        "completed_at": "2026-10-02T09:47:16.852767+00:00",
+        "iterations": 2,
+        "tool_calls": 2,
+        "llm_calls": 2,
+        "tokens": 8247,
+        "token_usage_status": "available"
+      }
+    ],
+    "G_restart": [
+      {
+        "agent_id": "supervisor",
+        "delegation_id": null,
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T10:04:43.935276+00:00",
+        "completed_at": "2026-10-02T10:06:57.531330+00:00",
+        "iterations": 9,
+        "tool_calls": 0,
+        "llm_calls": 9,
+        "tokens": 39831,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "research",
+        "delegation_id": "a09f81eb-a75c-4b9f-b182-85bfae599fff",
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T10:04:50.116021+00:00",
+        "completed_at": "2026-10-02T10:05:00.470783+00:00",
+        "iterations": 1,
+        "tool_calls": 1,
+        "llm_calls": 2,
+        "tokens": 5455,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "data",
+        "delegation_id": "6e79871a-77a9-43cd-901a-def9eb4b5ffa",
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T10:04:50.126904+00:00",
+        "completed_at": "2026-10-02T10:05:30.834074+00:00",
+        "iterations": 3,
+        "tool_calls": 3,
+        "llm_calls": 3,
+        "tokens": 13974,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "reviewer",
+        "delegation_id": "3811a9b0-9fcf-460f-8e31-69b6b9b7b1db",
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T10:05:42.469050+00:00",
+        "completed_at": "2026-10-02T10:05:57.395576+00:00",
+        "iterations": 1,
+        "tool_calls": 0,
+        "llm_calls": 1,
+        "tokens": 7919,
+        "token_usage_status": "available"
+      }
+    ],
+    "fresh_multi_comparison": [
+      {
+        "agent_id": "supervisor",
+        "delegation_id": null,
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T10:09:18.656442+00:00",
+        "completed_at": "2026-10-02T10:12:50.315722+00:00",
+        "iterations": 10,
+        "tool_calls": 0,
+        "llm_calls": 10,
+        "tokens": 54011,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "research",
+        "delegation_id": "d8bb6683-92f8-4fe7-91b0-8ca4e3abe285",
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T10:09:30.292213+00:00",
+        "completed_at": "2026-10-02T10:09:42.338006+00:00",
+        "iterations": 1,
+        "tool_calls": 1,
+        "llm_calls": 2,
+        "tokens": 4973,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "data",
+        "delegation_id": "fe676593-7bfa-4283-9984-5bc077d2b44c",
+        "status": "PARTIAL",
+        "started_at": "2026-10-02T10:09:30.277353+00:00",
+        "completed_at": "2026-10-02T10:10:30.849028+00:00",
+        "iterations": 2,
+        "tool_calls": 2,
+        "llm_calls": 3,
+        "tokens": 24973,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "reviewer",
+        "delegation_id": "256fd761-077f-49db-b907-65d709b4dd50",
+        "status": "COMPLETED",
+        "started_at": "2026-10-02T10:10:41.143527+00:00",
+        "completed_at": "2026-10-02T10:10:56.347641+00:00",
+        "iterations": 1,
+        "tool_calls": 0,
+        "llm_calls": 1,
+        "tokens": 7492,
+        "token_usage_status": "available"
+      },
+      {
+        "agent_id": "data",
+        "delegation_id": "c9acf5e9-a9c8-42b8-bd47-6e01d334c63b",
+        "status": "PARTIAL",
+        "started_at": "2026-10-02T10:10:56.395503+00:00",
+        "completed_at": "2026-10-02T10:11:26.683887+00:00",
+        "iterations": 2,
+        "tool_calls": 2,
+        "llm_calls": 3,
+        "tokens": 17048,
+        "token_usage_status": "available"
+      }
+    ]
+  },
+  "initial_parallel_group": {
+    "duration_sum_seconds": 70.557,
+    "span_seconds": 61.086,
+    "intervals": [
+      {
+        "agent": "research",
+        "start": "2026-10-02T09:26:40.139355+00:00",
+        "end": "2026-10-02T09:26:49.625184+00:00"
+      },
+      {
+        "agent": "data",
+        "start": "2026-10-02T09:26:40.154444+00:00",
+        "end": "2026-10-02T09:27:41.225835+00:00"
+      }
+    ],
+    "interpretation": "Measured interval sum is a sequential proxy, not an independently run sequential benchmark."
+  },
+  "single_vs_multi": {
+    "single_agent": {
+      "status": "COMPLETED",
+      "answer_result": "## Methods reported in the three papers\n\n| Paper | Method | Params | mIoU | Claimed design story |\n|---|---|---|---|---|\n| paper_1.pdf | Method A — convolutional segmentation | 2.5M | 73.27 | Strong mid-budget convolutional baseline [paper_1.pdf, p.1] |\n| paper_2.pdf | Method B — attention segmentation | 3.2M | 76.0 | Attention gives the highest quality, at the highest cost [paper_2.pdf, p.1] |\n| paper_3.pdf | Method C — compact convolution baseline | 2.0M | 70.0 | Cheapest configuration; lower quality [paper_3.pdf, p.1] |\n\nAll three papers describe the same fixture benchmark and evaluation protocol, and all three explicitly frame their claims as a **descriptive quality/cost tradeoff only — no causal or ablation claim** [paper_1.pdf, p.1][paper_2.pdf, p.1][paper_3.pdf, p.1].\n\n## experiment.xlsx results\n\nThe workbook contains a single sheet with 3 rows and 3 columns (`model`, `params_m`, `miou`), no missing values [Analysis 34e957e8-dd44-4233-ad78-920802f6fc85]:\n\n| model | params_m | miou |\n|---|---|---|\n| A | 2.5 | 73.27 |\n| B | 3.2 | 76.0 |\n| C | 2.0 | 70.0 |\n\nAcross the full set: mean params 2.57M, mean mIoU 73.09, range 70.0–76.0 [Analysis 34e957e8-dd44-4233-ad78-920802f6fc85].\n\n## Best configuration under 3M parameters\n\nFiltering to `params_m < 3` leaves two candidates:\n\n- **A — 2.5M params, mIoU 73.27** ← best\n- C — 2.0M params, mIoU 70.0\n\n**Model A is the best configuration under the 3M budget**, beating C by 3.27 mIoU points for 0.5M additional parameters [Analysis 34e957e8-dd44-4233-ad78-920802f6fc85]. Model B is excluded: at 3.2M parameters it exceeds the budget, though it posts the highest raw mIoU (76.0) [Analysis 34e957e8-dd44-4233-ad78-920802f6fc85].\n\n## Chart\n\nA `params_m` vs `miou` comparison chart was generated from experiment.xlsx and saved as **comparison.png** in the workspace [Analysis 34e957e8-dd44-4233-ad78-920802f6fc85].\n\n## Do the results support the reported design advantages?\n\n**Largely yes, but only at the descriptive level — and this is not independent validation.**\n\nSupporting points:\n- The experiment values are **numerically identical** to the paper-reported values for all three methods (A: 2.5M/73.27; B: 3.2M/76.0; C: 2.0M/70.0) [Analysis 34e957e8-dd44-4233-ad78-920802f6fc85][paper_1.pdf, p.1][paper_2.pdf, p.1][paper_3.pdf, p.1]. The ordering and gaps confirm the reported tradeoff: A over C by 3.27 points at +0.5M params, and B over A by 2.73 points at +0.7M params — the same arithmetic stated in the papers [paper_1.pdf, p.1].\n- The quality-vs-cost pattern (attention > convolution > compact baseline, with monotonically increasing parameter count) is reproduced exactly.\n\nImportant limitations:\n- Because the workbook values match the paper values exactly rather than differing by any re-measured amount, this is a **replication of the fixture numbers, not an independent re-test**. It cannot confirm that the design choices (attention vs. convolution) *cause* the gains.\n- The papers themselves state their claims are **descriptive tradeoff only, with no causal or ablation evidence**, and the fixture provides **three configurations with no uncertainty estimates** [paper_2.pdf, p.1].\n- The dataset is a 3-row synthetic fixture, so any conclusion is limited to these three points; there is no statistical power to support generalization.\n\n**Bottom line:** Model A is the best sub-3M configuration (2.5M params, 73.27 mIoU), and experiment.xlsx is fully consistent with the three papers' reported parameter budgets and mIoU figures. The results are consistent with the reported design advantages as a *quality/cost ordering*, but they do not independently validate a causal design advantage, since the values reproduce the fixtures' own numbers and carry no uncertainty estimates.",
+      "evidence_coverage": {
+        "evidence_ids": [
+          "ev_6225896fa858bc2524487834",
+          "ev_774cab490f47dfef6ff04fd5",
+          "ev_298c879c6e293832c92774fc",
+          "ev_34e957e8dd444233ad78920802f6fc85"
+        ],
+        "completed_specialties": []
+      },
+      "grounding": true,
+      "citations": [
+        {
+          "citation_id": "1",
+          "evidence_id": "ev_774cab490f47dfef6ff04fd5",
+          "document_name": "paper_1.pdf",
+          "page": 1,
+          "title": null,
+          "url": null,
+          "execution_id": null,
+          "dataset_ids": [],
+          "artifact_ids": []
+        },
+        {
+          "citation_id": "2",
+          "evidence_id": "ev_6225896fa858bc2524487834",
+          "document_name": "paper_2.pdf",
+          "page": 1,
+          "title": null,
+          "url": null,
+          "execution_id": null,
+          "dataset_ids": [],
+          "artifact_ids": []
+        },
+        {
+          "citation_id": "3",
+          "evidence_id": "ev_298c879c6e293832c92774fc",
+          "document_name": "paper_3.pdf",
+          "page": 1,
+          "title": null,
+          "url": null,
+          "execution_id": null,
+          "dataset_ids": [],
+          "artifact_ids": []
+        },
+        {
+          "citation_id": "4",
+          "evidence_id": "ev_34e957e8dd444233ad78920802f6fc85",
+          "document_name": null,
+          "page": null,
+          "title": "Dataset analysis",
+          "url": null,
+          "execution_id": "34e957e8-dd44-4233-ad78-920802f6fc85",
+          "dataset_ids": [
+            "df9911f5-221f-40f8-9749-43828776b3b3"
+          ],
+          "artifact_ids": [
+            "d0df7724-1552-4361-8fc6-3028b9904d12"
+          ]
+        }
+      ],
+      "latency_seconds": 114.907,
+      "llm_calls": 6,
+      "tool_calls": 3,
+      "tokens": 42738,
+      "token_usage_status": "available"
+    },
+    "multi_agent": {
+      "status": "COMPLETED",
+      "answer_result": "## Comparison and best configuration\n\nThe evidence is a **synthetic Phase 3 fixture, not published research**. It reports Model A: 2.5M params, mIoU 73.27; Model B: 3.2M params, mIoU 76.0; Model C: 2.0M params, mIoU 70.0 [paper_1.pdf, p.1], [paper_2.pdf, p.1], [paper_3.pdf, p.1]. The fixture labels A as convolutional segmentation, B as attention segmentation, and C as a compact convolution baseline; all use the same fixture benchmark/evaluation protocol [paper_1.pdf, p.1], [paper_2.pdf, p.1], [paper_3.pdf, p.1]. It states A improves over C by 3.27 points at 0.5M more params, and B improves over A by 2.73 points at 0.7M more params [paper_1.pdf, p.1], [paper_2.pdf, p.1], [paper_3.pdf, p.1]. Claims are descriptive quality/cost tradeoff only; no causal or ablation claim and no uncertainty estimates are reported [paper_1.pdf, p.1], [paper_2.pdf, p.1], [paper_3.pdf, p.1].\n\n`experiment.xlsx` is 3 rows × 3 columns (`model`, `params_m`, `miou`) with no missing values; its sample is A = 2.5M/73.27, B = 3.2M/76.0, C = 2.0M/70.0 [Analysis af3903c7-a24e-416c-ab49-bcaa84703b03], [Analysis 88faef1d-07be-4472-b83f-7fae1197c8b9], [Analysis 5630ded8-30ff-4cd2-99b8-7b773feef17f].\n\nComputed output ranks by mIoU: B 76.00 > A 73.27 > C 70.00 [Analysis 2b296c03-333b-463b-bcca-96eaf0ae0bb2], [Analysis 5630ded8-30ff-4cd2-99b8-7b773feef17f]. Best under 3M parameters is **Model A** (2.5M, mIoU 73.27); B is excluded because it is over budget at 3.2M [Analysis 2b296c03-333b-463b-bcca-96eaf0ae0bb2], [Analysis 5630ded8-30ff-4cd2-99b8-7b773feef17f]. Among sub-3M models, C has higher computed mIoU-per-million (35.000 vs 29.308 for A), while A is more accurate [Analysis 5630ded8-30ff-4cd2-99b8-7b773feef17f]. Computed Pearson correlation between `params_m` and `miou` is 0.9891; linear trend slope/intercept is 4.9294/60.4380 [Analysis 2b296c03-333b-463b-bcca-96eaf0ae0bb2]. Computed output reports `comparison.png` and `summary.json` saved [Analysis 2b296c03-333b-463b-bcca-96eaf0ae0bb2], [Analysis 5630ded8-30ff-4cd2-99b8-7b773feef17f].\n\n## Do results support reported design advantages?\n\nNumerically, yes for the descriptive tradeoff: spreadsheet values match the synthetic fixture values, including A over C and B over A differences [paper_1.pdf, p.1], [paper_2.pdf, p.1], [paper_3.pdf, p.1], [Analysis 5630ded8-30ff-4cd2-99b8-7b773feef17f]. This does **not** establish that architecture/design caused the improvements: the sources explicitly claim no causal or ablation claim and report no uncertainty estimates [paper_1.pdf, p.1], [paper_2.pdf, p.1], [paper_3.pdf, p.1]. With n=3 and no uncertainty estimates, significance/uncertainty cannot be assessed from these excerpts [Analysis 2b296c03-333b-463b-bcca-96eaf0ae0bb2], [Analysis 5630ded8-30ff-4cd2-99b8-7b773feef17f]. The provided excerpts do not support causal design claims.",
+      "evidence_coverage": {
+        "evidence_ids": [
+          "ev_2b296c03333b463bbcca96eaf0ae0bb2",
+          "ev_431753db3c87eca9b52937a8",
+          "ev_536f15c200449785cdc9e1da",
+          "ev_5630ded830ff4cd299b87b773feef17f",
+          "ev_88faef1d07be4472b83f7fae1197c8b9",
+          "ev_af3903c7a24e416cab49bcaa84703b03",
+          "ev_b129ca8cab84f9457f1c5443"
+        ],
+        "completed_specialties": [
+          "research"
+        ]
+      },
+      "grounding": true,
+      "citations": [
+        {
+          "citation_id": "1",
+          "evidence_id": "ev_431753db3c87eca9b52937a8",
+          "document_name": "paper_1.pdf",
+          "page": 1,
+          "title": null,
+          "url": null,
+          "execution_id": null,
+          "dataset_ids": [],
+          "artifact_ids": []
+        },
+        {
+          "citation_id": "2",
+          "evidence_id": "ev_b129ca8cab84f9457f1c5443",
+          "document_name": "paper_2.pdf",
+          "page": 1,
+          "title": null,
+          "url": null,
+          "execution_id": null,
+          "dataset_ids": [],
+          "artifact_ids": []
+        },
+        {
+          "citation_id": "3",
+          "evidence_id": "ev_536f15c200449785cdc9e1da",
+          "document_name": "paper_3.pdf",
+          "page": 1,
+          "title": null,
+          "url": null,
+          "execution_id": null,
+          "dataset_ids": [],
+          "artifact_ids": []
+        },
+        {
+          "citation_id": "4",
+          "evidence_id": "ev_af3903c7a24e416cab49bcaa84703b03",
+          "document_name": null,
+          "page": null,
+          "title": "dataset.inspect",
+          "url": null,
+          "execution_id": "af3903c7-a24e-416c-ab49-bcaa84703b03",
+          "dataset_ids": [
+            "2a3e8482-6f6d-41b1-b8c5-47a6cc51b1fa"
+          ],
+          "artifact_ids": []
+        },
+        {
+          "citation_id": "5",
+          "evidence_id": "ev_88faef1d07be4472b83f7fae1197c8b9",
+          "document_name": null,
+          "page": null,
+          "title": "dataset.inspect",
+          "url": null,
+          "execution_id": "88faef1d-07be-4472-b83f-7fae1197c8b9",
+          "dataset_ids": [
+            "2a3e8482-6f6d-41b1-b8c5-47a6cc51b1fa"
+          ],
+          "artifact_ids": []
+        },
+        {
+          "citation_id": "6",
+          "evidence_id": "ev_5630ded830ff4cd299b87b773feef17f",
+          "document_name": null,
+          "page": null,
+          "title": "Dataset analysis",
+          "url": null,
+          "execution_id": "5630ded8-30ff-4cd2-99b8-7b773feef17f",
+          "dataset_ids": [
+            "2a3e8482-6f6d-41b1-b8c5-47a6cc51b1fa"
+          ],
+          "artifact_ids": [
+            "07aa0142-e77c-4b6e-adf3-1dc7fe257bd9",
+            "c98ade03-5650-4228-91a6-0c105b695156"
+          ]
+        },
+        {
+          "citation_id": "7",
+          "evidence_id": "ev_2b296c03333b463bbcca96eaf0ae0bb2",
+          "document_name": null,
+          "page": null,
+          "title": "Dataset analysis",
+          "url": null,
+          "execution_id": "2b296c03-333b-463b-bcca-96eaf0ae0bb2",
+          "dataset_ids": [
+            "2a3e8482-6f6d-41b1-b8c5-47a6cc51b1fa"
+          ],
+          "artifact_ids": [
+            "45961340-2e97-4484-a799-45e8a0cffb26",
+            "997e28da-57f3-4b7d-9508-7b98e92778b9"
+          ]
+        }
+      ],
+      "latency_seconds": 212.906,
+      "llm_calls": 19,
+      "tool_calls": 5,
+      "tokens": 108497,
+      "token_usage_status": "available"
+    }
+  },
+  "comparison_limits": "Same synthetic PDFs/XLSX and goal; n=1 per mode, different plans and prior task/memory history. No causal quality or general speed claim.",
+  "restart_research_execution_count": 1,
+  "real_github": "SKIPPED: credentials absent; coding uses MOCK",
+  "external_writes": "LOCAL MOCK ONLY",
+  "evaluation_resumptions": [
+    "Reuse completed A/B/C only when their acceptance checks passed; retain measured latency and task IDs.",
+    "Reuse completed A/B/C only when their acceptance checks passed; retain measured latency and task IDs.",
+    "Reuse completed A/B/C only when their acceptance checks passed; retain measured latency and task IDs.",
+    "Reuse completed A/B/C only when their acceptance checks passed; retain measured latency and task IDs.",
+    "Reuse completed A/B/C only when their acceptance checks passed; retain measured latency and task IDs.",
+    "Reuse measured scenarios only when their associated acceptance checks passed; retain original latency and task IDs. F completion-cache proof is measured separately in G.",
+    "Reuse measured scenarios only when their associated acceptance checks passed; retain original latency and task IDs. F completion-cache proof is measured separately in G."
+  ]
+}

@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 from typing import Any
 
-import requests
+from client.auth_ui import api_requests as requests, login_gate, workspace_role, membership_panel
 import streamlit as st
 
 
@@ -111,10 +111,13 @@ def fetch_history(session_id: str) -> list[tuple[str, str]]:
         raise BackendError("Backend returned an invalid message history")
 
     history: list[tuple[str, str]] = []
+    st.session_state.research_details = {}
     for item in messages:
         role = item.get("role")
         content = item.get("content")
         if role in {"user", "assistant"} and isinstance(content, str):
+            if item.get("research"):
+                st.session_state.research_details[len(history)] = item["research"]
             history.append((role, content))
     return history
 
@@ -167,6 +170,9 @@ def activate_session(session_id: str) -> None:
     st.session_state.chat = fetch_history(session_id)
     st.session_state.context_report = None
     st.session_state.execution_report = None
+    record = current_session()
+    if record and record.get("workspace_id"):
+        st.session_state.workspace_id = record["workspace_id"]
 
 
 def current_session() -> dict[str, Any] | None:
@@ -180,6 +186,8 @@ def current_session() -> dict[str, Any] | None:
     )
 
 
+login_gate()
+
 defaults = {
     "session_id": None,
     "chat": [],
@@ -188,6 +196,9 @@ defaults = {
     "startup_error": None,
     "context_report": None,
     "execution_report": None,
+    "workspace_id": None,
+    "source_scope": "workspace_and_external",
+    "research_details": {},
 }
 for key, value in defaults.items():
     if key not in st.session_state:
@@ -209,13 +220,81 @@ with st.sidebar:
     st.title("🧠 Agentic RAG")
     st.caption("持久化 PDF 知识库与多工具 Agent")
 
-    if st.session_state.sessions:
-        session_ids = [item["session_id"] for item in st.session_state.sessions]
+    modes=["Workspace"] if st.session_state.get('_auth_enabled') else ["单 PDF", "Workspace"]
+    mode = st.radio("工作模式", modes, index=1 if len(modes)>1 and (current_session() or {}).get("workspace_id") else 0, key="work_mode", horizontal=True)
+    if mode == "Workspace":
+        try:
+            response = requests.get(f"{API_BASE}/workspaces", timeout=5)
+            response.raise_for_status()
+            workspaces = response.json()
+            with st.form("create_workspace"):
+                workspace_name = st.text_input("Workspace 名称")
+                description = st.text_input("描述（可选）")
+                create_clicked = st.form_submit_button("创建 Workspace")
+            if create_clicked:
+                created = requests.post(f"{API_BASE}/workspaces", json={"name": workspace_name, "description": description}, timeout=10)
+                if created.status_code != 200:
+                    raise BackendError(_response_error(created))
+                st.session_state.workspace_id = created.json()["id"]
+                st.rerun()
+            if workspaces:
+                ids = [item["id"] for item in workspaces]
+                workspace_labels = {item["id"]: item["name"] for item in workspaces}
+                selected = st.selectbox("Workspace", ids, index=ids.index(st.session_state.workspace_id) if st.session_state.workspace_id in ids else 0, format_func=lambda identity: workspace_labels[identity])
+                st.session_state.workspace_id = selected
+                role=workspace_role(API_BASE,selected)
+                membership_panel(API_BASE,selected,role)
+                if (current_session() or {}).get("workspace_id") != selected:
+                    associated = [item for item in st.session_state.sessions if item.get("workspace_id") == selected]
+                    if associated:
+                        activate_session(associated[0]["session_id"])
+                    else:
+                        st.session_state.session_id = None
+                        st.session_state.chat = []
+                        st.session_state.research_details = {}
+                documents_response = requests.get(f"{API_BASE}/workspaces/{selected}/documents", timeout=5)
+                documents_response.raise_for_status()
+                documents = documents_response.json()
+                for document in documents:
+                    st.caption(f"{document['display_name']} · {document['status']} · {document.get('page_count', '?')} 页")
+                    if st.button("移除文档", key=f"delete_{document['id']}",disabled=role=='VIEWER'):
+                        deleted = requests.delete(f"{API_BASE}/workspaces/{selected}/documents/{document['id']}", timeout=10)
+                        deleted.raise_for_status()
+                        st.rerun()
+                uploads = st.file_uploader("上传多个 PDF", type=["pdf"], accept_multiple_files=True)
+                if st.button("上传文档", disabled=not uploads or role=='VIEWER'):
+                    uploaded_response = requests.post(f"{API_BASE}/workspaces/{selected}/documents", files=[("files", (file.name, file, "application/pdf")) for file in uploads], timeout=660)
+                    uploaded_response.raise_for_status()
+                    for result in uploaded_response.json()["documents"]:
+                        if result["status"] == "failed":
+                            st.error(f"{result['filename']}: {result['error']}")
+                        else:
+                            st.success(f"{result['filename']} · {result['status']} · {result.get('page_count')} 页")
+                if st.button("新建 Workspace 会话"):
+                    created_session = requests.post(f"{API_BASE}/workspaces/{selected}/sessions", timeout=10)
+                    created_session.raise_for_status()
+                    st.session_state.sessions = fetch_sessions()
+                    activate_session(created_session.json()["session_id"])
+                    st.rerun()
+                if st.button("删除 Workspace",disabled=role!='OWNER'):
+                    deleted = requests.delete(f"{API_BASE}/workspaces/{selected}", timeout=10)
+                    deleted.raise_for_status()
+                    st.session_state.workspace_id = None
+                    st.rerun()
+        except (requests.RequestException, ValueError, BackendError) as error:
+            st.error(f"Workspace 操作失败：{error}")
+
+    scopes = ["workspace_and_external", "workspace_only", "external"]
+    st.selectbox("信息来源", scopes, key="source_scope", format_func=lambda value: {"workspace_and_external": "优先文档，必要时外部检索", "workspace_only": "仅上传文档", "external": "仅外部检索"}[value])
+    visible_sessions = [item for item in st.session_state.sessions if
+                        (st.session_state.workspace_id and item.get("workspace_id") == st.session_state.workspace_id if mode == "Workspace" else not item.get("workspace_id"))]
+    if visible_sessions:
+        session_ids = [item["session_id"] for item in visible_sessions]
         labels = {
             item["session_id"]: (
                 f"{item['file_name']} · {item.get('turn_count', 0)} 轮"
             )
-            for item in st.session_state.sessions
+            for item in visible_sessions
         }
         selected_index = (
             session_ids.index(st.session_state.session_id)
@@ -235,7 +314,11 @@ with st.sidebar:
             except (requests.RequestException, ValueError, BackendError) as error:
                 st.error(f"无法恢复历史会话：{error}")
     else:
-        st.info("还没有持久化会话，请上传第一份 PDF。")
+        if current_session() is not None:
+            st.session_state.session_id = None
+            st.session_state.chat = []
+            st.session_state.research_details = {}
+        st.info("当前 Workspace 还没有会话。" if mode == "Workspace" else "还没有单 PDF 会话，请上传第一份 PDF。")
 
     if st.button("刷新历史", use_container_width=True):
         try:
@@ -307,6 +390,11 @@ with st.sidebar:
                 st.error(f"上传失败：{error}")
 
     st.caption("PDF、Chroma 索引和聊天记录均保存在本机工作区。")
+    from client.phase3_ui import sidebar as phase3_sidebar
+    from client.phase4_ui import sidebar as phase4_sidebar
+    phase4_sidebar(API_BASE)
+    phase3_sidebar(API_BASE, st.session_state.workspace_id if mode == "Workspace" else None,
+                   st.session_state.session_id, st.session_state.source_scope)
 
 
 st.markdown(
@@ -355,9 +443,28 @@ else:
     )
 
 
-for role, content in st.session_state.chat:
+def show_research_details(details: dict[str, Any]) -> None:
+    if details.get("artifacts"):
+        from client.phase3_ui import show_artifacts
+        show_artifacts(API_BASE, details["artifacts"], "chat_" + str(len(st.session_state.chat)))
+    if details.get("evidence"):
+        with st.expander("Sources / Evidence"):
+            for item in details["evidence"]:
+                st.write(item.get("document_name") or item.get("title") or item["source_type"])
+                st.caption(f"Page: {item.get('page', '—')} · Retrieval: {item.get('retrieval_score')} · Rerank: {item.get('rerank_score')}")
+                st.write(item["content"])
+                if item.get("url"):
+                    st.link_button("打开来源", item["url"])
+    if details.get("plan"):
+        with st.expander("Task Plan"):
+            for step in details["plan"]["steps"]:
+                st.write(f"{'✓' if step['status'] == 'completed' else '○'} {step['description']} ({step['status']})")
+
+
+for index, (role, content) in enumerate(st.session_state.chat):
     with st.chat_message(role):
         st.markdown(content)
+        show_research_details(st.session_state.research_details.get(index, {}))
 
 
 prompt = st.chat_input(
@@ -380,6 +487,8 @@ if prompt and st.session_state.session_id:
                     json={
                         "session_id": st.session_state.session_id,
                         "message": prompt,
+                        "workspace_id": (current_session() or {}).get("workspace_id"),
+                        "source_scope": st.session_state.source_scope,
                     },
                     timeout=300,
                 )
@@ -387,6 +496,7 @@ if prompt and st.session_state.session_id:
                     answer = f"请求失败：{_response_error(response)}"
                 else:
                     payload = response.json()
+                    st.session_state.research_details[len(st.session_state.chat)] = payload
                     answer = payload.get("answer")
                     if not isinstance(answer, str):
                         answer = "后端没有返回有效的 answer 字段。"
@@ -413,6 +523,7 @@ if prompt and st.session_state.session_id:
                     item["turn_count"] = item.get("turn_count", 0) + 1
                     break
             st.markdown(answer)
+            show_research_details(st.session_state.research_details.get(len(st.session_state.chat) - 1, {}))
             if current_context_caption:
                 st.caption(current_context_caption)
             if current_execution_caption:

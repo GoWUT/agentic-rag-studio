@@ -1,0 +1,9 @@
+{
+  "previous_tests": 140,
+  "new_phase3_tests": 96,
+  "total": 236,
+  "passed": 236,
+  "failed": 0,
+  "skipped": 0,
+  "kind": "offline_regression_in_isolated_runtime_workspace"
+}

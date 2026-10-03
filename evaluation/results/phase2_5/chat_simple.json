@@ -1,0 +1,558 @@
+{
+  "name": "simple",
+  "question": "What is the proposed method called in the uploaded GCNet paper? Please cite the paper.",
+  "request": {
+    "session_id": "73d57dba-13da-4dec-a424-543d3e145cca",
+    "workspace_id": "86873dfc-42c8-460c-96a8-8d3be52e693f",
+    "message": "What is the proposed method called in the uploaded GCNet paper? Please cite the paper.",
+    "source_scope": "workspace_only"
+  },
+  "status": "PASS",
+  "total_http_ms": 55407.78,
+  "response": {
+    "answer": "I cannot confirm a GCNet paper from the supplied material. In the supplied evidence, I do not see any mention of GCNet or a proposed method named GCNet; the evidence items are about `pvigs.pdf`.\n\nThe supplied title-page excerpt identifies the document as: “PViGS: Sparse-view 3D Gaussian splatting with pixelwise visibility-aware regularization” by Yixiang Xie, Huabiao Qin, Bin Feng, in *Neurocomputing* [pvigs.pdf, p.1]. The proposed method in that paper is PViGS, described as a visibility-aware 3D Gaussian Splatting approach that introduces pixel-wise visibility attributes from Plane Sweep Volumes into Gaussian radiance fields [pvigs.pdf, p.14], with visibility-guided regularization and PSV-wise semantic regularization [pvigs.pdf, p.14][pvigs.pdf, p.7]. This does not appear to be the GCNet paper you asked about.\n\nCitation note: From the supplied title-page excerpt, I can see authors, title, and the journal *Neurocomputing* [pvigs.pdf, p.1]. The supplied excerpt does not include volume/issue, article number, or publication year, so I cannot provide a complete citation from the supplied evidence.\n\nLimitation: Because no GCNet paper appears in the supplied evidence, I cannot name its proposed method or cite it. If a GCNet paper was intended to be included, it does not appear in the supplied evidence; please provide it and I can extract the method name and citation from that document.",
+    "context": {
+      "model_context_window_tokens": 1000000,
+      "input_budget_tokens": 60000,
+      "max_output_tokens": 4096,
+      "safety_tokens": 4096,
+      "estimated_tokens_before": 8720,
+      "estimated_tokens_after": 8720,
+      "compacted_messages": 0,
+      "truncated_messages": 0,
+      "strategy": "full"
+    },
+    "execution": {
+      "run_id": "4a273b8f-331d-45ea-96b3-15a3f8d4086d",
+      "attempts": 1,
+      "duration_ms": 55144.61,
+      "max_graph_steps": 33
+    },
+    "citations": [
+      {
+        "citation_id": "1",
+        "evidence_id": "ev_0ed538a05c748e5580255195",
+        "document_name": "pvigs.pdf",
+        "page": 1,
+        "title": null,
+        "url": null
+      },
+      {
+        "citation_id": "2",
+        "evidence_id": "ev_10178767ebb7a907fede7ab3",
+        "document_name": "pvigs.pdf",
+        "page": 14,
+        "title": null,
+        "url": null
+      },
+      {
+        "citation_id": "3",
+        "evidence_id": "ev_a98d87acf0580a9444364841",
+        "document_name": "pvigs.pdf",
+        "page": 7,
+        "title": null,
+        "url": null
+      }
+    ],
+    "evidence": [
+      {
+        "evidence_id": "ev_c0d1236f280b6692c3430f9a",
+        "source_type": "workspace",
+        "document_id": "e680901e-ee4b-41c4-864d-d46237e8639e",
+        "document_name": "pvigs.pdf",
+        "page": 3,
+        "page_count": 16,
+        "chunk_id": "590205e193ef3b89e5c9af22",
+        "title": null,
+        "url": null,
+        "content": "constraints combining appearance and geometry to address the \noverfitting problem.\n• The effectiveness of PViGS is validated on several challenging \ndatasets under sparse-view scenarios. Experimental results demon­\nstrate that the proposed method achieves state-of-the-art per­\nformance and outperforms existing advanced NeRF-based and \n3DGS-based NVS approaches.\n2 . Related work\nThis section first reviews advanced 3D representation approaches for \nnovel view synthesis task, focusing on both NeRF and 3DGS techniques. \nThen, exploring the sparse-view problem, we discuss the mainstream \nprior-driven regularization studies based on various scene attributes.\n2.1 . Scene representation for novel view synthesis\nAs a long-standing task [ 44] in computer vision and graphics field,",
+        "retrieval_score": 0.030158730158730156,
+        "rerank_score": null,
+        "extraction_method": "native",
+        "table_labels": []
+      },
+      {
+        "evidence_id": "ev_01a0813b34d2789dd49b9679",
+        "source_type": "workspace",
+        "document_id": "e680901e-ee4b-41c4-864d-d46237e8639e",
+        "document_name": "pvigs.pdf",
+        "page": 2,
+        "page_count": 16,
+        "chunk_id": "22d5c4e4e4df85f425c0b28d",
+        "title": null,
+        "url": null,
+        "content": "paper focuses on a fundamental visual occlusion attribute derived from \nmulti-view stereopsis [28–32], namely the visibility of any pixel from a \nMonocular  Geometric \nRegularization Visibility  \nPSVRendered PSV Rendered\nVisibility-Aware \nRegularization (ours)\nFig. 2. Depth rendering in sparse-view scenarios. 3DGS based on monocular \ngeometric regularization suffers from inherent depth ambiguity, leading to per­\nvasive geometric artifacts. In contrast, our approach leverages fine-grained PSV \nvisibility priors to provide more reliable relative depth cues, which effectively \nconstrain the 3D representations and achieve high-quality reconstruction.\nFig. 3. Research motivation based on multi-view stereopsis using multiplane",
+        "retrieval_score": 0.03009207275993712,
+        "rerank_score": null,
+        "extraction_method": "native",
+        "table_labels": []
+      },
+      {
+        "evidence_id": "ev_b4f1122e6bbb4e7b712fd6af",
+        "source_type": "workspace",
+        "document_id": "e680901e-ee4b-41c4-864d-d46237e8639e",
+        "document_name": "pvigs.pdf",
+        "page": 10,
+        "page_count": 16,
+        "chunk_id": "4c46d5a00c7f2f7f35036bfd",
+        "title": null,
+        "url": null,
+        "content": "Quantitative and qualitative results on the T&T (Tanks and Temples) \ndataset are presented in Table 3 and Fig. 9, respectively. As shown in \nTable 3, the proposed method also surpasses other advanced methods on \nall image assessment metrics by a meaningful margin. It can be observed \nthat the PViGS exhibits more superior robustness in large-scale real-\nworld in-the-wild scenarios, with evaluation scores of 28.41 dB PSNR, \n0.890 SSIM, and 0.102 LPIPS. As shown in Table 4, our method achieves \ncompetitive performance compared to the SOTA method SparseGS-W, \nwith higher SSIM (0.73 vs. 0.68) and comparable PSNR/LPIPS.\nThe qualitative comparison is shown in Fig. 9. The comparison with \nFSGS [7] and 3DGS [ 1] confirms the importance of depth constraints",
+        "retrieval_score": 0.02946912242686891,
+        "rerank_score": null,
+        "extraction_method": "native",
+        "table_labels": []
+      },
+      {
+        "evidence_id": "ev_122cc6f1428bfa0c33b8bd03",
+        "source_type": "workspace",
+        "document_id": "e680901e-ee4b-41c4-864d-d46237e8639e",
+        "document_name": "pvigs.pdf",
+        "page": 14,
+        "page_count": 16,
+        "chunk_id": "2d3929de027222bfb97ad9c3",
+        "title": null,
+        "url": null,
+        "content": "ing, Supervision, Funding acquisition, Conceptualization. Bin Feng:\nResources, Formal analysis, Data curation.\nDeclaration of competing interest\nThe authors declare that they have no known competing financial \ninterests or personal relationships that could have appeared to influence \nthe work reported in this paper.\nAcknowledgements\nThis work was supported by the Guangdong Provincial \nKey Laboratory of Human Digital Twin, China [grant number \n2022B1212010004].\nData availability\nData will be made available on request.\nReferences\n[1] B. Kerbl, G. Kopanas, T. Leimkühler, G. Drettakis, 3D Gaussian splatting for real-\ntime radiance field rendering, ACM Trans. Graph. 42 (4) (2023) 1–14.\n[2] F. Wan, J. Zhang, T. Li, G. Lei, L. Xu, Z. Ye, AAC-GS: attention-aware adaptive",
+        "retrieval_score": 0.03149801587301587,
+        "rerank_score": null,
+        "extraction_method": "native",
+        "table_labels": []
+      },
+      {
+        "evidence_id": "ev_3ee471668fa1e0d352c28e35",
+        "source_type": "workspace",
+        "document_id": "e680901e-ee4b-41c4-864d-d46237e8639e",
+        "document_name": "pvigs.pdf",
+        "page": 9,
+        "page_count": 16,
+        "chunk_id": "b5f0cff8fd34e32416e91fb2",
+        "title": null,
+        "url": null,
+        "content": "Y. Xie, H. Qin and B. Feng\nunder sparse-view settings, the additional computational cost reflects a \nnecessary quality-first trade-off, in which the extra training cost con­\ntributes to the improvement of reconstruction quality. Addressing this \nefficiency limitation is an important direction for future work.\n4.2 . Evaluation on the LLFF dataset\nQuantitative and qualitative evaluation results at two different im­\nage resolutions on the LLFF dataset are provided with Table 2 and Fig. 8, \nseparately. As shown in Table 2 , our proposed method outperforms \nother advanced NVS approaches with respect to PSNR, SSIM, and LPIPS \nassessments. It is noteworthy that ViP-NeRF [ 15] employs a similar \nvisibility-based regularization strategy, but it produces low-quality color",
+        "retrieval_score": 0.02782608695652174,
+        "rerank_score": null,
+        "extraction_method": "native",
+        "table_labels": []
+      },
+      {
+        "evidence_id": "ev_d195d5b71cb9fc4938cd42c1",
+        "source_type": "workspace",
+        "document_id": "e680901e-ee4b-41c4-864d-d46237e8639e",
+        "document_name": "pvigs.pdf",
+        "page": 10,
+        "page_count": 16,
+        "chunk_id": "28b96a37ed30ce90b5210ee2",
+        "title": null,
+        "url": null,
+        "content": "It demonstrates the sensitivity of PViGS to the number of training sam­\nples, and the efficacy of the PSV-visibility-based regularization becomes \nmore evident when reducing views. As shown in Table 13, although \nPViGS does not surpass the state-of-the-art method, ICO-GS, it achieves \nconsistent improvements over the shared baseline (e.g., outperforming \nBinocularGS), demonstrating the robustness of our contributions across \ndifferent baseline settings.\nThe qualitative analysis in Fig. 8, conducted at 1/8 image resolu­\ntion, compares novel view synthesis results on forward-facing scenes of \nthe LLFF dataset. It can be observed that the original 3DGS’s perfor­\nmance suffers from the sparse-view problem severely, producing blurry",
+        "retrieval_score": 0.032266458495966696,
+        "rerank_score": null,
+        "extraction_method": "native",
+        "table_labels": []
+      },
+      {
+        "evidence_id": "ev_10178767ebb7a907fede7ab3",
+        "source_type": "workspace",
+        "document_id": "e680901e-ee4b-41c4-864d-d46237e8639e",
+        "document_name": "pvigs.pdf",
+        "page": 14,
+        "page_count": 16,
+        "chunk_id": "a26b864a5b3d7b215d952216",
+        "title": null,
+        "url": null,
+        "content": "BinocularGS [80] 21.44 0.751 0.168\nICO-GS [67] 22.20 0.778 0.157\n6 \n. Conclusion\nThis paper studies the task of novel view synthesis (NVS) and scene \nrepresentation in sparse-view scenarios. Since 3D Gaussian Splatting \n(3DGS) is prone to overfitting the sparse input images, leading to inaccu­\nrate representations such as floaters and incorrect shape. To address this \nchallenge, the Visibility-aware 3D Gaussian Splatting approach PViGS is \nproposed, which introduces pixel-wise visibility attributes from Plane \nSweep Volumes (PSV) into Gaussian radiance fields. Our PViGS effec­\ntively enables the explicit modeling of spatial occlusion relationships \nvia the new learnable Gaussian parameters. Furthermore, we design \nthe visibility-guided regularization strategy and the PSV-wise semantic",
+        "retrieval_score": 0.030017921146953404,
+        "rerank_score": null,
+        "extraction_method": "native",
+        "table_labels": []
+      },
+      {
+        "evidence_id": "ev_0ed538a05c748e5580255195",
+        "source_type": "workspace",
+        "document_id": "e680901e-ee4b-41c4-864d-d46237e8639e",
+        "document_name": "pvigs.pdf",
+        "page": 1,
+        "page_count": 16,
+        "chunk_id": "c593d8826144896a80469ffd",
+        "title": null,
+        "url": null,
+        "content": "Contents lists available at ScienceDirect\nNeurocomputing\njournal homepage: www.elsevier.com/locate/neucom \nPViGS: Sparse-view 3D Gaussian splatting with pixelwise visibility-aware \nregularization\nYixiang Xiea, Huabiao Qina,∗ iD, Bin Fengb\na School of Electronic and Information Engineering, South China University of Technology, Guangzhou, 510641, China\nb School of Information and Communication Engineering, Guangzhou Maritime University, Guangzhou, 510725, China\nH I G H L I G H T S\n• A novel visibility-aware Gaussian Splatting method for sparse-view reconstruction.\n• A novel hybrid prior-driven regularization mechanism for complex scenes.\n• A valid visibility prior generation and augmentation module for overfitting problem.\n• Superior performance on four challenging datasets.",
+        "retrieval_score": 0.029877369007803793,
+        "rerank_score": null,
+        "extraction_method": "native",
+        "table_labels": []
+      },
+      {
+        "evidence_id": "ev_f74b3139efaeea3efa02fbbc",
+        "source_type": "workspace",
+        "document_id": "e680901e-ee4b-41c4-864d-d46237e8639e",
+        "document_name": "pvigs.pdf",
+        "page": 13,
+        "page_count": 16,
+        "chunk_id": "29c80995cccdca8860e9e636",
+        "title": null,
+        "url": null,
+        "content": "its robustness to initialization quality. As demonstrated in Table 10 , \nthe proposed PViGS consistently reduces the sensitivity to initialization \nconditions with different point cloud qualities. We attribute this robust­\nness to two aspects: 1) the PViGS utilizes multi-view visibility priors \nas external spatial anchors, acting as more fine-grained guidance that \nconstrains the Gaussians to stay within a reasonable scene geometry; \nand 2) the VGR module effectively regularizes the spatial distribution \nof Gaussians by adopting spatial occlusion information, preventing the \nGaussians from falling into poor local optima (e.g., floating artifacts). \nThis advantage is highly practical for in-the-wild scenarios where reli­",
+        "retrieval_score": 0.02871794871794872,
+        "rerank_score": null,
+        "extraction_method": "native",
+        "table_labels": []
+      },
+      {
+        "evidence_id": "ev_f467c60a7e9755fb8853c078",
+        "source_type": "workspace",
+        "document_id": "e680901e-ee4b-41c4-864d-d46237e8639e",
+        "document_name": "pvigs.pdf",
+        "page": 3,
+        "page_count": 16,
+        "chunk_id": "d2b042ec00547bd10110a4bd",
+        "title": null,
+        "url": null,
+        "content": "limited by its need to query the MLP network for a large number of \nsampling points. This demand results in high computational costs dur­\ning both training and synthesis stages, which hinders broader practical \napplications. More recently, among the emerging alternatives to implicit \nrepresentation, 3D Gaussian Splatting (3DGS) [ 1] has garnered signifi­\ncant attention for its high-quality explicit representation of anisotropic \n3D Gaussian primitives and efficient rendering. NeRF-based methods \nthat rely on neural networks to estimate color and geometric parameters, \n3DGS employs a collection of point-based Gaussians to model scenes, \nwhich are parameterized by position, covariance, opacity, and Spherical \nHarmonic coefficients for view-dependent color. 3DGS’s rendering pro­",
+        "retrieval_score": 0.02964426877470356,
+        "rerank_score": null,
+        "extraction_method": "native",
+        "table_labels": []
+      },
+      {
+        "evidence_id": "ev_d2d016c15cebed901fbf6732",
+        "source_type": "workspace",
+        "document_id": "e680901e-ee4b-41c4-864d-d46237e8639e",
+        "document_name": "pvigs.pdf",
+        "page": 2,
+        "page_count": 16,
+        "chunk_id": "850ad703a3820f638a816e4b",
+        "title": null,
+        "url": null,
+        "content": "[5,11–17] mainly introduce external prior knowledge via regularization \nmechanisms during training to enhance constraints. On one hand, exist­\ning depth-driven regularization methods [5,7,8,12,18,19] leverage pre-\ntrained depth or optical flow estimation networks to generate monocular \nprior maps for geometric supervision, guiding the formation of accu­\nrate geometric structures. On the other hand, conventional semantic \nconsistency regularization [13,16,20] employs a perception model [21] \ntrained on large-scale datasets to extract color features, which enforce \nmulti-view semantic similarity constraints through feature alignment \nbetween different viewpoints. Additionally, the diffusion model prior \nbased methods [ 18,22–24] provide a semi-supervised learning frame­",
+        "retrieval_score": 0.028125,
+        "rerank_score": null,
+        "extraction_method": "native",
+        "table_labels": []
+      },
+      {
+        "evidence_id": "ev_a98d87acf0580a9444364841",
+        "source_type": "workspace",
+        "document_id": "e680901e-ee4b-41c4-864d-d46237e8639e",
+        "document_name": "pvigs.pdf",
+        "page": 7,
+        "page_count": 16,
+        "chunk_id": "0f2ac4b1d5ee2a8930faaef0",
+        "title": null,
+        "url": null,
+        "content": "formation to impose more adequate constraints for learning robust 3D \nrepresentation, as: \n𝐿v =𝜆 𝑝𝐿prior +𝜆 𝑠𝐿self.(17)\n3.5 . PSV-wise semantic regularization\nPrevious semantic regularization methods [ 13,16,74] conduct se­\nmantic alignment through optimizing the perceptual distance between \nrendered and training views, facilitating the reconstruction of the global \nstructure of the scene. Although traditional semantic regularization ef­\nfectively leverages the common semantics across different views as \nsmoothness constraints, it is prone to overfitting when facing sparse-\nview scenarios. To cope with this challenge, a novel PSV-wise semantic \nregularization strategy is proposed via Plane Sweep Volume (PSV). \nAs shown in module (A) of Fig. 4 , PSV process generates a large",
+        "retrieval_score": 0.027272727272727275,
+        "rerank_score": null,
+        "extraction_method": "native",
+        "table_labels": []
+      }
+    ],
+    "plan": null,
+    "trace_summary": {
+      "workspace_id": "86873dfc-42c8-460c-96a8-8d3be52e693f",
+      "document_count": 3,
+      "task_complexity": "simple",
+      "planner_steps": 0,
+      "tool_calls": 3,
+      "tools_used": [
+        "search_workspace",
+        "search_workspace",
+        "search_workspace"
+      ],
+      "retrieval_attempts": 3,
+      "rewrite_count": 2,
+      "evidence_count": 12,
+      "citation_count": 3,
+      "verification_passed": true,
+      "audit_runtime": {
+        "node_events": [
+          {
+            "node": "query_analyzer",
+            "duration_ms": 3307.483300101012,
+            "evidence_sufficient": false,
+            "grading_failed": false,
+            "rewrite_count": 0,
+            "retrieval_attempts": 0,
+            "revision_count": 0,
+            "refined_query": ""
+          },
+          {
+            "node": "simple_plan",
+            "duration_ms": 0.027899863198399544
+          },
+          {
+            "node": "executor",
+            "duration_ms": 4210.528900148347,
+            "retrieval_attempts": 1
+          },
+          {
+            "node": "step_evaluator",
+            "duration_ms": 0.14579994603991508
+          },
+          {
+            "node": "evidence_grader",
+            "duration_ms": 2456.3482999801636,
+            "evidence_sufficient": false,
+            "grading_failed": false
+          },
+          {
+            "node": "query_refiner",
+            "duration_ms": 2245.301199844107,
+            "rewrite_count": 1,
+            "refined_query": "Locate the uploaded GCNet paper document (not pvigs.pdf) and identify the name of the proposed method it introduces, along with its full citation including authors, title, venue, and year."
+          },
+          {
+            "node": "executor",
+            "duration_ms": 3457.5182001572102,
+            "retrieval_attempts": 2
+          },
+          {
+            "node": "step_evaluator",
+            "duration_ms": 0.1392001286149025
+          },
+          {
+            "node": "evidence_grader",
+            "duration_ms": 1735.3330000769347,
+            "evidence_sufficient": false,
+            "grading_failed": false
+          },
+          {
+            "node": "query_refiner",
+            "duration_ms": 1721.289400011301,
+            "rewrite_count": 2,
+            "refined_query": "Search external sources for the paper commonly abbreviated as \"GCNet\" (e.g., \"GCNet: Non-local Networks Meet Squeeze-Excitation Networks and Beyond\" / Global Context Network) and identify the exact name of the proposed method or module it introduces, together with its full citation: authors, title, publication venue/conference or journal, and year."
+          },
+          {
+            "node": "executor",
+            "duration_ms": 3318.4815000277013,
+            "retrieval_attempts": 3
+          },
+          {
+            "node": "step_evaluator",
+            "duration_ms": 0.13129995204508305
+          },
+          {
+            "node": "evidence_grader",
+            "duration_ms": 2227.76239993982,
+            "evidence_sufficient": false,
+            "grading_failed": false
+          },
+          {
+            "node": "generator",
+            "duration_ms": 3620.467900065705
+          },
+          {
+            "node": "verifier",
+            "duration_ms": 6768.399500055239,
+            "grounded": true,
+            "unsupported_claim_count": 2
+          },
+          {
+            "node": "answer_revision",
+            "duration_ms": 13077.021200209856,
+            "revision_count": 1
+          },
+          {
+            "node": "verifier",
+            "duration_ms": 6991.567099932581,
+            "grounded": true,
+            "unsupported_claim_count": 0
+          },
+          {
+            "node": "citation_validator",
+            "duration_ms": 0.795300118625164
+          }
+        ],
+        "node_count": 18,
+        "models": [
+          {
+            "node": "query_analyzer",
+            "duration_ms": 3303.062899969518,
+            "usage": {
+              "input_tokens": 520,
+              "output_tokens": 697,
+              "total_tokens": 1217,
+              "input_token_details": {
+                "cache_read": 384
+              },
+              "output_token_details": {
+                "reasoning": 649
+              }
+            }
+          },
+          {
+            "node": "evidence_grader",
+            "duration_ms": 2452.735299943015,
+            "usage": {
+              "input_tokens": 2282,
+              "output_tokens": 383,
+              "total_tokens": 2665,
+              "input_token_details": {
+                "cache_read": 0
+              },
+              "output_token_details": {
+                "reasoning": 307
+              }
+            }
+          },
+          {
+            "node": "query_refiner",
+            "duration_ms": 2242.5214999821037,
+            "usage": {
+              "input_tokens": 2471,
+              "output_tokens": 385,
+              "total_tokens": 2856,
+              "input_token_details": {
+                "cache_read": 0
+              },
+              "output_token_details": {
+                "reasoning": 330
+              }
+            }
+          },
+          {
+            "node": "evidence_grader",
+            "duration_ms": 1731.4980998635292,
+            "usage": {
+              "input_tokens": 4267,
+              "output_tokens": 293,
+              "total_tokens": 4560,
+              "input_token_details": {
+                "cache_read": 2176
+              },
+              "output_token_details": {
+                "reasoning": 204
+              }
+            }
+          },
+          {
+            "node": "query_refiner",
+            "duration_ms": 1716.6951999533921,
+            "usage": {
+              "input_tokens": 4507,
+              "output_tokens": 300,
+              "total_tokens": 4807,
+              "input_token_details": {
+                "cache_read": 128
+              },
+              "output_token_details": {
+                "reasoning": 210
+              }
+            }
+          },
+          {
+            "node": "evidence_grader",
+            "duration_ms": 2224.062400171533,
+            "usage": {
+              "input_tokens": 6276,
+              "output_tokens": 324,
+              "total_tokens": 6600,
+              "input_token_details": {
+                "cache_read": 4224
+              },
+              "output_token_details": {
+                "reasoning": 229
+              }
+            }
+          },
+          {
+            "node": "generator",
+            "duration_ms": 3619.9157000519335,
+            "usage": {
+              "input_tokens": 10690,
+              "output_tokens": 663,
+              "total_tokens": 11353,
+              "input_token_details": {
+                "cache_read": 0
+              },
+              "output_token_details": {
+                "reasoning": 196
+              }
+            }
+          },
+          {
+            "node": "verifier",
+            "duration_ms": 6765.150199877098,
+            "usage": {
+              "input_tokens": 4929,
+              "output_tokens": 1455,
+              "total_tokens": 6384,
+              "input_token_details": {
+                "cache_read": 0
+              },
+              "output_token_details": {
+                "reasoning": 1336
+              }
+            }
+          },
+          {
+            "node": "answer_revision",
+            "duration_ms": 13076.66500005871,
+            "usage": {
+              "input_tokens": 4879,
+              "output_tokens": 3080,
+              "total_tokens": 7959,
+              "input_token_details": {
+                "cache_read": 0
+              },
+              "output_token_details": {
+                "reasoning": 2725
+              }
+            }
+          },
+          {
+            "node": "verifier",
+            "duration_ms": 6987.716299947351,
+            "usage": {
+              "input_tokens": 4811,
+              "output_tokens": 1542,
+              "total_tokens": 6353,
+              "input_token_details": {
+                "cache_read": 128
+              },
+              "output_token_details": {
+                "reasoning": 1522
+              }
+            }
+          }
+        ],
+        "llm_calls": 10,
+        "tools": [
+          {
+            "tool": "search_workspace",
+            "duration_ms": 4210.228099953383
+          },
+          {
+            "tool": "search_workspace",
+            "duration_ms": 3457.222299883142
+          },
+          {
+            "tool": "search_workspace",
+            "duration_ms": 3318.203100003302
+          }
+        ],
+        "tool_calls_observed": 3,
+        "reranks": [
+          {
+            "candidate_count": 8,
+            "duration_ms": 3370.166099863127
+          },
+          {
+            "candidate_count": 8,
+            "duration_ms": 3221.0081999655813
+          },
+          {
+            "candidate_count": 8,
+            "duration_ms": 3079.549000132829
+          }
+        ],
+        "reranker_calls": 3,
+        "llm_ms": 44120.022599818185,
+        "tool_ms": 10985.653499839827,
+        "reranker_ms": 9670.723299961537
+      },
+      "latency": 55144.61
+    }
+  }
+}

@@ -1,0 +1,176 @@
+[
+  {
+    "query": "Hello",
+    "has_data": false,
+    "old": {
+      "mode": "existing_workflow",
+      "reason_summary": "Existing workflow handles this request.",
+      "required_capabilities": [],
+      "suggested_agents": [],
+      "independent_subtasks": 0,
+      "dependency_type": "none",
+      "estimated_agent_count": 0,
+      "expected_multi_agent_value": "low",
+      "estimated_cost_level": "low"
+    },
+    "new": {
+      "mode": "existing_workflow",
+      "reason_summary": "One specialty suffices; avoid cross-specialty orchestration.",
+      "required_capabilities": [],
+      "suggested_agents": [],
+      "independent_subtasks": 0,
+      "dependency_type": "none",
+      "estimated_agent_count": 0,
+      "expected_multi_agent_value": "low",
+      "estimated_cost_level": "low"
+    }
+  },
+  {
+    "query": "Compare the papers",
+    "has_data": false,
+    "old": {
+      "mode": "single_agent",
+      "reason_summary": "Independent research, data or code capabilities.",
+      "required_capabilities": [
+        "research.compare"
+      ],
+      "suggested_agents": [],
+      "independent_subtasks": 0,
+      "dependency_type": "none",
+      "estimated_agent_count": 0,
+      "expected_multi_agent_value": "low",
+      "estimated_cost_level": "low"
+    },
+    "new": {
+      "mode": "single_agent",
+      "reason_summary": "One specialty suffices; avoid cross-specialty orchestration.",
+      "required_capabilities": [
+        "research.compare"
+      ],
+      "suggested_agents": [],
+      "independent_subtasks": 1,
+      "dependency_type": "none",
+      "estimated_agent_count": 1,
+      "expected_multi_agent_value": "low",
+      "estimated_cost_level": "low"
+    }
+  },
+  {
+    "query": "Find maximum miou",
+    "has_data": true,
+    "old": {
+      "mode": "existing_workflow",
+      "reason_summary": "Existing workflow handles this request.",
+      "required_capabilities": [],
+      "suggested_agents": [],
+      "independent_subtasks": 0,
+      "dependency_type": "none",
+      "estimated_agent_count": 0,
+      "expected_multi_agent_value": "low",
+      "estimated_cost_level": "low"
+    },
+    "new": {
+      "mode": "single_agent",
+      "reason_summary": "One specialty suffices; avoid cross-specialty orchestration.",
+      "required_capabilities": [
+        "data.analyze"
+      ],
+      "suggested_agents": [],
+      "independent_subtasks": 1,
+      "dependency_type": "none",
+      "estimated_agent_count": 1,
+      "expected_multi_agent_value": "low",
+      "estimated_cost_level": "low"
+    }
+  },
+  {
+    "query": "Compare papers with experiment.xlsx data",
+    "has_data": true,
+    "old": {
+      "mode": "multi_agent",
+      "reason_summary": "Independent research, data or code capabilities.",
+      "required_capabilities": [
+        "research.compare",
+        "data.analyze"
+      ],
+      "suggested_agents": [],
+      "independent_subtasks": 0,
+      "dependency_type": "none",
+      "estimated_agent_count": 0,
+      "expected_multi_agent_value": "low",
+      "estimated_cost_level": "low"
+    },
+    "new": {
+      "mode": "multi_agent",
+      "reason_summary": "Distinct required source/tool boundaries can run independently.",
+      "required_capabilities": [
+        "research.compare",
+        "data.analyze"
+      ],
+      "suggested_agents": [],
+      "independent_subtasks": 2,
+      "dependency_type": "parallel",
+      "estimated_agent_count": 2,
+      "expected_multi_agent_value": "high",
+      "estimated_cost_level": "medium"
+    }
+  },
+  {
+    "query": "First extract metrics from papers then calculate with these data",
+    "has_data": true,
+    "old": {
+      "mode": "multi_agent",
+      "reason_summary": "Independent research, data or code capabilities.",
+      "required_capabilities": [
+        "research.compare",
+        "data.analyze"
+      ],
+      "suggested_agents": [],
+      "independent_subtasks": 0,
+      "dependency_type": "none",
+      "estimated_agent_count": 0,
+      "expected_multi_agent_value": "low",
+      "estimated_cost_level": "low"
+    },
+    "new": {
+      "mode": "existing_workflow",
+      "reason_summary": "Extracted source values are an input to later computation; use one sequential workflow.",
+      "required_capabilities": [
+        "research.compare",
+        "data.analyze"
+      ],
+      "suggested_agents": [],
+      "independent_subtasks": 0,
+      "dependency_type": "sequential",
+      "estimated_agent_count": 0,
+      "expected_multi_agent_value": "low",
+      "estimated_cost_level": "medium"
+    }
+  },
+  {
+    "query": "Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. Please explain this carefully. ",
+    "has_data": false,
+    "old": {
+      "mode": "existing_workflow",
+      "reason_summary": "Existing workflow handles this request.",
+      "required_capabilities": [],
+      "suggested_agents": [],
+      "independent_subtasks": 0,
+      "dependency_type": "none",
+      "estimated_agent_count": 0,
+      "expected_multi_agent_value": "low",
+      "estimated_cost_level": "low"
+    },
+    "new": {
+      "mode": "existing_workflow",
+      "reason_summary": "One specialty suffices; avoid cross-specialty orchestration.",
+      "required_capabilities": [],
+      "suggested_agents": [],
+      "independent_subtasks": 0,
+      "dependency_type": "none",
+      "estimated_agent_count": 0,
+      "expected_multi_agent_value": "low",
+      "estimated_cost_level": "low"
+    }
+  }
+]

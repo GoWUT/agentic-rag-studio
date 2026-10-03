@@ -1,0 +1,27 @@
+{
+  "previous": 437,
+  "new_offline": 25,
+  "new_postgres": 17,
+  "total_distinct": 479,
+  "passed": 479,
+  "failed": 0,
+  "skipped_after_explicit_pg_run": 0,
+  "runtime_passed": 30,
+  "retry_safety": {
+    "transient_read": {
+      "status": "PASS",
+      "attempts": 2
+    },
+    "invalid_input": {
+      "status": "PASS",
+      "attempts": 1
+    },
+    "ambiguous_write": {
+      "status": "PASS",
+      "task_status": "REQUIRES_RECONCILIATION",
+      "writes_before_recovery": 2,
+      "writes_after_recovery": 2
+    }
+  },
+  "runtime_run_id": "f60ebc6873f64c94a02d91c4ad60073e"
+}

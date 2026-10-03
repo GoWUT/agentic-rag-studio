@@ -1,0 +1,14 @@
+{
+  "uid": "agentic-runtime",
+  "title": "Agentic RAG Runtime",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "15s",
+  "time": {"from": "now-1h", "to": "now"},
+  "panels": [
+    {"id": 1, "type": "timeseries", "title": "Login successes / failures", "datasource": {"type": "prometheus", "uid": "prometheus"}, "gridPos": {"x": 0, "y": 0, "w": 12, "h": 8}, "targets": [{"expr": "sum(rate(auth_login_success_total{job=\"agent-api\"}[5m]))", "legendFormat": "success"}, {"expr": "sum(rate(auth_login_failure_total{job=\"agent-api\"}[5m]))", "legendFormat": "failure"}]},
+    {"id": 2, "type": "timeseries", "title": "Worker task outcomes", "datasource": {"type": "prometheus", "uid": "prometheus"}, "gridPos": {"x": 12, "y": 0, "w": 12, "h": 8}, "targets": [{"expr": "sum(rate(tasks_completed_total{job=\"agent-runtime\"}[5m]))", "legendFormat": "completed"}, {"expr": "sum(rate(tasks_failed_total{job=\"agent-runtime\"}[5m]))", "legendFormat": "failed"}]},
+    {"id": 3, "type": "stat", "title": "Queue depth", "datasource": {"type": "prometheus", "uid": "prometheus"}, "gridPos": {"x": 0, "y": 8, "w": 12, "h": 6}, "targets": [{"expr": "max(queue_depth{job=\"agent-api\"})"}]},
+    {"id": 4, "type": "timeseries", "title": "Worker tools / failures", "datasource": {"type": "prometheus", "uid": "prometheus"}, "gridPos": {"x": 12, "y": 8, "w": 12, "h": 6}, "targets": [{"expr": "sum(rate(tool_calls_total{job=\"agent-runtime\"}[5m]))", "legendFormat": "calls"}, {"expr": "sum(rate(tool_failures_total{job=\"agent-runtime\"}[5m]))", "legendFormat": "failures"}]}
+  ]
+}

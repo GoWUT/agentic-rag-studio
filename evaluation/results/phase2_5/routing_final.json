@@ -1,0 +1,169 @@
+{
+  "mode": "real_llm_analyzer_and_production_router",
+  "model": "deepseek-v4-flash",
+  "total": 20,
+  "passed": 20,
+  "errors": 0,
+  "cases": [
+    {
+      "query": "你好",
+      "expected": "Direct",
+      "actual": "Direct",
+      "passed": true,
+      "query_type": "direct",
+      "latency_ms": 760.29
+    },
+    {
+      "query": "谢谢你的帮助",
+      "expected": "Direct",
+      "actual": "Direct",
+      "passed": true,
+      "query_type": "direct",
+      "latency_ms": 1332.77
+    },
+    {
+      "query": "什么是 RAG？请给一个简短的通用定义，不需要查询论文。",
+      "expected": "Direct",
+      "actual": "Direct",
+      "passed": true,
+      "query_type": "direct",
+      "latency_ms": 1215.13
+    },
+    {
+      "query": "Explain what an embedding is without searching documents.",
+      "expected": "Direct",
+      "actual": "Direct",
+      "passed": true,
+      "query_type": "direct",
+      "latency_ms": 1256.72
+    },
+    {
+      "query": "Compare RAG and fine-tuning conceptually, without searching my documents.",
+      "expected": "Direct",
+      "actual": "Direct",
+      "passed": true,
+      "query_type": "direct",
+      "latency_ms": 773.66
+    },
+    {
+      "query": "What is the proposed method called in the GCNet paper?",
+      "expected": "Simple",
+      "actual": "Simple",
+      "passed": true,
+      "query_type": "document",
+      "latency_ms": 16581.29
+    },
+    {
+      "query": "这篇 GCNet 论文的作者是谁？",
+      "expected": "Simple",
+      "actual": "Simple",
+      "passed": true,
+      "query_type": "document",
+      "latency_ms": 13485.54
+    },
+    {
+      "query": "What datasets are used in the GCNet paper?",
+      "expected": "Simple",
+      "actual": "Simple",
+      "passed": true,
+      "query_type": "arxiv",
+      "latency_ms": 5689.21
+    },
+    {
+      "query": "模型参数量是多少？请查看 GCNet 论文。",
+      "expected": "Simple",
+      "actual": "Simple",
+      "passed": true,
+      "query_type": "arxiv",
+      "latency_ms": 2015.17
+    },
+    {
+      "query": "What is the title of the uploaded PViGS paper?",
+      "expected": "Simple",
+      "actual": "Simple",
+      "passed": true,
+      "query_type": "document",
+      "latency_ms": 3344.35
+    },
+    {
+      "query": "Which backbone is used in TDA-YOLO?",
+      "expected": "Simple",
+      "actual": "Simple",
+      "passed": true,
+      "query_type": "arxiv",
+      "latency_ms": 2015.56
+    },
+    {
+      "query": "Summarize the GCNet paper's main contribution in one sentence.",
+      "expected": "Simple",
+      "actual": "Simple",
+      "passed": true,
+      "query_type": "arxiv",
+      "latency_ms": 7474.05
+    },
+    {
+      "query": "Compare the methodology, datasets and experimental results of all papers in this workspace.",
+      "expected": "Complex",
+      "actual": "Complex",
+      "passed": true,
+      "query_type": "research",
+      "latency_ms": 2059.04
+    },
+    {
+      "query": "对比 Workspace 中三篇论文的核心方法、实验设置、性能、局限性和创新点。",
+      "expected": "Complex",
+      "actual": "Complex",
+      "passed": true,
+      "query_type": "document",
+      "latency_ms": 1253.91
+    },
+    {
+      "query": "Compare the main methods proposed in these three papers.",
+      "expected": "Complex",
+      "actual": "Complex",
+      "passed": true,
+      "query_type": "research",
+      "latency_ms": 16332.38
+    },
+    {
+      "query": "Across documents, explain how each paper addresses efficiency and accuracy, then synthesize the trade-offs.",
+      "expected": "Complex",
+      "actual": "Complex",
+      "passed": true,
+      "query_type": "research",
+      "latency_ms": 1952.51
+    },
+    {
+      "query": "分别提取每篇论文的方法、数据集和结果，并给出对比结论。",
+      "expected": "Complex",
+      "actual": "Complex",
+      "passed": true,
+      "query_type": "research",
+      "latency_ms": 2056.52
+    },
+    {
+      "query": "For each paper, identify the assumptions, evaluate the evidence and compare limitations.",
+      "expected": "Complex",
+      "actual": "Complex",
+      "passed": true,
+      "query_type": "research",
+      "latency_ms": 4084.43
+    },
+    {
+      "query": "Build a comparison of all papers covering architecture, evaluation metrics and failure cases.",
+      "expected": "Complex",
+      "actual": "Complex",
+      "passed": true,
+      "query_type": "research",
+      "latency_ms": 3191.36
+    },
+    {
+      "query": "综合分析三篇论文的创新点和适用条件，提出有证据支持的研究方向。",
+      "expected": "Complex",
+      "actual": "Complex",
+      "passed": true,
+      "query_type": "research",
+      "latency_ms": 6211.68
+    }
+  ]
+}

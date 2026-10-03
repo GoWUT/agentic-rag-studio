@@ -1,7 +1,9 @@
 from langchain_core.tools import tool
+from langchain_core.runnables import RunnableConfig
 from langchain_community.utilities import GoogleSerperAPIWrapper
 from langchain_community.retrievers import ArxivRetriever
 import requests
+from server.agent.evidence import evidence_from_hit, external_evidence
 
 
 def format_pdf_hits(docs):
@@ -12,21 +14,23 @@ def format_pdf_hits(docs):
     return "\n".join(lines)
 
 
-def make_pdf_tool(retriever):
+def make_pdf_tool(retriever, *, structured: bool = False):
     @tool("search_pdf")
-    def search_pdf(query: str) -> str:
+    def search_pdf(query: str):
         """Search the uploaded PDF and return relevant chunks."""
         hits = retriever.invoke(query)
+        if structured:
+            return {"evidence": [evidence_from_hit(hit).model_dump() for hit in hits]}
         return format_pdf_hits(hits)
 
     return search_pdf
 
 
-def make_web_tool(serper_api_key: str):
+def make_web_tool(serper_api_key: str, *, structured: bool = False):
     serper = GoogleSerperAPIWrapper(serper_api_key=serper_api_key)
 
     @tool("search_web")
-    def search_web(query: str) -> str:
+    def search_web(query: str):
         """Search the web using Serper."""
         try:
             results = serper.results(query)
@@ -51,6 +55,8 @@ def make_web_tool(serper_api_key: str):
             )
 
         organic = results.get("organic", [])
+        if structured:
+            return {"evidence": [external_evidence("web", r.get("title", ""), r.get("snippet", ""), r.get("link")) for r in organic[:5]]}
         out = ["Web Search Results:"]
         for r in organic[:5]:
             out.append(f"- {r.get('title')}: {r.get('snippet')}")
@@ -59,13 +65,15 @@ def make_web_tool(serper_api_key: str):
     return search_web
 
 
-def make_arxiv_tool():
+def make_arxiv_tool(*, structured: bool = False):
     arxiv = ArxivRetriever(max_results=3)
 
     @tool("search_arxiv")
-    def search_arxiv(query: str) -> str:
+    def search_arxiv(query: str):
         """Search arXiv for scientific papers."""
         papers = arxiv.invoke(query)
+        if structured:
+            return {"evidence": [external_evidence("arxiv", p.metadata.get("Title", p.metadata.get("title", "")), p.page_content, p.metadata.get("entry_id", p.metadata.get("Entry ID"))) for p in papers]}
         out = ["arXiv Results:"]
         for p in papers:
             out.append(p.metadata.get("title", ""))
@@ -74,13 +82,26 @@ def make_arxiv_tool():
     return search_arxiv
 
 
-def build_tools(retriever, serper_api_key: str):
+def make_workspace_tool(retriever):
+    @tool("search_workspace")
+    def search_workspace(query: str, config: RunnableConfig, document_ids: list[str] | None = None) -> dict:
+        """Search all documents in the current workspace for supporting evidence."""
+        coverage_query = config.get("configurable", {}).get("research_query", query)
+        options = {'document_ids':document_ids} if document_ids is not None else {}
+        return {"evidence": [evidence_from_hit(hit, "workspace").model_dump() for hit in retriever.invoke(query, coverage_query=coverage_query, **options)]}
+    return search_workspace
+
+
+def build_tools(retriever, serper_api_key: str, *, workspace_retriever=None, structured: bool = False):
     tools = []
 
     if retriever:
-        tools.append(make_pdf_tool(retriever))
+        tools.append(make_pdf_tool(retriever, structured=structured))
 
-    tools.append(make_web_tool(serper_api_key))
-    tools.append(make_arxiv_tool())
+    if workspace_retriever is not None:
+        tools.append(make_workspace_tool(workspace_retriever))
+
+    tools.append(make_web_tool(serper_api_key, structured=structured))
+    tools.append(make_arxiv_tool(structured=structured))
 
     return tools

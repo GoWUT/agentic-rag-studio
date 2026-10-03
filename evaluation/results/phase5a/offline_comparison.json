@@ -1,0 +1,232 @@
+{
+  "model": "SCRIPTED fixture, not a real provider",
+  "sources": "synthetic tool evidence and actual CSV/runtime/chart",
+  "token_usage": "unavailable from scripted fixture",
+  "cases": [
+    {
+      "name": "research_only",
+      "goal": "Compare the methods in the uploaded papers",
+      "single_agent": {
+        "answer_result": "Synthetic supported comparison. [paper.pdf, p.1]",
+        "status": "COMPLETED",
+        "evidence_coverage": {
+          "evidence_ids": [],
+          "completed_specialties": []
+        },
+        "latency_seconds": 0.694,
+        "llm_calls": 4,
+        "tool_calls": 1,
+        "tokens": null,
+        "token_usage_status": "unavailable",
+        "delegation_success_rate": null,
+        "delegation_completion_rate": null,
+        "duplicate_work_rate": null,
+        "duplicate_work_denominator": 0,
+        "agent_duration_sum_seconds": 0,
+        "agent_duration_span_seconds": 0,
+        "parallelism_utilization": null,
+        "evidence_types": [
+          "workspace"
+        ],
+        "citation_count": 1,
+        "grounded": true,
+        "selection_correct": null,
+        "evidence_type_coverage": 1.0,
+        "evidence_ids": [
+          "ev_paper"
+        ],
+        "artifact_count": 0
+      },
+      "multi_agent": {
+        "answer_result": "Synthetic supported comparison. [paper.pdf, p.1]",
+        "status": "COMPLETED",
+        "evidence_coverage": {
+          "evidence_ids": [
+            "ev_paper"
+          ],
+          "completed_specialties": [
+            "research"
+          ]
+        },
+        "latency_seconds": 0.903,
+        "llm_calls": 8,
+        "tool_calls": null,
+        "tokens": null,
+        "token_usage_status": "unavailable",
+        "delegation_success_rate": 1.0,
+        "delegation_completion_rate": 1.0,
+        "duplicate_work_rate": 0.0,
+        "duplicate_work_denominator": 1,
+        "agent_duration_sum_seconds": 0.275,
+        "agent_duration_span_seconds": 0.275,
+        "parallelism_utilization": 1.0,
+        "evidence_types": [
+          "workspace"
+        ],
+        "citation_count": 1,
+        "grounded": true,
+        "selection_correct": true,
+        "evidence_type_coverage": 1.0,
+        "evidence_ids": [
+          "ev_paper"
+        ],
+        "artifact_count": 0
+      }
+    },
+    {
+      "name": "data_only",
+      "goal": "Analyze experiment.csv, find the best configuration under 3M parameters and generate a chart",
+      "single_agent": {
+        "answer_result": "Synthetic supported comparison. [Analysis 258361de-315c-49e4-99b3-6f3b3bb64e57]",
+        "status": "COMPLETED",
+        "evidence_coverage": {
+          "evidence_ids": [],
+          "completed_specialties": []
+        },
+        "latency_seconds": 1.525,
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "tokens": null,
+        "token_usage_status": "unavailable",
+        "delegation_success_rate": null,
+        "delegation_completion_rate": null,
+        "duplicate_work_rate": null,
+        "duplicate_work_denominator": 0,
+        "agent_duration_sum_seconds": 0,
+        "agent_duration_span_seconds": 0,
+        "parallelism_utilization": null,
+        "evidence_types": [
+          "analysis"
+        ],
+        "citation_count": 1,
+        "grounded": true,
+        "selection_correct": null,
+        "evidence_type_coverage": 1.0,
+        "evidence_ids": [
+          "ev_258361de315c49e499b36f3b3bb64e57"
+        ],
+        "artifact_count": 1
+      },
+      "multi_agent": {
+        "answer_result": "Synthetic supported comparison. [Analysis e8d18b0c-3517-4558-af5f-2a2ea9706c43] [Analysis 6be7153e-d96e-462b-94fc-5666fdaf83cf]",
+        "status": "COMPLETED",
+        "evidence_coverage": {
+          "evidence_ids": [
+            "ev_6be7153ed96e462b94fc5666fdaf83cf",
+            "ev_e8d18b0c35174558af5f2a2ea9706c43"
+          ],
+          "completed_specialties": [
+            "data"
+          ]
+        },
+        "latency_seconds": 2.06,
+        "llm_calls": 9,
+        "tool_calls": null,
+        "tokens": null,
+        "token_usage_status": "unavailable",
+        "delegation_success_rate": 1.0,
+        "delegation_completion_rate": 1.0,
+        "duplicate_work_rate": 0.0,
+        "duplicate_work_denominator": 1,
+        "agent_duration_sum_seconds": 1.371,
+        "agent_duration_span_seconds": 1.371,
+        "parallelism_utilization": 1.0,
+        "evidence_types": [
+          "analysis"
+        ],
+        "citation_count": 2,
+        "grounded": true,
+        "selection_correct": true,
+        "evidence_type_coverage": 1.0,
+        "evidence_ids": [
+          "ev_e8d18b0c35174558af5f2a2ea9706c43",
+          "ev_6be7153ed96e462b94fc5666fdaf83cf"
+        ],
+        "artifact_count": 1
+      }
+    },
+    {
+      "name": "research_data",
+      "goal": "Compare the uploaded papers with experiment.csv data, find the best configuration under 3M parameters and generate a chart",
+      "single_agent": {
+        "answer_result": "Synthetic supported comparison. [paper.pdf, p.1] [Analysis 5303a551-4d78-47ac-a462-779d0deac490]",
+        "status": "COMPLETED",
+        "evidence_coverage": {
+          "evidence_ids": [],
+          "completed_specialties": []
+        },
+        "latency_seconds": 1.522,
+        "llm_calls": 5,
+        "tool_calls": 3,
+        "tokens": null,
+        "token_usage_status": "unavailable",
+        "delegation_success_rate": null,
+        "delegation_completion_rate": null,
+        "duplicate_work_rate": null,
+        "duplicate_work_denominator": 0,
+        "agent_duration_sum_seconds": 0,
+        "agent_duration_span_seconds": 0,
+        "parallelism_utilization": null,
+        "evidence_types": [
+          "analysis",
+          "workspace"
+        ],
+        "citation_count": 2,
+        "grounded": true,
+        "selection_correct": null,
+        "evidence_type_coverage": 1.0,
+        "evidence_ids": [
+          "ev_paper",
+          "ev_5303a5514d7847aca462779d0deac490"
+        ],
+        "artifact_count": 1
+      },
+      "multi_agent": {
+        "answer_result": "Synthetic supported comparison. [paper.pdf, p.1] [Analysis 46bfe0ce-7872-4463-b16e-71076aba48c0] [Analysis d2d4ee11-fec9-404a-a0f0-af3dee9f4f4d]",
+        "status": "COMPLETED",
+        "evidence_coverage": {
+          "evidence_ids": [
+            "ev_46bfe0ce78724463b16e71076aba48c0",
+            "ev_d2d4ee11fec9404aa0f0af3dee9f4f4d",
+            "ev_paper"
+          ],
+          "completed_specialties": [
+            "data",
+            "research"
+          ]
+        },
+        "latency_seconds": 2.234,
+        "llm_calls": 12,
+        "tool_calls": null,
+        "tokens": null,
+        "token_usage_status": "unavailable",
+        "delegation_success_rate": 1.0,
+        "delegation_completion_rate": 1.0,
+        "duplicate_work_rate": 0.0,
+        "duplicate_work_denominator": 2,
+        "agent_duration_sum_seconds": 1.715,
+        "agent_duration_span_seconds": 1.428,
+        "parallelism_utilization": 1.201,
+        "evidence_types": [
+          "analysis",
+          "workspace"
+        ],
+        "citation_count": 3,
+        "grounded": true,
+        "selection_correct": true,
+        "evidence_type_coverage": 1.0,
+        "evidence_ids": [
+          "ev_paper",
+          "ev_46bfe0ce78724463b16e71076aba48c0",
+          "ev_d2d4ee11fec9404aa0f0af3dee9f4f4d"
+        ],
+        "artifact_count": 1
+      }
+    }
+  ],
+  "real_comparison": "evaluation/results/phase5a/real_comparison.json",
+  "agent_selection_accuracy": 1.0,
+  "routing_accuracy": 1.0,
+  "denominator": 3,
+  "interpretation": "Mixed work adds isolation/review and cost. Same scripted fixture knowledge does not establish better answer quality. Latencies include actual analysis subprocess startup; n=1 each."
+}

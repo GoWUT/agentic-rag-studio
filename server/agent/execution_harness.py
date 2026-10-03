@@ -113,7 +113,9 @@ class ExecutionHarness:
                 Lock(),
             )
 
+        from contextvars import copy_context
         future = self._executor.submit(
+            copy_context().run,
             self._run_for_session,
             session_lock,
             agent,

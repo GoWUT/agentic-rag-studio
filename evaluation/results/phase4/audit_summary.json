@@ -1,0 +1,83 @@
+{
+  "run_id": "f2c38e56-298a-4064-b3b6-2dc74a1a9f83",
+  "executions": [
+    {
+      "id": "1e378e96-4062-4bde-9f06-2c69f047d896",
+      "task_id": "3f6b71b3-cdfa-43cd-acbc-5c60277112cf",
+      "task_step_id": "9770beb6-b5d9-4435-a151-45173ddc5128",
+      "tool_name": "mcp.github.get_file_contents",
+      "provider": "github",
+      "capability": "github.file.read",
+      "operation_type": "read",
+      "risk_level": "low",
+      "status": "SUCCEEDED",
+      "approval_request_id": null,
+      "duration_ms": 792.93
+    },
+    {
+      "id": "8edd8b66-a06e-498c-bb72-af8338ad5782",
+      "task_id": "df637840-b94a-4814-98a0-42627781def9",
+      "task_step_id": "38e06395-5e11-40d9-8e26-a5bb9f02302d",
+      "tool_name": "mcp.github.create_issue",
+      "provider": "github",
+      "capability": "github.issue.create",
+      "operation_type": "write",
+      "risk_level": "high",
+      "status": "REJECTED",
+      "approval_request_id": "b803f9fa-0a72-496d-bca0-a4d3c6070452",
+      "duration_ms": null
+    },
+    {
+      "id": "510c7c49-db4f-4ae2-878c-4aa22eae3dbf",
+      "task_id": "f871a624-4782-4415-9eeb-18d2cef22f69",
+      "task_step_id": "a69157d9-e988-4b1f-8d06-bbdb459120f8",
+      "tool_name": "mcp.github.create_issue",
+      "provider": "github",
+      "capability": "github.issue.create",
+      "operation_type": "write",
+      "risk_level": "high",
+      "status": "SUCCEEDED",
+      "approval_request_id": "2a16cfa3-6978-43d7-ba3b-716e9d86f4ef",
+      "duration_ms": 784.21
+    },
+    {
+      "id": "c02ae3e7-f400-472b-90a6-8892e5b52807",
+      "task_id": "3a8ef92b-07bb-41f3-94a6-3509c1ff2350",
+      "task_step_id": "cc3ed757-c6e8-4040-a117-b11a4f54d213",
+      "tool_name": "mcp.github.create_issue",
+      "provider": "github",
+      "capability": "github.issue.create",
+      "operation_type": "write",
+      "risk_level": "high",
+      "status": "SUCCEEDED",
+      "approval_request_id": "a33e0d65-fca9-4656-86a5-5d4a180471ca",
+      "duration_ms": 800.45
+    }
+  ],
+  "approval_statuses": [
+    "REJECTED",
+    "APPROVED",
+    "EDITED"
+  ],
+  "event_types": [
+    "APPROVAL_APPROVED",
+    "APPROVAL_EDITED",
+    "APPROVAL_REJECTED",
+    "APPROVAL_REQUESTED",
+    "PLAN_CREATED",
+    "STEP_COMPLETED",
+    "STEP_STARTED",
+    "TASK_COMPLETED",
+    "TASK_CREATED",
+    "TASK_RESUMED",
+    "TASK_STARTED",
+    "TASK_WAITING_USER",
+    "TOOL_CALLED",
+    "TOOL_COMPLETED",
+    "TOOL_DISCOVERED",
+    "TOOL_REQUESTED",
+    "TOOL_STARTED"
+  ],
+  "known_secrets_absent_from_logs": true,
+  "known_secrets_absent_from_fixture_database": true
+}

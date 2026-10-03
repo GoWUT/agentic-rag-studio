@@ -4,13 +4,13 @@ import json
 import logging
 import math
 import re
-from threading import RLock
+from server.rag.model_runtime import MODEL_LOAD_LOCK, cached_model_path
 import unicodedata
 
 from langchain_core.documents import Document
 
 LOGGER = logging.getLogger(__name__)
-_MODEL_LOCK = RLock()
+_MODEL_LOCK = MODEL_LOAD_LOCK
 _MODELS = {}
 
 
@@ -63,7 +63,7 @@ class BM25Index:
         return [self.documents[index] for index in order[:k]]
 
 
-def reciprocal_rank_fusion(rankings, k):
+def reciprocal_rank_fusion(rankings, k, *, include_scores=False):
     scores, documents = defaultdict(float), {}
     for ranking in rankings:
         seen = set()
@@ -75,14 +75,19 @@ def reciprocal_rank_fusion(rankings, k):
             documents.setdefault(key, document)
             scores[key] += 1 / (60 + rank)
     order = sorted(scores, key=lambda key: -scores[key])
-    return [documents[key] for key in order[:k]]
+    if not include_scores:
+        return [documents[key] for key in order[:k]]
+    return [Document(page_content=documents[key].page_content,
+                     metadata={**documents[key].metadata, "retrieval_score": scores[key]})
+            for key in order[:k]]
 
 
 class CrossEncoderReranker:
-    def __init__(self, model_name, device="cpu", batch_size=8):
+    def __init__(self, model_name, device="cpu", batch_size=8, *, include_scores=False):
         self.model_name = model_name
         self.device = device
         self.batch_size = batch_size
+        self.include_scores = include_scores
 
     def rerank(self, query, documents):
         if not documents:
@@ -92,9 +97,11 @@ class CrossEncoderReranker:
             key = (self.model_name, self.device)
             if key not in _MODELS:
                 from sentence_transformers import CrossEncoder
-                _MODELS[key] = CrossEncoder(
-                    self.model_name, device=self.device, max_length=512,
-                )
+                try:
+                    model = CrossEncoder(cached_model_path(self.model_name), device=self.device, max_length=512, local_files_only=True)
+                except OSError:
+                    model = CrossEncoder(self.model_name, device=self.device, max_length=512)
+                _MODELS[key] = model
             scores = _MODELS[key].predict(
                 [(query, document.page_content) for document in documents],
                 batch_size=self.batch_size, show_progress_bar=False,
@@ -105,12 +112,16 @@ class CrossEncoderReranker:
         if not all(math.isfinite(score) for score in values):
             raise ValueError("Reranker returned non-finite scores")
         order = sorted(range(len(documents)), key=lambda index: -values[index])
-        return [documents[index] for index in order]
+        if not self.include_scores:
+            return [documents[index] for index in order]
+        return [Document(page_content=documents[index].page_content,
+                         metadata={**documents[index].metadata, "rerank_score": values[index]})
+                for index in order]
 
 
 class PDFRetriever:
     def __init__(self, vectorstore, *, top_k=5, candidate_k=20,
-                 hybrid=True, reranker=None, fallback=True):
+                 hybrid=True, reranker=None, fallback=True, include_scores=False):
         if top_k <= 0 or candidate_k < top_k:
             raise ValueError("candidate_k must be >= top_k > 0")
         self.vectorstore = vectorstore
@@ -118,6 +129,7 @@ class PDFRetriever:
         self.candidate_k = candidate_k
         self.reranker = reranker
         self.fallback = fallback
+        self.include_scores = include_scores
         self.bm25 = None
         if hybrid:
             records = vectorstore.get(include=["documents", "metadatas"])
@@ -134,7 +146,7 @@ class PDFRetriever:
         rankings = [dense]
         if self.bm25 is not None:
             rankings.append(self.bm25.search(query, self.candidate_k))
-        candidates = reciprocal_rank_fusion(rankings, self.candidate_k)
+        candidates = reciprocal_rank_fusion(rankings, self.candidate_k, include_scores=self.include_scores)
         if self.reranker is not None and candidates:
             try:
                 candidates = self.reranker.rerank(query, candidates)
@@ -152,6 +164,7 @@ def build_retriever(vectorstore, config):
             config.get("RERANKER_MODEL", "BAAI/bge-reranker-base"),
             config.get("RERANKER_DEVICE", "cpu"),
             config.get("RERANKER_BATCH_SIZE", 8),
+            include_scores=config.get("RETRIEVAL_INCLUDE_SCORES", False),
         )
     return PDFRetriever(
         vectorstore,
@@ -160,4 +173,5 @@ def build_retriever(vectorstore, config):
         hybrid=config.get("HYBRID_RETRIEVAL_ENABLED", True),
         reranker=reranker,
         fallback=config.get("RERANKER_FALLBACK", True),
+        include_scores=config.get("RETRIEVAL_INCLUDE_SCORES", False),
     )

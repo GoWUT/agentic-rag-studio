@@ -1,0 +1,76 @@
+name: validation
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+permissions: {contents: read}
+env:
+  AUTH_ENABLED: "false"
+  LANGSMITH_TRACING: "false"
+  DEEPSEEK_API_KEY: fixture-not-a-real-key
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v7
+        with: {version: "0.12.21", python-version: "3.11"}
+      - run: uv lock --check
+      - run: python -m compileall -q server client scripts evaluation alembic
+      - run: git diff --check
+  unit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v7
+        with: {version: "0.12.21", python-version: "3.11"}
+      - run: uv sync --frozen --extra ocr
+      - run: uv run --no-sync python -m unittest discover -v
+  auth-rbac:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v7
+        with: {version: "0.12.21", python-version: "3.11"}
+      - run: uv sync --frozen
+      - run: uv run --no-sync python -m unittest test_phase5b2 -v
+  postgres:
+    strategy:
+      matrix: {suite: [integration, migration, worker]}
+    name: postgres-${{ matrix.suite }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:17-bookworm
+        env: {POSTGRES_USER: fixture, POSTGRES_PASSWORD: fixture-ci-only, POSTGRES_DB: fixture}
+        ports: ["5432:5432"]
+        options: --health-cmd "pg_isready -U fixture" --health-interval 5s --health-timeout 3s --health-retries 20
+    env:
+      PHASE5B1_TEST_DATABASE_URL: postgresql+psycopg://fixture:fixture-ci-only@localhost:5432/fixture
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v7
+        with: {version: "0.12.21", python-version: "3.11"}
+      - run: uv sync --frozen
+      - if: matrix.suite == 'integration'
+        run: uv run --no-sync python -m unittest test_phase5b1_postgres test_phase5b2_postgres -v
+      - if: matrix.suite == 'migration'
+        run: uv run --no-sync python -m unittest test_phase5b2_postgres.MigrationTests -v
+      - if: matrix.suite == 'worker'
+        run: uv run --no-sync python -m evaluation.phase5b2.runtime_smoke
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: "postgres-${{ matrix.suite }}", path: "evaluation/results/phase5b2/"}
+  docker-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with: {context: ., load: true, tags: "agentic-rag-studio:ci", push: false}
+      - run: docker run --rm --entrypoint sh agentic-rag-studio:ci -c 'test "$(id -u)" = 10001 && test ! -e /app/.env && test ! -e /app/.rag_workspace && python -c "import server.auth.service"'
+      - run: docker history --no-trunc agentic-rag-studio:ci

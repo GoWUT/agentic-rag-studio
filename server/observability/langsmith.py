@@ -31,6 +31,8 @@ def init_langsmith(
     - Your provided vars: LANGSMITH_TRACING, LANGSMITH_API_KEY, LANGSMITH_PROJECT, LANGSMITH_ENDPOINT
     """
     load_dotenv()
+    os.environ.setdefault("LANGSMITH_HIDE_INPUTS", "true")
+    os.environ.setdefault("LANGSMITH_HIDE_OUTPUTS", "true")
 
     # Accept either naming scheme.
     tracing_flag = (

@@ -147,10 +147,15 @@ class IndexStatus:
     updated_at: str
 
 
-class _IndexStatusStore:
+from server.persistence import Database
+
+
+class _IndexStatusStore(Database):
     def __init__(self, database_path: Path):
-        self.database_path = database_path
-        self.database_path.parent.mkdir(parents=True, exist_ok=True)
+        super().__init__(database_path)
+        self.database_path = self.path
+        if self.backend == 'postgresql':
+            return
         with self._connect() as connection:
             connection.execute("PRAGMA journal_mode=WAL")
             connection.execute(
@@ -178,15 +183,8 @@ class _IndexStatusStore:
                     "ALTER TABLE indexes ADD COLUMN owner_pid INTEGER"
                 )
 
-    @contextmanager
-    def _connect(self) -> Iterator[sqlite3.Connection]:
-        connection = sqlite3.connect(self.database_path, timeout=30)
-        connection.row_factory = sqlite3.Row
-        try:
-            with connection:
-                yield connection
-        finally:
-            connection.close()
+    def _connect(self):
+        return self.connect()
 
     def set(
         self,
@@ -291,6 +289,7 @@ class DocumentIngestionPipeline:
         workspace: str | Path,
         max_upload_bytes: int,
         index_adapter: IndexAdapter | None = None,
+        persistence=None,
     ):
         if max_upload_bytes <= 0:
             raise ValueError("max_upload_bytes must be positive")
@@ -301,9 +300,10 @@ class DocumentIngestionPipeline:
         self.staging_root.mkdir(parents=True, exist_ok=True)
         self._cleanup_abandoned_staging()
         self._statuses = _IndexStatusStore(
-            self.workspace / "indexes.sqlite3"
+            persistence or self.workspace / "indexes.sqlite3"
         )
-        self._statuses.fail_interrupted()
+        if not persistence:
+            self._statuses.fail_interrupted()
         self._locks_guard = RLock()
         self._file_locks: dict[str, RLock] = {}
 

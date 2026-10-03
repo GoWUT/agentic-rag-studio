@@ -1,0 +1,775 @@
+{
+  "fixture": "same synthetic 3 PDFs + experiment.xlsx; actual configured LLM; n=1 per mode",
+  "single_agent": {
+    "answer_result": "## Methods reported in the three papers\n\n| Paper | Method | Params | mIoU | Claimed design story |\n|---|---|---|---|---|\n| paper_1.pdf | Method A — convolutional segmentation | 2.5M | 73.27 | Strong mid-budget convolutional baseline [paper_1.pdf, p.1] |\n| paper_2.pdf | Method B — attention segmentation | 3.2M | 76.0 | Attention gives the highest quality, at the highest cost [paper_2.pdf, p.1] |\n| paper_3.pdf | Method C — compact convolution baseline | 2.0M | 70.0 | Cheapest configuration; lower quality [paper_3.pdf, p.1] |\n\nAll three papers describe the same fixture benchmark and evaluation protocol, and all three explicitly frame their claims as a **descriptive quality/cost tradeoff only — no causal or ablation claim** [paper_1.pdf, p.1][paper_2.pdf, p.1][paper_3.pdf, p.1].\n\n## experiment.xlsx results\n\nThe workbook contains a single sheet with 3 rows and 3 columns (`model`, `params_m`, `miou`), no missing values [Analysis 34e957e8-dd44-4233-ad78-920802f6fc85]:\n\n| model | params_m | miou |\n|---|---|---|\n| A | 2.5 | 73.27 |\n| B | 3.2 | 76.0 |\n| C | 2.0 | 70.0 |\n\nAcross the full set: mean params 2.57M, mean mIoU 73.09, range 70.0–76.0 [Analysis 34e957e8-dd44-4233-ad78-920802f6fc85].\n\n## Best configuration under 3M parameters\n\nFiltering to `params_m < 3` leaves two candidates:\n\n- **A — 2.5M params, mIoU 73.27** ← best\n- C — 2.0M params, mIoU 70.0\n\n**Model A is the best configuration under the 3M budget**, beating C by 3.27 mIoU points for 0.5M additional parameters [Analysis 34e957e8-dd44-4233-ad78-920802f6fc85]. Model B is excluded: at 3.2M parameters it exceeds the budget, though it posts the highest raw mIoU (76.0) [Analysis 34e957e8-dd44-4233-ad78-920802f6fc85].\n\n## Chart\n\nA `params_m` vs `miou` comparison chart was generated from experiment.xlsx and saved as **comparison.png** in the workspace [Analysis 34e957e8-dd44-4233-ad78-920802f6fc85].\n\n## Do the results support the reported design advantages?\n\n**Largely yes, but only at the descriptive level — and this is not independent validation.**\n\nSupporting points:\n- The experiment values are **numerically identical** to the paper-reported values for all three methods (A: 2.5M/73.27; B: 3.2M/76.0; C: 2.0M/70.0) [Analysis 34e957e8-dd44-4233-ad78-920802f6fc85][paper_1.pdf, p.1][paper_2.pdf, p.1][paper_3.pdf, p.1]. The ordering and gaps confirm the reported tradeoff: A over C by 3.27 points at +0.5M params, and B over A by 2.73 points at +0.7M params — the same arithmetic stated in the papers [paper_1.pdf, p.1].\n- The quality-vs-cost pattern (attention > convolution > compact baseline, with monotonically increasing parameter count) is reproduced exactly.\n\nImportant limitations:\n- Because the workbook values match the paper values exactly rather than differing by any re-measured amount, this is a **replication of the fixture numbers, not an independent re-test**. It cannot confirm that the design choices (attention vs. convolution) *cause* the gains.\n- The papers themselves state their claims are **descriptive tradeoff only, with no causal or ablation evidence**, and the fixture provides **three configurations with no uncertainty estimates** [paper_2.pdf, p.1].\n- The dataset is a 3-row synthetic fixture, so any conclusion is limited to these three points; there is no statistical power to support generalization.\n\n**Bottom line:** Model A is the best sub-3M configuration (2.5M params, 73.27 mIoU), and experiment.xlsx is fully consistent with the three papers' reported parameter budgets and mIoU figures. The results are consistent with the reported design advantages as a *quality/cost ordering*, but they do not independently validate a causal design advantage, since the values reproduce the fixtures' own numbers and carry no uncertainty estimates.",
+    "status": "COMPLETED",
+    "evidence_coverage": {
+      "evidence_ids": [
+        "ev_6225896fa858bc2524487834",
+        "ev_774cab490f47dfef6ff04fd5",
+        "ev_298c879c6e293832c92774fc",
+        "ev_34e957e8dd444233ad78920802f6fc85"
+      ],
+      "completed_specialties": []
+    },
+    "latency_seconds": 114.907,
+    "llm_calls": 6,
+    "tool_calls": 3,
+    "tokens": 42738,
+    "token_usage_status": "available",
+    "delegation_success_rate": null,
+    "delegation_completion_rate": null,
+    "duplicate_work_rate": null,
+    "duplicate_work_denominator": 0,
+    "agent_duration_sum_seconds": 0,
+    "agent_duration_span_seconds": 0,
+    "parallelism_utilization": null,
+    "task_id": "02039fee-4e1a-44db-a25a-753ead327ebe",
+    "runs": [],
+    "delegations": [],
+    "citations": [
+      {
+        "citation_id": "1",
+        "evidence_id": "ev_774cab490f47dfef6ff04fd5",
+        "document_name": "paper_1.pdf",
+        "page": 1,
+        "title": null,
+        "url": null,
+        "execution_id": null,
+        "dataset_ids": [],
+        "artifact_ids": []
+      },
+      {
+        "citation_id": "2",
+        "evidence_id": "ev_6225896fa858bc2524487834",
+        "document_name": "paper_2.pdf",
+        "page": 1,
+        "title": null,
+        "url": null,
+        "execution_id": null,
+        "dataset_ids": [],
+        "artifact_ids": []
+      },
+      {
+        "citation_id": "3",
+        "evidence_id": "ev_298c879c6e293832c92774fc",
+        "document_name": "paper_3.pdf",
+        "page": 1,
+        "title": null,
+        "url": null,
+        "execution_id": null,
+        "dataset_ids": [],
+        "artifact_ids": []
+      },
+      {
+        "citation_id": "4",
+        "evidence_id": "ev_34e957e8dd444233ad78920802f6fc85",
+        "document_name": null,
+        "page": null,
+        "title": "Dataset analysis",
+        "url": null,
+        "execution_id": "34e957e8-dd44-4233-ad78-920802f6fc85",
+        "dataset_ids": [
+          "df9911f5-221f-40f8-9749-43828776b3b3"
+        ],
+        "artifact_ids": [
+          "d0df7724-1552-4361-8fc6-3028b9904d12"
+        ]
+      }
+    ],
+    "grounding": true,
+    "evidence_count": 4
+  },
+  "multi_agent": {
+    "answer_result": "## Comparison and best configuration\n\nThe evidence is a **synthetic Phase 3 fixture, not published research**. It reports Model A: 2.5M params, mIoU 73.27; Model B: 3.2M params, mIoU 76.0; Model C: 2.0M params, mIoU 70.0 [paper_1.pdf, p.1], [paper_2.pdf, p.1], [paper_3.pdf, p.1]. The fixture labels A as convolutional segmentation, B as attention segmentation, and C as a compact convolution baseline; all use the same fixture benchmark/evaluation protocol [paper_1.pdf, p.1], [paper_2.pdf, p.1], [paper_3.pdf, p.1]. It states A improves over C by 3.27 points at 0.5M more params, and B improves over A by 2.73 points at 0.7M more params [paper_1.pdf, p.1], [paper_2.pdf, p.1], [paper_3.pdf, p.1]. Claims are descriptive quality/cost tradeoff only; no causal or ablation claim and no uncertainty estimates are reported [paper_1.pdf, p.1], [paper_2.pdf, p.1], [paper_3.pdf, p.1].\n\n`experiment.xlsx` is 3 rows × 3 columns (`model`, `params_m`, `miou`) with no missing values; its sample is A = 2.5M/73.27, B = 3.2M/76.0, C = 2.0M/70.0 [Analysis af3903c7-a24e-416c-ab49-bcaa84703b03], [Analysis 88faef1d-07be-4472-b83f-7fae1197c8b9], [Analysis 5630ded8-30ff-4cd2-99b8-7b773feef17f].\n\nComputed output ranks by mIoU: B 76.00 > A 73.27 > C 70.00 [Analysis 2b296c03-333b-463b-bcca-96eaf0ae0bb2], [Analysis 5630ded8-30ff-4cd2-99b8-7b773feef17f]. Best under 3M parameters is **Model A** (2.5M, mIoU 73.27); B is excluded because it is over budget at 3.2M [Analysis 2b296c03-333b-463b-bcca-96eaf0ae0bb2], [Analysis 5630ded8-30ff-4cd2-99b8-7b773feef17f]. Among sub-3M models, C has higher computed mIoU-per-million (35.000 vs 29.308 for A), while A is more accurate [Analysis 5630ded8-30ff-4cd2-99b8-7b773feef17f]. Computed Pearson correlation between `params_m` and `miou` is 0.9891; linear trend slope/intercept is 4.9294/60.4380 [Analysis 2b296c03-333b-463b-bcca-96eaf0ae0bb2]. Computed output reports `comparison.png` and `summary.json` saved [Analysis 2b296c03-333b-463b-bcca-96eaf0ae0bb2], [Analysis 5630ded8-30ff-4cd2-99b8-7b773feef17f].\n\n## Do results support reported design advantages?\n\nNumerically, yes for the descriptive tradeoff: spreadsheet values match the synthetic fixture values, including A over C and B over A differences [paper_1.pdf, p.1], [paper_2.pdf, p.1], [paper_3.pdf, p.1], [Analysis 5630ded8-30ff-4cd2-99b8-7b773feef17f]. This does **not** establish that architecture/design caused the improvements: the sources explicitly claim no causal or ablation claim and report no uncertainty estimates [paper_1.pdf, p.1], [paper_2.pdf, p.1], [paper_3.pdf, p.1]. With n=3 and no uncertainty estimates, significance/uncertainty cannot be assessed from these excerpts [Analysis 2b296c03-333b-463b-bcca-96eaf0ae0bb2], [Analysis 5630ded8-30ff-4cd2-99b8-7b773feef17f]. The provided excerpts do not support causal design claims.",
+    "status": "COMPLETED",
+    "evidence_coverage": {
+      "evidence_ids": [
+        "ev_2b296c03333b463bbcca96eaf0ae0bb2",
+        "ev_431753db3c87eca9b52937a8",
+        "ev_536f15c200449785cdc9e1da",
+        "ev_5630ded830ff4cd299b87b773feef17f",
+        "ev_88faef1d07be4472b83f7fae1197c8b9",
+        "ev_af3903c7a24e416cab49bcaa84703b03",
+        "ev_b129ca8cab84f9457f1c5443"
+      ],
+      "completed_specialties": [
+        "research"
+      ]
+    },
+    "latency_seconds": 212.906,
+    "llm_calls": 19,
+    "tool_calls": 5,
+    "tokens": 108497,
+    "token_usage_status": "available",
+    "delegation_success_rate": 0.5,
+    "delegation_completion_rate": 1.0,
+    "duplicate_work_rate": 0.0,
+    "duplicate_work_denominator": 3,
+    "agent_duration_sum_seconds": 102.906,
+    "agent_duration_span_seconds": 116.407,
+    "parallelism_utilization": 0.884,
+    "task_id": "19293f3c-2d73-496a-a7d4-47421a178682",
+    "runs": [
+      {
+        "id": "cc5ad047-0718-40da-91bb-d03021c1a4e9",
+        "task_id": "19293f3c-2d73-496a-a7d4-47421a178682",
+        "delegation_id": null,
+        "agent_id": "supervisor",
+        "status": "COMPLETED",
+        "objective": "Compare the methods reported in the three uploaded papers with experiment.xlsx results. Find the best configuration under 3M parameters, generate a chart, and assess whether our results support the reported design advantages. Use only uploaded data and documents; these are synthetic fixtures.",
+        "input_summary": "Compare the methods reported in the three uploaded papers with experiment.xlsx results. Find the best configuration under 3M parameters, generate a chart, and assess whether our results support the reported design advantages. Use only uploaded data and documents; these are synthetic fixtures.",
+        "output_summary": "## Comparison and best configuration\n\nThe evidence is a **synthetic Phase 3 fixture, not published research**. It reports Model A: 2.5M params, mIoU 73.27; Model B: 3.2M params, mIoU 76.0; Model C: 2.0M params, mIoU 70.0 [paper_1.pdf, p.1], [paper_2.pdf, p.1], [paper_3.pdf, p.1]. The fixture labels A as convolutional segmentation, B as attention segmentation, and C as a compact convolution baseline; all use the same fixture benchmark/evaluation protocol [paper_1.pdf, p.1], [paper_2.pdf, p.1], [paper_3.pdf, p.1]. It states A improves over C by 3.27 points at 0.5M more params, and B improves over A by 2.73 points at 0.7M more params [paper_1.pdf, p.1], [paper_2.pdf, p.1], [paper_3.pdf, p.1]. Claims are descriptive quality/cost tradeoff only; no causal or ablation claim and no uncertainty estimates are reported [paper_1.pdf, p.1], [paper_2.pdf, p.1], [paper_3.pdf, p.1].\n\n`experiment.xlsx` is 3 rows × 3 columns (`model`, `params_m`, `miou`) with no missing values; its sample is A = 2.5M/73.27, B = 3.2M/76.0, C = 2.0M/70.0 [Analysis af3903c7-a24e-416c-ab49-bcaa84703b03], [Analysis 88faef1d-07be-4472-b83f-7fae1197c8b9], [Analysis 5630ded8-30ff-4cd2-99b8-7b773feef17f].\n\nComputed output ranks by mIoU: B 76.00 > A 73.27 > C 70.00 [Analysis 2b296c03-333b-463b-bcca-96eaf0ae0bb2], [Analysis 5630ded8-30ff-4cd2-99b8-7b773feef17f]. Best under 3M parameters is **Model A** (2.5M, mIoU 73.27); B is excluded because it is over budget at 3.2M [Analysis 2b296c03-333b-463b-bcca-96eaf0ae0bb2], [Analysis 5630ded8-30ff-4cd2-99b8-7b773feef17f]. Among sub-3M models, C has higher computed mIoU-per-million (35.000 vs 29.308 for A), while A is more accurate [Analysis 5630ded8-30ff-4cd2-99b8-7b773feef17f]. Computed Pearson correlation between `params_m` and `miou` is 0.9891; linear trend slope/intercept is 4.9294/60.4380 [Analysis 2b296c03-333b-463b-bcca-96eaf0ae0bb2]. Computed output reports `comparison.png` and `summary.json` saved [Analysis 2b296c03-333b-463b-bcca-96eaf0ae0bb2], [Analysis 5630ded8-30ff-4cd2-99b8-7b773feef17f].\n\n## Do results support reported design advantages?\n\nNumerically, yes for the descriptive tradeoff: spreadsheet values match the synthetic fixture values, including A over C and B over A differences [paper_1.pdf, p.1], [paper_2.pdf, p.1], [paper_3.pdf, p.1], [Analysis 5630ded8-30ff-4cd2-99b8-7b773feef17f]. This does **not** establish that architecture/design caused the improvements: the sources explicitly claim no causal or ablation claim and report no uncertainty estimates [paper_1.pdf, p.1], [paper_2.pdf, p.1], [paper_3.pdf, p.1]. With n=3 and no uncertainty estimates, significance/uncertainty cannot be assessed from these excerpts [Analysis 2b296c03-333b-463b-bcca-96eaf0ae0bb2], [Analysis 5630ded8-30ff-4cd2-99b8-7b773feef17f]. The provided excerpts do not support causal design claims.",
+        "started_at": "2026-10-02T10:09:18.656442+00:00",
+        "completed_at": "2026-10-02T10:12:50.315722+00:00",
+        "duration_ms": 211659.28,
+        "llm_calls": 10,
+        "tool_calls": 0,
+        "iterations": 10,
+        "tokens": 54011,
+        "token_usage_status": "available",
+        "error_type": null,
+        "metadata": {
+          "orchestration_mode": "multi_agent",
+          "memory_extraction_started": true,
+          "memory_extraction_completed": true,
+          "memory_written": 3
+        }
+      },
+      {
+        "id": "d1101630-d9c4-4982-a2e4-72efab72c517",
+        "task_id": "19293f3c-2d73-496a-a7d4-47421a178682",
+        "delegation_id": "d8bb6683-92f8-4fe7-91b0-8ca4e3abe285",
+        "agent_id": "research",
+        "status": "COMPLETED",
+        "objective": "Using only the three uploaded paper/document fixtures, extract and compare their reported method designs: architectural components, training/optimization choices, claimed efficiency-motivated design advantages, and any reported parameter counts or mIoU figures. Return a per-paper fact table with explicit citations/locations for each claim, plus a short statement of what each paper claims its design advantages are and under what stated conditions. Do not analyze experiment.xlsx and do not perform cross-specialty comparison against dataset results; reported facts only, with any missing information flagged as 'not reported'.",
+        "input_summary": "Using only the three uploaded paper/document fixtures, extract and compare their reported method designs: architectural components, training/optimization choices, claimed efficiency-motivated design advantages, and any reported parameter counts or mIoU figures. Return a per-paper fact table with explicit citations/locations for each claim, plus a short statement of what each paper claims its design advantages are and under what stated conditions. Do not analyze experiment.xlsx and do not perform cross-specialty comparison against dataset results; reported facts only, with any missing informati",
+        "output_summary": "All three uploaded paper fixtures were located and read; each is a single-page synthetic fixture sharing an identical boilerplate block (fixture metric table + tradeoff statements). Per-paper facts extracted: Paper 1 = Method A, convolutional segmentation, 2.5M params, mIoU 73.27; Paper 2 = Method B, attention segmentation, 3.2M params, mIoU 76.0; Paper 3 = Method C, compact convolution baseline, 2.0M params, mIoU 70.0. All three state methods use the same fixture benchmark/evaluation protocol and make only descriptive quality/cost tradeoff claims (no causal or ablation claims, no uncertainty estimates). Architectural component breakdown, training/optimization choices (optimizer, LR schedule, epochs, losses, augmentation), and explicit efficiency-motivation statements beyond the cost/quality tradeoff are NOT reported in any fixture. All figures are labeled synthetic test values, not published research claims. experiment.xlsx was not analyzed and no cross-specialty comparison was performed.",
+        "started_at": "2026-10-02T10:09:30.292213+00:00",
+        "completed_at": "2026-10-02T10:09:42.338006+00:00",
+        "duration_ms": 12045.79,
+        "llm_calls": 2,
+        "tool_calls": 1,
+        "iterations": 1,
+        "tokens": 4973,
+        "token_usage_status": "available",
+        "error_type": null,
+        "metadata": {
+          "execution_group": 0,
+          "namespace": "research:d8bb6683-92f8-4fe7-91b0-8ca4e3abe285",
+          "revision_of": null,
+          "evidence_count": 3,
+          "artifact_count": 0
+        }
+      },
+      {
+        "id": "43cded7f-60a4-4c98-a5b2-f811be147e3a",
+        "task_id": "19293f3c-2d73-496a-a7d4-47421a178682",
+        "delegation_id": "fe676593-7bfa-4283-9984-5bc077d2b44c",
+        "agent_id": "data",
+        "status": "PARTIAL",
+        "objective": "Independently analyze the uploaded dataset experiment.xlsx (Sheet1: model, params_m, miou; 3 rows) using only that dataset. Compute the summary statistics from the raw rows, rank models by mIoU, and determine the best configuration satisfying a strict parameter budget of fewer than 3M parameters (report the ranked candidates and the selected best model with its params_m and miou, and note explicitly that the top-mIoU model B (3.2M) is excluded as over budget). Also verify the current parameter-vs-mIoU relationship (e.g., correlation/trend) and produce a chart comparing params_m and miou across models. Report the chart artifact reference and the underlying numbers; do not interpret paper claims or perform cross-specialty comparison.",
+        "input_summary": "Independently analyze the uploaded dataset experiment.xlsx (Sheet1: model, params_m, miou; 3 rows) using only that dataset. Compute the summary statistics from the raw rows, rank models by mIoU, and determine the best configuration satisfying a strict parameter budget of fewer than 3M parameters (report the ranked candidates and the selected best model with its params_m and miou, and note explicitly that the top-mIoU model B (3.2M) is excluded as over budget). Also verify the current parameter-vs-mIoU relationship (e.g., correlation/trend) and produce a chart comparing params_m and miou across",
+        "output_summary": "Collected evidence is available; structured summary could not be validated.",
+        "started_at": "2026-10-02T10:09:30.277353+00:00",
+        "completed_at": "2026-10-02T10:10:30.849028+00:00",
+        "duration_ms": 60571.67,
+        "llm_calls": 3,
+        "tool_calls": 2,
+        "iterations": 2,
+        "tokens": 24973,
+        "token_usage_status": "available",
+        "error_type": null,
+        "metadata": {
+          "execution_group": 0,
+          "namespace": "data:fe676593-7bfa-4283-9984-5bc077d2b44c",
+          "revision_of": null,
+          "evidence_count": 2,
+          "artifact_count": 2
+        }
+      },
+      {
+        "id": "a39db6c5-9682-413b-94e3-01860482ce1a",
+        "task_id": "19293f3c-2d73-496a-a7d4-47421a178682",
+        "delegation_id": "256fd761-077f-49db-b907-65d709b4dd50",
+        "agent_id": "reviewer",
+        "status": "COMPLETED",
+        "objective": "Review evidence, coverage, contradictions and requirements.",
+        "input_summary": "Review evidence, coverage, contradictions and requirements.",
+        "output_summary": "needs_revision",
+        "started_at": "2026-10-02T10:10:41.143527+00:00",
+        "completed_at": "2026-10-02T10:10:56.347641+00:00",
+        "duration_ms": 15204.11,
+        "llm_calls": 1,
+        "tool_calls": 0,
+        "iterations": 1,
+        "tokens": 7492,
+        "token_usage_status": "available",
+        "error_type": null,
+        "metadata": {
+          "execution_group": 1,
+          "namespace": "reviewer:256fd761-077f-49db-b907-65d709b4dd50",
+          "revision_of": null,
+          "evidence_count": 5,
+          "artifact_count": 2
+        }
+      },
+      {
+        "id": "70daf92a-57c4-4cf3-92a0-28381ef62a6c",
+        "task_id": "19293f3c-2d73-496a-a7d4-47421a178682",
+        "delegation_id": "c9acf5e9-a9c8-42b8-bd47-6e01d334c63b",
+        "agent_id": "data",
+        "status": "PARTIAL",
+        "objective": "Fill only this review gap: data: missing evidence or incomplete analysis. Address only: data: missing evidence or incomplete analysis. Summary unavailable: ValueError",
+        "input_summary": "Fill only this review gap: data: missing evidence or incomplete analysis. Address only: data: missing evidence or incomplete analysis. Summary unavailable: ValueError",
+        "output_summary": "Data-gap review: experiment.xlsx contains exactly 3 rows/3 columns (model, params_m, miou) with no missing values and no uncertainty columns; the three uploaded papers each report one of the same three fixture configurations (Paper 1 = Method A 2.5M/73.27, Paper 2 = Method B 3.2M/76.0, Paper 3 = Method C 2.0M/70.0), so paper-reported numbers match the spreadsheet values exactly for all three models. Computed analysis output ranks B (76.0) > A (73.27) > C (70.0) and selects A as the best configuration under the 3M-parameter budget (2.5M, mIoU 73.27); B (3.2M) is excluded as over budget. Reported metrics are descriptive only (Pearson r = 0.9891 on n=3; slope 4.9294, intercept 60.4380), and the sources explicitly state no causal/ablation claim and no uncertainty estimates. Evidence collection is complete for what the sources contain, but two parts of the gap could not be closed: (1) no variance, CI, seed, or per-fold results exist anywhere in the supplied evidence, so accuracy differences of 2.73-3.27 mIoU points cannot be shown to exceed noise; (2) the papers supply no training protocol, benchmark definition, dataset, or hyperparameter detail, so architecture-vs-parameter-count effects cannot be separated. Correlation/regression fitted on three points is reported as a computed output but is not statistically reliable and is not a basis for any claim.",
+        "started_at": "2026-10-02T10:10:56.395503+00:00",
+        "completed_at": "2026-10-02T10:11:26.683887+00:00",
+        "duration_ms": 30288.38,
+        "llm_calls": 3,
+        "tool_calls": 2,
+        "iterations": 2,
+        "tokens": 17048,
+        "token_usage_status": "available",
+        "error_type": null,
+        "metadata": {
+          "execution_group": 1,
+          "namespace": "data:c9acf5e9-a9c8-42b8-bd47-6e01d334c63b",
+          "revision_of": "fe676593-7bfa-4283-9984-5bc077d2b44c",
+          "evidence_count": 7,
+          "artifact_count": 2
+        }
+      }
+    ],
+    "delegations": [
+      {
+        "id": "d8bb6683-92f8-4fe7-91b0-8ca4e3abe285",
+        "task_id": "19293f3c-2d73-496a-a7d4-47421a178682",
+        "supervisor_run_id": "cc5ad047-0718-40da-91bb-d03021c1a4e9",
+        "agent_run_id": "d1101630-d9c4-4982-a2e4-72efab72c517",
+        "agent_id": "research",
+        "objective": "Using only the three uploaded paper/document fixtures, extract and compare their reported method designs: architectural components, training/optimization choices, claimed efficiency-motivated design advantages, and any reported parameter counts or mIoU figures. Return a per-paper fact table with explicit citations/locations for each claim, plus a short statement of what each paper claims its design advantages are and under what stated conditions. Do not analyze experiment.xlsx and do not perform cross-specialty comparison against dataset results; reported facts only, with any missing information flagged as 'not reported'.",
+        "status": "COMPLETED",
+        "execution_group": 0,
+        "created_at": "2026-10-02T10:09:30.232825+00:00",
+        "started_at": "2026-10-02T10:09:30.292213+00:00",
+        "completed_at": "2026-10-02T10:09:42.338006+00:00",
+        "result_json": {
+          "delegation_id": "d8bb6683-92f8-4fe7-91b0-8ca4e3abe285",
+          "agent_id": "research",
+          "revision_of": null,
+          "status": "completed",
+          "summary": "All three uploaded paper fixtures were located and read; each is a single-page synthetic fixture sharing an identical boilerplate block (fixture metric table + tradeoff statements). Per-paper facts extracted: Paper 1 = Method A, convolutional segmentation, 2.5M params, mIoU 73.27; Paper 2 = Method B, attention segmentation, 3.2M params, mIoU 76.0; Paper 3 = Method C, compact convolution baseline, 2.0M params, mIoU 70.0. All three state methods use the same fixture benchmark/evaluation protocol and make only descriptive quality/cost tradeoff claims (no causal or ablation claims, no uncertainty estimates). Architectural component breakdown, training/optimization choices (optimizer, LR schedule, epochs, losses, augmentation), and explicit efficiency-motivation statements beyond the cost/quality tradeoff are NOT reported in any fixture. All figures are labeled synthetic test values, not published research claims. experiment.xlsx was not analyzed and no cross-specialty comparison was performed.",
+          "evidence_ids": [
+            "ev_536f15c200449785cdc9e1da",
+            "ev_431753db3c87eca9b52937a8",
+            "ev_b129ca8cab84f9457f1c5443"
+          ],
+          "artifact_ids": [],
+          "unresolved_questions": [
+            "Architectural component details (block design, attention formulation for Method B, compact-conv design for Method C) are not reported in the fixtures.",
+            "Training/optimization choices (optimizer, LR schedule, epochs, losses, augmentation, pretraining) are not reported in any fixture.",
+            "Efficiency-motivation rationale is limited to the descriptive cost/quality tradeoff; no stated efficiency design mechanism or target deployment condition is reported.",
+            "The exact benchmark/dataset and evaluation protocol behind the fixture numbers are not identified by name.",
+            "No uncertainty estimates, seeds, or variance figures are provided for the reported mIoU/parameter values."
+          ],
+          "confidence": 0.9,
+          "payload": {
+            "delegation_id": "d8bb6683-92f8-4fe7-91b0-8ca4e3abe285",
+            "status": "completed",
+            "summary": "All three uploaded paper fixtures were located and read; each is a single-page synthetic fixture sharing an identical boilerplate block (fixture metric table + tradeoff statements). Per-paper facts extracted: Paper 1 = Method A, convolutional segmentation, 2.5M params, mIoU 73.27; Paper 2 = Method B, attention segmentation, 3.2M params, mIoU 76.0; Paper 3 = Method C, compact convolution baseline, 2.0M params, mIoU 70.0. All three state methods use the same fixture benchmark/evaluation protocol and make only descriptive quality/cost tradeoff claims (no causal or ablation claims, no uncertainty estimates). Architectural component breakdown, training/optimization choices (optimizer, LR schedule, epochs, losses, augmentation), and explicit efficiency-motivation statements beyond the cost/quality tradeoff are NOT reported in any fixture. All figures are labeled synthetic test values, not published research claims. experiment.xlsx was not analyzed and no cross-specialty comparison was performed.",
+            "findings": [
+              {
+                "claim": "Paper 1 (paper_1.pdf): Method A is a convolutional segmentation method with 2.5 million parameters and reported mIoU 73.27. The fixture states all synthetic methods use the same fixture benchmark and evaluation protocol, and the paper's stated claim is a descriptive quality/cost tradeoff only, with no causal or ablation claim.",
+                "evidence_ids": [
+                  "ev_431753db3c87eca9b52937a8"
+                ],
+                "confidence": 0.95
+              },
+              {
+                "claim": "Paper 2 (paper_2.pdf): Method B is an attention segmentation method with 3.2 million parameters and reported mIoU 76.0, under the same fixture benchmark and evaluation protocol; stated claim is descriptive quality/cost tradeoff only, no causal or ablation claim.",
+                "evidence_ids": [
+                  "ev_b129ca8cab84f9457f1c5443"
+                ],
+                "confidence": 0.95
+              },
+              {
+                "claim": "Paper 3 (paper_3.pdf): Method C is a compact convolution baseline with 2.0 million parameters and reported mIoU 70.0, under the same fixture benchmark and evaluation protocol; stated claim is descriptive quality/cost tradeoff only, no causal or ablation claim.",
+                "evidence_ids": [
+                  "ev_536f15c200449785cdc9e1da"
+                ],
+                "confidence": 0.95
+              },
+              {
+                "claim": "Reported parameter/efficiency tradeoff statements (identical text in all three fixtures): A improves mIoU over C by 3.27 points at 0.5M more parameters; B improves mIoU over A by 2.73 points at 0.7M more parameters. These are the only stated design-advantage conditions, framed purely as cost/quality tradeoffs.",
+                "evidence_ids": [
+                  "ev_431753db3c87eca9b52937a8",
+                  "ev_b129ca8cab84f9457f1c5443",
+                  "ev_536f15c200449785cdc9e1da"
+                ],
+                "confidence": 0.9
+              },
+              {
+                "claim": "Each fixture includes an identical three-configuration metric block (A: 2.5M/73.27; B: 3.2M/76.0; C: 2.0M/70.0) explicitly labeled synthetic test values, not published research claims, with three fixture configurations and no uncertainty estimates.",
+                "evidence_ids": [
+                  "ev_431753db3c87eca9b52937a8",
+                  "ev_b129ca8cab84f9457f1c5443",
+                  "ev_536f15c200449785cdc9e1da"
+                ],
+                "confidence": 0.9
+              },
+              {
+                "claim": "NOT REPORTED in any of the three fixtures: detailed architectural components (layers, blocks, attention mechanism specifics), training/optimization choices (optimizer, learning rate, schedule, epochs, loss functions, augmentation), any ablation studies, efficiency measurements other than parameter counts (e.g., FLOPs, latency, memory), and dataset/benchmark identity beyond the phrases 'fixture benchmark' and 'fixture evaluation protocol'.",
+                "evidence_ids": [
+                  "ev_431753db3c87eca9b52937a8",
+                  "ev_b129ca8cab84f9457f1c5443",
+                  "ev_536f15c200449785cdc9e1da"
+                ],
+                "confidence": 0.85
+              }
+            ],
+            "evidence_ids": [
+              "ev_536f15c200449785cdc9e1da",
+              "ev_431753db3c87eca9b52937a8",
+              "ev_b129ca8cab84f9457f1c5443"
+            ],
+            "unresolved_questions": [
+              "Architectural component details (block design, attention formulation for Method B, compact-conv design for Method C) are not reported in the fixtures.",
+              "Training/optimization choices (optimizer, LR schedule, epochs, losses, augmentation, pretraining) are not reported in any fixture.",
+              "Efficiency-motivation rationale is limited to the descriptive cost/quality tradeoff; no stated efficiency design mechanism or target deployment condition is reported.",
+              "The exact benchmark/dataset and evaluation protocol behind the fixture numbers are not identified by name.",
+              "No uncertainty estimates, seeds, or variance figures are provided for the reported mIoU/parameter values."
+            ],
+            "confidence": 0.9
+          }
+        }
+      },
+      {
+        "id": "fe676593-7bfa-4283-9984-5bc077d2b44c",
+        "task_id": "19293f3c-2d73-496a-a7d4-47421a178682",
+        "supervisor_run_id": "cc5ad047-0718-40da-91bb-d03021c1a4e9",
+        "agent_run_id": "43cded7f-60a4-4c98-a5b2-f811be147e3a",
+        "agent_id": "data",
+        "objective": "Independently analyze the uploaded dataset experiment.xlsx (Sheet1: model, params_m, miou; 3 rows) using only that dataset. Compute the summary statistics from the raw rows, rank models by mIoU, and determine the best configuration satisfying a strict parameter budget of fewer than 3M parameters (report the ranked candidates and the selected best model with its params_m and miou, and note explicitly that the top-mIoU model B (3.2M) is excluded as over budget). Also verify the current parameter-vs-mIoU relationship (e.g., correlation/trend) and produce a chart comparing params_m and miou across models. Report the chart artifact reference and the underlying numbers; do not interpret paper claims or perform cross-specialty comparison.",
+        "status": "PARTIAL",
+        "execution_group": 0,
+        "created_at": "2026-10-02T10:09:30.237822+00:00",
+        "started_at": "2026-10-02T10:09:30.277353+00:00",
+        "completed_at": "2026-10-02T10:10:30.849028+00:00",
+        "result_json": {
+          "delegation_id": "fe676593-7bfa-4283-9984-5bc077d2b44c",
+          "agent_id": "data",
+          "revision_of": null,
+          "status": "partial",
+          "summary": "Collected evidence is available; structured summary could not be validated.",
+          "evidence_ids": [
+            "ev_af3903c7a24e416cab49bcaa84703b03",
+            "ev_2b296c03333b463bbcca96eaf0ae0bb2"
+          ],
+          "artifact_ids": [
+            "45961340-2e97-4484-a799-45e8a0cffb26",
+            "997e28da-57f3-4b7d-9508-7b98e92778b9"
+          ],
+          "unresolved_questions": [
+            "Summary unavailable: ValueError"
+          ],
+          "confidence": 0.0,
+          "payload": {
+            "delegation_id": "fe676593-7bfa-4283-9984-5bc077d2b44c",
+            "status": "partial",
+            "summary": "Collected evidence is available; structured summary could not be validated.",
+            "findings": [],
+            "evidence_ids": [
+              "ev_af3903c7a24e416cab49bcaa84703b03",
+              "ev_2b296c03333b463bbcca96eaf0ae0bb2"
+            ],
+            "unresolved_questions": [
+              "Summary unavailable: ValueError"
+            ],
+            "confidence": 0.0,
+            "metrics": {},
+            "artifact_ids": [
+              "45961340-2e97-4484-a799-45e8a0cffb26",
+              "997e28da-57f3-4b7d-9508-7b98e92778b9"
+            ],
+            "execution_ids": [
+              "2b296c03-333b-463b-bcca-96eaf0ae0bb2"
+            ]
+          }
+        }
+      },
+      {
+        "id": "256fd761-077f-49db-b907-65d709b4dd50",
+        "task_id": "19293f3c-2d73-496a-a7d4-47421a178682",
+        "supervisor_run_id": "cc5ad047-0718-40da-91bb-d03021c1a4e9",
+        "agent_run_id": "a39db6c5-9682-413b-94e3-01860482ce1a",
+        "agent_id": "reviewer",
+        "objective": "Review evidence, coverage, contradictions and requirements.",
+        "status": "COMPLETED",
+        "execution_group": 1,
+        "created_at": "2026-10-02T10:10:41.140528+00:00",
+        "started_at": "2026-10-02T10:10:41.143527+00:00",
+        "completed_at": "2026-10-02T10:10:56.347641+00:00",
+        "result_json": {
+          "delegation_id": "256fd761-077f-49db-b907-65d709b4dd50",
+          "agent_id": "reviewer",
+          "revision_of": null,
+          "status": "completed",
+          "summary": "needs_revision",
+          "evidence_ids": [
+            "ev_2b296c03333b463bbcca96eaf0ae0bb2",
+            "ev_431753db3c87eca9b52937a8",
+            "ev_536f15c200449785cdc9e1da",
+            "ev_af3903c7a24e416cab49bcaa84703b03",
+            "ev_b129ca8cab84f9457f1c5443"
+          ],
+          "artifact_ids": [
+            "45961340-2e97-4484-a799-45e8a0cffb26",
+            "997e28da-57f3-4b7d-9508-7b98e92778b9"
+          ],
+          "unresolved_questions": [],
+          "confidence": 0.62,
+          "payload": {
+            "verdict": "needs_revision",
+            "missing_items": [
+              "data: missing evidence or incomplete analysis",
+              "Validated structured summary of experiment.xlsx: the data delegation is partial, its summary failed with ValueError, and its findings array is empty despite two analysis evidence records existing.",
+              "Complete extraction of the analysis statistics — the first analysis evidence (ev_af3903c7a24e416cab49bcaa84703b03) is truncated mid-'miou' statistics, so the full extraction is not confirmed.",
+              "Validated chart: artifact comparison.png exists but there is no validated chart description, encoding, or check that it reflects the experiment.xlsx metrics.",
+              "Architectural component details for Methods A/B/C (block design, attention formulation for B, compact-conv design for C) — not reported in any fixture.",
+              "Training/optimization choices (optimizer, LR schedule, epochs, losses, augmentation, pretraining) — not reported in any fixture.",
+              "Named benchmark/dataset and evaluation protocol behind the fixture numbers.",
+              "Independent basis for comparing 'our results' vs paper claims: experiment.xlsx values appear identical to the paper-reported values, so no independent cross-check exists yet.",
+              "Uncertainty estimates for any configuration.",
+              "Explicit criteria for 'under 3M' (strict vs inclusive) and confirmation that Method B (3.2M) is correctly excluded."
+            ],
+            "contradictions": [
+              "The data delegation reports status 'partial' with 'structured summary could not be validated' (ValueError) and an empty findings array, yet its evidence ev_2b296c03333b463bbcca96eaf0ae0bb2 contains fully computed summary statistics, a mIoU-descending ranking (B 3.2/76.0, A 2.5/73.27, C 2.0/70.0), and an explicit best-under-3M result (Model A, 2.5, 73.27).",
+              "The draft synthesis states experiment.xlsx results 'cannot currently be used to confirm best configuration', which directly contradicts ev_2b296c03333b463bbcca96eaf0ae0bb2 computing 'Best configuration under 3M parameters: Model A' and the ranking.",
+              "The draft synthesis states the claim 'chart generated' cannot be supported from current structured results, yet artifact 45961340-2e97-4484-a799-45e8a0cffb26 (comparison.png) exists with the data delegation.",
+              "The research delegation summary asserts 'experiment.xlsx was not analyzed and no cross-specialty comparison was performed', while the data delegation did analyze experiment.xlsx and produced comparison.json and comparison.png artifacts.",
+              "The three uploaded 'papers' share an identical boilerplate fixture block (same metric table and tradeoff text); each paper adds only a single distinguishing descriptive line, so treating them as three fully distinct method reports is not supported by the evidence content."
+            ],
+            "unsupported_claims": [
+              "Draft assertion that 'no validated structured summary, metrics, or findings are available' is overstated: no delegation-level validated summary exists, but metrics and a ranking are present in evidence ev_2b296c03333b463bbcca96eaf0ae0bb2.",
+              "The 'Best configuration under 3M parameters: Model A, 2.5, 73.27' result rests on an experiment.xlsx analysis whose owning delegation is unvalidated (partial, ValueError), so it is not yet a confirmed finding.",
+              "Any claim that our experiment.xlsx results support the papers' reported design advantages is unsupported: the experiment values appear identical to the paper-reported values, and the fixtures state only descriptive quality/cost tradeoffs with no causal, ablation, or uncertainty evidence.",
+              "The research delegation summary's claim that 'All three uploaded paper fixtures were located and read' with distinct extracted facts is only weakly supported, since the three evidence contents are near-identical boilerplate differing by one line each.",
+              "Descriptive tradeoff claims (A improves over C by 3.27 at +0.5M; B improves over A by 2.73 at +0.7M) are stated in the fixtures but are not independently verified and carry no uncertainty estimates."
+            ],
+            "suggested_delegations": [
+              {
+                "capability": "data.analyze",
+                "objective": "Re-run experiment.xlsx extraction and produce a delegation-level validated structured summary with per-model params_m and miou, full (untruncated) statistics, and an explicit best configuration under 3M; resolve the ValueError that caused the empty findings/summary.",
+                "missing_item": "Validated structured summary and metrics for experiment.xlsx"
+              },
+              {
+                "capability": "data.visualize",
+                "objective": "Verify artifact comparison.png against the validated experiment.xlsx metrics and provide a validated chart description (axes, encoding, which configurations plotted, budget threshold marking).",
+                "missing_item": "Validated chart artifact and description"
+              },
+              {
+                "capability": "research.document",
+                "objective": "Extract from the uploaded paper fixtures any architectural component details, training/optimization choices (optimizer, LR schedule, epochs, losses, augmentation, pretraining), and the named benchmark/evaluation protocol for Methods A/B/C; if absent, state so explicitly per paper.",
+                "missing_item": "Architectural, training/optimization, and benchmark-identification details"
+              },
+              {
+                "capability": "data.compare",
+                "objective": "Formally compare validated experiment.xlsx results against the paper-reported values and determine whether they are independent measurements or identical, to establish whether an independent assessment of the reported design advantages is possible.",
+                "missing_item": "Independent basis for comparing experiment results against paper claims"
+              },
+              {
+                "capability": "data.analyze",
+                "objective": "Address only: data: missing evidence or incomplete analysis. Summary unavailable: ValueError",
+                "missing_item": "data: missing evidence or incomplete analysis"
+              }
+            ],
+            "confidence": 0.62
+          }
+        }
+      },
+      {
+        "id": "c9acf5e9-a9c8-42b8-bd47-6e01d334c63b",
+        "task_id": "19293f3c-2d73-496a-a7d4-47421a178682",
+        "supervisor_run_id": "cc5ad047-0718-40da-91bb-d03021c1a4e9",
+        "agent_run_id": "70daf92a-57c4-4cf3-92a0-28381ef62a6c",
+        "agent_id": "data",
+        "objective": "Fill only this review gap: data: missing evidence or incomplete analysis. Address only: data: missing evidence or incomplete analysis. Summary unavailable: ValueError",
+        "status": "PARTIAL",
+        "execution_group": 1,
+        "created_at": "2026-10-02T10:10:56.366853+00:00",
+        "started_at": "2026-10-02T10:10:56.395503+00:00",
+        "completed_at": "2026-10-02T10:11:26.683887+00:00",
+        "result_json": {
+          "delegation_id": "c9acf5e9-a9c8-42b8-bd47-6e01d334c63b",
+          "agent_id": "data",
+          "revision_of": "fe676593-7bfa-4283-9984-5bc077d2b44c",
+          "status": "partial",
+          "summary": "Data-gap review: experiment.xlsx contains exactly 3 rows/3 columns (model, params_m, miou) with no missing values and no uncertainty columns; the three uploaded papers each report one of the same three fixture configurations (Paper 1 = Method A 2.5M/73.27, Paper 2 = Method B 3.2M/76.0, Paper 3 = Method C 2.0M/70.0), so paper-reported numbers match the spreadsheet values exactly for all three models. Computed analysis output ranks B (76.0) > A (73.27) > C (70.0) and selects A as the best configuration under the 3M-parameter budget (2.5M, mIoU 73.27); B (3.2M) is excluded as over budget. Reported metrics are descriptive only (Pearson r = 0.9891 on n=3; slope 4.9294, intercept 60.4380), and the sources explicitly state no causal/ablation claim and no uncertainty estimates. Evidence collection is complete for what the sources contain, but two parts of the gap could not be closed: (1) no variance, CI, seed, or per-fold results exist anywhere in the supplied evidence, so accuracy differences of 2.73-3.27 mIoU points cannot be shown to exceed noise; (2) the papers supply no training protocol, benchmark definition, dataset, or hyperparameter detail, so architecture-vs-parameter-count effects cannot be separated. Correlation/regression fitted on three points is reported as a computed output but is not statistically reliable and is not a basis for any claim.",
+          "evidence_ids": [
+            "ev_536f15c200449785cdc9e1da",
+            "ev_431753db3c87eca9b52937a8",
+            "ev_b129ca8cab84f9457f1c5443",
+            "ev_af3903c7a24e416cab49bcaa84703b03",
+            "ev_2b296c03333b463bbcca96eaf0ae0bb2",
+            "ev_88faef1d07be4472b83f7fae1197c8b9",
+            "ev_5630ded830ff4cd299b87b773feef17f"
+          ],
+          "artifact_ids": [
+            "07aa0142-e77c-4b6e-adf3-1dc7fe257bd9",
+            "c98ade03-5650-4228-91a6-0c105b695156"
+          ],
+          "unresolved_questions": [
+            "No uncertainty, variance, seed, or repeated-run data exists in any supplied source, so statistical significance of the A/B/C mIoU differences is unknown and cannot be computed.",
+            "Training protocol, optimizer, schedule, dataset, and evaluation-benchmark details are absent from all three papers; only the statement that all methods share one fixture benchmark is present.",
+            "Budget boundary is undefined between strict '<3M' and '<='3M'; either interpretation excludes B (3.2M) and includes A (2.5M), so the selection is unaffected, but the exact criterion used by the requester is unconfirmed.",
+            "Whether the papers describe three distinct methods or three aliases of one synthetic fixture (all report identical shared statistics) is not stated; the sources name Method A/B/C per paper, but no independent description of distinct architectures is provided."
+          ],
+          "confidence": 0.85,
+          "payload": {
+            "delegation_id": "c9acf5e9-a9c8-42b8-bd47-6e01d334c63b",
+            "status": "partial",
+            "summary": "Data-gap review: experiment.xlsx contains exactly 3 rows/3 columns (model, params_m, miou) with no missing values and no uncertainty columns; the three uploaded papers each report one of the same three fixture configurations (Paper 1 = Method A 2.5M/73.27, Paper 2 = Method B 3.2M/76.0, Paper 3 = Method C 2.0M/70.0), so paper-reported numbers match the spreadsheet values exactly for all three models. Computed analysis output ranks B (76.0) > A (73.27) > C (70.0) and selects A as the best configuration under the 3M-parameter budget (2.5M, mIoU 73.27); B (3.2M) is excluded as over budget. Reported metrics are descriptive only (Pearson r = 0.9891 on n=3; slope 4.9294, intercept 60.4380), and the sources explicitly state no causal/ablation claim and no uncertainty estimates. Evidence collection is complete for what the sources contain, but two parts of the gap could not be closed: (1) no variance, CI, seed, or per-fold results exist anywhere in the supplied evidence, so accuracy differences of 2.73-3.27 mIoU points cannot be shown to exceed noise; (2) the papers supply no training protocol, benchmark definition, dataset, or hyperparameter detail, so architecture-vs-parameter-count effects cannot be separated. Correlation/regression fitted on three points is reported as a computed output but is not statistically reliable and is not a basis for any claim.",
+            "findings": [
+              {
+                "claim": "experiment.xlsx holds 3 rows and 3 columns (model, params_m, miou) with zero missing values across all columns; no uncertainty, seed, or replicate column exists.",
+                "evidence_ids": [
+                  "ev_af3903c7a24e416cab49bcaa84703b03",
+                  "ev_88faef1d07be4472b83f7fae1197c8b9"
+                ],
+                "confidence": 0.95
+              },
+              {
+                "claim": "The three papers report the same three fixture configurations as the spreadsheet: Paper 1 Method A = 2.5M/73.27 mIoU, Paper 2 Method B = 3.2M/76.0 mIoU, Paper 3 Method C = 2.0M/70.0 mIoU; paper values equal spreadsheet values exactly for every model.",
+                "evidence_ids": [
+                  "ev_431753db3c87eca9b52937a8",
+                  "ev_b129ca8cab84f9457f1c5443",
+                  "ev_536f15c200449785cdc9e1da",
+                  "ev_af3903c7a24e416cab49bcaa84703b03"
+                ],
+                "confidence": 0.95
+              },
+              {
+                "claim": "Computed ranking by mIoU: B 76.00 (3.2M) > A 73.27 (2.5M) > C 70.00 (2.0M); the best configuration satisfying the <3M parameter budget is Model A at 2.5M params and 73.27 mIoU, with B excluded as over budget.",
+                "evidence_ids": [
+                  "ev_2b296c03333b463bbcca96eaf0ae0bb2",
+                  "ev_5630ded830ff4cd299b87b773feef17f"
+                ],
+                "confidence": 0.95
+              },
+              {
+                "claim": "Indicative efficiency metric from computed output: mIoU per million parameters is 35.000 for C (2.0M) and 29.308 for A (2.5M) among sub-3M configurations, i.e. C is more parameter-efficient while A is more accurate.",
+                "evidence_ids": [
+                  "ev_5630ded830ff4cd299b87b773feef17f"
+                ],
+                "confidence": 0.9
+              },
+              {
+                "claim": "Paired descriptive deltas reported in the sources are A over C = +3.27 mIoU at +0.5M params and B over A = +2.73 mIoU at +0.7M params; the sources explicitly label these as descriptive quality/cost statements with no causal or ablation claim.",
+                "evidence_ids": [
+                  "ev_431753db3c87eca9b52937a8",
+                  "ev_b129ca8cab84f9457f1c5443",
+                  "ev_536f15c200449785cdc9e1da"
+                ],
+                "confidence": 0.9
+              },
+              {
+                "claim": "The computed Pearson correlation between params_m and miou is 0.9891 and the fitted line is slope 4.9294, intercept 60.4380; these are computed outputs over n=3 points and therefore not a reliable estimate of any generalizable trend.",
+                "evidence_ids": [
+                  "ev_2b296c03333b463bbcca96eaf0ae0bb2"
+                ],
+                "confidence": 0.85
+              },
+              {
+                "claim": "Gap not closable: no uncertainty estimates, confidence intervals, standard deviations of repeated runs, or error bars appear in any of the three papers or in the spreadsheet, so the observed 2.73-3.27 mIoU gaps cannot be distinguished from run-to-run noise on the supplied evidence.",
+                "evidence_ids": [
+                  "ev_431753db3c87eca9b52937a8",
+                  "ev_b129ca8cab84f9457f1c5443",
+                  "ev_536f15c200449785cdc9e1da",
+                  "ev_af3903c7a24e416cab49bcaa84703b03"
+                ],
+                "confidence": 0.9
+              },
+              {
+                "claim": "Gap not closable: the papers do not report training protocols, hyperparameters, dataset composition, or benchmark definitions beyond the shared statement that all synthetic methods use the same fixture benchmark and evaluation protocol, so architecture and parameter-count effects cannot be separated.",
+                "evidence_ids": [
+                  "ev_431753db3c87eca9b52937a8",
+                  "ev_b129ca8cab84f9457f1c5443",
+                  "ev_536f15c200449785cdc9e1da"
+                ],
+                "confidence": 0.85
+              },
+              {
+                "claim": "The sources self-identify as synthetic Phase 3 research fixtures with test values that are not published research claims, so all figures here are fixture-level values and must not be presented as literature results.",
+                "evidence_ids": [
+                  "ev_431753db3c87eca9b52937a8",
+                  "ev_b129ca8cab84f9457f1c5443",
+                  "ev_536f15c200449785cdc9e1da"
+                ],
+                "confidence": 0.95
+              },
+              {
+                "claim": "Artifacts produced by the computed analysis are comparison.png (chart) and summary.json (summary), from execution 5630ded8-30ff-4cd2-99b8-7b773feef17f.",
+                "evidence_ids": [
+                  "ev_5630ded830ff4cd299b87b773feef17f"
+                ],
+                "confidence": 0.9
+              }
+            ],
+            "evidence_ids": [
+              "ev_536f15c200449785cdc9e1da",
+              "ev_431753db3c87eca9b52937a8",
+              "ev_b129ca8cab84f9457f1c5443",
+              "ev_af3903c7a24e416cab49bcaa84703b03",
+              "ev_2b296c03333b463bbcca96eaf0ae0bb2",
+              "ev_88faef1d07be4472b83f7fae1197c8b9",
+              "ev_5630ded830ff4cd299b87b773feef17f"
+            ],
+            "unresolved_questions": [
+              "No uncertainty, variance, seed, or repeated-run data exists in any supplied source, so statistical significance of the A/B/C mIoU differences is unknown and cannot be computed.",
+              "Training protocol, optimizer, schedule, dataset, and evaluation-benchmark details are absent from all three papers; only the statement that all methods share one fixture benchmark is present.",
+              "Budget boundary is undefined between strict '<3M' and '<='3M'; either interpretation excludes B (3.2M) and includes A (2.5M), so the selection is unaffected, but the exact criterion used by the requester is unconfirmed.",
+              "Whether the papers describe three distinct methods or three aliases of one synthetic fixture (all report identical shared statistics) is not stated; the sources name Method A/B/C per paper, but no independent description of distinct architectures is provided."
+            ],
+            "confidence": 0.85,
+            "metrics": {
+              "dataset_rows": 3,
+              "dataset_columns": 3,
+              "missing_values_total": 0,
+              "params_m_mean": 2.5666666667,
+              "params_m_std": 0.6027713773,
+              "params_m_min": 2.0,
+              "params_m_max": 3.2,
+              "params_m_median": 2.5,
+              "miou_mean": 73.09,
+              "miou_std": 3.0040472699,
+              "miou_min": 70.0,
+              "miou_max": 76.0,
+              "miou_median": 73.27,
+              "best_under_3m_model": "A",
+              "best_under_3m_params_m": 2.5,
+              "best_under_3m_miou": 73.27,
+              "excluded_over_budget_model": "B",
+              "excluded_over_budget_params_m": 3.2,
+              "excluded_over_budget_miou": 76.0,
+              "miou_per_m_a": 29.308,
+              "miou_per_m_c": 35.0,
+              "pearson_params_vs_miou": 0.9891,
+              "linear_slope": 4.9294,
+              "linear_intercept": 60.438,
+              "delta_miou_a_minus_c": 3.27,
+              "delta_params_a_minus_c": 0.5,
+              "delta_miou_b_minus_a": 2.73,
+              "delta_params_b_minus_a": 0.7,
+              "uncertainty_estimates_available": false,
+              "ablation_data_available": false
+            },
+            "artifact_ids": [
+              "07aa0142-e77c-4b6e-adf3-1dc7fe257bd9",
+              "c98ade03-5650-4228-91a6-0c105b695156"
+            ],
+            "execution_ids": [
+              "5630ded8-30ff-4cd2-99b8-7b773feef17f"
+            ]
+          }
+        }
+      }
+    ],
+    "citations": [
+      {
+        "citation_id": "1",
+        "evidence_id": "ev_431753db3c87eca9b52937a8",
+        "document_name": "paper_1.pdf",
+        "page": 1,
+        "title": null,
+        "url": null,
+        "execution_id": null,
+        "dataset_ids": [],
+        "artifact_ids": []
+      },
+      {
+        "citation_id": "2",
+        "evidence_id": "ev_b129ca8cab84f9457f1c5443",
+        "document_name": "paper_2.pdf",
+        "page": 1,
+        "title": null,
+        "url": null,
+        "execution_id": null,
+        "dataset_ids": [],
+        "artifact_ids": []
+      },
+      {
+        "citation_id": "3",
+        "evidence_id": "ev_536f15c200449785cdc9e1da",
+        "document_name": "paper_3.pdf",
+        "page": 1,
+        "title": null,
+        "url": null,
+        "execution_id": null,
+        "dataset_ids": [],
+        "artifact_ids": []
+      },
+      {
+        "citation_id": "4",
+        "evidence_id": "ev_af3903c7a24e416cab49bcaa84703b03",
+        "document_name": null,
+        "page": null,
+        "title": "dataset.inspect",
+        "url": null,
+        "execution_id": "af3903c7-a24e-416c-ab49-bcaa84703b03",
+        "dataset_ids": [
+          "2a3e8482-6f6d-41b1-b8c5-47a6cc51b1fa"
+        ],
+        "artifact_ids": []
+      },
+      {
+        "citation_id": "5",
+        "evidence_id": "ev_88faef1d07be4472b83f7fae1197c8b9",
+        "document_name": null,
+        "page": null,
+        "title": "dataset.inspect",
+        "url": null,
+        "execution_id": "88faef1d-07be-4472-b83f-7fae1197c8b9",
+        "dataset_ids": [
+          "2a3e8482-6f6d-41b1-b8c5-47a6cc51b1fa"
+        ],
+        "artifact_ids": []
+      },
+      {
+        "citation_id": "6",
+        "evidence_id": "ev_5630ded830ff4cd299b87b773feef17f",
+        "document_name": null,
+        "page": null,
+        "title": "Dataset analysis",
+        "url": null,
+        "execution_id": "5630ded8-30ff-4cd2-99b8-7b773feef17f",
+        "dataset_ids": [
+          "2a3e8482-6f6d-41b1-b8c5-47a6cc51b1fa"
+        ],
+        "artifact_ids": [
+          "07aa0142-e77c-4b6e-adf3-1dc7fe257bd9",
+          "c98ade03-5650-4228-91a6-0c105b695156"
+        ]
+      },
+      {
+        "citation_id": "7",
+        "evidence_id": "ev_2b296c03333b463bbcca96eaf0ae0bb2",
+        "document_name": null,
+        "page": null,
+        "title": "Dataset analysis",
+        "url": null,
+        "execution_id": "2b296c03-333b-463b-bcca-96eaf0ae0bb2",
+        "dataset_ids": [
+          "2a3e8482-6f6d-41b1-b8c5-47a6cc51b1fa"
+        ],
+        "artifact_ids": [
+          "45961340-2e97-4484-a799-45e8a0cffb26",
+          "997e28da-57f3-4b7d-9508-7b98e92778b9"
+        ]
+      }
+    ],
+    "grounding": true,
+    "evidence_count": 7
+  },
+  "interpretation": "Fresh workspace per comparison mode; different plans/call counts and possible user-scope memory history. Measured sample only; no general superiority claim."
+}

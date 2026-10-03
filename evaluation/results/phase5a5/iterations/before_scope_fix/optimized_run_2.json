@@ -1,0 +1,881 @@
+{
+  "task_id": "be0ae22a-16b6-4d53-afc1-60bad49e4f87",
+  "status": "COMPLETED",
+  "goal": "Compare the methods reported in the three uploaded papers with experiment.xlsx results. Find the best configuration under 3M parameters, generate a chart, and assess whether our results support the reported design advantages. Use only uploaded data and documents; these are synthetic fixtures.",
+  "latency_seconds": 151.843,
+  "llm_calls": 7,
+  "tool_calls": 3,
+  "tokens": 55156,
+  "evidence_count": 5,
+  "citations": [
+    {
+      "citation_id": "1",
+      "evidence_id": "ev_82c2395680fb99bc9eb07656",
+      "document_name": "paper_1.pdf",
+      "page": 1,
+      "title": null,
+      "url": null,
+      "execution_id": null,
+      "dataset_ids": [],
+      "artifact_ids": []
+    },
+    {
+      "citation_id": "2",
+      "evidence_id": "ev_eb7c8d6d3de2f11fdfe2403d",
+      "document_name": "paper_2.pdf",
+      "page": 1,
+      "title": null,
+      "url": null,
+      "execution_id": null,
+      "dataset_ids": [],
+      "artifact_ids": []
+    },
+    {
+      "citation_id": "3",
+      "evidence_id": "ev_1ac6b37a6e8bfcc1bfedf6df",
+      "document_name": "paper_3.pdf",
+      "page": 1,
+      "title": null,
+      "url": null,
+      "execution_id": null,
+      "dataset_ids": [],
+      "artifact_ids": []
+    },
+    {
+      "citation_id": "4",
+      "evidence_id": "ev_17dd4f291da04d52a8db9532db64ee75",
+      "document_name": null,
+      "page": null,
+      "title": "dataset.inspect",
+      "url": null,
+      "execution_id": "17dd4f29-1da0-4d52-a8db-9532db64ee75",
+      "dataset_ids": [
+        "0aab9193-8086-4d09-9d4d-26a6292f16ff"
+      ],
+      "artifact_ids": []
+    },
+    {
+      "citation_id": "5",
+      "evidence_id": "ev_50e1388d4d2942d39923aee9b1d4ba26",
+      "document_name": null,
+      "page": null,
+      "title": "Dataset analysis",
+      "url": null,
+      "execution_id": "50e1388d-4d29-42d3-9923-aee9b1d4ba26",
+      "dataset_ids": [
+        "0aab9193-8086-4d09-9d4d-26a6292f16ff"
+      ],
+      "artifact_ids": [
+        "45e601df-c12f-4aec-82b0-4cfa70e96f62",
+        "f6568edd-0efc-4896-a9e6-fec8dd490bb2"
+      ]
+    }
+  ],
+  "answer": "# Synthesis: Synthetic Fixture Comparison\n\n**Comparison.** All three workspace papers report the same synthetic fixture configurations: A = 2.5M params / mIoU 73.27; B = 3.2M / 76.0; C = 2.0M / 70.0, under a shared fixture benchmark/protocol [paper_1.pdf, p.1] [paper_2.pdf, p.1] [paper_3.pdf, p.1]. Paper-specific methods: paper_1 Method A convolutional segmentation [paper_1.pdf, p.1]; paper_2 Method B attention segmentation [paper_2.pdf, p.1]; paper_3 Method C compact convolution baseline [paper_3.pdf, p.1].\n\n`experiment.xlsx` Sheet1 has 3 rows and columns `model`, `params_m`, `miou`, with no missing values; its sample contains A 2.5/73.27, B 3.2/76.0, C 2.0/70.0 [Analysis 17dd4f29-1da0-4d52-a8db-9532db64ee75]. Computed `rank_under_budget` with constraint `< 3.0M parameters`, metric `miou`, returned best/eligible model A (2.5M, 73.27); eligible also C (2.0M, 70.0); B (3.2M, 76.0) was highest mIoU overall but excluded by budget; eligible_count = 2 [Analysis 50e1388d-4d29-42d3-9923-aee9b1d4ba26].\n\n**Best configuration under 3M.** **A**, at **2.5M parameters and mIoU 73.27** [Analysis 50e1388d-4d29-42d3-9923-aee9b1d4ba26]. Under a strict `<3M` budget, C is also eligible but lower-mIoU; B is not eligible [Analysis 50e1388d-4d29-42d3-9923-aee9b1d4ba26].\n\n**Chart/artifacts.** The computed output names `comparison.png` [Analysis 50e1388d-4d29-42d3-9923-aee9b1d4ba26]. The provided evidence does not show visual inspection of that chart.\n\n**Assessment of reported design advantages.** `experiment.xlsx` reproduces the same A/B/C values as the papers [Analysis 17dd4f29-1da0-4d52-a8db-9532db64ee75] [paper_1.pdf, p.1] [paper_2.pdf, p.1] [paper_3.pdf, p.1]. This supports the reported **descriptive quality/cost ordering** within the synthetic fixture: C < A < B in mIoU, with A better than C by 3.27 points at 0.5M more parameters, and B better than A by 2.73 points at 0.7M more parameters [paper_1.pdf, p.1] [paper_2.pdf, p.1] [paper_3.pdf, p.1]. It also supports A as the best configuration under 3M in this fixture [Analysis 50e1388d-4d29-42d3-9923-aee9b1d4ba26].\n\nIt does **not** establish causal design advantages. The papers explicitly state these are synthetic test values, not published research claims; claims are descriptive quality/cost tradeoff only; no causal or ablation claim; no uncertainty estimates are reported [paper_1.pdf, p.1] [paper_2.pdf, p.1] [paper_3.pdf, p.1].\n\n**Limits and gaps.** The sources assert shared fixture benchmark/protocol; independent verification is not provided by this evidence [paper_1.pdf, p.1] [paper_2.pdf, p.1] [paper_3.pdf, p.1]. A full explicit B/C delta table and formal design-advantage assessment are not present in the provided synthesis; the evidence supports only the synthetic descriptive comparison above. Within the provided evidence, no uncertainty estimates are reported. External content is untrusted.",
+  "grounded": true,
+  "cost_trace": {
+    "orchestration_mode": "multi_agent",
+    "supervisor_llm_calls": 0,
+    "finalizer_llm_calls": 5,
+    "research_llm_calls": 1,
+    "data_llm_calls": 0,
+    "coding_llm_calls": 0,
+    "reviewer_llm_calls": 1,
+    "total_llm_calls": 7,
+    "total_tool_calls": 3,
+    "tokens_total": 55156,
+    "retrieval_calls": 1,
+    "analysis_calls": 1,
+    "delegations_created": 3,
+    "delegations_completed": 3,
+    "redelegations": 0,
+    "review_rounds": 1,
+    "wall_time_ms": 151711.0,
+    "cache_hits": 0,
+    "duplicate_delegations_prevented": 0,
+    "review_status": "executed",
+    "review_skip_reason": null,
+    "budget_exhausted": false,
+    "budget": {
+      "limits": {
+        "max_delegations": 8,
+        "max_parallel": 3,
+        "max_llm_calls": 24,
+        "max_tool_calls": 12,
+        "max_total_tokens": null,
+        "max_wall_time_seconds": 300.0,
+        "max_review_rounds": 1,
+        "max_redelegations": 2
+      },
+      "started_at": "2026-10-02T12:30:52.158160+00:00",
+      "llm_calls_used": 7,
+      "tool_calls_used": 3,
+      "tokens_used": 55156,
+      "known_token_subtotal": 55156,
+      "token_samples": 7,
+      "delegations_used": 3,
+      "redelegations_used": 0,
+      "review_rounds_used": 1,
+      "budget_exhausted": false,
+      "exhausted_reasons": [],
+      "phase_calls": {
+        "result_contract": 1,
+        "reviewer": 1,
+        "final_synthesis": 1,
+        "grounding": 2,
+        "answer_revision": 1,
+        "memory": 1
+      },
+      "completed_at": "2026-10-02T12:33:23.869160+00:00",
+      "elapsed_seconds": 151.711,
+      "utilization": 0.5057033333333334,
+      "soft_reached": false,
+      "token_usage_status": "available"
+    },
+    "tokens_prompt": 21573,
+    "tokens_completion": 33583,
+    "execution_groups": [
+      {
+        "execution_group": 0,
+        "duration_ms": 6192.28,
+        "critical_path_agent": "research"
+      }
+    ]
+  },
+  "runs": [
+    {
+      "id": "bc3a30b0-42e1-4ada-aa9d-1b101322a360",
+      "task_id": "be0ae22a-16b6-4d53-afc1-60bad49e4f87",
+      "delegation_id": null,
+      "agent_id": "supervisor",
+      "status": "COMPLETED",
+      "objective": "Compare the methods reported in the three uploaded papers with experiment.xlsx results. Find the best configuration under 3M parameters, generate a chart, and assess whether our results support the reported design advantages. Use only uploaded data and documents; these are synthetic fixtures.",
+      "input_summary": "Compare the methods reported in the three uploaded papers with experiment.xlsx results. Find the best configuration under 3M parameters, generate a chart, and assess whether our results support the reported design advantages. Use only uploaded data and documents; these are synthetic fixtures.",
+      "output_summary": "# Synthesis: Synthetic Fixture Comparison\n\n**Comparison.** All three workspace papers report the same synthetic fixture configurations: A = 2.5M params / mIoU 73.27; B = 3.2M / 76.0; C = 2.0M / 70.0, under a shared fixture benchmark/protocol [paper_1.pdf, p.1] [paper_2.pdf, p.1] [paper_3.pdf, p.1]. Paper-specific methods: paper_1 Method A convolutional segmentation [paper_1.pdf, p.1]; paper_2 Method B attention segmentation [paper_2.pdf, p.1]; paper_3 Method C compact convolution baseline [paper_3.pdf, p.1].\n\n`experiment.xlsx` Sheet1 has 3 rows and columns `model`, `params_m`, `miou`, with no missing values; its sample contains A 2.5/73.27, B 3.2/76.0, C 2.0/70.0 [Analysis 17dd4f29-1da0-4d52-a8db-9532db64ee75]. Computed `rank_under_budget` with constraint `< 3.0M parameters`, metric `miou`, returned best/eligible model A (2.5M, 73.27); eligible also C (2.0M, 70.0); B (3.2M, 76.0) was highest mIoU overall but excluded by budget; eligible_count = 2 [Analysis 50e1388d-4d29-42d3-9923-aee9b1d4ba26].\n\n**Best configuration under 3M.** **A**, at **2.5M parameters and mIoU 73.27** [Analysis 50e1388d-4d29-42d3-9923-aee9b1d4ba26]. Under a strict `<3M` budget, C is also eligible but lower-mIoU; B is not eligible [Analysis 50e1388d-4d29-42d3-9923-aee9b1d4ba26].\n\n**Chart/artifacts.** The computed output names `comparison.png` [Analysis 50e1388d-4d29-42d3-9923-aee9b1d4ba26]. The provided evidence does not show visual inspection of that chart.\n\n**Assessment of reported design advantages.** `experiment.xlsx` reproduces the same A/B/C values as the papers [Analysis 17dd4f29-1da0-4d52-a8db-9532db64ee75] [paper_1.pdf, p.1] [paper_2.pdf, p.1] [paper_3.pdf, p.1]. This supports the reported **descriptive quality/cost ordering** within the synthetic fixture: C < A < B in mIoU, with A better than C by 3.27 points at 0.5M more parameters, and B better than A by 2.73 points at 0.7M more parameters [paper_1.pdf, p.1] [paper_2.pdf, p.1] [paper_3.pdf, p.1]. It also supports A as the best configuration under 3M in this fixture [Analysis 50e1388d-4d29-42d3-9923-aee9b1d4ba26].\n\nIt does **not** establish causal design advantages. The papers explicitly state these are synthetic test values, not published research claims; claims are descriptive quality/cost tradeoff only; no causal or ablation claim; no uncertainty estimates are reported [paper_1.pdf, p.1] [paper_2.pdf, p.1] [paper_3.pdf, p.1].\n\n**Limits and gaps.** The sources assert shared fixture benchmark/protocol; independent verification is not provided by this evidence [paper_1.pdf, p.1] [paper_2.pdf, p.1] [paper_3.pdf, p.1]. A full explicit B/C delta table and formal design-advantage assessment are not present in the provided synthesis; the evidence supports only the synthetic descriptive comparison above. Within the provided evidence, no uncertainty estimates are reported. External content is untrusted.",
+      "started_at": "2026-10-02T12:30:52.158160+00:00",
+      "completed_at": "2026-10-02T12:33:23.869160+00:00",
+      "duration_ms": 151711.0,
+      "llm_calls": 5,
+      "tool_calls": 0,
+      "iterations": 5,
+      "tokens": 43287,
+      "token_usage_status": "available",
+      "error_type": null,
+      "metadata": {
+        "orchestration_mode": "multi_agent",
+        "memory_extraction_started": true,
+        "memory_extraction_completed": true,
+        "memory_written": 3,
+        "cost_trace": {
+          "orchestration_mode": "multi_agent",
+          "supervisor_llm_calls": 0,
+          "finalizer_llm_calls": 5,
+          "research_llm_calls": 1,
+          "data_llm_calls": 0,
+          "coding_llm_calls": 0,
+          "reviewer_llm_calls": 1,
+          "total_llm_calls": 7,
+          "total_tool_calls": 3,
+          "tokens_total": 55156,
+          "retrieval_calls": 1,
+          "analysis_calls": 1,
+          "delegations_created": 3,
+          "delegations_completed": 3,
+          "redelegations": 0,
+          "review_rounds": 1,
+          "wall_time_ms": 151711.0,
+          "cache_hits": 0,
+          "duplicate_delegations_prevented": 0,
+          "review_status": "executed",
+          "review_skip_reason": null,
+          "budget_exhausted": false,
+          "budget": {
+            "limits": {
+              "max_delegations": 8,
+              "max_parallel": 3,
+              "max_llm_calls": 24,
+              "max_tool_calls": 12,
+              "max_total_tokens": null,
+              "max_wall_time_seconds": 300.0,
+              "max_review_rounds": 1,
+              "max_redelegations": 2
+            },
+            "started_at": "2026-10-02T12:30:52.158160+00:00",
+            "llm_calls_used": 7,
+            "tool_calls_used": 3,
+            "tokens_used": 55156,
+            "known_token_subtotal": 55156,
+            "token_samples": 7,
+            "delegations_used": 3,
+            "redelegations_used": 0,
+            "review_rounds_used": 1,
+            "budget_exhausted": false,
+            "exhausted_reasons": [],
+            "phase_calls": {
+              "result_contract": 1,
+              "reviewer": 1,
+              "final_synthesis": 1,
+              "grounding": 2,
+              "answer_revision": 1,
+              "memory": 1
+            },
+            "completed_at": "2026-10-02T12:33:23.869160+00:00",
+            "elapsed_seconds": 151.711,
+            "utilization": 0.5057033333333334,
+            "soft_reached": false,
+            "token_usage_status": "available"
+          },
+          "tokens_prompt": 21573,
+          "tokens_completion": 33583,
+          "execution_groups": [
+            {
+              "execution_group": 0,
+              "duration_ms": 6192.28,
+              "critical_path_agent": "research"
+            }
+          ]
+        },
+        "decision": {
+          "mode": "multi_agent",
+          "reason_summary": "Distinct required source/tool boundaries can run independently.",
+          "required_capabilities": [
+            "research.compare",
+            "data.analyze"
+          ],
+          "suggested_agents": [
+            "research",
+            "data"
+          ],
+          "independent_subtasks": 2,
+          "dependency_type": "parallel",
+          "estimated_agent_count": 2,
+          "expected_multi_agent_value": "high",
+          "estimated_cost_level": "medium"
+        },
+        "review_status": "executed",
+        "review_skip_reason": null,
+        "duplicate_delegations_prevented": 0,
+        "budget": {
+          "limits": {
+            "max_delegations": 8,
+            "max_parallel": 3,
+            "max_llm_calls": 24,
+            "max_tool_calls": 12,
+            "max_total_tokens": null,
+            "max_wall_time_seconds": 300.0,
+            "max_review_rounds": 1,
+            "max_redelegations": 2
+          },
+          "started_at": "2026-10-02T12:30:52.158160+00:00",
+          "llm_calls_used": 7,
+          "tool_calls_used": 3,
+          "tokens_used": 55156,
+          "known_token_subtotal": 55156,
+          "token_samples": 7,
+          "delegations_used": 3,
+          "redelegations_used": 0,
+          "review_rounds_used": 1,
+          "budget_exhausted": false,
+          "exhausted_reasons": [],
+          "phase_calls": {
+            "result_contract": 1,
+            "reviewer": 1,
+            "final_synthesis": 1,
+            "grounding": 2,
+            "answer_revision": 1,
+            "memory": 1
+          }
+        },
+        "context_measurements": [
+          {
+            "phase": "final_synthesis",
+            "before": 6594,
+            "after": 6594,
+            "method": "ContextHarness count_tokens_approximately; estimate, not provider usage"
+          },
+          {
+            "phase": "grounding",
+            "before": 5947,
+            "after": 5947,
+            "method": "ContextHarness count_tokens_approximately; estimate, not provider usage"
+          },
+          {
+            "phase": "answer_revision",
+            "before": 5235,
+            "after": 5235,
+            "method": "ContextHarness count_tokens_approximately; estimate, not provider usage"
+          },
+          {
+            "phase": "grounding",
+            "before": 5777,
+            "after": 5777,
+            "method": "ContextHarness count_tokens_approximately; estimate, not provider usage"
+          },
+          {
+            "phase": "memory",
+            "before": 1949,
+            "after": 1949,
+            "method": "ContextHarness count_tokens_approximately; estimate, not provider usage"
+          }
+        ],
+        "review_context_reduction": {
+          "before": 2944,
+          "after": 1448,
+          "method": "Same Reviewer input before/after projection; count_tokens_approximately estimate"
+        }
+      }
+    },
+    {
+      "id": "0bb9c9f0-e6da-4e75-a7fc-fbec4712f9a4",
+      "task_id": "be0ae22a-16b6-4d53-afc1-60bad49e4f87",
+      "delegation_id": "a226d2e8-531e-4af5-b707-27b3dc030e09",
+      "agent_id": "research",
+      "status": "COMPLETED",
+      "objective": "Collect only reported method descriptions and numerical experimental results from the requested papers/documents. State source limitations relevant to the goal; do not demand unreported architecture or training facts. No dataset computations.",
+      "input_summary": "Collect only reported method descriptions and numerical experimental results from the requested papers/documents. State source limitations relevant to the goal; do not demand unreported architecture or training facts. No dataset computations.",
+      "output_summary": "Collected reported method descriptions and numerical results from the three workspace papers (paper_1.pdf, paper_2.pdf, paper_3.pdf). Each paper reports one synthetic fixture method with parameter count and mIoU under a shared fixture benchmark and evaluation protocol. Only descriptive quality/cost tradeoff statements are reported; no causal or ablation claims, no uncertainty estimates, and the sources explicitly state these are synthetic test values rather than published research claims. No dataset (e.g., experiment.xlsx) values were collected or computed in this delegation; source_scope limited to workspace documents.",
+      "started_at": "2026-10-02T12:30:52.254054+00:00",
+      "completed_at": "2026-10-02T12:30:58.406310+00:00",
+      "duration_ms": 6152.26,
+      "llm_calls": 1,
+      "tool_calls": 1,
+      "iterations": 1,
+      "tokens": 3271,
+      "token_usage_status": "available",
+      "error_type": null,
+      "metadata": {
+        "execution_group": 0,
+        "namespace": "research:a226d2e8-531e-4af5-b707-27b3dc030e09",
+        "revision_of": null,
+        "evidence_count": 3,
+        "artifact_count": 0,
+        "cache_hit": false,
+        "context_measurements": [
+          {
+            "phase": "result_contract",
+            "before": 3134,
+            "after": 3134,
+            "method": "ContextHarness count_tokens_approximately; estimate, not provider usage"
+          }
+        ],
+        "context_reduction": {
+          "before": 254,
+          "after": 254,
+          "method": "Same private brief projected by Phase5A vs AgentContextBuilder; count_tokens_approximately estimate"
+        }
+      }
+    },
+    {
+      "id": "93b3d748-1733-4255-bb14-52fcfcebcccb",
+      "task_id": "be0ae22a-16b6-4d53-afc1-60bad49e4f87",
+      "delegation_id": "421c5a21-4ff0-4099-ab63-57073b920e48",
+      "agent_id": "data",
+      "status": "COMPLETED",
+      "objective": "Analyze only the uploaded dataset: Compare the methods reported in the three uploaded papers with experiment.xlsx results. Find the best configuration under 3M parameters, generate a chart, and assess whether our results support the reported design advantages. Use only uploaded data and documents; these are synthetic fixtures.. Do not perform new research or interpret paper claims.",
+      "input_summary": "Analyze only the uploaded dataset: Compare the methods reported in the three uploaded papers with experiment.xlsx results. Find the best configuration under 3M parameters, generate a chart, and assess whether our results support the reported design advantages. Use only uploaded data and documents; these are synthetic fixtures.. Do not perform new research or interpret paper claims.",
+      "output_summary": "Completed constrained dataset analysis and requested artifact generation.",
+      "started_at": "2026-10-02T12:30:52.214033+00:00",
+      "completed_at": "2026-10-02T12:30:53.496055+00:00",
+      "duration_ms": 1282.02,
+      "llm_calls": 0,
+      "tool_calls": 2,
+      "iterations": 2,
+      "tokens": null,
+      "token_usage_status": "unavailable",
+      "error_type": null,
+      "metadata": {
+        "execution_group": 0,
+        "namespace": "data:421c5a21-4ff0-4099-ab63-57073b920e48",
+        "revision_of": null,
+        "evidence_count": 2,
+        "artifact_count": 2,
+        "cache_hit": false,
+        "context_reduction": {
+          "before": 550,
+          "after": 550,
+          "method": "Same private brief projected by Phase5A vs AgentContextBuilder; count_tokens_approximately estimate"
+        }
+      }
+    },
+    {
+      "id": "51b1feb3-1454-43d1-a573-ad701dc2ecd6",
+      "task_id": "be0ae22a-16b6-4d53-afc1-60bad49e4f87",
+      "delegation_id": "321fe3a1-b8c0-4a97-b247-a5950d10a202",
+      "agent_id": "reviewer",
+      "status": "COMPLETED",
+      "objective": "Review evidence, coverage, contradictions and requirements.",
+      "input_summary": "Review evidence, coverage, contradictions and requirements.",
+      "output_summary": "needs_revision",
+      "started_at": "2026-10-02T12:30:58.471256+00:00",
+      "completed_at": "2026-10-02T12:31:29.526018+00:00",
+      "duration_ms": 31054.76,
+      "llm_calls": 1,
+      "tool_calls": 0,
+      "iterations": 1,
+      "tokens": 8598,
+      "token_usage_status": "available",
+      "error_type": null,
+      "metadata": {
+        "execution_group": 1,
+        "namespace": "reviewer:321fe3a1-b8c0-4a97-b247-a5950d10a202",
+        "revision_of": null,
+        "evidence_count": 5,
+        "artifact_count": 2,
+        "context_measurements": [
+          {
+            "phase": "reviewer",
+            "before": 3831,
+            "after": 3831,
+            "method": "ContextHarness count_tokens_approximately; estimate, not provider usage"
+          }
+        ]
+      }
+    }
+  ],
+  "delegations": [
+    {
+      "id": "a226d2e8-531e-4af5-b707-27b3dc030e09",
+      "task_id": "be0ae22a-16b6-4d53-afc1-60bad49e4f87",
+      "supervisor_run_id": "bc3a30b0-42e1-4ada-aa9d-1b101322a360",
+      "agent_run_id": "0bb9c9f0-e6da-4e75-a7fc-fbec4712f9a4",
+      "agent_id": "research",
+      "objective": "Collect only reported method descriptions and numerical experimental results from the requested papers/documents. State source limitations relevant to the goal; do not demand unreported architecture or training facts. No dataset computations.",
+      "status": "COMPLETED",
+      "execution_group": 0,
+      "created_at": "2026-10-02T12:30:52.165166+00:00",
+      "started_at": "2026-10-02T12:30:52.254054+00:00",
+      "completed_at": "2026-10-02T12:30:58.406310+00:00",
+      "result_json": {
+        "delegation_id": "a226d2e8-531e-4af5-b707-27b3dc030e09",
+        "agent_id": "research",
+        "revision_of": null,
+        "status": "completed",
+        "summary": "Collected reported method descriptions and numerical results from the three workspace papers (paper_1.pdf, paper_2.pdf, paper_3.pdf). Each paper reports one synthetic fixture method with parameter count and mIoU under a shared fixture benchmark and evaluation protocol. Only descriptive quality/cost tradeoff statements are reported; no causal or ablation claims, no uncertainty estimates, and the sources explicitly state these are synthetic test values rather than published research claims. No dataset (e.g., experiment.xlsx) values were collected or computed in this delegation; source_scope limited to workspace documents.",
+        "evidence_ids": [
+          "ev_1ac6b37a6e8bfcc1bfedf6df",
+          "ev_eb7c8d6d3de2f11fdfe2403d",
+          "ev_82c2395680fb99bc9eb07656"
+        ],
+        "artifact_ids": [],
+        "unresolved_questions": [
+          "Whether the fixture benchmark is truly identical/independent across the three papers as claimed (cross-paper comparability is asserted by the sources but not independently verifiable here).",
+          "The experiment.xlsx dataset results referenced in the broader user goal were not collected or evaluated in this delegation (dataset computation is explicitly out of scope here).",
+          "No uncertainty estimates, statistical significance, or ablation data are reported to support or refute design-advantage claims."
+        ],
+        "confidence": 0.88,
+        "payload": {
+          "delegation_id": "a226d2e8-531e-4af5-b707-27b3dc030e09",
+          "status": "completed",
+          "summary": "Collected reported method descriptions and numerical results from the three workspace papers (paper_1.pdf, paper_2.pdf, paper_3.pdf). Each paper reports one synthetic fixture method with parameter count and mIoU under a shared fixture benchmark and evaluation protocol. Only descriptive quality/cost tradeoff statements are reported; no causal or ablation claims, no uncertainty estimates, and the sources explicitly state these are synthetic test values rather than published research claims. No dataset (e.g., experiment.xlsx) values were collected or computed in this delegation; source_scope limited to workspace documents.",
+          "findings": [
+            {
+              "claim": "paper_1.pdf reports Method A: convolutional segmentation, 2.5 million parameters, mIoU 73.27 on the shared fixture benchmark/evaluation protocol.",
+              "evidence_ids": [
+                "ev_82c2395680fb99bc9eb07656"
+              ],
+              "confidence": 0.9
+            },
+            {
+              "claim": "paper_2.pdf reports Method B: attention segmentation, 3.2 million parameters, mIoU 76.0 on the shared fixture benchmark/evaluation protocol.",
+              "evidence_ids": [
+                "ev_eb7c8d6d3de2f11fdfe2403d"
+              ],
+              "confidence": 0.9
+            },
+            {
+              "claim": "paper_3.pdf reports Method C: compact convolution baseline, 2.0 million parameters, mIoU 70.0 on the shared fixture benchmark/evaluation protocol.",
+              "evidence_ids": [
+                "ev_1ac6b37a6e8bfcc1bfedf6df"
+              ],
+              "confidence": 0.9
+            },
+            {
+              "claim": "All three sources state the synthetic methods use the same fixture benchmark and evaluation protocol, and report the same three shared configuration values (A: 2.5M/73.27; B: 3.2M/76.0; C: 2.0M/70.0).",
+              "evidence_ids": [
+                "ev_82c2395680fb99bc9eb07656",
+                "ev_eb7c8d6d3de2f11fdfe2403d",
+                "ev_1ac6b37a6e8bfcc1bfedf6df"
+              ],
+              "confidence": 0.9
+            },
+            {
+              "claim": "Reported tradeoff statements are descriptive only: A improves mIoU over C by 3.27 points at 0.5M more parameters; B improves mIoU over A by 2.73 points at 0.7M more parameters. Sources explicitly disclaim causal or ablation claims.",
+              "evidence_ids": [
+                "ev_82c2395680fb99bc9eb07656",
+                "ev_eb7c8d6d3de2f11fdfe2403d",
+                "ev_1ac6b37a6e8bfcc1bfedf6df"
+              ],
+              "confidence": 0.9
+            },
+            {
+              "claim": "Source limitations: values are synthetic test fixtures, not published research claims; only three configurations are reported; no uncertainty estimates are provided.",
+              "evidence_ids": [
+                "ev_82c2395680fb99bc9eb07656",
+                "ev_eb7c8d6d3de2f11fdfe2403d",
+                "ev_1ac6b37a6e8bfcc1bfedf6df"
+              ],
+              "confidence": 0.9
+            },
+            {
+              "claim": "Not reported by the sources: any architecture/training details beyond the one-line method names, any dataset-level results (e.g., experiment.xlsx), any uncertainty/statistical measures, and any causal or ablation evidence. These facts are absent and are not asserted here.",
+              "evidence_ids": [
+                "ev_82c2395680fb99bc9eb07656",
+                "ev_eb7c8d6d3de2f11fdfe2403d",
+                "ev_1ac6b37a6e8bfcc1bfedf6df"
+              ],
+              "confidence": 0.85
+            }
+          ],
+          "evidence_ids": [
+            "ev_1ac6b37a6e8bfcc1bfedf6df",
+            "ev_eb7c8d6d3de2f11fdfe2403d",
+            "ev_82c2395680fb99bc9eb07656"
+          ],
+          "unresolved_questions": [
+            "Whether the fixture benchmark is truly identical/independent across the three papers as claimed (cross-paper comparability is asserted by the sources but not independently verifiable here).",
+            "The experiment.xlsx dataset results referenced in the broader user goal were not collected or evaluated in this delegation (dataset computation is explicitly out of scope here).",
+            "No uncertainty estimates, statistical significance, or ablation data are reported to support or refute design-advantage claims."
+          ],
+          "confidence": 0.88
+        }
+      }
+    },
+    {
+      "id": "421c5a21-4ff0-4099-ab63-57073b920e48",
+      "task_id": "be0ae22a-16b6-4d53-afc1-60bad49e4f87",
+      "supervisor_run_id": "bc3a30b0-42e1-4ada-aa9d-1b101322a360",
+      "agent_run_id": "93b3d748-1733-4255-bb14-52fcfcebcccb",
+      "agent_id": "data",
+      "objective": "Analyze only the uploaded dataset: Compare the methods reported in the three uploaded papers with experiment.xlsx results. Find the best configuration under 3M parameters, generate a chart, and assess whether our results support the reported design advantages. Use only uploaded data and documents; these are synthetic fixtures.. Do not perform new research or interpret paper claims.",
+      "status": "COMPLETED",
+      "execution_group": 0,
+      "created_at": "2026-10-02T12:30:52.167167+00:00",
+      "started_at": "2026-10-02T12:30:52.214033+00:00",
+      "completed_at": "2026-10-02T12:30:53.496055+00:00",
+      "result_json": {
+        "delegation_id": "421c5a21-4ff0-4099-ab63-57073b920e48",
+        "agent_id": "data",
+        "revision_of": null,
+        "status": "completed",
+        "summary": "Completed constrained dataset analysis and requested artifact generation.",
+        "evidence_ids": [
+          "ev_17dd4f291da04d52a8db9532db64ee75",
+          "ev_50e1388d4d2942d39923aee9b1d4ba26"
+        ],
+        "artifact_ids": [
+          "45e601df-c12f-4aec-82b0-4cfa70e96f62",
+          "f6568edd-0efc-4896-a9e6-fec8dd490bb2"
+        ],
+        "unresolved_questions": [],
+        "confidence": 1.0,
+        "payload": {
+          "delegation_id": "421c5a21-4ff0-4099-ab63-57073b920e48",
+          "status": "completed",
+          "summary": "Completed constrained dataset analysis and requested artifact generation.",
+          "findings": [
+            {
+              "claim": "Computed results: {\"best\": [{\"model\": \"A\", \"params_m\": 2.5, \"miou\": 73.27}], \"operation\": \"rank_under_budget\", \"constraint\": {\"operator\": \"<\", \"threshold\": 3.0, \"unit\": \"million parameters\"}, \"parameter_column\": \"params_m\", \"metric_column\": \"miou\", \"rows\": 3, \"excluded_missing_rows\": 0, \"ranked\": [{\"model\": \"B\", \"params_m\": 3.2, \"miou\": 76.0}, {\"model\": \"A\", \"params_m\": 2.5, \"miou\": 73.27}, {\"model\": \"C\", \"params_m\": 2.0, \"miou\": 70.0}], \"eligible\": [{\"model\": \"A\", \"params_m\": 2.5, \"miou\": 73.27}, {\"model\": \"C\", \"params_m\": 2.0, \"miou\": 70.0}], \"eligible_count\": 2, \"statistics\": {\"params_m\": {\"count\": 3.0, \"mean\": 2.5666666667, \"std\": 0.6027713773, \"min\": 2.0, \"25%\": 2.25, \"50%\": 2.5, \"75%\": 2.85, \"max\": 3.2}, \"miou\": {\"count\": 3.0, \"mean\": 73.09, \"std\": 3.0040472699, \"min\": 70.0, \"25%\": 71.635, \"50%\": 73.27, \"75%\": 74.635, \"max\": 76.0}}, \"chart\": \"comparison.png\"}",
+              "evidence_ids": [
+                "ev_50e1388d4d2942d39923aee9b1d4ba26"
+              ],
+              "confidence": 1.0
+            }
+          ],
+          "evidence_ids": [
+            "ev_17dd4f291da04d52a8db9532db64ee75",
+            "ev_50e1388d4d2942d39923aee9b1d4ba26"
+          ],
+          "unresolved_questions": [],
+          "confidence": 1.0,
+          "metrics": {
+            "best": [
+              {
+                "model": "A",
+                "params_m": 2.5,
+                "miou": 73.27
+              }
+            ],
+            "operation": "rank_under_budget",
+            "constraint": {
+              "operator": "<",
+              "threshold": 3.0,
+              "unit": "million parameters"
+            },
+            "parameter_column": "params_m",
+            "metric_column": "miou",
+            "rows": 3,
+            "excluded_missing_rows": 0,
+            "ranked": [
+              {
+                "model": "B",
+                "params_m": 3.2,
+                "miou": 76.0
+              },
+              {
+                "model": "A",
+                "params_m": 2.5,
+                "miou": 73.27
+              },
+              {
+                "model": "C",
+                "params_m": 2.0,
+                "miou": 70.0
+              }
+            ],
+            "eligible": [
+              {
+                "model": "A",
+                "params_m": 2.5,
+                "miou": 73.27
+              },
+              {
+                "model": "C",
+                "params_m": 2.0,
+                "miou": 70.0
+              }
+            ],
+            "eligible_count": 2,
+            "statistics": {
+              "params_m": {
+                "count": 3.0,
+                "mean": 2.5666666667,
+                "std": 0.6027713773,
+                "min": 2.0,
+                "25%": 2.25,
+                "50%": 2.5,
+                "75%": 2.85,
+                "max": 3.2
+              },
+              "miou": {
+                "count": 3.0,
+                "mean": 73.09,
+                "std": 3.0040472699,
+                "min": 70.0,
+                "25%": 71.635,
+                "50%": 73.27,
+                "75%": 74.635,
+                "max": 76.0
+              }
+            },
+            "chart": "comparison.png"
+          },
+          "artifact_ids": [
+            "45e601df-c12f-4aec-82b0-4cfa70e96f62",
+            "f6568edd-0efc-4896-a9e6-fec8dd490bb2"
+          ],
+          "execution_ids": [
+            "50e1388d-4d29-42d3-9923-aee9b1d4ba26"
+          ]
+        }
+      }
+    },
+    {
+      "id": "321fe3a1-b8c0-4a97-b247-a5950d10a202",
+      "task_id": "be0ae22a-16b6-4d53-afc1-60bad49e4f87",
+      "supervisor_run_id": "bc3a30b0-42e1-4ada-aa9d-1b101322a360",
+      "agent_run_id": "51b1feb3-1454-43d1-a573-ad701dc2ecd6",
+      "agent_id": "reviewer",
+      "objective": "Review evidence, coverage, contradictions and requirements.",
+      "status": "COMPLETED",
+      "execution_group": 1,
+      "created_at": "2026-10-02T12:30:58.468119+00:00",
+      "started_at": "2026-10-02T12:30:58.471256+00:00",
+      "completed_at": "2026-10-02T12:31:29.526018+00:00",
+      "result_json": {
+        "delegation_id": "321fe3a1-b8c0-4a97-b247-a5950d10a202",
+        "agent_id": "reviewer",
+        "revision_of": null,
+        "status": "completed",
+        "summary": "needs_revision",
+        "evidence_ids": [
+          "ev_17dd4f291da04d52a8db9532db64ee75",
+          "ev_1ac6b37a6e8bfcc1bfedf6df",
+          "ev_50e1388d4d2942d39923aee9b1d4ba26",
+          "ev_82c2395680fb99bc9eb07656",
+          "ev_eb7c8d6d3de2f11fdfe2403d"
+        ],
+        "artifact_ids": [
+          "45e601df-c12f-4aec-82b0-4cfa70e96f62",
+          "f6568edd-0efc-4896-a9e6-fec8dd490bb2"
+        ],
+        "unresolved_questions": [],
+        "confidence": 0.85,
+        "payload": {
+          "verdict": "needs_revision",
+          "missing_items": [
+            "Full explicit comparison of paper-reported methods (A: 2.5M/73.27, B: 3.2M/76.0, C: 2.0M/70.0) against experiment.xlsx values, including confirmation that the analyzed dataset is experiment.xlsx; the current data result only reports rank_under_budget with best A and truncated ranked rows.",
+            "Complete ranked/table output for all three methods under the <3M parameter budget, including B and C values and deltas versus paper reports.",
+            "An assessment of whether the experiment.xlsx results support the reported design advantages, including the source limitation that the papers provide only descriptive quality/cost statements and no uncertainty, ablation, or causal evidence."
+          ],
+          "contradictions": [],
+          "unsupported_claims": [],
+          "suggested_delegations": [
+            {
+              "capability": "data.compare",
+              "objective": "Using only the existing paper evidence and the experiment.xlsx analysis, produce a side-by-side table for A, B, and C with paper-reported params/mIoU, experiment.xlsx params/mIoU, and differences; restore the full ranked list under the <3M budget.",
+              "missing_item": "Full paper-vs-experiment.xlsx method comparison and untruncated budget ranking."
+            },
+            {
+              "capability": "data.analyze",
+              "objective": "Assess whether the experiment.xlsx results support the reported design advantages, explicitly limiting conclusions to the available descriptive quality/cost evidence and noting the absence of uncertainty, ablation, or causal support.",
+              "missing_item": "Assessment of whether results support reported design advantages."
+            }
+          ],
+          "confidence": 0.85
+        }
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "45e601df-c12f-4aec-82b0-4cfa70e96f62",
+      "task_id": "be0ae22a-16b6-4d53-afc1-60bad49e4f87",
+      "step_id": "bd6cf119-4a03-45aa-9c68-660749b8617a",
+      "execution_id": "50e1388d-4d29-42d3-9923-aee9b1d4ba26",
+      "workspace_id": "59f4354f-d52d-441c-9106-ec020d8a4aee",
+      "filename": "comparison.png",
+      "artifact_type": "png",
+      "mime_type": "image/png",
+      "size_bytes": 11989,
+      "created_at": "2026-10-02T12:30:53.460631+00:00",
+      "metadata": {}
+    },
+    {
+      "id": "f6568edd-0efc-4896-a9e6-fec8dd490bb2",
+      "task_id": "be0ae22a-16b6-4d53-afc1-60bad49e4f87",
+      "step_id": "bd6cf119-4a03-45aa-9c68-660749b8617a",
+      "execution_id": "50e1388d-4d29-42d3-9923-aee9b1d4ba26",
+      "workspace_id": "59f4354f-d52d-441c-9106-ec020d8a4aee",
+      "filename": "summary.json",
+      "artifact_type": "json",
+      "mime_type": "application/json",
+      "size_bytes": 1201,
+      "created_at": "2026-10-02T12:30:53.464560+00:00",
+      "metadata": {}
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ev_1ac6b37a6e8bfcc1bfedf6df",
+      "source_type": "workspace",
+      "source_metadata": {},
+      "execution_id": null,
+      "dataset_ids": [],
+      "artifact_ids": [],
+      "document_id": "86116e8c-9606-44bc-a959-1a95fdbbc40d",
+      "document_name": "paper_3.pdf",
+      "page": 1,
+      "page_count": 1,
+      "chunk_id": "40cfbba4ac87dc03ec6d658e",
+      "title": null,
+      "url": null,
+      "content": "Synthetic Phase 3 Research Fixture\nModel A: 2.5 million parameters; mIoU 73.27 percent.\nModel B: 3.2 million parameters; mIoU 76.0 percent.\nModel C: 2.0 million parameters; mIoU 70.0 percent.\nThese are synthetic test values, not published research claims.\nSynthetic Paper 3. Method C: compact convolution baseline, 2.0M parameters, mIoU 70.0.\nAll synthetic methods use the same fixture benchmark and evaluation protocol.\nA improves mIoU over C by 3.27 points at 0.5M more parameters.\nB improves mIoU over A by 2.73 points at 0.7M more parameters.\nClaims: descriptive quality/cost tradeoff only; no causal or ablation claim.\nThree fixture configurations, no uncertainty estimates; not published research.",
+      "retrieval_score": 0.03278688524590164,
+      "rerank_score": 0.0006150456028990448,
+      "extraction_method": "native",
+      "table_labels": []
+    },
+    {
+      "evidence_id": "ev_eb7c8d6d3de2f11fdfe2403d",
+      "source_type": "workspace",
+      "source_metadata": {},
+      "execution_id": null,
+      "dataset_ids": [],
+      "artifact_ids": [],
+      "document_id": "2cc27234-72d4-4021-90a3-5385df669d7f",
+      "document_name": "paper_2.pdf",
+      "page": 1,
+      "page_count": 1,
+      "chunk_id": "b4810f980bee3d926ebde00a",
+      "title": null,
+      "url": null,
+      "content": "Synthetic Phase 3 Research Fixture\nModel A: 2.5 million parameters; mIoU 73.27 percent.\nModel B: 3.2 million parameters; mIoU 76.0 percent.\nModel C: 2.0 million parameters; mIoU 70.0 percent.\nThese are synthetic test values, not published research claims.\nSynthetic Paper 2. Method B: attention segmentation, 3.2M parameters, mIoU 76.0.\nAll synthetic methods use the same fixture benchmark and evaluation protocol.\nA improves mIoU over C by 3.27 points at 0.5M more parameters.\nB improves mIoU over A by 2.73 points at 0.7M more parameters.\nClaims: descriptive quality/cost tradeoff only; no causal or ablation claim.\nThree fixture configurations, no uncertainty estimates; not published research.",
+      "retrieval_score": 0.03278688524590164,
+      "rerank_score": 0.0005434307968243957,
+      "extraction_method": "native",
+      "table_labels": []
+    },
+    {
+      "evidence_id": "ev_82c2395680fb99bc9eb07656",
+      "source_type": "workspace",
+      "source_metadata": {},
+      "execution_id": null,
+      "dataset_ids": [],
+      "artifact_ids": [],
+      "document_id": "a59840ac-b60f-45fa-b0e6-d1ddc0790a76",
+      "document_name": "paper_1.pdf",
+      "page": 1,
+      "page_count": 1,
+      "chunk_id": "9c6a6fdc3e59d182fef9086d",
+      "title": null,
+      "url": null,
+      "content": "Synthetic Phase 3 Research Fixture\nModel A: 2.5 million parameters; mIoU 73.27 percent.\nModel B: 3.2 million parameters; mIoU 76.0 percent.\nModel C: 2.0 million parameters; mIoU 70.0 percent.\nThese are synthetic test values, not published research claims.\nSynthetic Paper 1. Method A: convolutional segmentation, 2.5M parameters, mIoU 73.27.\nAll synthetic methods use the same fixture benchmark and evaluation protocol.\nA improves mIoU over C by 3.27 points at 0.5M more parameters.\nB improves mIoU over A by 2.73 points at 0.7M more parameters.\nClaims: descriptive quality/cost tradeoff only; no causal or ablation claim.\nThree fixture configurations, no uncertainty estimates; not published research.",
+      "retrieval_score": 0.03278688524590164,
+      "rerank_score": 0.000536684412509203,
+      "extraction_method": "native",
+      "table_labels": []
+    },
+    {
+      "evidence_id": "ev_17dd4f291da04d52a8db9532db64ee75",
+      "source_type": "analysis",
+      "source_metadata": {},
+      "execution_id": "17dd4f29-1da0-4d52-a8db-9532db64ee75",
+      "dataset_ids": [
+        "0aab9193-8086-4d09-9d4d-26a6292f16ff"
+      ],
+      "artifact_ids": [],
+      "document_id": null,
+      "document_name": null,
+      "page": null,
+      "page_count": null,
+      "chunk_id": null,
+      "title": "dataset.inspect",
+      "url": null,
+      "content": "{\"untrusted_data\": {\"0aab9193-8086-4d09-9d4d-26a6292f16ff\": {\"sheet_names\": [\"Sheet1\"], \"sheets\": {\"Sheet1\": {\"rows\": 3, \"columns\": 3, \"column_names\": [\"model\", \"params_m\", \"miou\"], \"dtypes\": {\"model\": \"object\", \"params_m\": \"float64\", \"miou\": \"float64\"}, \"missing\": {\"model\": 0, \"params_m\": 0, \"miou\": 0}, \"statistics\": {\"model\": {\"count\": 3, \"unique\": 3, \"top\": \"A\", \"freq\": 1, \"mean\": null, \"std\": null, \"min\": null, \"25%\": null, \"50%\": null, \"75%\": null, \"max\": null}, \"params_m\": {\"count\": 3.0, \"unique\": null, \"top\": null, \"freq\": null, \"mean\": 2.5666666667, \"std\": 0.6027713773, \"min\": 2.0, \"25%\": 2.25, \"50%\": 2.5, \"75%\": 2.85, \"max\": 3.2}, \"miou\": {\"count\": 3.0, \"unique\": null, \"top\": null, \"freq\": null, \"mean\": 73.09, \"std\": 3.0040472699, \"min\": 70.0, \"25%\": 71.635, \"50%\": 73.27, \"75%\": 74.635, \"max\": 76.0}}, \"sample\": [{\"model\": \"A\", \"params_m\": 2.5, \"miou\": 73.27}, {\"model\": \"B\", \"params_m\": 3.2, \"miou\": 76.0}, {\"model\": \"C\", \"params_m\": 2.0, \"miou\": 70.0}]}}}}}",
+      "retrieval_score": null,
+      "rerank_score": null,
+      "extraction_method": null,
+      "table_labels": []
+    },
+    {
+      "evidence_id": "ev_50e1388d4d2942d39923aee9b1d4ba26",
+      "source_type": "analysis",
+      "source_metadata": {},
+      "execution_id": "50e1388d-4d29-42d3-9923-aee9b1d4ba26",
+      "dataset_ids": [
+        "0aab9193-8086-4d09-9d4d-26a6292f16ff"
+      ],
+      "artifact_ids": [
+        "45e601df-c12f-4aec-82b0-4cfa70e96f62",
+        "f6568edd-0efc-4896-a9e6-fec8dd490bb2"
+      ],
+      "document_id": null,
+      "document_name": null,
+      "page": null,
+      "page_count": null,
+      "chunk_id": null,
+      "title": "Dataset analysis",
+      "url": null,
+      "content": "{\"computed_output\": \"{\\\"best\\\": [{\\\"model\\\": \\\"A\\\", \\\"params_m\\\": 2.5, \\\"miou\\\": 73.27}], \\\"operation\\\": \\\"rank_under_budget\\\", \\\"constraint\\\": {\\\"operator\\\": \\\"<\\\", \\\"threshold\\\": 3.0, \\\"unit\\\": \\\"million parameters\\\"}, \\\"parameter_column\\\": \\\"params_m\\\", \\\"metric_column\\\": \\\"miou\\\", \\\"rows\\\": 3, \\\"excluded_missing_rows\\\": 0, \\\"ranked\\\": [{\\\"model\\\": \\\"B\\\", \\\"params_m\\\": 3.2, \\\"miou\\\": 76.0}, {\\\"model\\\": \\\"A\\\", \\\"params_m\\\": 2.5, \\\"miou\\\": 73.27}, {\\\"model\\\": \\\"C\\\", \\\"params_m\\\": 2.0, \\\"miou\\\": 70.0}], \\\"eligible\\\": [{\\\"model\\\": \\\"A\\\", \\\"params_m\\\": 2.5, \\\"miou\\\": 73.27}, {\\\"model\\\": \\\"C\\\", \\\"params_m\\\": 2.0, \\\"miou\\\": 70.0}], \\\"eligible_count\\\": 2, \\\"statistics\\\": {\\\"params_m\\\": {\\\"count\\\": 3.0, \\\"mean\\\": 2.5666666667, \\\"std\\\": 0.6027713773, \\\"min\\\": 2.0, \\\"25%\\\": 2.25, \\\"50%\\\": 2.5, \\\"75%\\\": 2.85, \\\"max\\\": 3.2}, \\\"miou\\\": {\\\"count\\\": 3.0, \\\"mean\\\": 73.09, \\\"std\\\": 3.0040472699, \\\"min\\\": 70.0, \\\"25%\\\": 71.635, \\\"50%\\\": 73.27, \\\"75%\\\": 74.635, \\\"max\\\": 76.0}}, \\\"chart\\\": \\\"comparison.png\\\"}\\r\\n\", \"dataset_context\": [{\"dataset_id\": \"0aab9193-8086-4d09-9d4d-26a6292f16ff\", \"filename\": \"experiment.xlsx\", \"inspection\": {\"sheet_names\": [\"Sheet1\"], \"sheets\": {\"Sheet1\": {\"rows\": 3, \"columns\": 3, \"column_names\": [\"model\", \"params_m\", \"miou\"], \"dtypes\": {\"model\": \"object\", \"params_m\": \"float64\", \"miou\": \"float64\"}, \"missing\": {\"model\": 0, \"params_m\": 0, \"miou\": 0}, \"statistics\": {\"model\": {\"count\": 3, \"unique\": 3, \"top\": \"A\", \"freq\": 1, \"mean\": null, \"std\": null, \"min\": null, \"25%\": null, \"50%\": null, \"75%\": null, \"max\": null}, \"params_m\": {\"count\": 3.0, \"unique\": null, \"top\": null, \"freq\": null, \"mean\": 2.5666666667, \"std\": 0.6027713773, \"min\": 2.0, \"25%\": 2.25, \"50%\": 2.5, \"75%\": 2.85, \"max\": 3.2}, \"miou\": {\"count\": 3.0, \"unique\": null, \"top\": null, \"freq\": null, \"mean\": 73.09, \"std\": 3.0040472699, \"min\": 70.0, \"25%\": 71.635, \"50%\": 73.27, \"75%\": 74.635, \"max\": 76.0}}, \"sample\": [{\"model\": \"A\", \"params_m\": 2.5, \"miou\": 73.27}, {\"model\": \"B\", \"params_m\": 3.2, \"miou\": 76.0}, {\"model\": \"C\", \"params_m\": 2.0, \"miou\": 70.0}]}}}}]}",
+      "retrieval_score": null,
+      "rerank_score": null,
+      "extraction_method": null,
+      "table_labels": []
+    }
+  ],
+  "quality": {
+    "core_answer_correct": true,
+    "criteria": {
+      "select_A_2_5M_73_27": true,
+      "exclude_B_3_2M": true,
+      "no_causal_claim": true
+    },
+    "required_evidence_coverage": {
+      "three_papers": true,
+      "computed_dataset": true,
+      "chart_generated": true
+    },
+    "citation_validity": true,
+    "grounded": true
+  }
+}

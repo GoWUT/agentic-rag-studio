@@ -9,6 +9,8 @@ wheels/
 # Virtual environments
 .venv
 .env
+.env.*
+!.env.example
 .rag_workspace
 .runtime/
 
@@ -27,7 +29,7 @@ htmlcov/
 .DS_Store
 Thumbs.db
 
-# Local test suite (kept locally, excluded from GitHub)
-test_*.py
+# Deterministic test_*.py regression files are included for CI.
+# Explicit network smoke scripts execute only under their __main__ guard.
 *_test.py
 tests/
