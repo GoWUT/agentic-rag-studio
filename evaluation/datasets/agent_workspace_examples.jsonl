@@ -1,2 +1,0 @@
-{"id":"compare","question":"Compare the methods in these papers","source_scope":"workspace_only","expected_complexity":"complex","expected_tools":["search_workspace"],"expected_documents":["a","b","c"]}
-{"id":"title","question":"What is the title of paper_a?","source_scope":"workspace_only","expected_complexity":"simple","expected_tools":["search_workspace"],"expected_documents":["a"]}

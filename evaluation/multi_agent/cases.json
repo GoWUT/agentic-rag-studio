@@ -1,5 +1,0 @@
-[
-  {"name":"research_only","goal":"Compare the methods in the uploaded papers","expected_agents":["research"],"expected_evidence_types":["workspace"]},
-  {"name":"data_only","goal":"Analyze experiment.csv, find the best configuration under 3M parameters and generate a chart","expected_agents":["data"],"expected_evidence_types":["analysis"]},
-  {"name":"research_data","goal":"Compare the uploaded papers with experiment.csv data, find the best configuration under 3M parameters and generate a chart","expected_agents":["research","data"],"expected_evidence_types":["workspace","analysis"]}
-]

@@ -1,6 +1,6 @@
 # Agentic RAG Studio architecture
 
-This document describes the assembled Phase 5B-2 system. The overview uses PostgreSQL and an independent background worker. SQLite/inline execution remains available for local development. The native process topology has been exercised; Docker/Compose runtime acceptance remains pending.
+This document describes the implemented system running as native processes. The overview uses PostgreSQL and an independent background worker. SQLite/inline execution remains available for local development.
 
 ![System overview](assets/architecture.svg)
 
@@ -30,7 +30,6 @@ flowchart TB
     Supervisor --> Reviewer[Reviewer Agent]
     Research --> Retrieval[Workspace-scoped RAG]
     Data --> Analysis[Constrained analysis subprocess]
-    Coding --> Analysis
     Research --> Tools[Tool policy + approval gate]
     Data --> Tools
     Coding --> Tools
@@ -40,7 +39,6 @@ flowchart TB
     API -.-> Telemetry[Redacted logs / OpenTelemetry]
     Worker -.-> Telemetry
     Runtime -.-> LangSmith[Optional LangSmith: hidden input/output]
-    Telemetry -.-> Collector[Optional Collector / Tempo / Prometheus / Grafana]
 ```
 
 The API owns the HTTP and authorization boundary. Streamlit stores access/refresh tokens in server-side session state. Tokens carry identity; roles come from live membership queries. The worker restores the original task creator rather than using an unrestricted service identity. Graph/tool execution shares this actor context through the execution harness.
@@ -120,7 +118,7 @@ Queue/checkpoint initialization is idempotent SDK setup after business migration
 
 ## Agent execution and authority
 
-The supervisor chooses the existing research workflow, single-agent execution, or bounded delegation. Research, Data, Coding, and Reviewer agents use structured contracts, private context budgets, and restricted tool sets. Independent delegations may run concurrently. Risk-based review, duplicate detection, and task-local caching reduce unnecessary calls; configured aggregate budgets cap the full run.
+The supervisor chooses the existing research workflow, single-agent execution, or bounded delegation. Research, Data, Coding, and Reviewer agents use structured contracts, private context budgets, and restricted tool sets. Data Agent runs constrained analysis; Coding Agent reads repository files and returns text suggestions. Independent delegations may run concurrently. Risk-based review, duplicate detection, and task-local caching reduce unnecessary calls; configured aggregate budgets cap the full run.
 
 Authorization is enforced at three points:
 
@@ -130,7 +128,7 @@ Authorization is enforced at three points:
 
 OWNER controls membership and may approve external writes. EDITOR can modify assets and run analysis. VIEWER can read assets and run their own read-only tasks. Personal sessions/memory remain private regardless of workspace role. See the [complete security model](PHASE5B2_SECURITY.md).
 
-## Process and deployment view
+## Native process view
 
 ```mermaid
 flowchart LR
@@ -140,18 +138,14 @@ flowchart LR
     API -->|ready| UI[Streamlit process]
     API --- Volume[(Shared workspace volume)]
     Worker --- Volume
-    API -.-> Collector[Optional OTLP Collector]
-    Worker -.-> Collector
-    Collector --> Tempo[Tempo traces]
-    Collector --> Prometheus[Prometheus metrics]
-    API -.->|metrics endpoint| Prometheus
-    Tempo --> Grafana[Grafana]
-    Prometheus --> Grafana
+    API -.-> OTel[Configured OTLP endpoint]
+    Worker -.-> OTel
+    API -.-> Metrics[Prometheus-format metrics endpoint]
 ```
 
-API and Worker export telemetry independently. Logs redact credentials and payloads; exported spans use a restricted attribute set. Metrics avoid user/workspace/query IDs as dimensions. Collector outages do not fail core requests. Optional LangSmith keeps input/output hidden by default. Monitoring definitions describe the intended container topology; the local smoke scenario exercised real OTLP receipt, not a live Grafana/Tempo stack.
+API and Worker export telemetry independently. Logs redact credentials and payloads; exported spans use a restricted attribute set. Metrics avoid user/workspace/query IDs as dimensions. Export endpoint outages do not fail core requests. Optional LangSmith keeps input/output hidden by default.
 
-The Compose definition uses non-root processes, read-only source, loopback-published ports, separate database/application volumes, and health-gated startup. These settings still need container acceptance. The constrained analysis subprocess is **not an OS security sandbox**. Shared filesystem access and analysis execution currently assume trusted teams; public hostile-code isolation and HA need additional work.
+The constrained analysis subprocess limits imports, time and outputs, but is **not an OS security sandbox**. Shared filesystem access and analysis execution assume trusted teams.
 
 ## Source navigation and evidence
 
@@ -164,6 +158,6 @@ The Compose definition uses non-root processes, read-only source, loopback-publi
 | Graphs and specialists | [`server/agent/`](../server/agent/), [`server/agent_registry.py`](../server/agent_registry.py) |
 | Retrieval and analysis | [`server/rag/`](../server/rag/), [`server/analysis_runtime.py`](../server/analysis_runtime.py) |
 | Tool governance | [`server/tool_policy.py`](../server/tool_policy.py), [`server/tool_actions.py`](../server/tool_actions.py), [`server/mcp_client.py`](../server/mcp_client.py) |
-| Infrastructure telemetry | [`server/observability/runtime.py`](../server/observability/runtime.py), [`observability/`](../observability/) |
+| Infrastructure telemetry | [`server/observability/runtime.py`](../server/observability/runtime.py), [`server/observability/langsmith.py`](../server/observability/langsmith.py) |
 
-[Validation snapshot](PHASE5B2_VALIDATION.md) · [Deployment runbook](PHASE5B2_DEPLOYMENT.md) · [Migration guide](PHASE5B1_MIGRATION.md)
+[Native process runbook](PHASE5B2_DEPLOYMENT.md#native-production-process-mode) · [Migration guide](PHASE5B1_MIGRATION.md)

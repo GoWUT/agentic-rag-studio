@@ -20,7 +20,7 @@ class Canvas:
         self.parts = [
             f'<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{HEIGHT}" viewBox="0 0 {WIDTH} {HEIGHT}" role="img" aria-labelledby="title description">',
             '<title id="title">Agentic RAG Studio system architecture</title>',
-            '<desc id="description">Streamlit connects to FastAPI with live authentication and RBAC. PostgreSQL holds business state, durable queue jobs and checkpoints. An independent worker restores the original actor and executes bounded LangGraph workflows. Retrieval, analysis and governed MCP tools use shared workspace files. API and Worker export optional redacted telemetry. SQLite inline mode is a local alternative; container runtime acceptance is pending.</desc>',
+            '<desc id="description">Streamlit connects to FastAPI with live authentication and RBAC. PostgreSQL holds business state, durable queue jobs and checkpoints. An independent worker restores the original actor and executes bounded LangGraph workflows. Retrieval, analysis and governed MCP tools use shared workspace files. Coding Agent reads code and returns textual suggestions. API and Worker export optional redacted telemetry. SQLite inline mode is a local alternative.</desc>',
             f'<rect width="{WIDTH}" height="{HEIGHT}" fill="{BACKGROUND}"/>',
             '<g font-family="Segoe UI, Arial, sans-serif">',
         ]
@@ -147,11 +147,11 @@ def render(png=False):
     c.text(958, 776, '08  OPTIONAL TELEMETRY', 12, TEAL, True)
     c.text(958, 813, 'API + Worker export', 20, INK, True)
     c.text(958, 845, 'Redacted logs · OTel · LangSmith', 15, MUTED)
-    c.text(958, 873, 'Collector · Tempo · Prometheus', 15, MUTED)
-    c.text(958, 895, 'Grafana configuration included', 14, MUTED)
+    c.text(958, 873, 'OTLP trace / metric export', 15, MUTED)
+    c.text(958, 895, 'Prometheus metrics endpoint', 14, MUTED)
 
     c.text(44, 950, 'Shown: PostgreSQL worker mode. Local alternative: SQLite + inline execution.', 15, MUTED)
-    c.text(44, 975, 'Validated: native processes. Pending: Docker / Compose runtime acceptance.', 15, MUTED)
+    c.text(44, 975, 'Implemented runtime: native API / Worker / UI processes; shared local workspace files.', 15, MUTED)
     c.save(Path(__file__).resolve().parents[1]/'docs'/'assets')
 
 

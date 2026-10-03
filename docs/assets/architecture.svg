@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="990" viewBox="0 0 1280 990" role="img" aria-labelledby="title description">
 <title id="title">Agentic RAG Studio system architecture</title>
-<desc id="description">Streamlit connects to FastAPI with live authentication and RBAC. PostgreSQL holds business state, durable queue jobs and checkpoints. An independent worker restores the original actor and executes bounded LangGraph workflows. Retrieval, analysis and governed MCP tools use shared workspace files. API and Worker export optional redacted telemetry. SQLite inline mode is a local alternative; container runtime acceptance is pending.</desc>
+<desc id="description">Streamlit connects to FastAPI with live authentication and RBAC. PostgreSQL holds business state, durable queue jobs and checkpoints. An independent worker restores the original actor and executes bounded LangGraph workflows. Retrieval, analysis and governed MCP tools use shared workspace files. Coding Agent reads code and returns textual suggestions. API and Worker export optional redacted telemetry. SQLite inline mode is a local alternative.</desc>
 <rect width="1280" height="990" fill="#f8fafc"/>
 <g font-family="Segoe UI, Arial, sans-serif">
 <rect x="44" y="32" width="182" height="27" rx="8" fill="#e8efff" stroke="#e8efff"/>
@@ -77,8 +77,8 @@
 <text x="958" y="776" font-size="12" font-weight="700" fill="#087f8c">08  OPTIONAL TELEMETRY</text>
 <text x="958" y="813" font-size="20" font-weight="700" fill="#14253d">API + Worker export</text>
 <text x="958" y="845" font-size="15" font-weight="400" fill="#52647b">Redacted logs · OTel · LangSmith</text>
-<text x="958" y="873" font-size="15" font-weight="400" fill="#52647b">Collector · Tempo · Prometheus</text>
-<text x="958" y="895" font-size="14" font-weight="400" fill="#52647b">Grafana configuration included</text>
+<text x="958" y="873" font-size="15" font-weight="400" fill="#52647b">OTLP trace / metric export</text>
+<text x="958" y="895" font-size="14" font-weight="400" fill="#52647b">Prometheus metrics endpoint</text>
 <text x="44" y="950" font-size="15" font-weight="400" fill="#52647b">Shown: PostgreSQL worker mode. Local alternative: SQLite + inline execution.</text>
-<text x="44" y="975" font-size="15" font-weight="400" fill="#52647b">Validated: native processes. Pending: Docker / Compose runtime acceptance.</text>
+<text x="44" y="975" font-size="15" font-weight="400" fill="#52647b">Implemented runtime: native API / Worker / UI processes; shared local workspace files.</text>
 </g></svg>

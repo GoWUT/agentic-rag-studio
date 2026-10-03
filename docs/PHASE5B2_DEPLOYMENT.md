@@ -171,11 +171,12 @@ reconciliation; do not force retry them to test recovery.
 
 ## CI and release
 
-`ci.yml` defines quality, full unit regression, auth/RBAC, three real PostgreSQL
-matrix jobs (integration/migration/worker) and a Docker build/non-root/source-content
-probe. All provider integration is fixture-only. Tagged release calls validation
-first and publishes GHCR image tags/provenance/SBOM only after it succeeds. A normal
-branch push runs validation; image publication requires a separate `v*` tag.
+`ci.yml` checks the dependency lock, Python source compilation, diff whitespace,
+and exclusion of local test files. Test sources and acceptance fixtures stay local
+and are not available in a public clone. These source checks do not establish
+runtime or container readiness. The optional tagged release workflow invokes these
+source checks before building and publishing an image; no release tag is created
+by a normal branch push.
 
 Local `actionlint` verifies workflow schema/expressions and YAML checks cover Compose
 and observability configs. Consult the current GitHub Actions run for remote CI.

@@ -4,29 +4,29 @@
 
 面向研究与数据分析的 Agent 工作台：跨文档问答、可恢复任务、多 Agent 协作，以及工作区级权限管理。
 
-[![Validation](https://github.com/GoWUT/agentic-rag-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/GoWUT/agentic-rag-studio/actions/workflows/ci.yml)
+[![Source checks](https://github.com/GoWUT/agentic-rag-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/GoWUT/agentic-rag-studio/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
 ![API](https://img.shields.io/badge/API-FastAPI-009688?logo=fastapi&logoColor=white)
 ![Agents](https://img.shields.io/badge/Agents-LangGraph-4338CA)
 ![Persistence](https://img.shields.io/badge/Persistence-PostgreSQL-4169E1?logo=postgresql&logoColor=white)
 
-[Architecture](docs/ARCHITECTURE.md) · [Quick start](#quick-start) · [Evaluation](#evaluation-and-validation) · [Deployment](docs/PHASE5B2_DEPLOYMENT.md) · [Security](docs/PHASE5B2_SECURITY.md)
+[Architecture](docs/ARCHITECTURE.md) · [Quick start](#quick-start) · [Retrieval evaluation](#retrieval-evaluation) · [Security](docs/PHASE5B2_SECURITY.md)
 
 Upload papers, compare their evidence, analyze a dataset, and follow a task from planning through review. Answers retain document and physical-page citations; analysis produces downloadable artifacts; external writes require both permission and human approval. Workspaces, task events, memory, and graph checkpoints persist across restarts.
 
-The current version targets local research and trusted teams. PostgreSQL, independent API/Worker/Streamlit processes, authentication, and RBAC have been exercised on Windows. Docker and Compose definitions are included; their container acceptance remains pending. See the [validation snapshot](docs/PHASE5B2_VALIDATION.md) for the precise scope.
+The current version runs as native API, Worker, and Streamlit processes, with SQLite for local inline execution or PostgreSQL for background tasks. The features below are implemented in the repository.
 
 ## What you can do
 
 | Workflow | Implemented behavior |
 | --- | --- |
 | Research across PDFs | Workspace-scoped retrieval, dense + BM25 fusion, optional reranking and OCR, document/page citations, bounded query rewrites and answer revision |
-| Plan and delegate | Supervisor routes to Research, Data, Coding, and Reviewer agents; bounded parallelism, selective review, task-local caching, and aggregate budgets |
+| Plan and delegate | Supervisor routes to Research, Data, Coding, and Reviewer agents; bounded parallelism, selective review, task-local caching, and aggregate budgets. Coding reads repository files and returns textual suggestions |
 | Analyze datasets | CSV/XLSX/JSON ingestion, constrained Python execution, downloadable plots/tables, and artifact lineage |
 | Resume durable work | Task state/events, graph checkpoints, pause/resume/cancel, and independent PostgreSQL-backed worker execution |
 | Govern external tools | MCP tool registry, capability policy, OWNER-only external writes, human approval, execution receipts, and reconciliation for ambiguous writes |
 | Collaborate with boundaries | Argon2id passwords, JWT access, rotating refresh tokens, live OWNER/EDITOR/VIEWER checks, private sessions, and scoped memory |
-| Inspect execution | Structured redacted logs, OpenTelemetry traces/metrics, optional LangSmith, and provisioned monitoring configuration |
+| Inspect execution | Structured redacted logs, OpenTelemetry trace/metric export, a Prometheus metrics endpoint, and optional LangSmith integration |
 
 For example: create a workspace, upload two papers and a CSV, ask for an evidence-backed comparison, then request a chart. Inspect the plan, source citations, agent runs, task events, and generated artifacts in Streamlit. Optional GitHub MCP actions use the same permission and approval path.
 
@@ -131,7 +131,7 @@ uv run --no-sync streamlit run client/app.py --server.port 8501
 
 Task run/resume requests enqueue work and return HTTP 202 in worker mode. The API does not start a worker automatically. Role/status changes are checked again when a job begins. Uncertain external-write outcomes require reconciliation before retry.
 
-[`compose.yaml`](compose.yaml) defines PostgreSQL, one-shot migration, API, Worker, Streamlit, and an optional observability profile. The [deployment runbook](docs/PHASE5B2_DEPLOYMENT.md) covers container commands, health checks, backups, secrets, and upgrades. Docker/WSL installation and container execution were deferred; the configuration is not evidence of a successful container deployment.
+The [native process runbook](docs/PHASE5B2_DEPLOYMENT.md#native-production-process-mode) covers migrations, account management, process startup, and explicit legacy-data ownership assignment.
 
 ## Access model
 
@@ -147,13 +147,7 @@ Task run/resume requests enqueue work and return HTTP 202 in worker mode. The AP
 
 Sessions and personal memory remain private to their creator, including against other workspace owners. Membership is checked live rather than embedded in JWT roles. Existing unclaimed data requires explicit operator assignment; registering the first account does not claim it. See the [security model](docs/PHASE5B2_SECURITY.md), including token revocation behavior and deployment limits.
 
-## Evaluation and validation
-
-The latest local acceptance snapshot, **2026-10-03**, records **531 distinct regression tests passed**, with zero failed or skipped test cases. The native integration scenario records **43 PASS / 0 FAIL / 2 SKIPPED**; both skipped entries are container-only checks. Full discovery covered 529 tests; a final 52-test security run included two subsequently added tests, yielding 531 distinct cases. [Machine-readable summary](evaluation/results/phase5b2/validation_summary.json) · [Detailed report](docs/PHASE5B2_VALIDATION.md).
-
-That scenario uses real PostgreSQL, migrations, Argon2/JWT, HTTP, filesystem ingestion, independent processes, LangGraph checkpoints, analysis subprocesses, and OTLP export. LLM, embedding, retrieval, and external-provider behavior use declared deterministic fixtures/local mock MCP. It verifies isolation and execution plumbing; it does not measure live model answer quality or public deployment capacity.
-
-### Retrieval ablation
+## Retrieval evaluation
 
 A separate recorded experiment covers **3 papers, 60 manually anchored queries, 46 pages, and 344 chunks**. Retrieval-only measurements on the recorded CPU host:
 
@@ -166,15 +160,14 @@ A separate recorded experiment covers **3 papers, 60 manually anchored queries, 
 
 BM25 performs best overall on this small page-anchored corpus. Reranking improves some hybrid misses but adds substantial CPU latency and introduces other regressions. These results support configurable retrieval, with no claim of a universal winner. [Full report and confidence intervals](evaluation/results/retrieval_v2_multi_report.md) · [Dataset manifest and reproduction requirements](evaluation/datasets/README.md).
 
-### Run checks
+## Source checks
 
 ```bash
 uv lock --check
-uv run --no-sync python -m unittest test_phase5b2 -v
-uv run --no-sync python -m unittest discover -v
+uv run --no-sync python -m compileall -q server client scripts alembic
 ```
 
-Full regression expects the OCR extra. PostgreSQL integration tests opt in through `PHASE5B1_TEST_DATABASE_URL`; without it, their cases skip. Provider network smoke scripts require explicit execution. [GitHub Actions](.github/workflows/ci.yml) defines quality, regression, auth/RBAC, PostgreSQL integration/migration/worker, and Docker-build jobs. The badge reflects remote CI; recorded local acceptance is reported separately above.
+[GitHub Actions](.github/workflows/ci.yml) checks the dependency lock, Python source compilation, and diff whitespace. Test sources and acceptance fixtures are kept locally and excluded from this repository.
 
 ## Project map
 
@@ -188,8 +181,7 @@ server/observability/   Redacted logging, metrics, tracing and LangSmith
 server/api.py           Cross-platform API launcher
 server/worker.py        Independent Procrastinate worker
 alembic/                Business-schema migrations
-evaluation/             Fixtures, benchmarks and recorded validation evidence
-observability/          Collector, Tempo, Prometheus and Grafana configuration
+evaluation/             Retrieval benchmarks, datasets and recorded results
 docs/                   Architecture, security, deployment and phase reports
 ```
 
@@ -198,9 +190,9 @@ docs/                   Architecture, security, deployment and phase reports
 - [System architecture and task lifecycle](docs/ARCHITECTURE.md)
 - [Research pipeline](docs/PHASE2_IMPLEMENTATION.md), [memory/data/tasks](docs/PHASE3_IMPLEMENTATION.md), and [MCP approval flow](docs/PHASE4_IMPLEMENTATION.md)
 - [Multi-agent orchestration](docs/PHASE5A_IMPLEMENTATION.md) and [efficiency decisions](docs/PHASE5A5_IMPLEMENTATION.md)
-- [PostgreSQL migration](docs/PHASE5B1_MIGRATION.md), [auth implementation](docs/PHASE5B2_IMPLEMENTATION.md), and [deployment operations](docs/PHASE5B2_DEPLOYMENT.md)
+- [PostgreSQL migration](docs/PHASE5B1_MIGRATION.md), [auth implementation](docs/PHASE5B2_IMPLEMENTATION.md), and [native process operations](docs/PHASE5B2_DEPLOYMENT.md#native-production-process-mode)
 
-The analysis runner constrains imports, time, outputs, and artifacts, but is **not an OS security sandbox**. Shared local files/Chroma and code execution assume trusted users. Public untrusted multi-tenant execution needs stronger isolation. HA, SSO, email verification/reset delivery, global rate limiting, and container runtime acceptance are outside the validated scope. Historical phase reports describe their own checkpoints; this README describes the current assembled system.
+The analysis runner constrains imports, time, outputs, and artifacts, but is **not an OS security sandbox**. Shared local files/Chroma and code execution assume trusted users. Historical phase reports describe their own checkpoints; this README describes the current implemented system.
 
 ## Acknowledgment
 

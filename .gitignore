@@ -29,7 +29,24 @@ htmlcov/
 .DS_Store
 Thumbs.db
 
-# Deterministic test_*.py regression files are included for CI.
-# Explicit network smoke scripts execute only under their __main__ guard.
+# Tests and acceptance fixtures stay local.
+test_*.py
 *_test.py
 tests/
+evaluation/multi_agent/
+evaluation/multi_agent_efficiency/
+evaluation/phase5b1/
+evaluation/phase5b2/
+evaluation/phase2_runtime_audit.py
+evaluation/phase3_smoke.py
+evaluation/phase4_smoke.py
+evaluation/phase4_github_smoke.py
+evaluation/phase4_mock_server.py
+evaluation/benchmark_agent_workspace.py
+evaluation/benchmark_phase3.py
+evaluation/benchmark_phase4.py
+evaluation/datasets/phase3_fixtures.json
+evaluation/datasets/agent_workspace_examples.jsonl
+evaluation/results/agent_workspace_demo.json
+evaluation/results/**/tests.json
+evaluation/results/**/regression.json
